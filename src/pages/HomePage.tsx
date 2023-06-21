@@ -23,6 +23,7 @@ const HomePage = () => (
           justifyContent: "space-between",
           height: "100%",
           paddingBottom: 60,
+          alignItems: "center",
         }}
       >
         <div
@@ -34,7 +35,13 @@ const HomePage = () => (
           <IonDatetime></IonDatetime>
         </div>
 
-        <div style={{ marginBottom: "5px" }}>
+        <div
+          style={{
+            marginBottom: "5px",
+            width: "100%",
+            maxWidth: "370px",
+          }}
+        >
           <div style={{ marginTop: "10px" }}>
             <IonButton expand="block">Add</IonButton>
           </div>
