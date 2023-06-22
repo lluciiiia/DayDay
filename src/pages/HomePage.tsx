@@ -5,6 +5,7 @@ import { useHistory } from "react-router";
 const HomePage = () => {
   const history = useHistory();
   const [selectedDate, setSelectedDate] = useState<string | null>(null); // Track the selected date
+  const [showButtons, setShowButtons] = useState(false); // Track whether to show the buttons
 
   const handleAddClick = () => {
     if (!selectedDate) return; // If no date selected, do nothing
@@ -30,6 +31,7 @@ const HomePage = () => {
 
   const handleDateChange = (event: CustomEvent<any>) => {
     setSelectedDate(event.detail.value);
+    setShowButtons(true); // Show the buttons when a date is selected
   };
 
   const checkDiaryExists = () => {
@@ -37,7 +39,6 @@ const HomePage = () => {
     // Return true if diary exists, false otherwise
     return false;
   };
-
 
   return (
     <>
@@ -66,24 +67,29 @@ const HomePage = () => {
             <IonDatetime onIonChange={handleDateChange}></IonDatetime>
           </div>
 
-          <div
-            style={{
-              marginBottom: "5px",
-              width: "100%",
-              maxWidth: "370px",
-            }}
-          >
-            <div style={{ marginTop: "10px" }}>
-              <IonButton expand="block" onClick={handleAddClick}>
-                Add
-              </IonButton>
+          {showButtons && (
+            <div
+              style={{
+                marginBottom: "5px",
+                width: "100%",
+                maxWidth: "370px",
+              }}
+            >
+              {checkDiaryExists() ? (
+                <div style={{ marginTop: "10px" }}>
+                  <IonButton expand="block" onClick={handleEditClick}>
+                    Edit
+                  </IonButton>
+                </div>
+              ) : (
+                <div style={{ marginTop: "10px" }}>
+                  <IonButton expand="block" onClick={handleAddClick}>
+                    Add
+                  </IonButton>
+                </div>
+              )}
             </div>
-            <div style={{ marginTop: "10px" }}>
-              <IonButton expand="block" onClick={handleEditClick}>
-                Edit
-              </IonButton>
-            </div>
-          </div>
+          )}
         </div>
       </IonContent>
     </>
