@@ -1,10 +1,7 @@
 import React, { useState, useRef } from "react";
-import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css";
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonButton, IonIcon, useIonToast } from "@ionic/react";
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonDatetime, IonButton, IonIcon, useIonToast } from "@ionic/react";
 import { useHistory } from "react-router";
 import { mic, document, images } from "ionicons/icons";
-
 
 const AddPage = () => {
   const history = useHistory();
@@ -51,24 +48,19 @@ const AddPage = () => {
     const fileList = event.target.files;
     if (fileList && fileList.length > 0) {
       const selectedImages = Array.from(fileList);
-      const imagePromises = selectedImages.map((image) => {
-        return new Promise<string>((resolve) => {
-          const reader = new FileReader();
-          reader.onloadend = () => {
-            const imageDataUrl = reader.result as string;
-            resolve(imageDataUrl);
-          };
-          reader.readAsDataURL(image);
-        });
+      const imageTexts: string[] = []; 
+
+      // Use the selectedImages array and the image processing API to extract text from images
+      // Append the extracted text to the textarea
+      selectedImages.forEach(async (image) => {
+        const imageData = await readImageAsDataURL(image);
+        const imageText = await extractTextFromImage(imageData);
+        imageTexts.push(imageText);
       });
-  
-      Promise.all(imagePromises).then((imageDataUrls) => {
-        const imagesContent = imageDataUrls.map((imageDataUrl) => `<img src="${imageDataUrl}" />`);
-        setContent(content + imagesContent.join("\n"));
-      });
+
+      setContent(content + imageTexts.join("\n"));
     }
   };
-  
 
   const readImageAsDataURL = (file: File): Promise<string> => {
     return new Promise((resolve) => {
