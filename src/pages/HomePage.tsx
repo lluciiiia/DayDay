@@ -3,13 +3,11 @@ import { IonContent, IonHeader, IonTitle, IonToolbar, IonDatetime, IonButton } f
 import { useHistory } from "react-router";
 
 const HomePage = () => {
-  const history = useHistory();
+  const history = useHistory(); // To check if there's a diary on the date
   const [selectedDate, setSelectedDate] = useState<string | null>(null); // Track the selected date
   const [showButtons, setShowButtons] = useState(false); // Track whether to show the buttons
 
   const handleAddClick = () => {
-    if (!selectedDate) return; // If no date selected, do nothing
-
     // Check if diary exists for selected date
     const diaryExists = checkDiaryExists(); // Remove the argument
 
@@ -18,14 +16,12 @@ const HomePage = () => {
     }
   };
 
-  const handleEditClick = () => {
-    if (!selectedDate) return; // If no date selected, do nothing
-
+  const handleViewClick = () => {
     // Check if diary exists for selected date
     const diaryExists = checkDiaryExists(); // Remove the argument
 
     if (diaryExists) {
-      history.push("/edit"); // Navigate to EditPage if diary exists
+      history.push("/view"); // Navigate to EditPage if diary exists
     }
   };
 
@@ -65,9 +61,11 @@ const HomePage = () => {
             }}
           >
             <IonDatetime onIonChange={handleDateChange}></IonDatetime>
+          {/* The onchange event occurs when the value of an HTML element is changed.
+            -> call the function */}
           </div>
 
-          {showButtons && (
+          {showButtons && ( // when the date is selected -> showButtons True (handleDateChange)
             <div
               style={{
                 marginBottom: "5px",
@@ -76,13 +74,13 @@ const HomePage = () => {
               }}
             >
               {checkDiaryExists() ? (
-                <div style={{ marginTop: "10px" }}>
-                  <IonButton expand="block" onClick={handleEditClick}>
-                    Edit
+                <div style={{ marginTop: "10px" }}> {/*if checkDiaryExists True*/}
+                  <IonButton expand="block" onClick={handleViewClick}>
+                    View 
                   </IonButton>
                 </div>
               ) : (
-                <div style={{ marginTop: "10px" }}>
+                <div style={{ marginTop: "10px" }}> {/*if checkDiaryExists False*/}
                   <IonButton expand="block" onClick={handleAddClick}>
                     Add
                   </IonButton>
