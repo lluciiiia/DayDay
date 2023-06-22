@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonDatetime, IonButton } from "@ionic/react";
 import { useHistory } from "react-router";
+import AddPage from "./AddPage";
+import ViewPage from "./ViewPage";
 
 const HomePage = () => {
   const history = useHistory(); // To check if there's a diary on the date

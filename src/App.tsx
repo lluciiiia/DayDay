@@ -1,4 +1,5 @@
 import { Redirect, Route } from "react-router-dom";
+import React from "react";
 import {
   IonApp,
   IonIcon,
@@ -29,19 +30,13 @@ import "@ionic/react/css/display.css";
 
 /* Theme variables */
 import "./theme/variables.css";
-import {
-  playCircle,
-  radio,
-  library,
-  search,
-  heart,
-  pencil,
-  list,
-} from "ionicons/icons";
+import { search, heart, pencil, list } from "ionicons/icons";
 import HomePage from "./pages/HomePage";
 import SearchPage from "./pages/SearchPage";
 import SentimentPage from "./pages/SentimentPage";
 import WordlistPage from "./pages/WordlistPage";
+import AddPage from "./pages/AddPage";
+import ViewPage from "./pages/ViewPage";
 
 setupIonicReact();
 
@@ -49,25 +44,14 @@ const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
       <IonTabs>
-        <IonRouterOutlet>
+      <IonRouterOutlet>
           <Redirect exact path="/" to="/home" />
-          {/*
-          Use the render method to reduce the number of renders your component will have due to a route change.
-
-          Use the component prop when your component depends on the RouterComponentProps passed in automatically.
-        */}
-          <Route path="/home" render={() => <HomePage />} exact={true} />
-          <Route
-            path="/sentiment"
-            render={() => <SentimentPage />}
-            exact={true}
-          />
-          <Route
-            path="/wordlist"
-            render={() => <WordlistPage />}
-            exact={true}
-          />
-          <Route path="/search" render={() => <SearchPage />} exact={true} />
+          <Route path="/home" exact={true} render={() => <HomePage />} />
+          <Route path="/sentiment" exact={true} render={() => <SentimentPage />} />
+          <Route path="/wordlist" exact={true} render={() => <WordlistPage />} />
+          <Route path="/search" exact={true} render={() => <SearchPage />} />
+          <Route path="/add" exact={true} render={() => <AddPage />} />
+          <Route path="/view" exact={true} render={() => <ViewPage />} />
         </IonRouterOutlet>
 
         <IonTabBar slot="bottom">
