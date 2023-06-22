@@ -1,13 +1,17 @@
-import React, { useState } from "react";
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonDatetime, IonButton, IonIcon, useIonToast } from "@ionic/react";
+import React, { useState, useRef } from "react";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonButton, IonIcon, useIonToast } from "@ionic/react";
 import { useHistory } from "react-router";
 import { mic, document, images } from "ionicons/icons";
+
 
 const AddPage = () => {
   const history = useHistory();
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
   const [content, setContent] = useState("");
   const [present] = useIonToast();
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleSave = () => {
     if (content.trim() === "") {
@@ -21,7 +25,7 @@ const AddPage = () => {
     // Show success toast and navigate back to the home page after a short delay
     presentToast("Your diary is saved!");
     setTimeout(() => {
-      history.push("/home"); 
+      history.push("/home");
     }, 1000);
   };
 
@@ -35,6 +39,62 @@ const AddPage = () => {
 
   const handleContentChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setContent(event.target.value);
+  };
+
+  const handleImageClick = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  };
+
+  const handleFileInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const fileList = event.target.files;
+    if (fileList && fileList.length > 0) {
+      const selectedImages = Array.from(fileList);
+      const imagePromises = selectedImages.map((image) => {
+        return new Promise<string>((resolve) => {
+          const reader = new FileReader();
+          reader.onloadend = () => {
+            const imageDataUrl = reader.result as string;
+            resolve(imageDataUrl);
+          };
+          reader.readAsDataURL(image);
+        });
+      });
+  
+      Promise.all(imagePromises).then((imageDataUrls) => {
+        const imagesContent = imageDataUrls.map((imageDataUrl) => `<img src="${imageDataUrl}" />`);
+        setContent(content + imagesContent.join("\n"));
+      });
+    }
+  };
+  
+
+  const readImageAsDataURL = (file: File): Promise<string> => {
+    return new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        resolve(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    });
+  };
+
+  const extractTextFromImage = async (imageData: string): Promise<string> => {
+    // Use the image processing API to extract text from the image
+    // Replace the following line with the actual API call or image processing code
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    return "Extracted text from image";
+  };
+
+  const handleVoiceClick = () => {
+    // Implement voice recording functionality using an API or the Web Speech API
+    // Convert the recorded voice to text and insert it into the textarea
+  };
+
+  const handleDocumentClick = () => {
+    // Implement document scanning functionality using an OCR API or OpenCV.js
+    // Extract text from the scanned document and append it to the textarea
   };
 
   return (
@@ -79,13 +139,13 @@ const AddPage = () => {
             padding: "0.5rem",
           }}
         >
-          <IonButton fill="outline" id="voice">
+          <IonButton fill="outline" id="voice" onClick={handleVoiceClick}>
             <IonIcon icon={mic} />
           </IonButton>
-          <IonButton fill="outline" id="scan">
+          <IonButton fill="outline" id="scan" onClick={handleDocumentClick}>
             <IonIcon icon={document} />
           </IonButton>
-          <IonButton fill="outline" id="attachment">
+          <IonButton fill="outline" id="attachment" onClick={handleImageClick}>
             <IonIcon icon={images} />
           </IonButton>
           <IonButton
@@ -97,6 +157,15 @@ const AddPage = () => {
             Save
           </IonButton>
         </div>
+        {/* Hidden file input for image selection */}
+        <input
+          ref={fileInputRef}
+          type="file"
+          accept="image/*"
+          style={{ display: "none" }}
+          onChange={handleFileInputChange}
+          multiple
+        />
       </IonContent>
     </>
   );
