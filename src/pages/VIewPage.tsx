@@ -19,12 +19,12 @@ const ViewPage = () => {
   const deleteEntry = () => {
     if (selectedDate) {
       localStorage.removeItem(selectedDate);
-      history.push("/"); // Redirect to the home page after deleting
+      history.push("/home"); 
     }
   };
 
   const editEntry = () => {
-    history.push("/edit"); // Redirect to the edit page
+    history.push("/edit"); 
   };
 
   return (
@@ -56,9 +56,20 @@ const ViewPage = () => {
           ></IonActionSheet>
         </IonToolbar>
       </IonHeader>
-      <IonContent
+      <div
+          style={{
+            width: "100%",
+            height: "100%",
+            border: 0,
+            borderRadius: 10,
+            borderColor: "transparent",
+            padding: "20px",
+            
+          }}
+        >
+          <IonContent
         style={{
-          height: 680,
+          height: 700,
           overflowY: "scroll",
           margin: "0 20px",
           display: "flex",
@@ -68,6 +79,9 @@ const ViewPage = () => {
       >
         {selectedDate && <div>{localStorage.getItem(selectedDate)}</div>}
       </IonContent>
+
+        </div>
+      
     </>
   );
 };
