@@ -27,7 +27,6 @@ const ViewPage = () => {
     history.push("/edit"); // Redirect to the edit page
   };
 
-
   return (
     <>
       <IonHeader>
@@ -37,24 +36,24 @@ const ViewPage = () => {
             <IonIcon icon={ellipsisVerticalOutline} />
           </IonButton>
           <IonActionSheet
-        trigger="open-action-sheet"
-        header="Actions"
-        buttons={[
-          {
-            text: "Edit",
-            handler: editEntry,
-          },
-          {
-            text: "Delete",
-            role: "destructive",
-            handler: deleteEntry,
-          },
-          {
-            text: "Cancel",
-            role: "cancel",
-          },
-        ]}
-      ></IonActionSheet>
+            trigger="open-action-sheet"
+            header="Actions"
+            buttons={[
+              {
+                text: "Edit",
+                handler: editEntry,
+              },
+              {
+                text: "Delete",
+                role: "destructive",
+                handler: deleteEntry,
+              },
+              {
+                text: "Cancel",
+                role: "cancel",
+              },
+            ]}
+          ></IonActionSheet>
         </IonToolbar>
       </IonHeader>
       <IonContent

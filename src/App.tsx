@@ -37,6 +37,7 @@ import SentimentPage from "./pages/SentimentPage";
 import WordlistPage from "./pages/WordlistPage";
 import AddPage from "./pages/AddPage";
 import ViewPage from "./pages/ViewPage";
+import EditPage from "./pages/EditPage";
 
 setupIonicReact();
 
@@ -52,6 +53,7 @@ const App: React.FC = () => (
           <Route path="/search" exact={true} render={() => <SearchPage />} />
           <Route path="/add" exact={true} render={() => <AddPage />} />
           <Route path="/view" exact={true} render={() => <ViewPage />} />
+          <Route path="/edit" exact={true} render={() => <EditPage />} />
         </IonRouterOutlet>
 
         <IonTabBar slot="bottom">
