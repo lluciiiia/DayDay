@@ -27,45 +27,44 @@ const ViewPage = () => {
     history.push("/edit"); // Redirect to the edit page
   };
 
+
   return (
     <>
       <IonHeader>
         <IonToolbar>
           <IonTitle>View Diary</IonTitle>
-          <IonButton id="open-action-sheet" slot="end">
-          <IonIcon icon={ellipsisVerticalOutline} />
+          <IonButton id="open-action-sheet">
+            <IonIcon icon={ellipsisVerticalOutline} />
           </IonButton>
           <IonActionSheet
-            id="action-sheet"
-            header="Actions"
-            buttons={[
-              {
-                text: "Edit",
-                handler: editEntry,
-              },
-              {
-                text: "Delete",
-                role: "destructive",
-                handler: deleteEntry,
-              },
-              {
-                text: "Cancel",
-                role: "cancel",
-              },
-            ]}
-          ></IonActionSheet>
+        trigger="open-action-sheet"
+        header="Actions"
+        buttons={[
+          {
+            text: "Edit",
+            handler: editEntry,
+          },
+          {
+            text: "Delete",
+            role: "destructive",
+            handler: deleteEntry,
+          },
+          {
+            text: "Cancel",
+            role: "cancel",
+          },
+        ]}
+      ></IonActionSheet>
         </IonToolbar>
       </IonHeader>
       <IonContent
         style={{
           height: 680,
           overflowY: "scroll",
-          maxWidth: 370,
-          margin: "0 auto",
-          padding: "20px 3px",
-          border: 0,
-          borderRadius: 10,
-          borderColor: "transparent",
+          margin: "0 20px",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
         }}
       >
         {selectedDate && <div>{localStorage.getItem(selectedDate)}</div>}
