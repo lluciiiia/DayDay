@@ -8,11 +8,12 @@ const HomePage = () => {
   const [showButtons, setShowButtons] = useState(false);
 
   const handleAddClick = () => {
-      history.push("/add");
+    history.push("/add", { selectedDate });
   };
 
   const handleViewClick = () => {
-    history.push("/view");
+    // TODO: with the value of the date
+    history.push("/view"); 
   };
 
   const handleDateChange = (event: CustomEvent<any>) => {

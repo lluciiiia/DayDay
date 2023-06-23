@@ -1,11 +1,14 @@
-import React, { useState, useRef } from "react";
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonDatetime, IonButton, IonIcon, useIonToast } from "@ionic/react";
-import { useHistory } from "react-router";
-import { mic, document, images } from "ionicons/icons";
+import React, { useState } from "react";
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonButton, useIonToast } from "@ionic/react";
+import { useHistory, useLocation } from "react-router";
+
+interface LocationState {
+  selectedDate: string;
+}
 
 const AddPage = () => {
   const history = useHistory();
-  const [selectedDate, setSelectedDate] = useState<string | null>(null);
+  const location = useLocation<LocationState>();
   const [content, setContent] = useState("");
   const [present] = useIonToast();
 
@@ -14,17 +17,18 @@ const AddPage = () => {
       presentToast("Please enter your diary content");
       return;
     }
-  
-    // Save the diary entry in local storage
-    saveData('diaryEntry', content); // TODO: key => Date
-  
-    // Show success toast and navigate back to the home page after a short delay
+
+    const selectedDate = location.state?.selectedDate;
+    console.log("date in AddPage:", selectedDate);
+    if (selectedDate) {
+      saveData(selectedDate, content);
+    }
+
     presentToast("Your diary is saved!");
     setTimeout(() => {
       history.push("/home");
     }, 1000);
   };
-  
 
   const presentToast = (message: string) => {
     present({
@@ -35,26 +39,11 @@ const AddPage = () => {
   };
 
   const saveData = (key: string, value: string) => {
-    localStorage.setItem(key, value); // key=date, value=content
+    localStorage.setItem(key, value);
   };
-  
 
   const handleContentChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setContent(event.target.value);
-  };
-
-  const handleImageClick = () => {
-    // implement API
-  };
-
-  const handleVoiceClick = () => {
-    // Implement voice recording functionality using an API or the Web Speech API
-    // Convert the recorded voice to text and insert it into the textarea
-  };
-
-  const handleDocumentClick = () => {
-    // Implement document scanning functionality using an OCR API or OpenCV.js
-    // Extract text from the scanned document and append it to the textarea
   };
 
   return (
@@ -99,15 +88,6 @@ const AddPage = () => {
             padding: "0.5rem",
           }}
         >
-          <IonButton fill="outline" id="voice" onClick={handleVoiceClick}>
-            <IonIcon icon={mic} />
-          </IonButton>
-          <IonButton fill="outline" id="scan" onClick={handleDocumentClick}>
-            <IonIcon icon={document} />
-          </IonButton>
-          <IonButton fill="outline" id="attachment" onClick={handleImageClick}>
-            <IonIcon icon={images} />
-          </IonButton>
           <IonButton
             fill="outline"
             id="save"
@@ -117,7 +97,6 @@ const AddPage = () => {
             Save
           </IonButton>
         </div>
-       
       </IonContent>
     </>
   );
