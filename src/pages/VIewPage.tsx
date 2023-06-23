@@ -19,22 +19,29 @@ const ViewPage = () => {
   const deleteEntry = () => {
     if (selectedDate) {
       localStorage.removeItem(selectedDate);
-      history.push("/home"); 
+      history.push("/home");
     }
   };
 
   const editEntry = () => {
-    history.push("/edit"); 
+    history.push("/edit");
   };
 
   return (
     <>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>View Diary</IonTitle>
-          <IonButton id="open-action-sheet">
-            <IonIcon icon={ellipsisVerticalOutline} />
-          </IonButton>
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <IonTitle>View Diary</IonTitle>
+            <IonButton
+              slot="end"
+              id="open-action-sheet"
+              style={{ marginLeft: "auto" }}
+            >
+              <IonIcon icon={ellipsisVerticalOutline} />
+            </IonButton>
+          </div>
+
           <IonActionSheet
             trigger="open-action-sheet"
             header="Actions"
@@ -57,31 +64,28 @@ const ViewPage = () => {
         </IonToolbar>
       </IonHeader>
       <div
-          style={{
-            width: "100%",
-            height: "100%",
-            border: 0,
-            borderRadius: 10,
-            borderColor: "transparent",
-            padding: "20px",
-            
-          }}
-        >
-          <IonContent
         style={{
-          height: 700,
-          overflowY: "scroll",
-          margin: "0 20px",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
+          width: "100%",
+          height: "100%",
+          border: 0,
+          borderRadius: 10,
+          borderColor: "transparent",
+          padding: "20px",
         }}
       >
-        {selectedDate && <div>{localStorage.getItem(selectedDate)}</div>}
-      </IonContent>
-
-        </div>
-      
+        <IonContent
+          style={{
+            height: 700,
+            overflowY: "scroll",
+            margin: "0 20px",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          {selectedDate && <div>{localStorage.getItem(selectedDate)}</div>}
+        </IonContent>
+      </div>
     </>
   );
 };
