@@ -10,21 +10,11 @@ const HomePage = () => {
   const [showButtons, setShowButtons] = useState(false); // Track whether to show the buttons
 
   const handleAddClick = () => {
-    // Check if diary exists for selected date
-    const diaryExists = checkDiaryExists(); // Remove the argument
-
-    if (!diaryExists) {
-      history.push("/add"); // Navigate to AddPage if no diary exists
-    }
+    history.push("/add");
   };
 
   const handleViewClick = () => {
-    // Check if diary exists for selected date
-    const diaryExists = checkDiaryExists(); // Remove the argument
-
-    if (diaryExists) {
-      history.push("/view"); // Navigate to EditPage if diary exists
-    }
+    history.push("/view");
   };
 
   const handleDateChange = (event: CustomEvent<any>) => {
@@ -69,7 +59,7 @@ const HomePage = () => {
             -> call the function */}
           </div>
 
-          {showButtons && ( // when the date is selected -> showButtons True (handleDateChange)
+          {showButtons && ( // showButtons True (handleDateChange)
             <div
               style={{
                 marginBottom: "5px",

@@ -8,23 +8,23 @@ const AddPage = () => {
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
   const [content, setContent] = useState("");
   const [present] = useIonToast();
-  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleSave = () => {
     if (content.trim() === "") {
       presentToast("Please enter your diary content");
       return;
     }
-
-    // Add your logic to save the diary entry
-    // For example, you can save the content in local storage or a database
-
+  
+    // Save the diary entry in local storage
+    saveData('diaryEntry', content); // TODO: key => Date
+  
     // Show success toast and navigate back to the home page after a short delay
     presentToast("Your diary is saved!");
     setTimeout(() => {
       history.push("/home");
     }, 1000);
   };
+  
 
   const presentToast = (message: string) => {
     present({
@@ -34,49 +34,17 @@ const AddPage = () => {
     });
   };
 
+  const saveData = (key: string, value: string) => {
+    localStorage.setItem(key, value); // key=date, value=content
+  };
+  
+
   const handleContentChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setContent(event.target.value);
   };
 
   const handleImageClick = () => {
-    if (fileInputRef.current) {
-      fileInputRef.current.click();
-    }
-  };
-
-  const handleFileInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const fileList = event.target.files;
-    if (fileList && fileList.length > 0) {
-      const selectedImages = Array.from(fileList);
-      const imageTexts: string[] = []; 
-
-      // Use the selectedImages array and the image processing API to extract text from images
-      // Append the extracted text to the textarea
-      selectedImages.forEach(async (image) => {
-        const imageData = await readImageAsDataURL(image);
-        const imageText = await extractTextFromImage(imageData);
-        imageTexts.push(imageText);
-      });
-
-      setContent(content + imageTexts.join("\n"));
-    }
-  };
-
-  const readImageAsDataURL = (file: File): Promise<string> => {
-    return new Promise((resolve) => {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        resolve(reader.result as string);
-      };
-      reader.readAsDataURL(file);
-    });
-  };
-
-  const extractTextFromImage = async (imageData: string): Promise<string> => {
-    // Use the image processing API to extract text from the image
-    // Replace the following line with the actual API call or image processing code
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    return "Extracted text from image";
+    // implement API
   };
 
   const handleVoiceClick = () => {
@@ -149,15 +117,7 @@ const AddPage = () => {
             Save
           </IonButton>
         </div>
-        {/* Hidden file input for image selection */}
-        <input
-          ref={fileInputRef}
-          type="file"
-          accept="image/*"
-          style={{ display: "none" }}
-          onChange={handleFileInputChange}
-          multiple
-        />
+       
       </IonContent>
     </>
   );

@@ -14,6 +14,7 @@ const ViewPage = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent>
+        {/* document.getElementById("demo").innerHTML = localStorage.getItem("lastname"); */}
         {/* Add your content here */}
         <IonButton expand="block" onClick={handleUpdate}>
           Update
