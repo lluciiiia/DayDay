@@ -62,6 +62,8 @@ const HomePage = () => {
               paddingTop: 30,
             }}
           >
+            {/* date clicked -> show buttons (depending on checkDiaryExists) */}
+
             <IonDatetime onIonChange={handleDateChange}></IonDatetime>
           {/* The onchange event occurs when the value of an HTML element is changed.
             -> call the function */}
