@@ -12,8 +12,7 @@ const HomePage = () => {
   };
 
   const handleViewClick = () => {
-    // TODO: with the value of the date
-    history.push("/view"); 
+    history.push("/view", { selectedDate });
   };
 
   const handleDateChange = (event: CustomEvent<any>) => {
