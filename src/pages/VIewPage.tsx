@@ -24,7 +24,7 @@ const ViewPage = () => {
   };
 
   const editEntry = () => {
-    history.push("/edit");
+    history.push("/edit", { selectedDate });
   };
 
   return (
@@ -41,7 +41,6 @@ const ViewPage = () => {
               <IonIcon icon={ellipsisVerticalOutline} />
             </IonButton>
           </div>
-
           <IonActionSheet
             trigger="open-action-sheet"
             header="Actions"

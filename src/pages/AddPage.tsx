@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonButton, useIonToast } from "@ionic/react";
+import {
+  IonContent,
+  IonHeader,
+  IonTitle,
+  IonToolbar,
+  IonButton,
+  useIonToast,
+} from "@ionic/react";
 import { useHistory, useLocation } from "react-router";
 
 interface LocationState {
@@ -11,6 +18,8 @@ const AddPage = () => {
   const location = useLocation<LocationState>();
   const [content, setContent] = useState("");
   const [present] = useIonToast();
+  const selectedDate = location.state?.selectedDate;
+  console.log("date in AddPage:", selectedDate);
 
   const handleSave = () => {
     if (content.trim() === "") {
@@ -18,8 +27,6 @@ const AddPage = () => {
       return;
     }
 
-    const selectedDate = location.state?.selectedDate;
-    console.log("date in AddPage:", selectedDate);
     if (selectedDate) {
       saveData(selectedDate, content);
     }
@@ -33,7 +40,7 @@ const AddPage = () => {
   const presentToast = (message: string) => {
     present({
       message: message,
-      duration: 1500,
+      duration: 1000,
       position: "middle",
     });
   };
@@ -42,7 +49,9 @@ const AddPage = () => {
     localStorage.setItem(key, value);
   };
 
-  const handleContentChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const handleContentChange = (
+    event: React.ChangeEvent<HTMLTextAreaElement>
+  ) => {
     setContent(event.target.value);
   };
 
@@ -60,7 +69,7 @@ const AddPage = () => {
             overflowY: "scroll",
             maxWidth: 370,
             margin: "0 auto",
-            padding: "20px 3px"
+            padding: "20px 3px",
           }}
         >
           <textarea

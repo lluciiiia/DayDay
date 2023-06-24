@@ -1,6 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButton, useIonToast } from '@ionic/react';
-import { useHistory, useLocation } from 'react-router';
+import React, { useState, useEffect } from "react";
+import {
+  IonContent,
+  IonHeader,
+  IonPage,
+  IonTitle,
+  IonToolbar,
+  IonButton,
+  useIonToast,
+} from "@ionic/react";
+import { useHistory, useLocation } from "react-router";
 
 interface LocationState {
   selectedDate: string;
@@ -9,19 +17,22 @@ interface LocationState {
 const EditPage: React.FC = () => {
   const history = useHistory();
   const location = useLocation<LocationState>();
-  const [content, setContent] = useState('');
+  const [content, setContent] = useState("");
   const [present] = useIonToast();
 
   const selectedDate = location.state?.selectedDate;
-  const savedContent = localStorage.getItem(selectedDate) || '';
+  const savedContent = localStorage.getItem(selectedDate) || "";
+  console.log("date in EditPage:", selectedDate);
+  console.log("Prev content:", savedContent);
 
+  // display the prev content
   useEffect(() => {
     setContent(savedContent);
   }, [savedContent]);
 
   const handleSave = () => {
-    if (content.trim() === '') {
-      presentToast('Please enter your diary content');
+    if (content.trim() === "") {
+      presentToast("Please enter your diary content");
       return;
     }
 
@@ -29,17 +40,17 @@ const EditPage: React.FC = () => {
       saveData(selectedDate, content);
     }
 
-    presentToast('Your diary is saved!');
+    presentToast("Your diary is saved!");
     setTimeout(() => {
-      history.push('/home');
+      history.push("/home");
     }, 1000);
   };
 
   const presentToast = (message: string) => {
     present({
       message: message,
-      duration: 1500,
-      position: 'middle',
+      duration: 1000,
+      position: "middle",
     });
   };
 
@@ -47,7 +58,9 @@ const EditPage: React.FC = () => {
     localStorage.setItem(key, value);
   };
 
-  const handleContentChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const handleContentChange = (
+    event: React.ChangeEvent<HTMLTextAreaElement>
+  ) => {
     setContent(event.target.value);
   };
 
@@ -62,38 +75,42 @@ const EditPage: React.FC = () => {
         <div
           style={{
             height: 680,
-            overflowY: 'scroll',
+            overflowY: "scroll",
             maxWidth: 370,
-            margin: '0 auto',
-            padding: '20px 3px',
+            margin: "0 auto",
+            padding: "20px 3px",
           }}
         >
           <textarea
             value={content}
             onChange={handleContentChange}
             style={{
-              width: '100%',
-              height: '100%',
+              width: "100%",
+              height: "100%",
               border: 0,
               borderRadius: 10,
-              borderColor: 'transparent',
+              borderColor: "transparent",
             }}
-            placeholder="Enter your diary here"
           ></textarea>
         </div>
         <div
           style={{
-            display: 'flex',
-            justifyContent: 'space-around',
+            display: "flex",
+            justifyContent: "space-around",
             marginBottom: 10,
-            position: 'fixed',
+            position: "fixed",
             bottom: 0,
             left: 0,
             right: 0,
-            padding: '0.5rem',
+            padding: "0.5rem",
           }}
         >
-          <IonButton fill="outline" id="save" style={{ width: '160px' }} onClick={handleSave}>
+          <IonButton
+            fill="outline"
+            id="save"
+            style={{ width: "160px" }}
+            onClick={handleSave}
+          >
             Save
           </IonButton>
         </div>
