@@ -19,7 +19,8 @@ const ViewPage = () => {
   const deleteEntry = () => {
     if (selectedDate) {
       localStorage.removeItem(selectedDate);
-      history.push("/home");
+      history.replace("/")
+      window.location.reload()
     }
   };
 

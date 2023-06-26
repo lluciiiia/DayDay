@@ -42,7 +42,8 @@ const EditPage: React.FC = () => {
 
     presentToast("Your diary is saved!");
     setTimeout(() => {
-      history.push("/home");
+      history.replace("/")
+      window.location.reload()
     }, 1000);
   };
 

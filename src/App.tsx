@@ -42,6 +42,7 @@ import EditPage from "./pages/EditPage";
 setupIonicReact();
 
 const App: React.FC = () => (
+  
   <IonApp>
     <IonReactRouter>
       <IonTabs>
