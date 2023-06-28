@@ -22,8 +22,6 @@ const EditPage: React.FC = () => {
 
   const selectedDate = location.state?.selectedDate;
   const savedContent = localStorage.getItem(selectedDate) || "";
-  console.log("date in EditPage:", selectedDate);
-  console.log("Prev content:", savedContent);
 
   // display the prev content
   useEffect(() => {
