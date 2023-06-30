@@ -25,25 +25,28 @@ const WordlistPage = () => (
           justifyContent: "center",
           height: "100%",
         }}>
-        <div>
+        <div style={{
+          position: "absolute",
+          top: 5,
+        }}>
           <p style={{ fontSize: "25px" }}>Top 50 Frequently Used Words</p>
         </div>
 
         <IonList inset={true}>
           <IonItem>
-            <IonLabel>Pokémon Yellow</IonLabel>
+            <IonLabel>element1</IonLabel>
           </IonItem>
           <IonItem>
-            <IonLabel>Mega Man X</IonLabel>
+            <IonLabel>element2</IonLabel>
           </IonItem>
           <IonItem>
-            <IonLabel>The Legend of Zelda</IonLabel>
+            <IonLabel>element3</IonLabel>
           </IonItem>
           <IonItem>
-            <IonLabel>Pac-Man</IonLabel>
+            <IonLabel>element4</IonLabel>
           </IonItem>
           <IonItem>
-            <IonLabel>Super Mario World</IonLabel>
+            <IonLabel>element5</IonLabel>
           </IonItem>
         </IonList>
       </div>
