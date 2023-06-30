@@ -29,6 +29,7 @@ const AddPage = () => {
 
     if (selectedDate) {
       saveData(selectedDate, content);
+      updateList(selectedDate, content);
     }
 
     presentToast("Your diary is saved!");
@@ -48,6 +49,9 @@ const AddPage = () => {
   const saveData = (key: string, value: string) => {
     localStorage.setItem(key, value);
   };
+
+  // TODO: complete here
+  const updateList = (key: string, value: string) => {};
 
   const handleContentChange = (
     event: React.ChangeEvent<HTMLTextAreaElement>
@@ -70,8 +74,7 @@ const AddPage = () => {
             maxWidth: 370,
             margin: "0 auto",
             padding: "20px 3px",
-          }}
-        >
+          }}>
           <textarea
             value={content}
             onChange={handleContentChange}
@@ -82,8 +85,7 @@ const AddPage = () => {
               borderRadius: 10,
               borderColor: "transparent",
             }}
-            placeholder="Enter your diary here"
-          ></textarea>
+            placeholder="Enter your diary here"></textarea>
         </div>
         <div
           style={{
@@ -95,14 +97,12 @@ const AddPage = () => {
             left: 0,
             right: 0,
             padding: "0.5rem",
-          }}
-        >
+          }}>
           <IonButton
             fill="outline"
             id="save"
             style={{ width: "160px" }}
-            onClick={handleSave}
-          >
+            onClick={handleSave}>
             Save
           </IonButton>
         </div>

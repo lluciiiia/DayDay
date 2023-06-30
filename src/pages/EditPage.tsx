@@ -36,12 +36,13 @@ const EditPage: React.FC = () => {
 
     if (selectedDate) {
       saveData(selectedDate, content);
+      updateList(selectedDate, content);
     }
 
     presentToast("Your diary is saved!");
     setTimeout(() => {
-      history.replace("/")
-      window.location.reload()
+      history.replace("/");
+      window.location.reload();
     }, 1000);
   };
 
@@ -55,6 +56,13 @@ const EditPage: React.FC = () => {
 
   const saveData = (key: string, value: string) => {
     localStorage.setItem(key, value);
+  };
+
+  // TODO: complete here
+  const updateList = (key: string, value: string) => {
+    // TODO: delete the old content from storage by id (key=date)
+
+    // TODO: update the list with key & value
   };
 
   const handleContentChange = (
@@ -78,8 +86,7 @@ const EditPage: React.FC = () => {
             maxWidth: 370,
             margin: "0 auto",
             padding: "20px 3px",
-          }}
-        >
+          }}>
           <textarea
             value={content}
             onChange={handleContentChange}
@@ -89,8 +96,7 @@ const EditPage: React.FC = () => {
               border: 0,
               borderRadius: 10,
               borderColor: "transparent",
-            }}
-          ></textarea>
+            }}></textarea>
         </div>
         <div
           style={{
@@ -102,14 +108,12 @@ const EditPage: React.FC = () => {
             left: 0,
             right: 0,
             padding: "0.5rem",
-          }}
-        >
+          }}>
           <IonButton
             fill="outline"
             id="save"
             style={{ width: "160px" }}
-            onClick={handleSave}
-          >
+            onClick={handleSave}>
             Save
           </IonButton>
         </div>
