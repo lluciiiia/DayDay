@@ -9,6 +9,8 @@ import {
   IonList,
 } from "@ionic/react";
 
+import wordCount from "./Functionality/InitializeCount";
+
 const WordlistPage = () => (
   <>
     <IonHeader>
@@ -25,29 +27,20 @@ const WordlistPage = () => (
           justifyContent: "center",
           height: "100%",
         }}>
-        <div style={{
-          position: "absolute",
-          top: 5,
-        }}>
+        <div
+          style={{
+            position: "absolute",
+            top: 5,
+          }}>
           <p style={{ fontSize: "25px" }}>Top 50 Frequently Used Words</p>
         </div>
 
         <IonList inset={true}>
-          <IonItem>
-            <IonLabel>element1</IonLabel>
-          </IonItem>
-          <IonItem>
-            <IonLabel>element2</IonLabel>
-          </IonItem>
-          <IonItem>
-            <IonLabel>element3</IonLabel>
-          </IonItem>
-          <IonItem>
-            <IonLabel>element4</IonLabel>
-          </IonItem>
-          <IonItem>
-            <IonLabel>element5</IonLabel>
-          </IonItem>
+          {Object.entries(wordCount).map(([word, count]) => (
+            <IonItem key={word}>
+              <IonLabel>{`${word}: ${count}`}</IonLabel>
+            </IonItem>
+          ))}
         </IonList>
       </div>
     </IonContent>

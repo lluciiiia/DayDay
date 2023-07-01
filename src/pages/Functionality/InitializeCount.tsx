@@ -1,3 +1,3 @@
-const wordCount = {}; // Initialize the wordCount dictionary
+const wordCount: { [key: string]: number } = {}; 
 
 export default wordCount;
