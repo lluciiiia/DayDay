@@ -1,6 +1,7 @@
-  // TODO: a dictionary (wordCount) => initialized and accessible in this function
-  import wordCount from './wordCount'; // Path to the wordCountMap.js file
+import wordCount from "./InitializeCount";
 
+// Usage example
+console.log(wordCount); // Access the wordCountMap object
 
 const increaseCount = (key: string, value: string) => {
   const content = value.toLowerCase();
@@ -112,3 +113,5 @@ function isException(word: string): boolean {
     !nounExceptions.includes(word)
   );
 }
+
+
