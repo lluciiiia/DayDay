@@ -8,7 +8,7 @@ const SentimentPage = () => (
         <IonTitle>Sentiment</IonTitle>
       </IonToolbar>
     </IonHeader>
-    <IonContent>
+    <IonContent scrollY={false}>
       <div
         style={{
           display: 'flex',

@@ -66,7 +66,7 @@ const AddPage = () => {
           <IonTitle>Write your day</IonTitle>
         </IonToolbar>
       </IonHeader>
-      <IonContent>
+      <IonContent scrollY={false}>
         <div
           style={{
             height: 680,

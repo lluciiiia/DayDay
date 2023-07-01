@@ -39,8 +39,8 @@ const EditPage: React.FC = () => {
 
     if (selectedDate) {
       saveData(selectedDate, content);
-      decreaseCount (savedContent);
-      increaseCount (content);
+      decreaseCount (selectedDate,savedContent);
+      increaseCount (selectedDate,content);
 
     }
 
@@ -76,7 +76,7 @@ const EditPage: React.FC = () => {
           <IonTitle>Edit Page</IonTitle>
         </IonToolbar>
       </IonHeader>
-      <IonContent>
+      <IonContent scrollY={false}>
         <div
           style={{
             height: 680,

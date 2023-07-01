@@ -74,7 +74,7 @@ const ViewPage = () => {
           borderColor: "transparent",
           padding: "20px",
         }}>
-        <IonContent
+        <IonContent scrollY={false}
           style={{
             height: 700,
             overflowY: "scroll",

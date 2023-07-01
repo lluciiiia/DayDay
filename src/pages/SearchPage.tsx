@@ -9,7 +9,7 @@ const SearchPage = () => (
         <IonTitle>Search</IonTitle>
       </IonToolbar>
     </IonHeader>
-    <IonContent>
+    <IonContent scrollY={false}>
       <div
         style={{
           display: "flex",
