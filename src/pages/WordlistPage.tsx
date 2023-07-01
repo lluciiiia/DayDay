@@ -33,22 +33,36 @@ const WordlistPage = () => {
       <IonContent>
         <div
           style={{
+            position: "fixed",
+            top: "56px", // Height of the IonHeader
+            left: 0,
+            right: 0,
+            bottom: "49px", // Height of the tabs
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            justifyContent: "center",
-            height: "100%",
+            justifyContent: "flex-start",
+            padding: "56px 0 0 0", // Space for the title and padding from the top
+            overflowY: "auto", // Enable vertical scrolling within the limited range
           }}
         >
           <div
             style={{
-              position: "absolute",
-              top: 5,
+              position: "fixed",
+              top: "56px", // Height of the IonHeader
+              left: 0,
+              right: 0,
+              //backgroundColor: "white",
+              zIndex: 100, // Increase the z-index to bring the title to the front
+              textAlign: "center",
+              fontSize: "25px",
+              color: "white",
+              padding: "10px 0",
             }}
           >
-            <p style={{ fontSize: "25px" }}>Top 50 Frequently Used Words</p>
+            Top 50 Frequently Used Words
           </div>
-          <IonList inset={true}>
+          <IonList>
             {topWords.map((item) => (
               <IonItem key={item.word}>
                 <IonLabel>{`${item.word}: ${item.count}`}</IonLabel>
