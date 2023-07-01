@@ -39,8 +39,8 @@ const EditPage: React.FC = () => {
 
     if (selectedDate) {
       saveData(selectedDate, content);
-      decreaseCount (selectedDate, savedContent);
-      increaseCount (selectedDate, content);
+      decreaseCount (savedContent);
+      increaseCount (content);
 
     }
 
