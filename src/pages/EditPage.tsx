@@ -10,6 +10,9 @@ import {
 } from "@ionic/react";
 import { useHistory, useLocation } from "react-router";
 
+import {increaseCount} from "./Functionality/UpdateList"
+import {decreaseCount} from "./Functionality/UpdateList"
+
 interface LocationState {
   selectedDate: string;
 }
@@ -36,9 +39,9 @@ const EditPage: React.FC = () => {
 
     if (selectedDate) {
       saveData(selectedDate, content);
-      // TODO: decreaseCount (selectedDate, savedContent)
-      
-      // TODO: increaseCount (selectedDate, content)
+      decreaseCount (selectedDate, savedContent);
+      increaseCount (selectedDate, content);
+
     }
 
     presentToast("Your diary is saved!");

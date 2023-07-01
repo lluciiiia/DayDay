@@ -3,7 +3,7 @@ import wordCount from "./InitializeCount";
 // Usage example
 console.log(wordCount); // Access the wordCountMap object
 
-const increaseCount = (key: string, value: string) => {
+export const increaseCount = (key: string, value: string) => {
   const content = value.toLowerCase();
   const words = content.split(" ");
 
@@ -19,7 +19,7 @@ const increaseCount = (key: string, value: string) => {
   });
 };
 
-const decreaseCount = (key: string, value: string) => {
+export const decreaseCount = (key: string, value: string) => {
   const content = value.toLowerCase();
   const words = content.split(" ");
 

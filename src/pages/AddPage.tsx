@@ -9,6 +9,9 @@ import {
 } from "@ionic/react";
 import { useHistory, useLocation } from "react-router";
 
+import {increaseCount} from "./Functionality/UpdateList"
+
+
 interface LocationState {
   selectedDate: string;
 }
@@ -29,7 +32,7 @@ const AddPage = () => {
 
     if (selectedDate) {
       saveData(selectedDate, content);
-      updateList(selectedDate, content);
+      increaseCount (selectedDate, content);
     }
 
     presentToast("Your diary is saved!");
@@ -48,17 +51,6 @@ const AddPage = () => {
 
   const saveData = (key: string, value: string) => {
     localStorage.setItem(key, value);
-  };
-
-  // TODO: complete here
-  const updateList = (key: string, value: string) => {
-    // get content
-
-    // go through every word in isException
-        // if it returns true: word += 1
-        // if false: nothing
-
-    // update the heap (?)
   };
 
   const handleContentChange = (

@@ -11,6 +11,9 @@ import {
 import { useLocation, useHistory } from "react-router-dom";
 import { ellipsisVerticalOutline } from "ionicons/icons";
 
+import {decreaseCount} from "./Functionality/UpdateList"
+
+
 const ViewPage = () => {
   const location = useLocation<{ selectedDate?: string }>();
   const history = useHistory();
@@ -18,8 +21,7 @@ const ViewPage = () => {
 
   const deleteEntry = () => {
     if (selectedDate) {
-      // TODO: decreaseCount (selectedDate, content)
-
+      const content = localStorage.getItem(selectedDate) ?? "";      decreaseCount (selectedDate, content);
       localStorage.removeItem(selectedDate);
       history.replace("/")
       window.location.reload()
