@@ -1,5 +1,5 @@
-  // TODO: a dictionary (wordCountMap) => initialized and accessible in this function
-  import wordCountMap from './wordCountMap'; // Path to the wordCountMap.js file
+  // TODO: a dictionary (wordCount) => initialized and accessible in this function
+  import wordCount from './wordCount'; // Path to the wordCountMap.js file
 
 
 const increaseCount = (key: string, value: string) => {
@@ -9,10 +9,10 @@ const increaseCount = (key: string, value: string) => {
   words.forEach((word) => {
     // Check if the word passes the isException method (returns boolean)
     if (isException(word)) {
-      if (wordCountMap.hasOwnProperty(word)) {
-        wordCountMap[word] += 1;
+      if (wordCount.hasOwnProperty(word)) {
+        wordCount[word] += 1;
       } else {
-        wordCountMap[word] = 1; // initialize it in the map
+        wordCount[word] = 1; // initialize it in the map
       }
     }
   });
@@ -25,7 +25,7 @@ const decreaseCount = (key: string, value: string) => {
   words.forEach((word) => {
     // iterates each word in content
     if (isException(word)) {
-      wordCountMap[word] -= 1;
+      wordCount[word] -= 1;
     }
   });
 };
@@ -90,7 +90,18 @@ function isException(word: string): boolean {
   ];
 
   // Check if the word is a specific noun
-  const nounExceptions = ["exception1", "exception2"];
+  const nounExceptions = [
+    "thing",
+    "stuff",
+    "something",
+    "nothing",
+    "everything",
+    "anything",
+    "people",
+    "person",
+    "place",
+    "time",
+  ];
 
   return (
     !auxiliaryVerbs.includes(word) &&
