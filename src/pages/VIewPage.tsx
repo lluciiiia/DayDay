@@ -23,6 +23,15 @@ const ViewPage = () => {
       const content = localStorage.getItem(selectedDate) ?? "";
       decreaseCount(selectedDate, content);
       localStorage.removeItem(selectedDate);
+
+      // Remove the date from diaryDates
+      const savedDates = JSON.parse(localStorage.getItem("diaryDates") || "[]");
+      const index = savedDates.indexOf(selectedDate);
+      if (index > -1) {
+        savedDates.splice(index, 1);
+        localStorage.setItem("diaryDates", JSON.stringify(savedDates));
+      }
+
       history.replace("/");
       window.location.reload();
     }
@@ -74,7 +83,8 @@ const ViewPage = () => {
           borderColor: "transparent",
           padding: "20px",
         }}>
-        <IonContent scrollY={false}
+        <IonContent
+          scrollY={false}
           style={{
             height: 700,
             overflowY: "scroll",

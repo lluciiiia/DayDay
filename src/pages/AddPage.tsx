@@ -51,6 +51,10 @@ const AddPage = () => {
 
   const saveData = (key: string, value: string) => {
     localStorage.setItem(key, value);
+    // Add the date from diaryDates (color mark in calendar)
+    const savedDates = JSON.parse(localStorage.getItem("diaryDates") || "[]");
+    savedDates.push(key);
+    localStorage.setItem("diaryDates", JSON.stringify(savedDates));
   };
 
   const handleContentChange = (
