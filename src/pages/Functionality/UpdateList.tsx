@@ -1,12 +1,22 @@
 import wordCount from "./InitializeCount";
 import { removeStopwords, eng, fra } from "stopword";
 
+const ignoredWords = ["the", "when", "where", "how", "why", "what", "who", "that"];
+
 export const increaseCount = (key: string, value: string) => {
   const content = value.toLowerCase();
-  let words = content.split(" ");
+  console.log("CONTENT: ", content);
+
+  let words = content.split(/\s+|(?=[^\w\s])|(?<=[^\w\s])/); // Split by whitespace or symbols
   console.log("BEFORE: ", words);
+  
   words = removeStopwords(words, eng);
+  words = words.map(word => word.replace(/[^a-zA-Z]+/g, '')); // Remove symbols from words
+  words = words.filter(word => !ignoredWords.includes(word)); // Remove ignored words
+  
   console.log("AFTER: ", words);
+
+  words = words.filter(word => word.trim() !== ''); // Remove empty strings
 
   words.forEach((word) => {
     const index = wordCount.findIndex((item) => item.word === word);
@@ -22,8 +32,13 @@ export const increaseCount = (key: string, value: string) => {
 
 export const decreaseCount = (key: string, value: string) => {
   const content = value.toLowerCase();
-  let words = content.split(" ");
+  let words = content.split(/\s+|(?=[^\w\s])|(?<=[^\w\s])/); // Split by whitespace or symbols
+  
   words = removeStopwords(words, eng);
+  words = words.map(word => word.replace(/[^a-zA-Z]+/g, '')); // Remove symbols from words
+  words = words.filter(word => !ignoredWords.includes(word)); // Remove ignored words
+  words = words.filter(word => word.trim() !== ''); // Remove empty strings
+
 
   words.forEach((word) => {
     const index = wordCount.findIndex((item) => item.word === word);

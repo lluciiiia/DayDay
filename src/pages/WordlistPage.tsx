@@ -57,6 +57,7 @@ const WordlistPage = () => {
               flex: 1,
               overflowY: "scroll",
               width: "100%",
+              fontSize: "10px",
             }}
           >
             <IonList>
