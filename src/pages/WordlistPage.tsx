@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   IonContent,
   IonHeader,
@@ -12,10 +12,15 @@ import {
 import wordCount from "./Functionality/InitializeCount";
 
 const WordlistPage = () => {
-  // Sort the wordCount array in descending order based on count
-  const sortedWordCount = [...wordCount].sort((a, b) => b.count - a.count);
+  const [updatedWordCount, setUpdatedWordCount] = useState(wordCount);
 
-  // Get the top 50 words
+  useEffect(() => {
+    const storedWordCount = JSON.parse(localStorage.getItem('wordCount') || '[]');
+    setUpdatedWordCount(storedWordCount);
+  }, []);
+
+  const sortedWordCount = [...updatedWordCount].sort((a, b) => b.count - a.count);
+
   const topWords = sortedWordCount.slice(0, 50);
 
   return (
@@ -43,7 +48,6 @@ const WordlistPage = () => {
           >
             <p style={{ fontSize: "25px" }}>Top 50 Frequently Used Words</p>
           </div>
-
           <IonList inset={true}>
             {topWords.map((item) => (
               <IonItem key={item.word}>

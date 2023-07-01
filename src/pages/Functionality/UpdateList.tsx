@@ -1,8 +1,5 @@
 import wordCount from "./InitializeCount";
 
-// Usage example
-console.log(wordCount); // Access the wordCountMap object
-
 export const increaseCount = (key: string, value: string) => {
   const content = value.toLowerCase();
   const words = content.split(" ");
@@ -17,6 +14,8 @@ export const increaseCount = (key: string, value: string) => {
       }
     }
   });
+
+  updateLocalStorage();
 };
 
 export const decreaseCount = (key: string, value: string) => {
@@ -31,15 +30,11 @@ export const decreaseCount = (key: string, value: string) => {
       }
     }
   });
+
+  updateLocalStorage();
 };
 
 function isException(word: string): boolean {
-  // Check if the word ends with "ed" or "ing"
-  if (word.endsWith("ed") || word.endsWith("ing")) {
-    return false;
-  }
-
-  // Check if the word is an auxiliary or modal verb
   const auxiliaryVerbs = [
     "be",
     "have",
@@ -55,13 +50,10 @@ function isException(word: string): boolean {
     "would",
   ];
 
-  // Check if the word is an article
   const articleExceptions = ["a", "an", "the"];
 
-  // Check if the word is a conjunction
   const conjunctionExceptions = ["and", "or", "but", "so"];
 
-  // Check if the word is a preposition
   const prepositionExceptions = [
     "in",
     "on",
@@ -76,7 +68,6 @@ function isException(word: string): boolean {
     "over",
   ];
 
-  // Check if the word is a pronoun
   const pronounExceptions = [
     "I",
     "you",
@@ -92,7 +83,6 @@ function isException(word: string): boolean {
     "them",
   ];
 
-  // Check if the word is a specific noun
   const nounExceptions = [
     "thing",
     "stuff",
@@ -116,4 +106,6 @@ function isException(word: string): boolean {
   );
 }
 
-
+function updateLocalStorage() {
+  localStorage.setItem('wordCount', JSON.stringify(wordCount));
+}
