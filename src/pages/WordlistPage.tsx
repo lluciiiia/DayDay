@@ -30,45 +30,43 @@ const WordlistPage = () => {
           <IonTitle>Word list</IonTitle>
         </IonToolbar>
       </IonHeader>
-      <IonContent>
+      <IonContent scrollY={false}>
         <div
           style={{
-            position: "fixed",
-            top: "56px", // Height of the IonHeader
-            left: 0,
-            right: 0,
-            bottom: "49px", // Height of the tabs
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "flex-start",
-            padding: "56px 0 0 0", // Space for the title and padding from the top
-            overflowY: "auto", // Enable vertical scrolling within the limited range
+            height: "100%",
           }}
         >
           <div
             style={{
-              position: "fixed",
-              top: "56px", // Height of the IonHeader
-              left: 0,
-              right: 0,
-              //backgroundColor: "white",
-              zIndex: 100, // Increase the z-index to bring the title to the front
+              position: "relative",
               textAlign: "center",
               fontSize: "25px",
               color: "white",
-              padding: "10px 0",
+              padding: "20px 10px",
+              backgroundColor: "black",
             }}
           >
             Top 50 Frequently Used Words
           </div>
-          <IonList>
-            {topWords.map((item) => (
-              <IonItem key={item.word}>
-                <IonLabel>{`${item.word}: ${item.count}`}</IonLabel>
-              </IonItem>
-            ))}
-          </IonList>
+          <div
+            style={{
+              flex: 1,
+              overflowY: "scroll",
+              width: "100%",
+            }}
+          >
+            <IonList>
+              {topWords.map((item) => (
+                <IonItem key={item.word}>
+                  <IonLabel>{`${item.word}: ${item.count}`}</IonLabel>
+                </IonItem>
+              ))}
+            </IonList>
+          </div>
         </div>
       </IonContent>
     </>
