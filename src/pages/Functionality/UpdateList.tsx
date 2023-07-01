@@ -1,5 +1,5 @@
 import wordCount from "./InitializeCount";
-import { removeStopwords, eng, fra } from "stopword";
+import { removeStopwords, eng } from "stopword";
 
 const ignoredWords = ["the", "when", "where", "how", "why", "what", "who", "that"];
 
