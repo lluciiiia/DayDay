@@ -21,7 +21,7 @@ const WordlistPage = () => {
 
   const sortedWordCount = [...updatedWordCount].sort((a, b) => b.count - a.count);
 
-  const topWords = sortedWordCount.slice(0, 50);
+  const topWords = sortedWordCount.slice(0, 51);
 
   return (
     <>
@@ -57,13 +57,16 @@ const WordlistPage = () => {
               flex: 1,
               overflowY: "scroll",
               width: "100%",
-              fontSize: "10px",
             }}
           >
             <IonList>
-              {topWords.map((item) => (
+              {topWords.map((item, index) => (
                 <IonItem key={item.word}>
-                  <IonLabel>{`${item.word}: ${item.count}`}</IonLabel>
+                  <div style={{marginRight: "30px" }}>
+                  <IonLabel style={{ fontSize: "23px", fontWeight: "bold", }}>{`Top ${index + 1}`}</IonLabel>
+
+                  </div>
+                  <IonLabel style={{ fontSize: "20px" }}>{`${item.word} (${item.count})`}</IonLabel>
                 </IonItem>
               ))}
             </IonList>

@@ -67,13 +67,11 @@ const HomePage = () => {
             <IonDatetime
               onIonChange={handleDateChange}
               presentation="date"
-              //value="2023-07-01"
               highlightedDates={diaryDates.map((date) => ({
                 date,
                 textColor: "rgb(68, 10, 184)",
                 backgroundColor: "rgb(211, 200, 229)",
-              }))}
-            ></IonDatetime>
+              }))}></IonDatetime>
           </div>
 
           {showButtons && (
