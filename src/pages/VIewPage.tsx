@@ -18,8 +18,9 @@ const ViewPage = () => {
 
   const deleteEntry = () => {
     if (selectedDate) {
+      // TODO: decreaseCount (selectedDate, content)
+
       localStorage.removeItem(selectedDate);
-      updateList(selectedDate);
       history.replace("/")
       window.location.reload()
     }
@@ -29,9 +30,6 @@ const ViewPage = () => {
     history.push("/edit", { selectedDate });
   };
 
-   const updateList = (key: string) => {
-    // TODO: delete the content from storage by id (key=date)
-   };
 
   return (
     <>

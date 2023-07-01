@@ -51,7 +51,15 @@ const AddPage = () => {
   };
 
   // TODO: complete here
-  const updateList = (key: string, value: string) => {};
+  const updateList = (key: string, value: string) => {
+    // get content
+
+    // go through every word in isException
+        // if it returns true: word += 1
+        // if false: nothing
+
+    // update the heap (?)
+  };
 
   const handleContentChange = (
     event: React.ChangeEvent<HTMLTextAreaElement>

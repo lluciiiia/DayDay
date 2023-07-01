@@ -36,7 +36,9 @@ const EditPage: React.FC = () => {
 
     if (selectedDate) {
       saveData(selectedDate, content);
-      updateList(selectedDate, content);
+      // TODO: decreaseCount (selectedDate, savedContent)
+      
+      // TODO: increaseCount (selectedDate, content)
     }
 
     presentToast("Your diary is saved!");
@@ -56,13 +58,6 @@ const EditPage: React.FC = () => {
 
   const saveData = (key: string, value: string) => {
     localStorage.setItem(key, value);
-  };
-
-  // TODO: complete here
-  const updateList = (key: string, value: string) => {
-    // TODO: delete the old content from storage by id (key=date)
-
-    // TODO: update the list with key & value
   };
 
   const handleContentChange = (
