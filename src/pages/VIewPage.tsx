@@ -11,8 +11,7 @@ import {
 import { useLocation, useHistory } from "react-router-dom";
 import { ellipsisVerticalOutline } from "ionicons/icons";
 
-import {decreaseCount} from "./Functionality/UpdateList"
-
+import { decreaseCount } from "./Functionality/UpdateList";
 
 const ViewPage = () => {
   const location = useLocation<{ selectedDate?: string }>();
@@ -21,17 +20,17 @@ const ViewPage = () => {
 
   const deleteEntry = () => {
     if (selectedDate) {
-      const content = localStorage.getItem(selectedDate) ?? "";      decreaseCount (selectedDate, content);
+      const content = localStorage.getItem(selectedDate) ?? "";
+      decreaseCount(selectedDate, content);
       localStorage.removeItem(selectedDate);
-      history.replace("/")
-      window.location.reload()
+      history.replace("/");
+      window.location.reload();
     }
   };
 
   const editEntry = () => {
     history.push("/edit", { selectedDate });
   };
-
 
   return (
     <>
@@ -42,8 +41,7 @@ const ViewPage = () => {
             <IonButton
               slot="end"
               id="open-action-sheet"
-              style={{ marginLeft: "auto" }}
-            >
+              style={{ marginLeft: "auto" }}>
               <IonIcon icon={ellipsisVerticalOutline} />
             </IonButton>
           </div>
@@ -64,8 +62,7 @@ const ViewPage = () => {
                 text: "Cancel",
                 role: "cancel",
               },
-            ]}
-          ></IonActionSheet>
+            ]}></IonActionSheet>
         </IonToolbar>
       </IonHeader>
       <div
@@ -76,8 +73,7 @@ const ViewPage = () => {
           borderRadius: 10,
           borderColor: "transparent",
           padding: "20px",
-        }}
-      >
+        }}>
         <IonContent
           style={{
             height: 700,
@@ -86,8 +82,7 @@ const ViewPage = () => {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-          }}
-        >
+          }}>
           {selectedDate && <div>{localStorage.getItem(selectedDate)}</div>}
         </IonContent>
       </div>

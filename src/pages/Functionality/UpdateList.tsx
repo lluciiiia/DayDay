@@ -8,12 +8,12 @@ export const increaseCount = (key: string, value: string) => {
   const words = content.split(" ");
 
   words.forEach((word) => {
-    // Check if the word passes the isException method (returns boolean)
     if (isException(word)) {
-      if (wordCount.hasOwnProperty(word)) {
-        wordCount[word] += 1;
+      const index = wordCount.findIndex((item) => item.word === word);
+      if (index !== -1) {
+        wordCount[index].count += 1;
       } else {
-        wordCount[word] = 1; // initialize it in the map
+        wordCount.push({ count: 1, word });
       }
     }
   });
@@ -24,9 +24,11 @@ export const decreaseCount = (key: string, value: string) => {
   const words = content.split(" ");
 
   words.forEach((word) => {
-    // iterates each word in content
     if (isException(word)) {
-      wordCount[word] -= 1;
+      const index = wordCount.findIndex((item) => item.word === word);
+      if (index !== -1) {
+        wordCount[index].count -= 1;
+      }
     }
   });
 };
