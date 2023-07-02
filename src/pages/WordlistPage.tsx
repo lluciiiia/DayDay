@@ -9,7 +9,7 @@ import {
   IonList,
 } from "@ionic/react";
 
-import wordCount from "./Functionality/InitializeVariables";
+import wordCount from "./Functionality/InitializeCount";
 
 const WordlistPage = () => {
   const [updatedWordCount, setUpdatedWordCount] = useState(wordCount);

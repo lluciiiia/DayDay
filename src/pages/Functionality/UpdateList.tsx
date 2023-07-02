@@ -1,4 +1,4 @@
-import wordCount from "./InitializeVariables";
+import wordCount from "./InitializeCount";
 import { removeStopwords, eng } from "stopword";
 
 const ignoredWords = [
