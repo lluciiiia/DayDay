@@ -1,5 +1,5 @@
 import React from "react";
-import natural from "natural";
+import Sentiment from "sentiment";
 import graphDot from "./InitializeDot";
 
 // Define an interface for the sentiment scores
@@ -7,9 +7,8 @@ interface SentimentScores {
   [key: string]: number;
 }
 
-// Create a sentiment analyzer using the Natural library
-const sentimentAnalyzer = new natural.SentimentAnalyzer("English", natural.PorterStemmer, "afinn");
-const tokenizer = new natural.WordTokenizer();
+// Create a sentiment analyzer using the Sentiment library
+const sentimentAnalyzer = new Sentiment();
 
 export const addGraph = (key: string, value: string) => {
   const totalScore = sentimentScore(value);
@@ -29,15 +28,12 @@ export const deleteGraph = (selectedDate: string) => {
 
 const sentimentScore = (value: string) => {
   const content = value.toLowerCase();
-  const tokens = tokenizer.tokenize(content);
+  const tokens = content.split(" ");
 
   let totalScore = 0;
-  if (tokens !== null) {
-    for (const token of tokens) {
-      const stemmedToken = natural.PorterStemmer.stem(token);
-      const score = sentimentAnalyzer.getSentiment([stemmedToken]);
-      totalScore += score;
-    }
+  for (const token of tokens) {
+    const result = sentimentAnalyzer.analyze(token);
+    totalScore += result.score;
   }
 
   return totalScore;
