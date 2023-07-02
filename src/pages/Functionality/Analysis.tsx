@@ -13,6 +13,8 @@ const sentimentAnalyzer = new Sentiment();
 export const addGraph = (key: string, value: string) => {
   const totalScore = sentimentScore(value);
 
+  console.log(key, " score => ", totalScore);
+
   graphDot.push({ date: key, score: totalScore });
   localStorage.setItem("graphDot", JSON.stringify(graphDot));
 };

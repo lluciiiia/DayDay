@@ -79,7 +79,6 @@ const EditPage: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent scrollY={false}>
-        s
         <div
           style={{
             height: 680,
