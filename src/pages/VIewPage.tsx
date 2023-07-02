@@ -14,7 +14,6 @@ import { ellipsisVerticalOutline } from "ionicons/icons";
 import { decreaseCount } from "./Functionality/UpdateList";
 import { deleteGraph } from "./Functionality/Analysis";
 
-
 const ViewPage = () => {
   const location = useLocation<{ selectedDate?: string }>();
   const history = useHistory();
