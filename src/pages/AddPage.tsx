@@ -9,8 +9,8 @@ import {
 } from "@ionic/react";
 import { useHistory, useLocation } from "react-router";
 
-import {increaseCount} from "./Functionality/UpdateList"
-
+import { increaseCount } from "./Functionality/UpdateList";
+import { sentimentScore } from "./Functionality/Analysis";
 
 interface LocationState {
   selectedDate: string;
@@ -30,10 +30,9 @@ const AddPage = () => {
       return;
     }
 
-    if (selectedDate) {
-      saveData(selectedDate, content);
-      increaseCount (selectedDate, content);
-    }
+    saveData(selectedDate, content);
+    increaseCount(selectedDate, content);
+    // TODO:implement editGraph function
 
     presentToast("Your diary is saved!");
     setTimeout(() => {
@@ -62,6 +61,11 @@ const AddPage = () => {
   ) => {
     setContent(event.target.value);
   };
+
+  // TODO: editGraph function
+
+  //  get the overall score for each content
+  // -> add it to the graph as a dot in the corresponding date dot={date: figure}
 
   return (
     <>
