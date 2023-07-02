@@ -5,6 +5,13 @@ interface AfinnScores {
   [key: string]: number;
 }
 
+export const addGraph = (key: string, value: string) => {
+    // get the overall score for the content
+    const totalScore = sentimentScore(value);
+    // TODO: add it to the graph as a dot in the corresponding date dot={date: figure}
+  };
+
+
 export const sentimentScore = (value: string) => {
   // Define the input text and split it into tokens:
   const content = value.toLowerCase();

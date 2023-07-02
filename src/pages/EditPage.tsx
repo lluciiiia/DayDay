@@ -41,6 +41,10 @@ const EditPage: React.FC = () => {
     decreaseCount(savedContent);
     increaseCount(content);
 
+    // TODO: deleteGraph(selectedDate)
+
+    // TODO: addGraph(selectedDate, content)
+
     presentToast("Your diary is saved!");
     setTimeout(() => {
       history.replace("/");

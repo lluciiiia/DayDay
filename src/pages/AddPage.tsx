@@ -10,7 +10,7 @@ import {
 import { useHistory, useLocation } from "react-router";
 
 import { increaseCount } from "./Functionality/UpdateList";
-import { sentimentScore } from "./Functionality/Analysis";
+import { addGraph } from "./Functionality/Analysis";
 
 interface LocationState {
   selectedDate: string;
@@ -32,7 +32,7 @@ const AddPage = () => {
 
     saveData(selectedDate, content);
     increaseCount(content);
-    // TODO:implement editGraph function
+    addGraph(selectedDate, content);
 
     presentToast("Your diary is saved!");
     setTimeout(() => {
@@ -61,11 +61,6 @@ const AddPage = () => {
   ) => {
     setContent(event.target.value);
   };
-
-  // TODO: editGraph function
-
-  //  get the overall score for each content
-  // -> add it to the graph as a dot in the corresponding date dot={date: figure}
 
   return (
     <>

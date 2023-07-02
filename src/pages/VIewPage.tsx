@@ -32,6 +32,8 @@ const ViewPage = () => {
         localStorage.setItem("diaryDates", JSON.stringify(savedDates));
       }
 
+      // TODO: deleteGraph(selectedDate)
+
       history.replace("/");
       window.location.reload();
     }
