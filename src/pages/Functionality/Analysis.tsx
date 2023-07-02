@@ -2,11 +2,6 @@ import React from "react";
 import Sentiment from "sentiment";
 import graphDot from "./InitializeDot";
 
-// Define an interface for the sentiment scores
-interface SentimentScores {
-  [key: string]: number;
-}
-
 // Create a sentiment analyzer using the Sentiment library
 const sentimentAnalyzer = new Sentiment();
 
