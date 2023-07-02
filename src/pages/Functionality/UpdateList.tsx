@@ -1,7 +1,7 @@
 import wordCount from "./InitializeCount";
 import { removeStopwords, eng } from "stopword";
 
-const ignoredWords = ["the", "when", "where", "how", "why", "what", "who", "that", "day", "today", "yesterday", "tomorrow", "really", "not", "no"];
+const ignoredWords = ["the", "when", "where", "how", "why", "what", "who", "that", "day", "today", "yesterday", "tomorrow", "really", "not", "no", "bit", "wasn", "isn", "t", "m"];
 
 export const increaseCount = (key: string, value: string) => {
   const content = value.toLowerCase();
