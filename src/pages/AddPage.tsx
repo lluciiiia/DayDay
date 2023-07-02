@@ -31,7 +31,7 @@ const AddPage = () => {
     }
 
     saveData(selectedDate, content);
-    increaseCount(selectedDate, content);
+    increaseCount(content);
     // TODO:implement editGraph function
 
     presentToast("Your diary is saved!");

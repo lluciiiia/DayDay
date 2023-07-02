@@ -38,8 +38,8 @@ const EditPage: React.FC = () => {
     }
 
     saveData(selectedDate, content);
-    decreaseCount(selectedDate, savedContent);
-    increaseCount(selectedDate, content);
+    decreaseCount(savedContent);
+    increaseCount(content);
 
     presentToast("Your diary is saved!");
     setTimeout(() => {

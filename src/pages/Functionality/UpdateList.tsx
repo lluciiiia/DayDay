@@ -1,9 +1,9 @@
 import wordCount from "./InitializeCount";
 import { removeStopwords, eng } from "stopword";
 
-const ignoredWords = ["the", "when", "where", "how", "why", "what", "who", "that", "day", "today", "yesterday", "tomorrow", "really", "not", "no", "bit", "wasn", "isn", "t", "m"];
+const ignoredWords = ["the", "when", "where", "how", "why", "what", "who", "that", "day", "today", "yesterday", "tomorrow", "really", "not", "no", "bit", "wasn", "isn", "t", "m", "s"];
 
-export const increaseCount = (key: string, value: string) => {
+export const increaseCount = (value: string) => {
   const content = value.toLowerCase();
   console.log("CONTENT: ", content);
 
@@ -30,7 +30,7 @@ export const increaseCount = (key: string, value: string) => {
   updateLocalStorage();
 };
 
-export const decreaseCount = (key: string, value: string) => {
+export const decreaseCount = (value: string) => {
   const content = value.toLowerCase();
   let words = content.split(/\s+|(?=[^\w\s])|(?<=[^\w\s])/); // Split by whitespace or symbols
   

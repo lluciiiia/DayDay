@@ -21,7 +21,7 @@ const ViewPage = () => {
   const deleteEntry = () => {
     if (selectedDate) {
       const content = localStorage.getItem(selectedDate) ?? "";
-      decreaseCount(selectedDate, content);
+      decreaseCount(content);
       localStorage.removeItem(selectedDate);
 
       // Remove the date from diaryDates
