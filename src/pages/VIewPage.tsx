@@ -12,6 +12,8 @@ import { useLocation, useHistory } from "react-router-dom";
 import { ellipsisVerticalOutline } from "ionicons/icons";
 
 import { decreaseCount } from "./Functionality/UpdateList";
+import { deleteGraph } from "./Functionality/Analysis";
+
 
 const ViewPage = () => {
   const location = useLocation<{ selectedDate?: string }>();
@@ -32,7 +34,7 @@ const ViewPage = () => {
         localStorage.setItem("diaryDates", JSON.stringify(savedDates));
       }
 
-      // TODO: deleteGraph(selectedDate)
+      deleteGraph(selectedDate);
 
       history.replace("/");
       window.location.reload();

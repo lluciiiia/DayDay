@@ -12,6 +12,7 @@ import { useHistory, useLocation } from "react-router";
 
 import { increaseCount } from "./Functionality/UpdateList";
 import { decreaseCount } from "./Functionality/UpdateList";
+import { addGraph, deleteGraph } from "./Functionality/Analysis";
 
 interface LocationState {
   selectedDate: string;
@@ -38,12 +39,12 @@ const EditPage: React.FC = () => {
     }
 
     saveData(selectedDate, content);
+
     decreaseCount(savedContent);
     increaseCount(content);
 
-    // TODO: deleteGraph(selectedDate)
-
-    // TODO: addGraph(selectedDate, content)
+    deleteGraph(selectedDate);
+    addGraph(selectedDate, content);
 
     presentToast("Your diary is saved!");
     setTimeout(() => {
