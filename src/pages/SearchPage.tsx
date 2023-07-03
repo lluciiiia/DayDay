@@ -7,6 +7,7 @@ import {
   IonItem,
   IonList,
   IonSearchbar,
+  IonLabel,
 } from "@ionic/react";
 
 const SearchPage = () => {
@@ -85,7 +86,6 @@ const SearchPage = () => {
             debounce={1000}
             onIonInput={handleInput}></IonSearchbar>
 
-          {/* TODO: scroll for the list of diaries like wordlistPage */}
           <div
             style={{
               flex: 1,
@@ -94,7 +94,10 @@ const SearchPage = () => {
             }}>
             <IonList>
               {results.map((result, index) => (
-                <IonItem key={index}>{result}</IonItem>
+                <IonItem key={index}>
+                  <IonLabel style={{ fontWeight: "bold" }}>Title</IonLabel>
+                  {result}
+                </IonItem>
               ))}
             </IonList>
           </div>
