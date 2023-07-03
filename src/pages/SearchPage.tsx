@@ -2,6 +2,7 @@ import React from "react";
 import { IonContent, IonHeader, IonTitle, IonToolbar } from "@ionic/react";
 import { IonSearchbar } from "@ionic/react";
 
+
 const SearchPage = () => (
   <>
     <IonHeader>
@@ -19,7 +20,7 @@ const SearchPage = () => (
           height: "100%",
         }}
       >
-        <IonSearchbar></IonSearchbar>
+        <IonSearchbar showClearButton="focus"></IonSearchbar>
       </div>
     </IonContent>
   </>
