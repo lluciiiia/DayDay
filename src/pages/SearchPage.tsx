@@ -66,7 +66,7 @@ const SearchPage = () => {
                       }}>
                       {result.date}
                     </IonLabel>
-                    {result.content}
+                    {result.content.split(" ").slice(0, 20).join(" ")}
                   </div>
                 </IonItem>
               ))}
