@@ -27,10 +27,18 @@ const ViewPage = () => {
 
       // Remove the date from diaryDates
       const savedDates = JSON.parse(localStorage.getItem("diaryDates") || "[]");
-      const index = savedDates.indexOf(selectedDate);
-      if (index > -1) {
-        savedDates.splice(index, 1);
+      const indexDate = savedDates.indexOf(selectedDate);
+      if (indexDate > -1) {
+        savedDates.splice(indexDate, 1);
         localStorage.setItem("diaryDates", JSON.stringify(savedDates));
+      }
+
+      // Remove the date from dictionary
+      const savedDict = JSON.parse(localStorage.getItem("diaryDates") || "[]");
+      const indexDict = savedDict.indexOf(selectedDate);
+      if (indexDict > -1) {
+        savedDict.splice(indexDict, 1);
+        localStorage.setItem("diaryDates", JSON.stringify(savedDict));
       }
 
       deleteGraph(selectedDate);

@@ -46,6 +46,8 @@ const EditPage: React.FC = () => {
     deleteGraph(selectedDate);
     addGraph(selectedDate, content);
 
+    // TODO: delete dictionary / add dictionary
+
     presentToast("Your diary is saved!");
     setTimeout(() => {
       history.replace("/");
@@ -63,6 +65,8 @@ const EditPage: React.FC = () => {
 
   const saveData = (key: string, value: string) => {
     localStorage.setItem(key, value);
+
+    // TODO: Update the localStorage dictionary
   };
 
   const handleContentChange = (
