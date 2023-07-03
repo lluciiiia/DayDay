@@ -34,12 +34,19 @@ const ViewPage = () => {
       }
 
       // Remove the date from dictionary
-      const savedDict = JSON.parse(localStorage.getItem("diaryDates") || "[]");
-      const indexDict = savedDict.indexOf(selectedDate);
-      if (indexDict > -1) {
-        savedDict.splice(indexDict, 1);
-        localStorage.setItem("diaryDates", JSON.stringify(savedDict));
-      }
+      // const dictionary: { date: string; content: string }[] = JSON.parse(
+      //   localStorage.getItem("dictionary") || "[]"
+      // );
+
+      // const index = dictionary.findIndex(
+      //   (entry) => entry.date === selectedDate
+      // );
+
+      // // Remove the object from the dictionary if found
+      // if (index > -1) {
+      //   dictionary.splice(index, 1);
+      //   localStorage.setItem("dictionary", JSON.stringify(dictionary));
+      // }
 
       deleteGraph(selectedDate);
 

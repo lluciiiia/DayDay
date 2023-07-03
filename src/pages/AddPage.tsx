@@ -22,7 +22,6 @@ const AddPage = () => {
   const [content, setContent] = useState("");
   const [present] = useIonToast();
   const selectedDate = location.state?.selectedDate;
-  console.log("date in AddPage:", selectedDate);
 
   const handleSave = () => {
     if (content.trim() === "") {

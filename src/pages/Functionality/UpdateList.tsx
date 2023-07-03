@@ -27,16 +27,12 @@ const ignoredWords = [
 
 export const increaseCount = (value: string) => {
   const content = value.toLowerCase();
-  console.log("CONTENT: ", content);
 
   let words = content.split(/\s+|(?=[^\w\s])|(?<=[^\w\s])/); // Split by whitespace or symbols
-  console.log("BEFORE: ", words);
 
   words = removeStopwords(words, eng);
   words = words.map((word) => word.replace(/[^a-zA-Z]+/g, "")); // Remove symbols from words
   words = words.filter((word) => !ignoredWords.includes(word)); // Remove ignored words
-
-  console.log("AFTER: ", words);
 
   words = words.filter((word) => word.trim() !== ""); // Remove empty strings
 
