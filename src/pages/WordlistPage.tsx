@@ -15,11 +15,15 @@ const WordlistPage = () => {
   const [updatedWordCount, setUpdatedWordCount] = useState(wordCount);
 
   useEffect(() => {
-    const storedWordCount = JSON.parse(localStorage.getItem('wordCount') || '[]');
+    const storedWordCount = JSON.parse(
+      localStorage.getItem("wordCount") || "[]"
+    );
     setUpdatedWordCount(storedWordCount);
   }, []);
 
-  const sortedWordCount = [...updatedWordCount].sort((a, b) => b.count - a.count);
+  const sortedWordCount = [...updatedWordCount].sort(
+    (a, b) => b.count - a.count
+  );
 
   const topWords = sortedWordCount.slice(0, 51);
 
@@ -38,8 +42,7 @@ const WordlistPage = () => {
             alignItems: "center",
             justifyContent: "flex-start",
             height: "100%",
-          }}
-        >
+          }}>
           <div
             style={{
               position: "relative",
@@ -48,8 +51,7 @@ const WordlistPage = () => {
               color: "white",
               padding: "20px 10px",
               backgroundColor: "black",
-            }}
-          >
+            }}>
             Top 50 Frequently Used Words
           </div>
           <div
@@ -57,19 +59,31 @@ const WordlistPage = () => {
               flex: 1,
               overflowY: "scroll",
               width: "100%",
-            }}
-          >
-            <IonList>
-              {topWords.map((item, index) => (
-                <IonItem key={item.word}>
-                  <div style={{marginRight: "30px" }}>
-                  <IonLabel style={{ fontSize: "23px", fontWeight: "bold", }}>{`Top ${index + 1}`}</IonLabel>
-
-                  </div>
-                  <IonLabel style={{ fontSize: "20px" }}>{`${item.word} (${item.count})`}</IonLabel>
-                </IonItem>
-              ))}
-            </IonList>
+            }}>
+            <div
+              style={{
+                flex: 1,
+                overflowY: "scroll",
+                width: "100%",
+              }}>
+              <IonList>
+                {topWords.map((item, index) => (
+                  <IonItem key={item.word}>
+                    <div style={{ marginRight: "30px" }}>
+                      <IonLabel
+                        style={{
+                          fontSize: "23px",
+                          fontWeight: "bold",
+                        }}>{`Top ${index + 1}`}</IonLabel>
+                    </div>
+                    <IonLabel
+                      style={{
+                        fontSize: "20px",
+                      }}>{`${item.word} (${item.count})`}</IonLabel>
+                  </IonItem>
+                ))}
+              </IonList>
+            </div>
           </div>
         </div>
       </IonContent>
