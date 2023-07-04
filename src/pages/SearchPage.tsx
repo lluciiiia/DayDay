@@ -26,13 +26,7 @@ const SearchPage = () => {
 
   const highlightInput = (content: string, input: string) => {
     const regex = new RegExp(`(${input})`, "gi");
-    const highlightedContent = content.replace(
-      regex,
-      "<span style='color: red'>$1</span>"
-    );
-    const words = highlightedContent.split(" ");
-    const truncatedWords = words.slice(0, 20);
-    return truncatedWords.join(" ");
+    return content.replace(regex, "<span style='color: red'>$1</span>");
   };
 
   return (
@@ -84,7 +78,7 @@ const SearchPage = () => {
                     </IonLabel>
                     <div
                       dangerouslySetInnerHTML={{
-                        __html: highlightInput(result.content, inputValue),
+                        __html: highlightInput(result.content, inputValue), // Use inputValue for highlighting
                       }}
                     />
                   </div>
