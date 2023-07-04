@@ -48,14 +48,28 @@ const SentimentPage = () => (
       </IonToolbar>
     </IonHeader>
     <IonContent scrollY={false}>
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          height: "100%",
-        }}>
-        <Line data={data} />
+      <div style={{ display: "flex", flexDirection: "column" }}>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            height: "100%",
+            marginTop: "30px",
+            width: "100%",
+          }}>
+          <Line data={data} />
+        </div>
+        <div id="instruction" style={{ marginTop: "50px", padding: "10px" }}>
+          <div style={{ fontSize: "20px", fontWeight: "bold" }}>
+            Get To Know Your Sentiment Patterns
+          </div>
+          <div style={{ fontSize: "18px", marginTop: "18px" }}>
+            each sentiment score ranges from -5 to +5. <br></br>
+            positive score: positive sentiment. <br></br>
+            negative score: negative sentiment.
+          </div>
+        </div>
       </div>
     </IonContent>
   </>
