@@ -3,7 +3,8 @@ import Dictionary from "./InitializeDictionary";
 
 export const SearchWords = (input: string) => {
   const options = {
-    includeScore: true,
+    includeMatches: true,
+    includeScores: true,
     keys: ["content"],
   };
 
