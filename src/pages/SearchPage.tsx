@@ -15,12 +15,18 @@ const SearchPage = () => {
   const [results, setResults] = useState<{ date: string; content: string }[]>(
     []
   );
+  const [inputValue, setInputValue] = useState(""); // New state variable
 
   const handleInput = (event: CustomEvent) => {
     const input = event.detail.value || "";
+    setInputValue(input); // Store the input value
     const searchResults = SearchWords(input);
-
     setResults(searchResults);
+  };
+
+  const highlightInput = (content: string, input: string) => {
+    const regex = new RegExp(`(${input})`, "gi");
+    return content.replace(regex, "<span style='color: red'>$1</span>");
   };
 
   return (
@@ -38,18 +44,20 @@ const SearchPage = () => {
             alignItems: "center",
             justifyContent: "flex-start",
             height: "100%",
-          }}>
+          }}
+        >
           <IonSearchbar
             showClearButton="focus"
-            //debounce={1000} // delay til finishing typing
-            onIonInput={handleInput}></IonSearchbar>
+            onIonInput={handleInput}
+          ></IonSearchbar>
 
           <div
             style={{
               flex: 1,
               overflowY: "scroll",
               width: "100%",
-            }}>
+            }}
+          >
             <IonList>
               {results.map((result) => (
                 <IonItem key={result.date} style={{ paddingTop: "15px" }}>
@@ -57,16 +65,22 @@ const SearchPage = () => {
                     style={{
                       display: "flex",
                       flexDirection: "column",
-                    }}>
+                    }}
+                  >
                     <IonLabel
                       style={{
                         fontWeight: "bold",
                         fontSize: "17px",
                         paddingBottom: "7px",
-                      }}>
+                      }}
+                    >
                       {result.date}
                     </IonLabel>
-                    {result.content.split(" ").slice(0, 20).join(" ")}
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: highlightInput(result.content, inputValue), // Use inputValue for highlighting
+                      }}
+                    />
                   </div>
                 </IonItem>
               ))}
