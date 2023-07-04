@@ -4,6 +4,7 @@ import Dictionary from "./InitializeDictionary";
 export const SearchWords = (input: string) => {
   const options = {
     includeMatches: true,
+    shouldSort: true,
     keys: ["content"],
   };
 
