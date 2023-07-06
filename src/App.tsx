@@ -31,7 +31,6 @@ import "@ionic/react/css/display.css";
 /* Theme variables */
 import "./theme/variables.css";
 import { search, heart, pencil, list } from "ionicons/icons";
-import HomePage from "./pages/HomePage";
 import CalendarPage from "./pages/CalendarPage";
 import BrowserPage from "./pages/BrowserPage";
 import CategoryPage from "./pages/CategoryPage";
@@ -44,8 +43,7 @@ const App: React.FC = () => (
     <IonReactRouter>
     <IonTabs>
         <IonRouterOutlet>
-          <Redirect exact path="/" to="/home" />
-          <Route path="/home" exact={true} render={() => <HomePage />} />
+          <Redirect exact path="/" to="/calendar" />
           <Route path="/calendar" exact={true} render={() => <CalendarPage />} />
           <Route path="/browser" exact={true} render={() => <BrowserPage />} />
           <Route path="/category" exact={true} render={() => <CategoryPage />} />
