@@ -23,15 +23,23 @@ const CalendarPage = () => {
 
   const fetchDiaryDatesFromDatabase = async () => {
     try {
-      const [rows] = await connection.execute(
+      const [result] = await connection.promise().execute(
         "SELECT DISTINCT date FROM diary_entries"
       );
-      const dates = (rows as any[]).map((row: any) => row.date);
-      setDiaryDates(dates);
+  
+      if (Array.isArray(result)) {
+        const rows = result as RowDataPacket[];
+        const dates = rows.map((row) => row.date);
+        setDiaryDates(dates);
+      } else {
+        console.error("Invalid result format:", result);
+      }
     } catch (error) {
       console.error("Error fetching diary dates:", error);
     }
   };
+  
+  
 
   const handleAddClick = () => {
     history.push("/add", { selectedDate });
@@ -50,18 +58,21 @@ const CalendarPage = () => {
 
   const checkDiaryExists = (date: string | null) => {
     if (date) {
-      return connection
-        .execute<RowDataPacket[]>(
+      return new Promise<boolean>((resolve) => {
+        connection.query(
           "SELECT COUNT(*) as count FROM diary_entries WHERE date = ?",
-          [date]
-        )
-        .then(([rows]) => {
-          const count = rows[0].count;
-          return count > 0;
-        });
+          [date],
+          (error: any, rows: any) => {
+            const count = rows[0].count;
+            resolve(!error && count > 0);
+          }
+        );
+      });
     }
     return false;
   };
+  
+  
 
   return (
     <>
