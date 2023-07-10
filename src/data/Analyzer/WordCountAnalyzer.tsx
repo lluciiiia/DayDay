@@ -25,7 +25,7 @@ const ignoredWords = [
   's',
 ];
 
-class WordCountAnalyzer implements IAnalyzer<PlotableAnalysis> {
+export class WordCountAnalyzer implements IAnalyzer<PlotableAnalysis> {
     async analyze(entries: Entry[]): Promise<PlotableAnalysis> {
       const wordCount = new Map<string, number>();
   

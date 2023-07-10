@@ -1,4 +1,6 @@
- // Type for analysis page cards
+import { WordCountAnalyzer } from '../Analyzer/WordCountAnalyzer';
+
+// Type for analysis page cards
  type AnalysisPageCard = {
     title: string;
     analyzer: IAnalyzer<any>; // Use 'any' here if the analyzer can have different types
