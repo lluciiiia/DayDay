@@ -1,5 +1,6 @@
 type Content = {
     type: "text" | "image" | "video" | "audio" | "location" | "sticker";
+    text?: string; // Add the 'text' property as an optional string
   };
   
   type Entry = {
