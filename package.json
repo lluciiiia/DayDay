@@ -27,6 +27,7 @@
     "faker": "^6.6.6",
     "fuse.js": "^6.6.2",
     "ionicons": "^7.0.0",
+    "mysql2": "^3.5.0",
     "natural": "^6.5.0",
     "react": "^18.2.0",
     "react-chartjs-2": "^5.2.0",

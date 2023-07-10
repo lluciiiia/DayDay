@@ -30,7 +30,7 @@ import "@ionic/react/css/display.css";
 
 /* Theme variables */
 import "./theme/variables.css";
-import { search, heart, pencil, list } from "ionicons/icons";
+import { search, heart, calendarClear, list } from "ionicons/icons";
 import CalendarPage from "./pages/CalendarPage";
 import BrowserPage from "./pages/BrowserPage";
 import CategoryPage from "./pages/CategoryPage";
@@ -52,17 +52,17 @@ const App: React.FC = () => (
 
         <IonTabBar slot="bottom">
           <IonTabButton tab="category" href="/category">
-            <IonIcon icon={pencil} />
+            <IonIcon icon={list} />
             <IonLabel>Category</IonLabel>
           </IonTabButton>
 
           <IonTabButton tab="calendar" href="/calendar">
-            <IonIcon icon={heart} />
+            <IonIcon icon={calendarClear} />
             <IonLabel>Calendar</IonLabel>
           </IonTabButton>
 
           <IonTabButton tab="browser" href="/browser">
-            <IonIcon icon={list} />
+            <IonIcon icon={search} />
             <IonLabel>Browser</IonLabel>
           </IonTabButton>
 
