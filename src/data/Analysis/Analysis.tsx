@@ -5,7 +5,7 @@ interface Analysis {
   
   // Interface for analysis that can be plotted on a graph
   interface PlotableAnalysis extends Analysis {
-    data: { label: string; value: number }[];
+    data: { label: string; value: number, title: string }[];
   }
   
   // Interface for geolocation analysis
