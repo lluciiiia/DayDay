@@ -20,6 +20,7 @@
     "@capacitor/status-bar": "5.0.4",
     "@ionic/react": "^7.0.0",
     "@ionic/react-router": "^7.0.0",
+    "@types/mysql": "^2.15.21",
     "@types/react-router": "^5.1.20",
     "@types/react-router-dom": "^5.3.3",
     "afinn-111": "^2.0.1",

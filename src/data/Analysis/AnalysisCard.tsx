@@ -22,7 +22,7 @@ import { WordCountAnalyzer } from '../Analyzer/WordCountAnalyzer';
       analyzer: new WordCountAnalyzer(),
       settings: {},
     },
-    //...
+    
   ];
   
  
