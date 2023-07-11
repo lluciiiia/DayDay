@@ -25,28 +25,26 @@ const ignoredWords = [
 ];
 
 class WordCountAnalyzer implements IAnalyzer<PlotableAnalysis> {
-  analyze(entries: Entry[]): Promise<PlotableAnalysis> {
+  analyze(entry: Entry): Promise<PlotableAnalysis> {
     const wordCount: { word: string; count: number }[] = [];
 
-    entries.forEach((entry) => {
-      entry.content.forEach((content) => {
-        if (content.type === "text" && content.text) {
-          const words = content.text
-            .toLowerCase()
-            .split(/\s+|(?=[^\w\s])|(?<=[^\w\s])/); // Split by whitespace or symbols
+    entry.content.forEach((content) => {
+      if (content.type === "text" && content.text) {
+        const words = content.text
+          .toLowerCase()
+          .split(/\s+|(?=[^\w\s])|(?<=[^\w\s])/);
 
-          words.forEach((word) => {
-            if (!ignoredWords.includes(word.trim())) {
-              const index = wordCount.findIndex((item) => item.word === word);
-              if (index !== -1) {
-                wordCount[index].count += 1;
-              } else {
-                wordCount.push({ count: 1, word });
-              }
+        words.forEach((word) => {
+          if (!ignoredWords.includes(word.trim())) {
+            const index = wordCount.findIndex((item) => item.word === word);
+            if (index !== -1) {
+              wordCount[index].count += 1;
+            } else {
+              wordCount.push({ count: 1, word });
             }
-          });
-        }
-      });
+          }
+        });
+      }
     });
 
     return axios
