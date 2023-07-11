@@ -24,7 +24,6 @@ const ignoredWords = [
   "s",
 ];
 
-
 class WordCountAnalyzer implements IAnalyzer<PlotableAnalysis> {
   analyze(entries: Entry[]): Promise<PlotableAnalysis> {
     const wordCount: { word: string; count: number }[] = [];
@@ -32,7 +31,9 @@ class WordCountAnalyzer implements IAnalyzer<PlotableAnalysis> {
     entries.forEach((entry) => {
       entry.content.forEach((content) => {
         if (content.type === "text" && content.text) {
-          const words = content.text.toLowerCase().split(/\s+|(?=[^\w\s])|(?<=[^\w\s])/); // Split by whitespace or symbols
+          const words = content.text
+            .toLowerCase()
+            .split(/\s+|(?=[^\w\s])|(?<=[^\w\s])/); // Split by whitespace or symbols
 
           words.forEach((word) => {
             if (!ignoredWords.includes(word.trim())) {
@@ -48,26 +49,48 @@ class WordCountAnalyzer implements IAnalyzer<PlotableAnalysis> {
       });
     });
 
-    // Update the word count data in your backend API
     return axios
-      .post("http://localhost:3001/api/wordcount", wordCount)
-      .then(() => {
-        const data = wordCount.map((item) => ({
-          label: item.word,
-          value: item.count,
-        }));
+    // analyze sends a GET request to fetch the existing word count data from the backend server.
+      .get("http://localhost:3003/api/wordcount") 
+      .then((response) => {
+        const existingWordCountData = response.data;
 
-        const plotableAnalysis: PlotableAnalysis = {
-          name: "Word Count Analysis", 
-          data,
-          // Add any additional properties required for your analysis
-        };
+        wordCount.forEach((item) => {
+          const existingItem = existingWordCountData.find(
+            (dataItem: { word: string; count: number }) => dataItem.word === item.word
+          );
+          if (existingItem) {
+            existingItem.count += item.count;
+          } else {
+            existingWordCountData.push(item);
+          }
+        });
 
-        return plotableAnalysis;
+        return axios
+        // analyze sends a PUT request to update the word count data on the backend server.
+          .put("http://localhost:3003/api/wordcount", existingWordCountData)
+          .then(() => {
+            const data = existingWordCountData.map((item: { word: string; count: number }) => ({
+              label: item.word,
+              value: item.count,
+            }));
+
+            const plotableAnalysis: PlotableAnalysis = {
+              name: "Word Count Analysis",
+              data,
+              // Add any additional properties required for your analysis
+            };
+
+            return plotableAnalysis;
+          })
+          .catch((error) => {
+            console.error(error);
+            throw new Error("Failed to update word count data.");
+          });
       })
       .catch((error) => {
         console.error(error);
-        throw new Error("Failed to analyze word count.");
+        throw new Error("Failed to fetch existing word count data.");
       });
   }
 }
