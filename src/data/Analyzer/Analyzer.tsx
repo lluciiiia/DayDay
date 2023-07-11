@@ -1,6 +1,7 @@
 // Interface for analyzers
 interface IAnalyzer<Output> {
   analyze(entry: Entry): Promise<Output>;
+  
 }
 
 // Analyzer for sentiment analysis
