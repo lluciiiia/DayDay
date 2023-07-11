@@ -34,7 +34,7 @@ const CalendarPage = () => {
 
       const dates = entries.map((entry: Entry) => entry.date);
       setDiaryDates(dates);
-      
+
     } catch (error) {
       console.error(error);
     }
@@ -103,6 +103,9 @@ const CalendarPage = () => {
               }}>
               {checkDiaryExists(selectedDate) ? (
                 <div style={{ marginTop: "10px" }}>
+                  <IonButton expand="block" onClick={handleAddClick}>
+                    Add
+                  </IonButton>
                   <IonButton expand="block" onClick={handleViewClick}>
                     View
                   </IonButton>
