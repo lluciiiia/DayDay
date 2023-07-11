@@ -34,6 +34,7 @@ import { search, heart, calendarClear, list } from "ionicons/icons";
 import CalendarPage from "./pages/CalendarPage";
 import BrowserPage from "./pages/BrowserPage";
 import CategoryPage from "./pages/CategoryPage";
+import AddPage from "./pages/AddPage";
 
 setupIonicReact();
 
@@ -47,6 +48,7 @@ const App: React.FC = () => (
           <Route path="/calendar" exact={true} render={() => <CalendarPage />} />
           <Route path="/browser" exact={true} render={() => <BrowserPage />} />
           <Route path="/category" exact={true} render={() => <CategoryPage />} />
+          <Route path="/add" exact={true} render={() => <AddPage />} />
         
         </IonRouterOutlet>
 
