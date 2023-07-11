@@ -6,6 +6,8 @@ import {
   IonToolbar,
   IonButton,
   useIonToast,
+  IonInput,
+  IonItem,
 } from "@ionic/react";
 import { useHistory, useLocation } from "react-router";
 import { AddAll } from "./UpdateAll";
@@ -69,13 +71,18 @@ const AddPage = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent scrollY={false}>
+        <div style={{margin: "8px"}}>
+          <IonItem style={{fontSize: "20px"}}>
+            <IonInput label="Title" placeholder="Enter the title"></IonInput>
+          </IonItem>
+        </div>
         <div
           style={{
-            height: 680,
+            height: 610,
             overflowY: "scroll",
             maxWidth: 370,
-            margin: "0 auto",
-            padding: "20px 3px",
+            margin: "auto",
+            padding: "0px 3px 20px 3px",
           }}>
           <textarea
             value={content}
@@ -86,6 +93,7 @@ const AddPage = () => {
               border: 0,
               borderRadius: 10,
               borderColor: "transparent",
+              fontSize: "18px"
             }}
             placeholder="Enter your diary here"></textarea>
         </div>
