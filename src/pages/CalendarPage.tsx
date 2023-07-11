@@ -29,10 +29,12 @@ const CalendarPage = () => {
 
   const getData = async () => {
     try {
-      const response = await axios.get("http://localhost:3003/api/entries");
-      const entries: Entry[] = response.data;
-      const dates = entries.map((entry) => entry.date);
+      const response = await axios.get("http://localhost:3004/api/entries");
+      const entries = response.data;
+
+      const dates = entries.map((entry: Entry) => entry.date);
       setDiaryDates(dates);
+      
     } catch (error) {
       console.error(error);
     }
@@ -76,14 +78,12 @@ const CalendarPage = () => {
             height: "100%",
             paddingBottom: 60,
             alignItems: "center",
-          }}
-        >
+          }}>
           <div
             style={{
               alignSelf: "center",
               paddingTop: 30,
-            }}
-          >
+            }}>
             <IonDatetime
               onIonChange={handleDateChange}
               presentation="date"
@@ -91,8 +91,7 @@ const CalendarPage = () => {
                 date,
                 textColor: "rgb(68, 10, 184)",
                 backgroundColor: "rgb(211, 200, 229)",
-              }))}
-            ></IonDatetime>
+              }))}></IonDatetime>
           </div>
 
           {showButtons && (
@@ -101,8 +100,7 @@ const CalendarPage = () => {
                 marginBottom: "5px",
                 width: "100%",
                 maxWidth: "370px",
-              }}
-            >
+              }}>
               {checkDiaryExists(selectedDate) ? (
                 <div style={{ marginTop: "10px" }}>
                   <IonButton expand="block" onClick={handleViewClick}>

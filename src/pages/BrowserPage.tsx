@@ -14,6 +14,7 @@ import {
 } from "@ionic/react";
 
 const BrowserPage = () => {
+  // Enable to reorder the list
   function handleReorder(event: CustomEvent<ItemReorderEventDetail>) {
     console.log("Dragged from index", event.detail.from, "to", event.detail.to);
     event.detail.complete();
