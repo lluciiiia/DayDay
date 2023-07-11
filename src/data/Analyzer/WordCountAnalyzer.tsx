@@ -50,7 +50,7 @@ class WordCountAnalyzer implements IAnalyzer<PlotableAnalysis> {
 
     // Update the word count data in your backend API
     return axios
-      .post("http://localhost:3000/api/wordcount", wordCount)
+      .post("http://localhost:3001/api/wordcount", wordCount)
       .then(() => {
         const data = wordCount.map((item) => ({
           label: item.word,
@@ -58,7 +58,7 @@ class WordCountAnalyzer implements IAnalyzer<PlotableAnalysis> {
         }));
 
         const plotableAnalysis: PlotableAnalysis = {
-          name: "Word Count Analysis", // Add the required 'name' property
+          name: "Word Count Analysis", 
           data,
           // Add any additional properties required for your analysis
         };
