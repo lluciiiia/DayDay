@@ -5,6 +5,7 @@ interface Analysis {
   
   // Interface for analysis that can be plotted on a graph
   interface PlotableAnalysis extends Analysis {
+    name: string;
     data: { label: string; value: number }[];
   }
   

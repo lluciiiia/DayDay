@@ -1,4 +1,4 @@
-import { WordCountAnalyzer } from '../Analyzer/WordCountAnalyzer';
+import WordCountAnalyzer from "../Analyzer/WordCountAnalyzer";
 
 // Type for analysis page cards
  type AnalysisPageCard = {
