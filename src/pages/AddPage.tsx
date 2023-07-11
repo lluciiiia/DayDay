@@ -20,10 +20,15 @@ const AddPage = () => {
   const history = useHistory();
   const location = useLocation<LocationState>();
   const [content, setContent] = useState("");
+  const [title, setTitle] = useState("");
   const [present] = useIonToast();
   const selectedDate = location.state?.selectedDate;
 
   const handleSave = async () => {
+    if (title.trim() === "") {
+      presentToast("Please enter your diary title");
+      return;
+    }
     if (content.trim() === "") {
       presentToast("Please enter your diary content");
       return;
@@ -32,12 +37,12 @@ const AddPage = () => {
     const entry: Entry = {
       content: [], // Modify this to match your Content interface
       date: selectedDate,
-      title: "Your title here", // TODO: title input section
+      title: title, // TODO: title input section
       category: "Your category here", // TODO: category input section
     };
 
     try {
-      AddAll(entry);
+      AddAll(entry);  
 
       presentToast("Your diary is saved!");
       setTimeout(() => {
@@ -63,6 +68,11 @@ const AddPage = () => {
     setContent(event.target.value);
   };
 
+  const handleTitleChange = (event: any) => {
+    setTitle(event.detail.value);
+  };
+
+
   return (
     <>
       <IonHeader>
@@ -73,7 +83,7 @@ const AddPage = () => {
       <IonContent scrollY={false}>
         <div style={{margin: "8px"}}>
           <IonItem style={{fontSize: "20px"}}>
-            <IonInput label="Title" placeholder="Enter the title"></IonInput>
+            <IonInput label="Title" placeholder="Enter the title" value={title} onIonChange={handleTitleChange}></IonInput>
           </IonItem>
         </div>
         <div
