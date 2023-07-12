@@ -14,6 +14,7 @@ import {
   IonPopover,
 } from "@ionic/react";
 import { settingsOutline } from "ionicons/icons";
+import '../main.css';
 
 const CategoryPage = () => {
   const popover = useRef<HTMLIonPopoverElement>(null);
