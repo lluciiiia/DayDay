@@ -198,6 +198,7 @@ const CategoryPage = () => {
                       width: "300px",
                       borderRadius: "10px",
                       fontSize: "25px",
+                      textAlign: "center",
                     }}></IonInput>
                 </div>
               </div>
