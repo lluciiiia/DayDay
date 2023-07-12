@@ -17,7 +17,7 @@ import {
   IonButtons,
   IonPage,
 } from "@ionic/react";
-import { flame, reload, settingsOutline } from "ionicons/icons";
+import { flame, reload, settingsOutline, list } from "ionicons/icons";
 import "../main.css";
 
 const CategoryPage = () => {
@@ -89,7 +89,9 @@ const CategoryPage = () => {
         </IonPopover>
       </div>
 
+      {/* TODO: search the name of the list (fusy.js) */}
       <IonSearchbar showClearButton="focus"></IonSearchbar>
+
       {/* TODO: make the list dynamic. It can be added from addCategory Modal && The list (data) of the categories must be saved in backend server */}
       <IonList>
         <IonItem style={{ padding: "7px", fontSize: "18px" }}>
@@ -124,39 +126,8 @@ const CategoryPage = () => {
           <IonLabel>Item 5</IonLabel>
           <IonReorder slot="end"></IonReorder>
         </IonItem>
-        <IonItem style={{ padding: "7px", fontSize: "18px" }}>
-          <IonLabel>Item 5</IonLabel>
-          <IonReorder slot="end"></IonReorder>
-        </IonItem>
-        <IonItem style={{ padding: "7px", fontSize: "18px" }}>
-          <IonLabel>Item 5</IonLabel>
-          <IonReorder slot="end"></IonReorder>
-        </IonItem>
-        <IonItem style={{ padding: "7px", fontSize: "18px" }}>
-          <IonLabel>Item 5</IonLabel>
-          <IonReorder slot="end"></IonReorder>
-        </IonItem>
-        <IonItem style={{ padding: "7px", fontSize: "18px" }}>
-          <IonLabel>Item 5</IonLabel>
-          <IonReorder slot="end"></IonReorder>
-        </IonItem>
-        <IonItem style={{ padding: "7px", fontSize: "18px" }}>
-          <IonLabel>Item 5</IonLabel>
-          <IonReorder slot="end"></IonReorder>
-        </IonItem>
-        <IonItem style={{ padding: "7px", fontSize: "18px" }}>
-          <IonLabel>Item 5</IonLabel>
-          <IonReorder slot="end"></IonReorder>
-        </IonItem>
-        <IonItem style={{ padding: "7px", fontSize: "18px" }}>
-          <IonLabel>Item 5</IonLabel>
-          <IonReorder slot="end"></IonReorder>
-        </IonItem>
-        <IonItem style={{ padding: "7px", fontSize: "18px" }}>
-          <IonLabel>Item 5</IonLabel>
-          <IonReorder slot="end"></IonReorder>
-        </IonItem>
       </IonList>
+
       {/* add category section  */}
       {showModal && (
         <IonModal
@@ -169,20 +140,53 @@ const CategoryPage = () => {
                 <IonButton
                   onClick={() => {
                     setShowModal(false);
-                  }}
-                 >
+                  }}>
                   Close
                 </IonButton>
               </IonButtons>
               <IonTitle>New Category</IonTitle>
               <IonButtons slot="end">
                 {/* TODO: Done onclick -> add the list */}
-                <IonButton onClick={() => {}} > 
-                  Done
-                </IonButton>
+                <IonButton onClick={() => {}}>Done</IonButton>
               </IonButtons>
             </IonToolbar>
           </IonHeader>
+
+          <IonContent scrollY={false}>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                marginTop: "20px",
+              }}>
+              <div
+                style={{
+                  background: "rgba(70, 70, 70, 0.5)",
+                  width: "350px",
+                  height: "200px",
+                  borderRadius: "10px",
+                }}>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    marginTop: "15px",
+                  }}>
+                  <IonIcon
+                    icon={list}
+                    style={{
+                      fontSize: "68px",
+                      background: "rgba(56, 128, 255)",
+                      padding: "15px",
+                      borderRadius: "50%",
+                    }}
+                  />
+                </div>
+              </div>
+            </div>
+          </IonContent>
         </IonModal>
       )}
     </IonContent>
