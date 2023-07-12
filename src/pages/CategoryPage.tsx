@@ -44,10 +44,9 @@ const CategoryPage = () => {
             onClick={openPopover}
             style={{ marginTop: "38px", fontSize: "28px", marginLeft: "210px" }}
           />
-
-          <IonPopover trigger="popover-button" dismissOnSelect={true}>
-            <IonContent>
-              <IonList>
+          <IonPopover trigger="popover-button" dismissOnSelect={true} >
+            <IonContent scrollY={false}>
+              <IonList >
                 <IonItem button={true} detail={false}>
                   add category
                 </IonItem>
