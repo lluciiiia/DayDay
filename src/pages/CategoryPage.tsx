@@ -9,23 +9,29 @@ import {
   IonSearchbar,
   IonLabel,
   IonReorder,
+  IonIcon,
 } from "@ionic/react";
+import { flame, settingsOutline } from "ionicons/icons";
 
 const CategoryPage = () => {
   return (
     <>
       <IonHeader></IonHeader>
       <IonContent scrollY={true}>
-        <p
-          style={{
-            fontSize: "28px",
-            marginLeft: "15px",
-            fontWeight: "bold",
-            marginTop: "35px",
-            marginBottom: "10px",
-          }}>
-          Category
-        </p>
+        <div style={{display:"flex", flexDirection: "row"}}>
+          <p
+            style={{
+              fontSize: "28px",
+              marginLeft: "15px",
+              fontWeight: "bold",
+              marginTop: "35px",
+              marginBottom: "10px",
+            }}>
+            Category
+          </p>
+          <IonIcon icon={settingsOutline} style={{ marginTop: "38px", fontSize: "28px", marginLeft: "210px"}} />
+        </div>
+
         <IonSearchbar
           showClearButton="focus"
           //onIonInput={handleInput}
