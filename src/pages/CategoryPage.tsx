@@ -78,11 +78,11 @@ const CategoryPage = () => {
                 detail={false}
                 onClick={openPopover}
                 id="addCategory">
-                add category
+                Add Category
               </IonItem>
 
               <IonItem button={true} detail={false}>
-                edit category
+                Edit Category
               </IonItem>
             </IonList>
           </IonContent>
@@ -90,6 +90,7 @@ const CategoryPage = () => {
       </div>
 
       <IonSearchbar showClearButton="focus"></IonSearchbar>
+      {/* TODO: make the list dynamic. It can be added from addCategory Modal && The list (data) of the categories must be saved in backend server */}
       <IonList>
         <IonItem style={{ padding: "7px", fontSize: "18px" }}>
           <IonLabel>Item 1</IonLabel>
@@ -173,7 +174,7 @@ const CategoryPage = () => {
                   Close
                 </IonButton>
               </IonButtons>
-              <IonTitle>add category</IonTitle>
+              <IonTitle>New Category</IonTitle>
               <IonButtons slot="end">
                 {/* TODO: Done onclick -> add the list */}
                 <IonButton onClick={() => {}} > 
