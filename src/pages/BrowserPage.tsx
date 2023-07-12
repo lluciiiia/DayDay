@@ -22,11 +22,17 @@ const BrowserPage = () => {
 
   return (
     <>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle>Browser</IonTitle>
-        </IonToolbar>
-      </IonHeader>
+      <IonHeader></IonHeader>
+      <p
+        style={{
+          fontSize: "28px",
+          marginLeft: "15px",
+          fontWeight: "bold",
+          marginTop: "35px",
+          marginBottom: "10px",
+        }}>
+        Browser
+      </p>
       <IonSearchbar
         showClearButton="focus"
         //onIonInput={handleInput}

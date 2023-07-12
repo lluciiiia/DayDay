@@ -14,11 +14,7 @@ import {
 const CategoryPage = () => {
   return (
     <>
-      <IonHeader>
-        {/* <IonToolbar>
-          <IonTitle>Category</IonTitle>
-        </IonToolbar> */}
-      </IonHeader>
+      <IonHeader></IonHeader>
       <IonContent scrollY={true}>
         <p
           style={{
