@@ -13,7 +13,7 @@ import {
   IonButton,
   IonPopover,
   IonModal,
-  IonCheckbox,
+  IonInput,
   IonButtons,
   IonPage,
 } from "@ionic/react";
@@ -183,6 +183,22 @@ const CategoryPage = () => {
                       borderRadius: "50%",
                     }}
                   />
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    marginTop: "20px",
+                  }}>
+                  <IonInput
+                    placeholder="Category Name"
+                    style={{
+                      background: "rgba(120, 120, 120, 0.5)",
+                      width: "300px",
+                      borderRadius: "10px",
+                      fontSize: "25px",
+                    }}></IonInput>
                 </div>
               </div>
             </div>
