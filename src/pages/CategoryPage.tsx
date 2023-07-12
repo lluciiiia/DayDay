@@ -194,10 +194,11 @@ const CategoryPage = () => {
                   <IonInput
                     placeholder="Category Name"
                     style={{
-                      background: "rgba(120, 120, 120, 0.5)",
+                      background: "rgba(120, 120, 120, 0.4)",
                       width: "300px",
                       borderRadius: "10px",
-                      fontSize: "25px",
+                      fontSize: "20px",
+                      color: "rgba(255, 255, 255, 0.5)",
                       textAlign: "center",
                     }}></IonInput>
                 </div>
