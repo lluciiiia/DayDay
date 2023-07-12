@@ -31,6 +31,7 @@ const CalendarPage = () => {
     try {
       const response = await axios.get("http://localhost:3004/api/entries");
       const entries = response.data;
+      console.log(entries);
 
       const dates = entries.map((entry: Entry) => entry.date);
       setDiaryDates(dates);

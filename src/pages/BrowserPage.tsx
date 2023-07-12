@@ -28,33 +28,29 @@ const BrowserPage = () => {
         </IonToolbar>
       </IonHeader>
       <IonSearchbar
-            showClearButton="focus"
-            //onIonInput={handleInput}
-          ></IonSearchbar>
+        showClearButton="focus"
+        //onIonInput={handleInput}
+      ></IonSearchbar>
       <IonList>
         {/* The reorder gesture is disabled by default, enable it to drag and drop items */}
         <IonReorderGroup disabled={false} onIonItemReorder={handleReorder}>
-          <IonItem>
+          <IonItem style={{ padding: "7px", fontSize: "18px" }}>
             <IonLabel>Item 1</IonLabel>
             <IonReorder slot="end"></IonReorder>
           </IonItem>
-
-          <IonItem>
+          <IonItem style={{ padding: "7px", fontSize: "18px" }}>
             <IonLabel>Item 2</IonLabel>
             <IonReorder slot="end"></IonReorder>
           </IonItem>
-
-          <IonItem>
+          <IonItem style={{ padding: "7px", fontSize: "18px" }}>
             <IonLabel>Item 3</IonLabel>
             <IonReorder slot="end"></IonReorder>
           </IonItem>
-
-          <IonItem>
+          <IonItem style={{ padding: "7px", fontSize: "18px" }}>
             <IonLabel>Item 4</IonLabel>
             <IonReorder slot="end"></IonReorder>
           </IonItem>
-
-          <IonItem>
+          <IonItem style={{ padding: "7px", fontSize: "18px" }}>
             <IonLabel>Item 5</IonLabel>
             <IonReorder slot="end"></IonReorder>
           </IonItem>
