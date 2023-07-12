@@ -17,7 +17,7 @@ import {
   IonButtons,
   IonPage,
 } from "@ionic/react";
-import { reload, settingsOutline } from "ionicons/icons";
+import { flame, reload, settingsOutline } from "ionicons/icons";
 import "../main.css";
 
 const CategoryPage = () => {
@@ -164,13 +164,20 @@ const CategoryPage = () => {
           presentingElement={presentingElement}>
           <IonHeader>
             <IonToolbar>
-              <IonTitle>add category</IonTitle>
-              <IonButtons slot="end">
+              <IonButtons slot="start">
                 <IonButton
                   onClick={() => {
                     setShowModal(false);
-                  }}>
+                  }}
+                 >
                   Close
+                </IonButton>
+              </IonButtons>
+              <IonTitle>add category</IonTitle>
+              <IonButtons slot="end">
+                {/* TODO: Done onclick -> add the list */}
+                <IonButton onClick={() => {}} > 
+                  Done
                 </IonButton>
               </IonButtons>
             </IonToolbar>
