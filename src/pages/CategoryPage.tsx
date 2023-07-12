@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import {
   IonContent,
   IonHeader,
@@ -10,15 +10,24 @@ import {
   IonLabel,
   IonReorder,
   IonIcon,
+  IonButton,
+  IonPopover,
 } from "@ionic/react";
-import { flame, settingsOutline } from "ionicons/icons";
+import { settingsOutline } from "ionicons/icons";
 
 const CategoryPage = () => {
+  const popover = useRef<HTMLIonPopoverElement>(null);
+  const [popoverOpen, setPopoverOpen] = useState(false);
+
+  const openPopover = (e: any) => {
+    popover.current!.event = e;
+    setPopoverOpen(true);
+  };
   return (
     <>
       <IonHeader></IonHeader>
       <IonContent scrollY={true}>
-        <div style={{display:"flex", flexDirection: "row"}}>
+        <div style={{ display: "flex", flexDirection: "row" }}>
           <p
             style={{
               fontSize: "28px",
@@ -29,7 +38,25 @@ const CategoryPage = () => {
             }}>
             Category
           </p>
-          <IonIcon icon={settingsOutline} style={{ marginTop: "38px", fontSize: "28px", marginLeft: "210px"}} />
+          <IonIcon
+            id="popover-button"
+            icon={settingsOutline}
+            onClick={openPopover}
+            style={{ marginTop: "38px", fontSize: "28px", marginLeft: "210px" }}
+          />
+
+          <IonPopover trigger="popover-button" dismissOnSelect={true}>
+            <IonContent>
+              <IonList>
+                <IonItem button={true} detail={false}>
+                  add category
+                </IonItem>
+                <IonItem button={true} detail={false}>
+                  edit category
+                </IonItem>
+              </IonList>
+            </IonContent>
+          </IonPopover>
         </div>
 
         <IonSearchbar
