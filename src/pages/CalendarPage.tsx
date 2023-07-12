@@ -35,7 +35,6 @@ const CalendarPage = () => {
 
       const dates = entries.map((entry: Entry) => entry.date);
       setDiaryDates(dates);
-
     } catch (error) {
       console.error(error);
     }
@@ -67,10 +66,21 @@ const CalendarPage = () => {
     <>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Write your diary</IonTitle>
+          <IonTitle>Write your day</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent scrollY={false}>
+        {/* <p
+            style={{
+              fontSize: "28px",
+              marginLeft: "15px",
+              fontWeight: "bold",
+              marginTop: "35px",
+              marginBottom: "10px",
+            }}>
+            Write your day
+          </p> */}
+
         <div
           style={{
             display: "flex",
