@@ -31,7 +31,8 @@ const CategoryPage = () => {
   const [showModal, setShowModal] = useState(false);
 
   const [categories, setCategories] = useState(["Dafault", "Achievement"]);
-  const [newCategory, setNewCategory] = useState("");
+  const categoryRef = useRef<HTMLIonInputElement>(null);
+
 
   const openPopover = (e: any) => {
     const itemId = e.target.id;
@@ -51,20 +52,31 @@ const CategoryPage = () => {
     setPresentingElement(page.current);
   }, []);
 
-  // useEffect(() => {
-  //   console.log("Updated newCategory:", newCategory);
-  // }, [newCategory]);
+  useEffect(() => {
+    console.log("Category Ref updated:", categoryRef.current);
+  }, [categoryRef]);
 
   const handleDoneClick = () => {
-    if (newCategory.trim() !== "") {
+    // const newCategory = categoryRef.current.trim();
+    // if (newCategory !== "") {
+    //   setCategories((prevCategories) => [...prevCategories]);
+    //   setShowModal(false);
+    //   console.log("non-empty category");
+    // } else {
+    //   console.log("empty category");
+    // }
+    const newCategory = categoryRef.current?.value as string;
+    if (newCategory) {
       setCategories((prevCategories) => [...prevCategories, newCategory]);
       setShowModal(false);
-      console.log("non-empty");
-    } else {
-      // presentToast('Enter new category');
-      console.log("empty");
+      console.log("non-empty category");
+    }
+    else {
+      console.log("empty category");
+      presentToast('Enter new category');
     }
   };
+  
 
   const presentToast = (message: string) => {
     present({
@@ -198,6 +210,7 @@ const CategoryPage = () => {
                     marginTop: "20px",
                   }}>
                   <IonInput
+                    ref={categoryRef}
                     placeholder="Category Name"
                     style={{
                       background: "rgba(120, 120, 120, 0.4)",
@@ -207,10 +220,9 @@ const CategoryPage = () => {
                       color: "rgba(255, 255, 255, 0.5)",
                       textAlign: "center",
                     }}
-                    value={newCategory}
-                    onIonChange={(e) =>
-                      setNewCategory(e.detail.value!)
-                    }></IonInput>
+                    value={""}
+                    // onIonChange={(e) => (categoryRef.current = e.detail.value!)}
+                    ></IonInput>
                 </div>
               </div>
             </div>
