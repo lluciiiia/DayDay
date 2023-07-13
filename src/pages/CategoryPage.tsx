@@ -17,7 +17,12 @@ import {
   IonButtons,
   useIonToast,
 } from "@ionic/react";
-import { settingsOutline, list, closeCircleOutline } from "ionicons/icons";
+import {
+  settingsOutline,
+  list,
+  closeCircleOutline,
+  informationCircleOutline,
+} from "ionicons/icons";
 import "../main.css";
 import axios from "axios";
 import { ApiURL } from "../BackendURL";
@@ -164,11 +169,22 @@ const CategoryPage = () => {
               category !== "Achievement" && (
                 <IonIcon
                   icon={closeCircleOutline}
-                  style={{ fontSize: "22px", marginRight: "7px" }}
+                  style={{
+                    fontSize: "22px",
+                    marginRight: "10px",
+                  }}
                   onClick={() => handleDeleteCategory(index)}
                 />
               )}
             <IonLabel>{category}</IonLabel>
+            {editMode &&
+              category !== "Default" &&
+              category !== "Achievement" && (
+                <IonIcon
+                  icon={informationCircleOutline}
+                  style={{ fontSize: "22px", marginLeft: "255px" }}
+                />
+              )}
           </IonItem>
         ))}
       </IonList>
