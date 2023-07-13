@@ -204,7 +204,7 @@ const CategoryPage = () => {
               category !== "Achievement" && (
                 <IonIcon
                   icon={informationCircleOutline}
-                  style={{ fontSize: "22px", marginLeft: "255px" }}
+                  style={{ fontSize: "22px" }}
                   onClick={() => {
                     setSelectedCategory(category); // Set the selected category
                     setShowModal(true);
