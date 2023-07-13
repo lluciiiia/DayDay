@@ -25,15 +25,12 @@ import {
   checkmarkCircle,
 } from "ionicons/icons";
 import "../../main.css";
-import axios from "axios";
 import { CategoriesData } from "../../GetPutData";
 
 const CategoryPage = () => {
   const popover = useRef<HTMLIonPopoverElement | null>(null);
   const [popoverOpen, setPopoverOpen] = useState(false);
   const [present] = useIonToast();
-
-  const modal = useRef<HTMLIonModalElement>(null);
   const page = useRef(undefined);
 
   const [showModal, setShowModal] = useState(false);

@@ -28,23 +28,7 @@
 // import { CategoriesData } from "../../GetPutData";
 
 // const tmpCategoryPage = () => {
-//   const [categories, setCategories] = useState<string[]>([]);
-//   const [presentingElement, setPresentingElement] = useState<
-//     HTMLElement | undefined
-//   >(undefined);
-
-//   useEffect(() => {
-//     setPresentingElement(page.current);
-//     const categoriesData = new CategoriesData();
-//     categoriesData
-//       .getCategoriesData()
-//       .then((data) => {
-//         setCategories(data);
-//       })
-//       .catch((error) => {
-//         console.error("Error fetching categories:", error);
-//       });
-//   }, []);
+  
 
 //   return (
 //     <IonContent scrollY={true}>
