@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import {
   IonContent,
   IonHeader,
@@ -15,14 +15,23 @@ import {
   IonModal,
   IonInput,
   IonButtons,
-  IonPage,
+  useIonToast,
 } from "@ionic/react";
-import { flame, reload, settingsOutline, list } from "ionicons/icons";
+import { settingsOutline, list } from "ionicons/icons";
 import "../main.css";
 
 const CategoryPage = () => {
-  const popover = useRef<HTMLIonPopoverElement>(null);
+  const popover = useRef<HTMLIonPopoverElement | null>(null);
   const [popoverOpen, setPopoverOpen] = useState(false);
+  const [present] = useIonToast();
+
+  const modal = useRef<HTMLIonModalElement>(null);
+  const page = useRef(undefined);
+
+  const [showModal, setShowModal] = useState(false);
+
+  const [categories, setCategories] = useState(["Dafault", "Achievement"]);
+  const [newCategory, setNewCategory] = useState("");
 
   const openPopover = (e: any) => {
     const itemId = e.target.id;
@@ -34,9 +43,6 @@ const CategoryPage = () => {
     }
   };
 
-  const modal = useRef<HTMLIonModalElement>(null);
-  const page = useRef(undefined);
-
   const [presentingElement, setPresentingElement] = useState<
     HTMLElement | undefined
   >(undefined);
@@ -45,7 +51,28 @@ const CategoryPage = () => {
     setPresentingElement(page.current);
   }, []);
 
-  const [showModal, setShowModal] = useState(false);
+  // useEffect(() => {
+  //   console.log("Updated newCategory:", newCategory);
+  // }, [newCategory]);
+
+  const handleDoneClick = () => {
+    if (newCategory.trim() !== "") {
+      setCategories((prevCategories) => [...prevCategories, newCategory]);
+      setShowModal(false);
+      console.log("non-empty");
+    } else {
+      // presentToast('Enter new category');
+      console.log("empty");
+    }
+  };
+
+  const presentToast = (message: string) => {
+    present({
+      message: message,
+      duration: 100,
+      position: "middle",
+    });
+  };
 
   return (
     <IonContent scrollY={true}>
@@ -70,7 +97,13 @@ const CategoryPage = () => {
             marginLeft: "210px",
           }}
         />
-        <IonPopover trigger="popover-button" dismissOnSelect={true}>
+        <IonPopover
+          ref={(ref) => {
+            popover.current = ref;
+          }}
+          trigger="popover-button"
+          dismissOnSelect={true}>
+          {" "}
           <IonContent scrollY={false}>
             <IonList>
               <IonItem
@@ -94,38 +127,12 @@ const CategoryPage = () => {
 
       {/* TODO: make the list dynamic. It can be added from addCategory Modal && The list (data) of the categories must be saved in backend server */}
       <IonList>
-        <IonItem style={{ padding: "7px", fontSize: "18px" }}>
-          <IonLabel>Item 1</IonLabel>
-          <IonReorder slot="end"></IonReorder>
-        </IonItem>
-        <IonItem style={{ padding: "7px", fontSize: "18px" }}>
-          <IonLabel>Item 2</IonLabel>
-          <IonReorder slot="end"></IonReorder>
-        </IonItem>
-        <IonItem style={{ padding: "7px", fontSize: "18px" }}>
-          <IonLabel>Item 3</IonLabel>
-          <IonReorder slot="end"></IonReorder>
-        </IonItem>
-        <IonItem style={{ padding: "7px", fontSize: "18px" }}>
-          <IonLabel>Item 4</IonLabel>
-          <IonReorder slot="end"></IonReorder>
-        </IonItem>
-        <IonItem style={{ padding: "7px", fontSize: "18px" }}>
-          <IonLabel>Item 5</IonLabel>
-          <IonReorder slot="end"></IonReorder>
-        </IonItem>
-        <IonItem style={{ padding: "7px", fontSize: "18px" }}>
-          <IonLabel>Item 5</IonLabel>
-          <IonReorder slot="end"></IonReorder>
-        </IonItem>
-        <IonItem style={{ padding: "7px", fontSize: "18px" }}>
-          <IonLabel>Item 5</IonLabel>
-          <IonReorder slot="end"></IonReorder>
-        </IonItem>
-        <IonItem style={{ padding: "7px", fontSize: "18px" }}>
-          <IonLabel>Item 5</IonLabel>
-          <IonReorder slot="end"></IonReorder>
-        </IonItem>
+        {categories.map((category, index) => (
+          <IonItem key={index} style={{ padding: "7px", fontSize: "18px" }}>
+            <IonLabel>{category}</IonLabel>
+            <IonReorder slot="end" />
+          </IonItem>
+        ))}
       </IonList>
 
       {/* add category section  */}
@@ -146,8 +153,7 @@ const CategoryPage = () => {
               </IonButtons>
               <IonTitle>New Category</IonTitle>
               <IonButtons slot="end">
-                {/* TODO: Done onclick -> add the list */}
-                <IonButton onClick={() => {}}>Done</IonButton>
+                <IonButton onClick={handleDoneClick}>Done</IonButton>
               </IonButtons>
             </IonToolbar>
           </IonHeader>
@@ -200,7 +206,11 @@ const CategoryPage = () => {
                       fontSize: "20px",
                       color: "rgba(255, 255, 255, 0.5)",
                       textAlign: "center",
-                    }}></IonInput>
+                    }}
+                    value={newCategory}
+                    onIonChange={(e) =>
+                      setNewCategory(e.detail.value!)
+                    }></IonInput>
                 </div>
               </div>
             </div>
