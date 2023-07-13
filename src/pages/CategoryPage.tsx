@@ -33,7 +33,6 @@ const CategoryPage = () => {
   const [categories, setCategories] = useState(["Dafault", "Achievement"]);
   const categoryRef = useRef<HTMLIonInputElement>(null);
 
-
   const openPopover = (e: any) => {
     const itemId = e.target.id;
     if (itemId === "addCategory") {
@@ -57,26 +56,16 @@ const CategoryPage = () => {
   }, [categoryRef]);
 
   const handleDoneClick = () => {
-    // const newCategory = categoryRef.current.trim();
-    // if (newCategory !== "") {
-    //   setCategories((prevCategories) => [...prevCategories]);
-    //   setShowModal(false);
-    //   console.log("non-empty category");
-    // } else {
-    //   console.log("empty category");
-    // }
     const newCategory = categoryRef.current?.value as string;
     if (newCategory) {
       setCategories((prevCategories) => [...prevCategories, newCategory]);
       setShowModal(false);
       console.log("non-empty category");
-    }
-    else {
+    } else {
       console.log("empty category");
-      presentToast('Enter new category');
+      presentToast("Enter new category");
     }
   };
-  
 
   const presentToast = (message: string) => {
     present({
@@ -222,7 +211,7 @@ const CategoryPage = () => {
                     }}
                     value={""}
                     // onIonChange={(e) => (categoryRef.current = e.detail.value!)}
-                    ></IonInput>
+                  ></IonInput>
                 </div>
               </div>
             </div>
