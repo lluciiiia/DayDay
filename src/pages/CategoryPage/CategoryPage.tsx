@@ -27,6 +27,7 @@ import {
 import "../../main.css";
 import axios from "axios";
 import { ApiURL } from "../../BackendURL";
+import { CategoriesData } from "../../GetPutData";
 
 const CategoryPage = () => {
   const apiURL = ApiURL + "/categories";
@@ -64,7 +65,15 @@ const CategoryPage = () => {
 
   useEffect(() => {
     setPresentingElement(page.current);
-    getData();
+    const categoriesData = new CategoriesData();
+    categoriesData
+      .getCategoriesData()
+      .then((data) => {
+        setCategories(data);
+      })
+      .catch((error) => {
+        console.error("Error fetching categories:", error);
+      });
   }, []);
 
   const handleDoneClick = () => {
@@ -82,7 +91,9 @@ const CategoryPage = () => {
         // Add a new category
         updatedData = [...categories, newCategory];
       }
-      putData(updatedData);
+      const categoriesData = new CategoriesData();
+      categoriesData.putCategoriesData(updatedData);
+      setCategories(updatedData);
       setShowModal(false);
     } else {
       presentToast("Enter new category");
@@ -97,30 +108,11 @@ const CategoryPage = () => {
     });
   };
 
-  const getData = async () => {
-    try {
-      const response = await axios.get(apiURL);
-      const categoriesData = response.data;
-      setCategories(categoriesData);
-      console.log(categoriesData);
-    } catch (error) {
-      console.error("Error fetching categories:", error);
-    }
-  };
-
-  const putData = async (data: string[]) => {
-    try {
-      await axios.put(apiURL, data);
-      setCategories(data);
-    } catch (error) {
-      console.error(error);
-      throw new Error("Failed to update entries data.");
-    }
-  };
-
   const handleDeleteCategory = (index: number) => {
     const updatedData = categories.filter((_, i) => i !== index);
-    putData(updatedData);
+    const categoriesData = new CategoriesData();
+    categoriesData.putCategoriesData(updatedData);
+    setCategories(updatedData);
   };
 
   return (
