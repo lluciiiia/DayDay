@@ -25,9 +25,32 @@
 //   checkmarkCircle,
 // } from "ionicons/icons";
 // import "../../main.css";
-// import { CategoriesData } from "../../GetPutData";
 
 // const tmpCategoryPage = () => {
+
+//     const handleDoneClick = () => {
+//         const newCategory = categoryRef.current?.value as string;
+//         if (newCategory) {
+//           let updatedData;
+//           if (selectedCategory) {
+//             // Modify the existing category
+//             const categoryIndex = categories.findIndex(
+//               (category) => category === selectedCategory
+//             );
+//             updatedData = [...categories];
+//             updatedData[categoryIndex] = newCategory;
+//           } else {
+//             // Add a new category
+//             updatedData = [...categories, newCategory];
+//           }
+//           const categoriesData = new CategoriesData();
+//           categoriesData.putCategoriesData(updatedData);
+//           setCategories(updatedData);
+//           setShowModal(false);
+//         } else {
+//           presentToast("Enter new category");
+//         }
+//       };
   
 
 //   return (

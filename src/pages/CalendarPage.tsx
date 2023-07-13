@@ -8,8 +8,7 @@ import {
   IonButton,
 } from "@ionic/react";
 import { useHistory } from "react-router";
-import axios from "axios";
-import { ApiURL } from "../BackendURL";
+import { EntriesData } from "../GetPutData";
 
 interface Entry {
   content: any;
@@ -19,28 +18,28 @@ interface Entry {
 }
 
 const CalendarPage = () => {
-  const apiURL = ApiURL + "/entries";
   const history = useHistory();
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
   const [showButtons, setShowButtons] = useState(false);
   const [diaryDates, setDiaryDates] = useState<string[]>([]);
 
   useEffect(() => {
-    getData();
+    const entriesData = new EntriesData();
+    const entriesResultPromise = entriesData.getEntriesData();
+
+    entriesResultPromise
+      .then((entriesResult) => {
+        if (Array.isArray(entriesResult)) {
+          const dates = entriesResult.map((entry: Entry) => entry.date);
+          setDiaryDates(dates);
+        } else {
+          console.error("The returned value is not an array.");
+        }
+      })
+      .catch((error) => {
+        console.error("Failed to fetch entries data: ", error);
+      });
   }, []);
-
-  const getData = async () => {
-    try {
-      const response = await axios.get(apiURL);
-      const entries = response.data;
-      console.log(entries);
-
-      const dates = entries.map((entry: Entry) => entry.date);
-      setDiaryDates(dates);
-    } catch (error) {
-      console.error(error);
-    }
-  };
 
   const handleAddClick = () => {
     history.push("/add", { selectedDate });
@@ -72,17 +71,6 @@ const CalendarPage = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent scrollY={false}>
-        {/* <p
-            style={{
-              fontSize: "28px",
-              marginLeft: "15px",
-              fontWeight: "bold",
-              marginTop: "35px",
-              marginBottom: "10px",
-            }}>
-            Write your day
-          </p> */}
-
         <div
           style={{
             display: "flex",

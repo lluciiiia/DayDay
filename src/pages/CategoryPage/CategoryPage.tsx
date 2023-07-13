@@ -41,6 +41,10 @@ const CategoryPage = () => {
   const [editMode, setEditMode] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("");
 
+  const [presentingElement, setPresentingElement] = useState<
+    HTMLElement | undefined
+  >(undefined);
+
   const openPopover = (e: any) => {
     const itemId = e.target.id;
     if (itemId === "addCategory") {
@@ -54,12 +58,11 @@ const CategoryPage = () => {
     setPopoverOpen(true);
   };
 
-  const [presentingElement, setPresentingElement] = useState<
-    HTMLElement | undefined
-  >(undefined);
+  
 
   useEffect(() => {
     setPresentingElement(page.current);
+    // get data from backend
     const categoriesData = new CategoriesData();
     categoriesData
       .getCategoriesData()
@@ -71,6 +74,7 @@ const CategoryPage = () => {
       });
   }, []);
 
+  
   const handleDoneClick = () => {
     const newCategory = categoryRef.current?.value as string;
     if (newCategory) {
