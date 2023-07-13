@@ -24,9 +24,9 @@ import {
   informationCircleOutline,
   checkmarkCircle,
 } from "ionicons/icons";
-import "../main.css";
+import "../../main.css";
 import axios from "axios";
-import { ApiURL } from "../BackendURL";
+import { ApiURL } from "../../BackendURL";
 
 const CategoryPage = () => {
   const apiURL = ApiURL + "/categories";

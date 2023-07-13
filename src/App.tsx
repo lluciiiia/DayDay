@@ -33,7 +33,7 @@ import "./theme/variables.css";
 import { search, heart, calendarClear, list } from "ionicons/icons";
 import CalendarPage from "./pages/CalendarPage";
 import BrowserPage from "./pages/BrowserPage";
-import CategoryPage from "./pages/CategoryPage";
+import CategoryPage from "./pages/CategoryPage/CategoryPage";
 import AddPage from "./pages/AddPage";
 
 setupIonicReact();
