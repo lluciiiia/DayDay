@@ -26,6 +26,7 @@ export class CategoriesData {
   }
 }
 
+
 export class EntriesData {
   async getEntriesData() {
     try {

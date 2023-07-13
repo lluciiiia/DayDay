@@ -58,8 +58,6 @@ const CategoryPage = () => {
     setPopoverOpen(true);
   };
 
-  
-
   useEffect(() => {
     setPresentingElement(page.current);
     // get data from backend
@@ -74,7 +72,6 @@ const CategoryPage = () => {
       });
   }, []);
 
-  
   const handleDoneClick = () => {
     const newCategory = categoryRef.current?.value as string;
     if (newCategory) {
