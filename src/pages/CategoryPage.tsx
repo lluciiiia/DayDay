@@ -20,8 +20,10 @@ import {
 import { settingsOutline, list } from "ionicons/icons";
 import "../main.css";
 import axios from "axios";
+import { ApiURL } from "../BackendURL";
 
 const CategoryPage = () => {
+  const apiURL = ApiURL + "/categories";
   const popover = useRef<HTMLIonPopoverElement | null>(null);
   const [popoverOpen, setPopoverOpen] = useState(false);
   const [present] = useIonToast();
@@ -74,7 +76,7 @@ const CategoryPage = () => {
 
   const getData = async () => {
     try {
-      const response = await axios.get("http://localhost:3005/api/categories");
+      const response = await axios.get(apiURL);
       const categoriesData = response.data;
       setCategories(categoriesData);
       console.log(categoriesData);
@@ -85,7 +87,7 @@ const CategoryPage = () => {
 
   const putData = async (data: string[]) => {
     try {
-      await axios.put("http://localhost:3005/api/categories", data);
+      await axios.put(apiURL, data);
       setCategories(data);
     } catch (error) {
       console.error(error);

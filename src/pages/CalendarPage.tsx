@@ -9,6 +9,7 @@ import {
 } from "@ionic/react";
 import { useHistory } from "react-router";
 import axios from "axios";
+import { ApiURL } from "../BackendURL";
 
 interface Entry {
   content: any;
@@ -18,6 +19,7 @@ interface Entry {
 }
 
 const CalendarPage = () => {
+  const apiURL = ApiURL + "/entries";
   const history = useHistory();
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
   const [showButtons, setShowButtons] = useState(false);
@@ -29,7 +31,7 @@ const CalendarPage = () => {
 
   const getData = async () => {
     try {
-      const response = await axios.get("http://localhost:3005/api/entries");
+      const response = await axios.get(apiURL);
       const entries = response.data;
       console.log(entries);
 

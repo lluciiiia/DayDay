@@ -1,4 +1,6 @@
 import axios from "axios";
+import { ApiURL } from "../../BackendURL";
+const apiURL = ApiURL + "/wordcount";
 
 const ignoredWords = [
   "the",
@@ -81,7 +83,7 @@ class WordCountAnalyzer implements IAnalyzer<PlotableAnalysis> {
 
   async getData(): Promise<any> {
     try {
-      const response = await axios.get("http://localhost:3004/api/wordcount");
+      const response = await axios.get(apiURL);
       return response.data;
     } catch (error) {
       console.error(error);
@@ -91,7 +93,7 @@ class WordCountAnalyzer implements IAnalyzer<PlotableAnalysis> {
 
   async putData(data: any): Promise<void> {
     try {
-      await axios.put("http://localhost:3004/api/wordcount", data);
+      await axios.put(apiURL, data);
     } catch (error) {
       console.error(error);
       throw new Error("Failed to update word count data.");
