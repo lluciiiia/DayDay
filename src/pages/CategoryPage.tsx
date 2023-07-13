@@ -60,9 +60,7 @@ const CategoryPage = () => {
     if (newCategory) {
       setCategories((prevCategories) => [...prevCategories, newCategory]);
       setShowModal(false);
-      console.log("non-empty category");
     } else {
-      console.log("empty category");
       presentToast("Enter new category");
     }
   };
@@ -126,7 +124,7 @@ const CategoryPage = () => {
       {/* TODO: search the name of the list (fusy.js) */}
       <IonSearchbar showClearButton="focus"></IonSearchbar>
 
-      {/* TODO: make the list dynamic. It can be added from addCategory Modal && The list (data) of the categories must be saved in backend server */}
+      {/* Dynamic list */}
       <IonList>
         {categories.map((category, index) => (
           <IonItem key={index} style={{ padding: "7px", fontSize: "18px" }}>
@@ -209,9 +207,7 @@ const CategoryPage = () => {
                       color: "rgba(255, 255, 255, 0.5)",
                       textAlign: "center",
                     }}
-                    value={""}
-                    // onIonChange={(e) => (categoryRef.current = e.detail.value!)}
-                  ></IonInput>
+                    value={""}></IonInput>
                 </div>
               </div>
             </div>
