@@ -1,9 +1,10 @@
 import WordCountAnalyzer from "../data/Analyzer/WordCountAnalyzer";
-import { putData } from "../data/Entry/EntryData";
+import { EntriesData } from "../GetPutData";
 
 export async function AddAll(entry: Entry) {
   // add entry
-  await putData(entry);
+  const entriesData = new EntriesData();
+  entriesData.putEntriesData(entry);
 
   // add word count;
   const wordCountAnalyzer = new WordCountAnalyzer();

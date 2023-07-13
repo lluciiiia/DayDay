@@ -32,11 +32,18 @@ export class EntriesData {
       const response = await axios.get(entriesURL);
       const entries = response.data;
     return entries;
-    //   const dates = entries.map((entry: Entry) => entry.date);
-    //   setDiaryDates(dates);
     } catch (error) {
       //console.error(error);
       throw new Error("Failed to update entries data.");
     }
   };
+
+  async putEntriesData(data: Entry) {
+    try {
+      await axios.put(entriesURL, data);
+    } catch (error) {
+      //console.error(error);
+      throw new Error("Failed to update entries data.");
+    }
+  }
 }
