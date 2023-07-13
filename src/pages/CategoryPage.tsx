@@ -17,7 +17,7 @@ import {
   IonButtons,
   useIonToast,
 } from "@ionic/react";
-import { settingsOutline, list } from "ionicons/icons";
+import { settingsOutline, list, closeCircleOutline } from "ionicons/icons";
 import "../main.css";
 import axios from "axios";
 import { ApiURL } from "../BackendURL";
@@ -36,14 +36,17 @@ const CategoryPage = () => {
   const [categories, setCategories] = useState<string[]>([]);
   const categoryRef = useRef<HTMLIonInputElement>(null);
 
+  const [editMode, setEditMode] = useState(false);
+
   const openPopover = (e: any) => {
     const itemId = e.target.id;
     if (itemId === "addCategory") {
       setShowModal(true);
-    } else {
-      popover.current!.event = e;
-      setPopoverOpen(true);
+    } else if (itemId === "editCategory") {
+      setEditMode(!editMode); // Toggle the edit mode
     }
+    popover.current!.event = e;
+    setPopoverOpen(true);
   };
 
   const [presentingElement, setPresentingElement] = useState<
@@ -95,6 +98,11 @@ const CategoryPage = () => {
     }
   };
 
+  const handleDeleteCategory = (index: number) => {
+    const updatedData = categories.filter((_, i) => i !== index);
+    putData(updatedData);
+  };
+
   return (
     <IonContent scrollY={true}>
       <div style={{ display: "flex", flexDirection: "row" }}>
@@ -134,7 +142,11 @@ const CategoryPage = () => {
                 Add Category
               </IonItem>
 
-              <IonItem button={true} detail={false}>
+              <IonItem
+                button={true}
+                detail={false}
+                onClick={openPopover}
+                id="editCategory">
                 Edit Category
               </IonItem>
             </IonList>
@@ -147,6 +159,15 @@ const CategoryPage = () => {
       <IonList>
         {categories.map((category, index) => (
           <IonItem key={index} style={{ padding: "7px", fontSize: "18px" }}>
+            {editMode &&
+              category !== "Default" &&
+              category !== "Achievement" && (
+                <IonIcon
+                  icon={closeCircleOutline}
+                  style={{ fontSize: "22px", marginRight: "7px" }}
+                  onClick={() => handleDeleteCategory(index)}
+                />
+              )}
             <IonLabel>{category}</IonLabel>
           </IonItem>
         ))}
