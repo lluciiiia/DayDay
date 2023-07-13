@@ -29,7 +29,7 @@ const CalendarPage = () => {
 
   const getData = async () => {
     try {
-      const response = await axios.get("http://localhost:3004/api/entries");
+      const response = await axios.get("http://localhost:3005/api/entries");
       const entries = response.data;
       console.log(entries);
 

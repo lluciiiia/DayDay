@@ -19,6 +19,7 @@ import {
 } from "@ionic/react";
 import { settingsOutline, list } from "ionicons/icons";
 import "../main.css";
+import axios from "axios";
 
 const CategoryPage = () => {
   const popover = useRef<HTMLIonPopoverElement | null>(null);
@@ -30,7 +31,8 @@ const CategoryPage = () => {
 
   const [showModal, setShowModal] = useState(false);
 
-  const [categories, setCategories] = useState(["Dafault", "Achievement"]);
+  const [categories, setCategories] = useState(["Default", "Achievement"]);
+  const [updatedCategories, setUpdatedCategories] = useState(categories);
   const categoryRef = useRef<HTMLIonInputElement>(null);
 
   const openPopover = (e: any) => {
@@ -58,7 +60,9 @@ const CategoryPage = () => {
   const handleDoneClick = () => {
     const newCategory = categoryRef.current?.value as string;
     if (newCategory) {
-      setCategories((prevCategories) => [...prevCategories, newCategory]);
+      const updatedData = [...updatedCategories, newCategory];
+      setUpdatedCategories(updatedData);
+      putData(updatedData);
       setShowModal(false);
     } else {
       presentToast("Enter new category");
@@ -71,6 +75,33 @@ const CategoryPage = () => {
       duration: 100,
       position: "middle",
     });
+  };
+
+  // Call data from backend
+  useEffect(() => {
+    getData();
+  }, []);
+
+  const getData = async () => {
+    try {
+      const response = await axios.get('http://localhost:3005/api/categories');
+      const categoriesData = response.data;
+      setCategories(categoriesData);
+      setUpdatedCategories(categoriesData);
+      console.log(categoriesData);
+    } catch (error) {
+      console.error('Error fetching categories:', error);
+    }
+  };
+
+  // Update data and push it to the backend
+  const putData = async (data: string[]) => {
+    try {
+      await axios.put("http://localhost:3005/api/categories", data);
+    } catch (error) {
+      console.error(error);
+      throw new Error("Failed to update entries data.");
+    }
   };
 
   return (
@@ -101,15 +132,16 @@ const CategoryPage = () => {
             popover.current = ref;
           }}
           trigger="popover-button"
-          dismissOnSelect={true}>
-          {" "}
+          dismissOnSelect={true}
+        >
           <IonContent scrollY={false}>
             <IonList>
               <IonItem
                 button={true}
                 detail={false}
                 onClick={openPopover}
-                id="addCategory">
+                id="addCategory"
+              >
                 Add Category
               </IonItem>
 
@@ -121,15 +153,14 @@ const CategoryPage = () => {
         </IonPopover>
       </div>
 
-      {/* TODO: search the name of the list (fusy.js) */}
+      {/* TODO: search the name of the category in the lists (including default and achievement) (fusy.js) */}
       <IonSearchbar showClearButton="focus"></IonSearchbar>
 
       {/* Dynamic list */}
       <IonList>
-        {categories.map((category, index) => (
-          <IonItem key={index} style={{ padding: "7px", fontSize: "18px" }}>
+        {updatedCategories.map((category, index) => (
+          <IonItem key={index} style={{ padding: '7px', fontSize: '18px' }}>
             <IonLabel>{category}</IonLabel>
-            <IonReorder slot="end" />
           </IonItem>
         ))}
       </IonList>
