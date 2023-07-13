@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import {
   IonContent,
   IonHeader,
@@ -20,11 +20,13 @@ const AddPage = () => {
   const history = useHistory();
   const location = useLocation<LocationState>();
   const [content, setContent] = useState("");
-  const [title, setTitle] = useState("");
   const [present] = useIonToast();
   const selectedDate = location.state?.selectedDate;
+  const titleRef = useRef<HTMLIonInputElement>(null);
 
   const handleSave = async () => {
+    const title = titleRef.current?.value as string;
+
     if (title.trim() === "") {
       presentToast("Please enter your diary title");
       return;
@@ -37,17 +39,17 @@ const AddPage = () => {
     const entry: Entry = {
       content: [], // Modify this to match your Content interface
       date: selectedDate,
-      title: title, // TODO: title input section
+      title: title,
       category: "Your category here", // TODO: category input section
     };
 
     try {
-      AddAll(entry);  
+      AddAll(entry);
 
       presentToast("Your diary is saved!");
       setTimeout(() => {
         history.push("/calendar");
-      }, 1000);
+      }, 300);
     } catch (error) {
       console.error(error);
       presentToast("Failed to save your diary.");
@@ -57,7 +59,7 @@ const AddPage = () => {
   const presentToast = (message: string) => {
     present({
       message: message,
-      duration: 1000,
+      duration: 300,
       position: "middle",
     });
   };
@@ -68,11 +70,6 @@ const AddPage = () => {
     setContent(event.target.value);
   };
 
-  const handleTitleChange = (event: any) => {
-    setTitle(event.detail.value);
-  };
-
-
   return (
     <>
       <IonHeader>
@@ -81,9 +78,12 @@ const AddPage = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent scrollY={false}>
-        <div style={{margin: "8px"}}>
-          <IonItem style={{fontSize: "20px"}}>
-            <IonInput label="Title" placeholder="Enter the title" value={title} onIonChange={handleTitleChange}></IonInput>
+        <div style={{ margin: "8px" }}>
+          <IonItem style={{ fontSize: "20px" }}>
+            <IonInput
+              label="Title"
+              placeholder="Enter the title"
+              ref={titleRef}></IonInput>
           </IonItem>
         </div>
         <div
@@ -103,7 +103,7 @@ const AddPage = () => {
               border: 0,
               borderRadius: 10,
               borderColor: "transparent",
-              fontSize: "18px"
+              fontSize: "18px",
             }}
             placeholder="Enter your diary here"></textarea>
         </div>
