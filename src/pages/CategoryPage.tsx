@@ -136,23 +136,7 @@ const CategoryPage = () => {
           }}>
           Category
         </p>
-        {/* {editMode ? (
-          <IonButtons slot="end">
-            <IonButton onClick={() => setEditMode(false)}>Done</IonButton>
-          </IonButtons>
-        ) : (
-          <IonIcon
-            id="popover-button"
-            icon={settingsOutline}
-            onClick={openPopover}
-            style={{
-              display: editMode ? 'none' : 'block',
-              marginTop: "38px",
-              fontSize: "28px",
-              marginLeft: "210px",
-            }}
-          />
-        )} */}
+
         {editMode && (
           <IonButtons style={{ marginTop: "27px", marginLeft: "190px" }}>
             <IonButton onClick={() => setEditMode(false)}>Done</IonButton>
