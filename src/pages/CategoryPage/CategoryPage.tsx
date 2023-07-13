@@ -26,11 +26,9 @@ import {
 } from "ionicons/icons";
 import "../../main.css";
 import axios from "axios";
-import { ApiURL } from "../../BackendURL";
 import { CategoriesData } from "../../GetPutData";
 
 const CategoryPage = () => {
-  const apiURL = ApiURL + "/categories";
   const popover = useRef<HTMLIonPopoverElement | null>(null);
   const [popoverOpen, setPopoverOpen] = useState(false);
   const [present] = useIonToast();
