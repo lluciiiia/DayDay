@@ -15,6 +15,7 @@ import "../../main.css";
 import { CategoriesData } from "../../GetPutData";
 import CategoryModal from "./CategoryModal";
 import CategoryList from "./CategoryList";
+import CategoryHeader from "./CategoryHeader";
 
 const CategoryPage = () => {
   const popover = useRef<HTMLIonPopoverElement | null>(null);
@@ -102,66 +103,11 @@ const CategoryPage = () => {
 
   return (
     <IonContent scrollY={true}>
-      <div style={{ display: "flex", flexDirection: "row" }}>
-        <p
-          style={{
-            fontSize: "28px",
-            marginLeft: "15px",
-            fontWeight: "bold",
-            marginTop: "35px",
-            marginBottom: "10px",
-          }}>
-          Category
-        </p>
-
-        {editMode && (
-          <IonButtons>
-            <IonButton
-              style={{ marginTop: "27px", marginLeft: "190px" }}
-              onClick={() => setEditMode(false)}>
-              Done
-            </IonButton>
-          </IonButtons>
-        )}
-        <IonIcon
-          id="popover-button"
-          icon={settingsOutline}
-          onClick={openPopover}
-          style={{
-            display: editMode ? "none" : "block",
-            marginTop: "38px",
-            fontSize: "28px",
-            marginLeft: "210px",
-          }}
-        />
-
-        <IonPopover
-          ref={(ref) => {
-            popover.current = ref;
-          }}
-          trigger="popover-button"
-          dismissOnSelect={true}>
-          <IonContent scrollY={false}>
-            <IonList>
-              <IonItem
-                button={true}
-                detail={false}
-                onClick={openPopover}
-                id="addCategory">
-                Add Category
-              </IonItem>
-              <IonItem
-                button={true}
-                detail={false}
-                onClick={openPopover}
-                id="editCategory">
-                Edit Category
-              </IonItem>
-            </IonList>
-          </IonContent>
-        </IonPopover>
-      </div>
-
+      <CategoryHeader
+        editMode={editMode}
+        openPopover={openPopover}
+        popover={popover} // Pass the popover ref to CategoryHeader
+      />
       <div style={{ display: "flex", flexDirection: "row" }}>
         <IonSearchbar showClearButton="focus" />
       </div>
