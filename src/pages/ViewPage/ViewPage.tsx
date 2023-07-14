@@ -8,20 +8,11 @@ import {
   IonButtons,
 } from "@ionic/react";
 import { ellipsisHorizontalCircleOutline } from "ionicons/icons";
+import SettingSection from "./SettingSection";
 
 const ViewPage = () => {
   const location = useLocation<{ selectedDate?: string; entryData?: Entry }>();
   const entryData = location?.state?.entryData || null;
-  const history = useHistory();
-
-  const deleteEntry = () => {
-    // TODO: delete the corresponding entry from the backend
-    history.push("/calendar");
-  };
-  const editEntry = () => {
-    // TODO: edit the corresponding entry from the backend
-    history.push("/edit", {  });
-  };
 
   return (
     <IonContent>
@@ -51,25 +42,7 @@ const ViewPage = () => {
               style={{ fontSize: "30px" }}
             />
           </IonButton>
-
-          <IonActionSheet
-            trigger="open-action-sheet"
-            header="Actions"
-            buttons={[
-              {
-                text: "Edit",
-                handler: editEntry,
-              },
-              {
-                text: "Delete",
-                role: "destructive",
-                handler: deleteEntry,
-              },
-              {
-                text: "Cancel",
-                role: "cancel",
-              },
-            ]}></IonActionSheet>
+          <SettingSection></SettingSection>
         </div>
 
         <div
