@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   IonModal,
   IonHeader,
@@ -9,8 +9,10 @@ import {
   IonContent,
   IonIcon,
   IonInput,
+  useIonToast,
 } from "@ionic/react";
 import { list } from "ionicons/icons";
+import { CategoriesData } from "../../../GetPutData";
 
 interface CategoryModalProps {
   showModal: boolean;
@@ -18,7 +20,8 @@ interface CategoryModalProps {
   presentingElement: HTMLElement | undefined;
   selectedCategory: string;
   categoryRef: React.RefObject<HTMLIonInputElement>;
-  handleDoneClick: () => void;
+  setCategories: React.Dispatch<React.SetStateAction<string[]>>;
+  categories: string[];
 }
 
 const CategoryModal: React.FC<CategoryModalProps> = ({
@@ -27,8 +30,49 @@ const CategoryModal: React.FC<CategoryModalProps> = ({
   presentingElement,
   selectedCategory,
   categoryRef,
-  handleDoneClick,
+  setCategories,
+  categories,
 }) => {
+  const [present] = useIonToast();
+
+  const handleDoneClick = () => {
+    const newCategory = categoryRef.current?.value as string;
+    if (newCategory) {
+      let updatedData: any;
+      // Rename the existing category
+      if (selectedCategory) {
+        const categoryIndex = categories.findIndex(
+          (category) => category === selectedCategory
+        );
+        updatedData = [...categories];
+        updatedData[categoryIndex] = newCategory;
+      } // Add a new category
+      else {
+        updatedData = [...categories, newCategory];
+      }
+      const categoriesData = new CategoriesData();
+      categoriesData
+        .putCategoriesData(updatedData)
+        .then(() => {
+          setCategories(updatedData);
+          setShowModal(false);
+        })
+        .catch((error: any) => {
+          console.error("Error updating categories:", error);
+        });
+    } else {
+      presentToast("Enter new category");
+    }
+  };
+
+  const presentToast = (message: string) => {
+    present({
+      message: message,
+      duration: 100,
+      position: "middle",
+    });
+  };
+
   return (
     <IonModal
       isOpen={showModal}

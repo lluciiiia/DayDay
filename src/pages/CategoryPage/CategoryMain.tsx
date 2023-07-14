@@ -34,38 +34,6 @@ const CategoryMain = () => {
       });
   }, []);
 
-  const handleDoneClick = () => {
-    const newCategory = categoryRef.current?.value as string;
-    if (newCategory) {
-      let updatedData;
-      // Rename the existing category
-      if (selectedCategory) {
-        const categoryIndex = categories.findIndex(
-          (category) => category === selectedCategory
-        );
-        updatedData = [...categories];
-        updatedData[categoryIndex] = newCategory;
-      } // Add a new category
-      else {
-        updatedData = [...categories, newCategory];
-      }
-      const categoriesData = new CategoriesData();
-      categoriesData.putCategoriesData(updatedData);
-      setCategories(updatedData);
-      setShowModal(false);
-    } else {
-      presentToast("Enter new category");
-    }
-  };
-
-  const presentToast = (message: string) => {
-    present({
-      message: message,
-      duration: 100,
-      position: "middle",
-    });
-  };
-
   const handleDeleteCategory = (index: number) => {
     const updatedData = categories.filter((_, i) => i !== index);
     const categoriesData = new CategoriesData();
@@ -83,7 +51,6 @@ const CategoryMain = () => {
         selectedCategory={selectedCategory}
         setSelectedCategory={setSelectedCategory}
         categoryRef={categoryRef}
-        handleDoneClick={handleDoneClick}
         categories={categories}
       />
       <div style={{ display: "flex", flexDirection: "row" }}>
@@ -105,7 +72,8 @@ const CategoryMain = () => {
           presentingElement={presentingElement}
           selectedCategory={selectedCategory}
           categoryRef={categoryRef}
-          handleDoneClick={handleDoneClick}
+          setCategories={setCategories}
+          categories={categories}
         />
       )}
     </IonContent>
