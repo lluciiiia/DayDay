@@ -32,12 +32,7 @@ export class EntriesData {
     console.log("typeof data in deleteEntriesData", typeof data);
     console.log("entriesURL", entriesURL);
     try {
-      await axios.delete(entriesURL, {
-        data,
-        headers: {
-          "Authorization": "Bearer none"
-        },
-      });
+      await axios.delete(entriesURL, { data });
     } catch (error) {
       console.error(error);
       throw new Error("Failed to delete entry.");

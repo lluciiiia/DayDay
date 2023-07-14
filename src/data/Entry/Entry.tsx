@@ -8,6 +8,7 @@ type Entry = {
   date: string;
   title: string;
   category: string;
+  id: number;
 };
 
 interface EntryService {

@@ -54,7 +54,7 @@ const ViewDatePage = () => {
         <IonList>
           {filteredEntries.map((entry) => (
             <IonItem
-            key={entry.date}
+            key={entry.id}
             style={{ padding: "7px", fontSize: "18px" }}
             onClick={() => {
               history.push("/view", { entryData: entry });
