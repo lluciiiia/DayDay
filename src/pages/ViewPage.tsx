@@ -1,20 +1,11 @@
-// From ViewCategory OR ViewDate
-
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import {
   IonContent,
-  IonHeader,
-  IonTitle,
-  IonToolbar,
-  IonItem,
-  IonList,
-  IonLabel,
 } from "@ionic/react";
 
 const ViewPage = () => {
   const location = useLocation<{ selectedDate?: string; entryData?: Entry }>();
-  const selectedDate = location?.state?.selectedDate || "";
   const entryData = location?.state?.entryData || null;
  return (
   <IonContent>
