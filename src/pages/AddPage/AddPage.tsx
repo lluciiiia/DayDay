@@ -5,12 +5,8 @@ import {
   IonHeader,
   IonInput,
   IonItem,
-  IonList,
-  IonSelect,
-  IonSelectOption,
   IonTitle,
   IonToolbar,
-  SelectChangeEventDetail,
 } from "@ionic/react";
 import { useHistory, useLocation } from "react-router";
 import { CategoriesData } from "../../GetPutData";

@@ -30,8 +30,7 @@ const CategorySelection: React.FC<CategorySelectionProps> = ({
           aria-label="category"
           placeholder="Select Category"
           value={selectedCategory}
-          onIonChange={handleCategoryChange}
-        >
+          onIonChange={handleCategoryChange}>
           {categories.map((category: string) => (
             <IonSelectOption value={category} key={category}>
               {category}
