@@ -58,28 +58,35 @@ const ViewDatePage = () => {
           {filteredEntries.map((entry) => (
             <IonItem
               key={entry.date}
-              style={{ padding: "7px", fontSize: "18px" }}>
-              <div style={{ display: "flex", flexDirection: "column" }}>
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    padding: "2px",
-                  }}>
+              style={{ padding: "7px", fontSize: "18px"}}>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  width: "100%",
+                }}>
+                <div style={{ display: "flex", flexDirection: "row" }}>
                   <div
                     style={{
                       fontSize: "21px",
                       fontWeight: "bold",
-                      marginRight: "180px",
+                      marginRight: "auto",
                     }}>
                     {entry.title}
                   </div>
-                  <div style={{ fontSize: "16px", color: "gray", marginLeft: "auto" }}>
+                  <div
+                    style={{
+                      fontSize: "14px",
+                      color: "rgb(165, 165, 165)",
+                      marginLeft: "auto",
+                      marginTop: "10px"
+                    }}>
                     {entry.category}
                   </div>
                 </div>
-                <div style={{ fontSize: "18px", marginTop: "5px" }}>
-                  content
+
+                <div style={{ fontSize: "16px", marginTop: "5px", marginBottom: "15px" }}>
+                  content max 20 words .....................
                 </div>
               </div>
             </IonItem>
