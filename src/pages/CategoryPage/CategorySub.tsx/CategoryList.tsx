@@ -1,22 +1,29 @@
 import React from "react";
 import { IonItem, IonList, IonIcon, IonLabel } from "@ionic/react";
 import { closeCircleOutline, informationCircleOutline } from "ionicons/icons";
+import { CategoriesData } from "../../../GetPutData";
 
 interface CategoryListProps {
   categories: string[];
   editMode: boolean;
-  handleDeleteCategory: (index: number) => void;
   setSelectedCategory: (category: string) => void;
   setShowModal: (show: boolean) => void;
+  setCategories: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
 const CategoryList: React.FC<CategoryListProps> = ({
   categories,
   editMode,
-  handleDeleteCategory,
   setSelectedCategory,
   setShowModal,
+  setCategories,
 }) => {
+  const handleDeleteCategory = (index: number) => {
+    const updatedData = categories.filter((_, i) => i !== index);
+    const categoriesData = new CategoriesData();
+    categoriesData.putCategoriesData(updatedData);
+    setCategories(updatedData);
+  };
   return (
     <IonList>
       {categories.map((category, index) => (

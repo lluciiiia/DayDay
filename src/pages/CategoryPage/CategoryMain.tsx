@@ -34,13 +34,6 @@ const CategoryMain = () => {
       });
   }, []);
 
-  const handleDeleteCategory = (index: number) => {
-    const updatedData = categories.filter((_, i) => i !== index);
-    const categoriesData = new CategoriesData();
-    categoriesData.putCategoriesData(updatedData);
-    setCategories(updatedData);
-  };
-
   return (
     <IonContent scrollY={true}>
       <CategoryHeader
@@ -60,7 +53,7 @@ const CategoryMain = () => {
       <CategoryList
         categories={categories}
         editMode={editMode}
-        handleDeleteCategory={handleDeleteCategory}
+        setCategories={setCategories}
         setSelectedCategory={setSelectedCategory}
         setShowModal={setShowModal}
       />
