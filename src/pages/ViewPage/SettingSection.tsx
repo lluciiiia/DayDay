@@ -2,18 +2,15 @@
 import React from "react";
 import { useState } from "react";
 import { useLocation, useHistory } from "react-router-dom";
-import {
-  IonContent,
-  IonIcon,
-  IonActionSheet,
-  IonButton,
-  IonButtons,
-} from "@ionic/react";
-import { ellipsisHorizontalCircleOutline } from "ionicons/icons";
+import { IonActionSheet } from "@ionic/react";
 
-interface SettingSectionProps {}
+interface SettingSectionProps {
+  entryData: Entry[];
+}
 
-export const SettingSection: React.FC<SettingSectionProps> = ({}) => {
+export const SettingSection: React.FC<SettingSectionProps> = ({
+  entryData,
+}) => {
   const history = useHistory();
 
   const deleteEntry = () => {

@@ -42,7 +42,8 @@ const ViewPage = () => {
               style={{ fontSize: "30px" }}
             />
           </IonButton>
-          <SettingSection></SettingSection>
+          <SettingSection
+            entryData={entryData ? [entryData] : []}></SettingSection>
         </div>
 
         <div
