@@ -87,7 +87,11 @@ const ViewDatePage = () => {
                     marginTop: "5px",
                     marginBottom: "15px",
                   }}>
-                  {entry.content[0].text}
+                  {entry.content && entry.content[0] && entry.content[0].text
+                    ? entry.content[0].text.length > 30
+                      ? `${entry.content[0].text.substring(0, 88)}...`
+                      : entry.content[0].text
+                    : ""}
                 </div>
               </div>
             </IonItem>
