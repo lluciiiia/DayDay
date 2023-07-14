@@ -106,7 +106,8 @@ const CategoryPage = () => {
       <CategoryHeader
         editMode={editMode}
         openPopover={openPopover}
-        popover={popover} // Pass the popover ref to CategoryHeader
+        setEditMode={setEditMode} // Pass setEditMode as a prop
+        popover={popover}
       />
       <div style={{ display: "flex", flexDirection: "row" }}>
         <IonSearchbar showClearButton="focus" />

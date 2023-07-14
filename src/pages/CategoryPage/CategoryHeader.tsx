@@ -12,14 +12,20 @@ import { settingsOutline } from "ionicons/icons";
 interface CategoryHeaderProps {
   editMode: boolean;
   openPopover: (e: any) => void;
-  popover: React.MutableRefObject<HTMLIonPopoverElement | null>; // Add popover ref prop
+  setEditMode: React.Dispatch<React.SetStateAction<boolean>>; // Add setEditMode prop
+  popover: React.MutableRefObject<HTMLIonPopoverElement | null>;
 }
 
 const CategoryHeader: React.FC<CategoryHeaderProps> = ({
   editMode,
   openPopover,
+  setEditMode,
   popover,
 }) => {
+  const handleDoneClick = () => {
+    setEditMode(false); // Set editMode to false
+  };
+
   return (
     <div style={{ display: "flex", flexDirection: "row" }}>
       <p
@@ -29,7 +35,8 @@ const CategoryHeader: React.FC<CategoryHeaderProps> = ({
           fontWeight: "bold",
           marginTop: "35px",
           marginBottom: "10px",
-        }}>
+        }}
+      >
         Category
       </p>
 
@@ -37,7 +44,7 @@ const CategoryHeader: React.FC<CategoryHeaderProps> = ({
         <IonButtons>
           <IonButton
             style={{ marginTop: "27px", marginLeft: "190px" }}
-            onClick={() => {}} // Update this with the appropriate function
+            onClick={handleDoneClick} // Call handleDoneClick
           >
             Done
           </IonButton>
@@ -56,22 +63,15 @@ const CategoryHeader: React.FC<CategoryHeaderProps> = ({
       />
 
       <IonPopover
-        ref={popover} // Assign the popover ref
+        ref={popover}
         trigger="popover-button"
-        dismissOnSelect={true}>
+        dismissOnSelect={true}
+      >
         <IonList>
-          <IonItem
-            button={true}
-            detail={false}
-            onClick={openPopover}
-            id="addCategory">
+          <IonItem button={true} detail={false} onClick={openPopover} id="addCategory">
             Add Category
           </IonItem>
-          <IonItem
-            button={true}
-            detail={false}
-            onClick={openPopover}
-            id="editCategory">
+          <IonItem button={true} detail={false} onClick={openPopover} id="editCategory">
             Edit Category
           </IonItem>
         </IonList>
