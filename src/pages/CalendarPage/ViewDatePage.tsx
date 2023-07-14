@@ -8,10 +8,6 @@ import {
   IonItem,
   IonList,
   IonSearchbar,
-  IonLabel,
-  IonReorder,
-  IonReorderGroup,
-  ItemReorderEventDetail,
 } from "@ionic/react";
 import { EntriesData } from "../../GetPutData";
 
@@ -58,7 +54,7 @@ const ViewDatePage = () => {
           {filteredEntries.map((entry) => (
             <IonItem
               key={entry.date}
-              style={{ padding: "7px", fontSize: "18px"}}>
+              style={{ padding: "7px", fontSize: "18px" }}>
               <div
                 style={{
                   display: "flex",
@@ -79,13 +75,18 @@ const ViewDatePage = () => {
                       fontSize: "14px",
                       color: "rgb(165, 165, 165)",
                       marginLeft: "auto",
-                      marginTop: "10px"
+                      marginTop: "10px",
                     }}>
                     {entry.category}
                   </div>
                 </div>
 
-                <div style={{ fontSize: "16px", marginTop: "5px", marginBottom: "15px" }}>
+                <div
+                  style={{
+                    fontSize: "16px",
+                    marginTop: "5px",
+                    marginBottom: "15px",
+                  }}>
                   content max 20 words .....................
                 </div>
               </div>

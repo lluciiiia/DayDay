@@ -35,8 +35,9 @@ import CalendarPage from "./pages/CalendarPage/CalendarPage";
 import BrowserPage from "./pages/BrowserPage";
 import CategoryPage from "./pages/CategoryPage/CategoryMain";
 import AddPage from "./pages/AddPage";
-import ViewCategoryPage from "./pages/CategoryPage/ViewCategory";
-import ViewDatePage from "./pages/CalendarPage/ViewDate";
+import ViewCategoryPage from "./pages/CategoryPage/ViewCategoryPage";
+import ViewDatePage from "./pages/CalendarPage/ViewDatePage";
+import ViewPage from "./pages/ViewPage";
 
 setupIonicReact();
 
@@ -54,6 +55,7 @@ const App: React.FC = () => (
           {/* <Route path="/category/:id" exact={true} render={() => <ViewCategoryPage />} /> */}
           <Route path="/viewCategory" exact={true} render={() => <ViewCategoryPage/>} />
           <Route path="/viewDate" exact={true} render={() => <ViewDatePage/>} />
+          <Route path="/view" exact={true} render={() => <ViewPage/>} />
 
         
         </IonRouterOutlet>
