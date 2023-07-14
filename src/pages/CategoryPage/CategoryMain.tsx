@@ -6,9 +6,9 @@ import {
 } from "@ionic/react";
 import "../../main.css";
 import { CategoriesData } from "../../GetPutData";
-import CategoryModal from "./CategoryModal";
-import CategoryList from "./CategoryList";
-import CategoryHeader from "./CategoryHeader";
+import CategoryModal from "./CategorySub.tsx/CategoryModal";
+import CategoryList from "./CategorySub.tsx/CategoryList";
+import CategoryHeader from "./CategorySub.tsx/CategoryHeader";
 
 const CategoryPage = () => {
   const popover = useRef<HTMLIonPopoverElement | null>(null);
