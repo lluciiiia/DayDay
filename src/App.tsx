@@ -37,7 +37,7 @@ import CategoryPage from "./pages/CategoryPage/CategoryPage";
 import AddPage from "./pages/AddPage/AddPage";
 import ViewCategoryPage from "./pages/CategoryPage/ViewCategoryPage";
 import ViewDatePage from "./pages/CalendarPage/ViewDatePage";
-import ViewPage from "./pages/ViewPage";
+import ViewPage from "./pages/ViewPage/ViewPage";
 
 setupIonicReact();
 
