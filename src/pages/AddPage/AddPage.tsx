@@ -1,5 +1,4 @@
-// AddPage.tsx
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   IonButton,
   IonContent,
@@ -11,14 +10,12 @@ import {
   IonSelectOption,
   IonTitle,
   IonToolbar,
-  useIonToast,
-  SelectCustomEvent,
   SelectChangeEventDetail,
 } from "@ionic/react";
 import { useHistory, useLocation } from "react-router";
-import { AddAll } from "../UpdateAll";
 import { CategoriesData } from "../../GetPutData";
 import ContentEditor from "./AddSub/ContentEditor";
+import { SaveEntry } from "./AddSub/SaveEntry";
 
 interface LocationState {
   selectedDate: string;
@@ -28,11 +25,11 @@ const AddPage = () => {
   const history = useHistory();
   const location = useLocation<LocationState>();
   const [content, setContent] = useState("");
-  const [present] = useIonToast();
   const selectedDate = location.state?.selectedDate;
   const titleRef = useRef<HTMLIonInputElement>(null);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [categories, setCategories] = useState<string[]>([]);
+  const { handleSave } = SaveEntry();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -43,49 +40,6 @@ const AddPage = () => {
 
     fetchData();
   }, []);
-
-  const handleSave = async () => {
-    const title = titleRef.current?.value as string;
-
-    if (title.trim() === "") {
-      presentToast("Please enter your diary title");
-      return;
-    }
-    if (content.trim() === "") {
-      presentToast("Please enter your diary content");
-      return;
-    }
-
-    const entry: Entry = {
-      content:   [{
-        type: "text",
-        text: content,
-      },],
-      date: selectedDate,
-      title: title,
-      category: selectedCategory,
-    };
-
-    try {
-      AddAll(entry);
-
-      presentToast("Your diary is saved!");
-      setTimeout(() => {
-        history.push("/calendar");
-      }, 300);
-    } catch (error) {
-      console.error(error);
-      presentToast("Failed to save your diary.");
-    }
-  };
-
-  const presentToast = (message: string) => {
-    present({
-      message: message,
-      duration: 300,
-      position: "middle",
-    });
-  };
 
   const handleCategoryChange = (
     event: CustomEvent<SelectChangeEventDetail<any>>
@@ -137,7 +91,15 @@ const AddPage = () => {
             fill="outline"
             id="save"
             style={{ width: "160px" }}
-            onClick={handleSave}>
+            onClick={() =>
+              handleSave(
+                titleRef,
+                content,
+                selectedDate,
+                selectedCategory,
+                history
+              )
+            }>
             Save
           </IonButton>
         </div>
