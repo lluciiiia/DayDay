@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useLocation } from "react-router-dom";
 import {
   IonContent,
   IonHeader,
@@ -14,6 +15,8 @@ import {
 } from "@ionic/react";
 
 const ViewCategoryPage = () => {
+  const location = useLocation<{ category?: string }>();
+  const category = location?.state?.category || "";
 
   return (
     <>
@@ -26,15 +29,13 @@ const ViewCategoryPage = () => {
           marginTop: "35px",
           marginBottom: "10px",
         }}>
-        Category Name
+        {category}
       </p>
       <IonSearchbar
         showClearButton="focus"
         //onIonInput={handleInput}
       ></IonSearchbar>
-      <IonList>
-
-      </IonList>
+      <IonList></IonList>
     </>
   );
 };
