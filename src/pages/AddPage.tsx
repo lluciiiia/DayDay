@@ -11,6 +11,7 @@ import {
   IonSelectOption,
   IonSelect,
   IonList,
+  SelectChangeEventDetail,
 } from "@ionic/react";
 import { useHistory, useLocation } from "react-router";
 import { AddAll } from "./UpdateAll";
@@ -27,6 +28,7 @@ const AddPage = () => {
   const [present] = useIonToast();
   const selectedDate = location.state?.selectedDate;
   const titleRef = useRef<HTMLIonInputElement>(null);
+  const [selectedCategory, setSelectedCategory] = useState("");
 
   const [categories, setCategories] = useState<string[]>([]);
 
@@ -53,10 +55,10 @@ const AddPage = () => {
     }
 
     const entry: Entry = {
-      content: [], // Modify this to match your Content interface
+      content: [],
       date: selectedDate,
       title: title,
-      category: "Your category here", // TODO: category input section
+      category: selectedCategory,
     };
 
     try {
@@ -86,6 +88,12 @@ const AddPage = () => {
     setContent(event.target.value);
   };
 
+  const handleCategoryChange = (
+    event: CustomEvent<SelectChangeEventDetail<any>>
+  ) => {
+    setSelectedCategory(event.detail.value);
+  };
+
   return (
     <>
       <IonHeader>
@@ -101,11 +109,16 @@ const AddPage = () => {
         </div>
         <div style={{ marginLeft: "18px", marginBottom: "5px" }}>
           <IonList>
-            <IonSelect aria-label="category" placeholder="Select Category">
+            <IonSelect
+              aria-label="category"
+              placeholder="Select Category"
+              value={selectedCategory}
+              onIonChange={handleCategoryChange as any}
+            >
               {categories.map((category: string) => (
-                <IonItem style={{ padding: "7px", fontSize: "18px" }}>
-                  <IonSelectOption value={category}>{category}</IonSelectOption>
-                </IonItem>
+                <IonSelectOption value={category} key={category}>
+                  {category}
+                </IonSelectOption>
               ))}
             </IonSelect>
           </IonList>
@@ -117,7 +130,8 @@ const AddPage = () => {
             maxWidth: 370,
             margin: "auto",
             padding: "0px 3px 20px 3px",
-          }}>
+          }}
+        >
           <textarea
             value={content}
             onChange={handleContentChange}
@@ -129,7 +143,8 @@ const AddPage = () => {
               borderColor: "transparent",
               fontSize: "16px",
             }}
-            placeholder="Enter your diary here"></textarea>
+            placeholder="Enter your diary here"
+          ></textarea>
         </div>
         <div
           style={{
@@ -141,12 +156,14 @@ const AddPage = () => {
             left: 0,
             right: 0,
             padding: "0.5rem",
-          }}>
+          }}
+        >
           <IonButton
             fill="outline"
             id="save"
             style={{ width: "160px" }}
-            onClick={handleSave}>
+            onClick={handleSave}
+          >
             Save
           </IonButton>
         </div>
