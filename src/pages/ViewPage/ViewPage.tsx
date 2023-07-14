@@ -42,8 +42,7 @@ const ViewPage = () => {
               style={{ fontSize: "30px" }}
             />
           </IonButton>
-          <SettingSection
-            entryData={entryData ? [entryData] : []}></SettingSection>
+          {entryData && <SettingSection entryData={entryData}></SettingSection>}
         </div>
 
         <div

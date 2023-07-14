@@ -5,7 +5,7 @@ import { IonActionSheet } from "@ionic/react";
 import { EntriesData } from "../../GetPutData";
 
 interface SettingSectionProps {
-  entryData: Entry[];
+  entryData: Entry;
 }
 
 export const SettingSection: React.FC<SettingSectionProps> = ({
@@ -13,23 +13,18 @@ export const SettingSection: React.FC<SettingSectionProps> = ({
 }) => {
   const history = useHistory();
 
-  const deleteEntry = async () => {
+const deleteEntry = async () => {
     const entriesData = new EntriesData();
-    const currentEntries = await entriesData.getEntriesData();
-
-    // Create a new array without the entry to be deleted
-    const updatedEntries = currentEntries.filter((entry: any) => {
-      // Return true for entries that are not equal to the entry to be deleted
-      return entry !== entryData;
-    });
     try {
       // Update the backend with the modified entries data
-      await entriesData.putEntriesData(updatedEntries);
+      await entriesData.deleteEntriesData(entryData);
       history.push("/calendar");
     } catch (error) {
       console.error(error);
     }
   };
+
+  
   const editEntry = () => {
     // TODO: edit the corresponding entry from the backend
     history.push("/edit", {});
