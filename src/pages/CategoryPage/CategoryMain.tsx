@@ -1,16 +1,9 @@
 import { useState, useRef, useEffect } from "react";
 import {
   IonContent,
-  IonIcon,
-  IonPopover,
   useIonToast,
-  IonButtons,
-  IonButton,
   IonSearchbar,
-  IonList,
-  IonItem,
 } from "@ionic/react";
-import { settingsOutline } from "ionicons/icons";
 import "../../main.css";
 import { CategoriesData } from "../../GetPutData";
 import CategoryModal from "./CategoryModal";
