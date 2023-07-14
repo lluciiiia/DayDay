@@ -1,25 +1,17 @@
 import { useState, useRef, useEffect } from "react";
-import {
-  IonContent,
-  useIonToast,
-  IonSearchbar,
-} from "@ionic/react";
+import { IonContent, useIonToast, IonSearchbar } from "@ionic/react";
 import "../../main.css";
 import { CategoriesData } from "../../GetPutData";
 import CategoryModal from "./CategorySub.tsx/CategoryModal";
 import CategoryList from "./CategorySub.tsx/CategoryList";
 import CategoryHeader from "./CategorySub.tsx/CategoryHeader";
 
-const CategoryPage = () => {
-  const popover = useRef<HTMLIonPopoverElement | null>(null);
-  const [popoverOpen, setPopoverOpen] = useState(false);
-  const [present] = useIonToast();
-  const page = useRef(undefined);
-
+const CategoryMain = () => {
   const [showModal, setShowModal] = useState(false);
-
   const [categories, setCategories] = useState<string[]>([]);
   const categoryRef = useRef<HTMLIonInputElement>(null);
+  const [present] = useIonToast();
+  const page = useRef(undefined);
 
   const [editMode, setEditMode] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -27,19 +19,6 @@ const CategoryPage = () => {
   const [presentingElement, setPresentingElement] = useState<
     HTMLElement | undefined
   >(undefined);
-
-  const openPopover = (e: any) => {
-    const itemId = e.target.id;
-    if (itemId === "addCategory") {
-      setSelectedCategory(""); // Clear the selected category
-      setShowModal(true);
-    } else if (itemId === "editCategory") {
-      setSelectedCategory(categories[0]); // Set the selected category to the first category in the list
-      setEditMode(!editMode); // Toggle the edit mode
-    }
-    popover.current!.event = e;
-    setPopoverOpen(true);
-  };
 
   useEffect(() => {
     setPresentingElement(page.current);
@@ -98,9 +77,14 @@ const CategoryPage = () => {
     <IonContent scrollY={true}>
       <CategoryHeader
         editMode={editMode}
-        openPopover={openPopover}
-        setEditMode={setEditMode} 
-        popover={popover}
+        setEditMode={setEditMode}
+        showModal={showModal}
+        setShowModal={setShowModal}
+        selectedCategory={selectedCategory}
+        setSelectedCategory={setSelectedCategory}
+        categoryRef={categoryRef}
+        handleDoneClick={handleDoneClick}
+        categories={categories}
       />
       <div style={{ display: "flex", flexDirection: "row" }}>
         <IonSearchbar showClearButton="focus" />
@@ -128,4 +112,4 @@ const CategoryPage = () => {
   );
 };
 
-export default CategoryPage;
+export default CategoryMain;

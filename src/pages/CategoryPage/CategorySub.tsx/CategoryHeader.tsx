@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import {
   IonPopover,
   IonList,
@@ -11,17 +11,50 @@ import { settingsOutline } from "ionicons/icons";
 
 interface CategoryHeaderProps {
   editMode: boolean;
-  openPopover: (e: any) => void;
-  setEditMode: React.Dispatch<React.SetStateAction<boolean>>; // Add setEditMode prop
-  popover: React.MutableRefObject<HTMLIonPopoverElement | null>;
+  setEditMode: React.Dispatch<React.SetStateAction<boolean>>;
+  showModal: boolean;
+  setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
+  selectedCategory: string;
+  setSelectedCategory: React.Dispatch<React.SetStateAction<string>>;
+  categoryRef: React.RefObject<HTMLIonInputElement>;
+  categories: string[]; // Add categories prop
 }
 
 const CategoryHeader: React.FC<CategoryHeaderProps> = ({
   editMode,
-  openPopover,
   setEditMode,
-  popover,
+  showModal,
+  setShowModal,
+  selectedCategory,
+  setSelectedCategory,
+  categoryRef,
+
+  categories,
 }) => {
+  const popover = useRef<HTMLIonPopoverElement | null>(null);
+  const [popoverOpen, setPopoverOpen] = useState(false);
+
+  const openPopover = (e: React.MouseEvent<HTMLIonIconElement, MouseEvent>) => {
+    const itemId = e.currentTarget.id;
+    if (itemId === "addCategory") {
+      setSelectedCategory(""); // Clear the selected category
+      setShowModal(true);
+    } else if (itemId === "editCategory") {
+      setSelectedCategory(categories[0]); // Set the selected category to the first category in the list
+      setEditMode(!editMode); // Toggle the edit mode
+    }
+    popover.current!.event = e;
+    setPopoverOpen(true);
+  };
+
+  const handleItemClicked = (
+    e: React.MouseEvent<HTMLIonItemElement, MouseEvent>
+  ) => {
+    openPopover(
+      e as unknown as React.MouseEvent<HTMLIonIconElement, MouseEvent>
+    );
+  };
+
   const handleDoneClick = () => {
     setEditMode(false); // Set editMode to false
   };
@@ -35,8 +68,7 @@ const CategoryHeader: React.FC<CategoryHeaderProps> = ({
           fontWeight: "bold",
           marginTop: "35px",
           marginBottom: "10px",
-        }}
-      >
+        }}>
         Category
       </p>
 
@@ -66,12 +98,21 @@ const CategoryHeader: React.FC<CategoryHeaderProps> = ({
         ref={popover}
         trigger="popover-button"
         dismissOnSelect={true}
-      >
+        isOpen={popoverOpen}
+        onDidDismiss={() => setPopoverOpen(false)}>
         <IonList>
-          <IonItem button={true} detail={false} onClick={openPopover} id="addCategory">
+          <IonItem
+            button={true}
+            detail={false}
+            onClick={handleItemClicked}
+            id="addCategory">
             Add Category
           </IonItem>
-          <IonItem button={true} detail={false} onClick={openPopover} id="editCategory">
+          <IonItem
+            button={true}
+            detail={false}
+            onClick={handleItemClicked}
+            id="editCategory">
             Edit Category
           </IonItem>
         </IonList>
