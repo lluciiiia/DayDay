@@ -10,12 +10,9 @@ const CategoryMain = () => {
   const [showModal, setShowModal] = useState(false);
   const [categories, setCategories] = useState<string[]>([]);
   const categoryRef = useRef<HTMLIonInputElement>(null);
-  const [present] = useIonToast();
   const page = useRef(undefined);
-
   const [editMode, setEditMode] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("");
-
   const [presentingElement, setPresentingElement] = useState<
     HTMLElement | undefined
   >(undefined);
