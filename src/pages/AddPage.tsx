@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import {
   IonContent,
   IonHeader,
@@ -8,9 +8,13 @@ import {
   useIonToast,
   IonInput,
   IonItem,
+  IonSelectOption,
+  IonSelect,
+  IonList,
 } from "@ionic/react";
 import { useHistory, useLocation } from "react-router";
 import { AddAll } from "./UpdateAll";
+import { CategoriesData } from "../GetPutData";
 
 interface LocationState {
   selectedDate: string;
@@ -23,6 +27,18 @@ const AddPage = () => {
   const [present] = useIonToast();
   const selectedDate = location.state?.selectedDate;
   const titleRef = useRef<HTMLIonInputElement>(null);
+
+  const [categories, setCategories] = useState<string[]>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const categoriesData = new CategoriesData();
+      const categories = await categoriesData.getCategoriesData();
+      setCategories(categories);
+    };
+
+    fetchData();
+  }, []);
 
   const handleSave = async () => {
     const title = titleRef.current?.value as string;
@@ -78,17 +94,25 @@ const AddPage = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent scrollY={false}>
-        <div style={{ margin: "8px" }}>
-          <IonItem style={{ fontSize: "20px" }}>
-            <IonInput
-              label="Title"
-              placeholder="Enter the title"
-              ref={titleRef}></IonInput>
+        <div style={{ margin: "5px" }}>
+          <IonItem style={{ fontSize: "18px" }}>
+            <IonInput placeholder="Enter the title" ref={titleRef}></IonInput>
           </IonItem>
+        </div>
+        <div style={{ marginLeft: "18px", marginBottom: "5px" }}>
+          <IonList>
+            <IonSelect aria-label="category" placeholder="Select Category">
+              {categories.map((category: string) => (
+                <IonItem style={{ padding: "7px", fontSize: "18px" }}>
+                  <IonSelectOption value={category}>{category}</IonSelectOption>
+                </IonItem>
+              ))}
+            </IonSelect>
+          </IonList>
         </div>
         <div
           style={{
-            height: 610,
+            height: 570,
             overflowY: "scroll",
             maxWidth: 370,
             margin: "auto",
@@ -103,7 +127,7 @@ const AddPage = () => {
               border: 0,
               borderRadius: 10,
               borderColor: "transparent",
-              fontSize: "18px",
+              fontSize: "16px",
             }}
             placeholder="Enter your diary here"></textarea>
         </div>
