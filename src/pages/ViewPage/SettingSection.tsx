@@ -15,6 +15,8 @@ export const SettingSection: React.FC<SettingSectionProps> = ({
 
 const deleteEntry = async () => {
     const entriesData = new EntriesData();
+    console.log("type of entryData", typeof entryData);
+    console.log(entryData);
     try {
       // Update the backend with the modified entries data
       await entriesData.deleteEntriesData(entryData);

@@ -27,9 +27,17 @@ export class CategoriesData {
 }
 
 export class EntriesData {
-  async deleteEntriesData(data: Entry) {
+  async deleteEntriesData(data: any) {
+    console.log("data in deleteEntriesData", data);
+    console.log("typeof data in deleteEntriesData", typeof data);
+    console.log("entriesURL", entriesURL);
     try {
-      await axios.delete(entriesURL, { data });
+      await axios.delete(entriesURL, {
+        data,
+        headers: {
+          "Authorization": "Bearer none"
+        },
+      });
     } catch (error) {
       console.error(error);
       throw new Error("Failed to delete entry.");
