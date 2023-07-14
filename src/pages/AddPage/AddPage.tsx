@@ -16,6 +16,7 @@ import { useHistory, useLocation } from "react-router";
 import { CategoriesData } from "../../GetPutData";
 import ContentEditor from "./AddSub/ContentEditor";
 import { SaveEntry } from "./AddSub/SaveEntry";
+import CategorySelection from "./AddSub/CategorySelection";
 
 interface LocationState {
   selectedDate: string;
@@ -41,12 +42,6 @@ const AddPage = () => {
     fetchData();
   }, []);
 
-  const handleCategoryChange = (
-    event: CustomEvent<SelectChangeEventDetail<any>>
-  ) => {
-    setSelectedCategory(event.detail.value);
-  };
-
   return (
     <>
       <IonHeader>
@@ -60,21 +55,11 @@ const AddPage = () => {
             <IonInput placeholder="Enter the title" ref={titleRef}></IonInput>
           </IonItem>
         </div>
-        <div style={{ marginLeft: "18px", marginBottom: "5px" }}>
-          <IonList>
-            <IonSelect
-              aria-label="category"
-              placeholder="Select Category"
-              value={selectedCategory}
-              onIonChange={handleCategoryChange as any}>
-              {categories.map((category: string) => (
-                <IonSelectOption value={category} key={category}>
-                  {category}
-                </IonSelectOption>
-              ))}
-            </IonSelect>
-          </IonList>
-        </div>
+        <CategorySelection
+          selectedCategory={selectedCategory}
+          categories={categories}
+          onCategoryChange={setSelectedCategory}
+        />
         <ContentEditor content={content} onContentChange={setContent} />
         <div
           style={{
