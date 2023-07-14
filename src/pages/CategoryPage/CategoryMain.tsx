@@ -113,15 +113,13 @@ const CategoryPage = () => {
         <IonSearchbar showClearButton="focus" />
       </div>
 
-      <IonContent scrollY={true}>
-        <CategoryList
-          categories={categories}
-          editMode={editMode}
-          handleDeleteCategory={handleDeleteCategory}
-          setSelectedCategory={setSelectedCategory}
-          setShowModal={setShowModal}
-        />
-      </IonContent>
+      <CategoryList
+        categories={categories}
+        editMode={editMode}
+        handleDeleteCategory={handleDeleteCategory}
+        setSelectedCategory={setSelectedCategory}
+        setShowModal={setShowModal}
+      />
 
       {showModal && (
         <CategoryModal
