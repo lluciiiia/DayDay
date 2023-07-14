@@ -15,11 +15,12 @@ const ViewPage = () => {
   const history = useHistory();
 
   const deleteEntry = () => {
-    // history.replace("/");
-    // window.location.reload();
+    // TODO: delete the corresponding entry from the backend
+    history.push("/calendar");
   };
   const editEntry = () => {
-    //history.push("/edit", {  });
+    // TODO: edit the corresponding entry from the backend
+    history.push("/edit", {  });
   };
 
   return (
