@@ -31,11 +31,12 @@ import "@ionic/react/css/display.css";
 /* Theme variables */
 import "./theme/variables.css";
 import { search, heart, calendarClear, list } from "ionicons/icons";
-import CalendarPage from "./pages/CalendarPage";
+import CalendarPage from "./pages/CalendarPage/CalendarPage";
 import BrowserPage from "./pages/BrowserPage";
 import CategoryPage from "./pages/CategoryPage/CategoryMain";
 import AddPage from "./pages/AddPage";
-import SingleCategoryPage from "./pages/CategoryPage/SingleCategoryPage";
+import ViewCategoryPage from "./pages/CategoryPage/ViewCategory";
+import ViewDatePage from "./pages/CalendarPage/ViewDate";
 
 setupIonicReact();
 
@@ -50,8 +51,10 @@ const App: React.FC = () => (
           <Route path="/browser" exact={true} render={() => <BrowserPage />} />
           <Route path="/category" exact={true} render={() => <CategoryPage />} />
           <Route path="/add" exact={true} render={() => <AddPage />} />
-          {/* <Route path="/category/:id" exact={true} render={() => <SingleCategoryPage />} /> */}
-          <Route path="/single" exact={true} render={() => <SingleCategoryPage/>} />
+          {/* <Route path="/category/:id" exact={true} render={() => <ViewCategoryPage />} /> */}
+          <Route path="/viewCategory" exact={true} render={() => <ViewCategoryPage/>} />
+          <Route path="/viewDate" exact={true} render={() => <ViewDatePage/>} />
+
         
         </IonRouterOutlet>
 

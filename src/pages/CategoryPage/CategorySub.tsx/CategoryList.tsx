@@ -30,7 +30,7 @@ const CategoryList: React.FC<CategoryListProps> = ({
 
   const handleCategoryClick = (category: string) => {
     setSelectedCategory(category);
-    history.push("/single"); // Navigate to "/single" route
+    history.push("/viewCategory"); // Navigate to "/viewCategory" route
   };
 
   return (

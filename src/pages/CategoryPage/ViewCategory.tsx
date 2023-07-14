@@ -1,9 +1,3 @@
-// TODO: dynamic category page 
-
-// (1) view a list of diaries 
-// (2) addPage (selectedCategory) in the list / 
-// (3) if click on a diary: viewPage of it
-
 import React, { useState } from "react";
 import {
   IonContent,
@@ -19,7 +13,7 @@ import {
   ItemReorderEventDetail,
 } from "@ionic/react";
 
-const SingleCategoryPage = () => {
+const ViewCategoryPage = () => {
 
   return (
     <>
@@ -32,7 +26,7 @@ const SingleCategoryPage = () => {
           marginTop: "35px",
           marginBottom: "10px",
         }}>
-        category name
+        Category Name
       </p>
       <IonSearchbar
         showClearButton="focus"
@@ -45,4 +39,4 @@ const SingleCategoryPage = () => {
   );
 };
 
-export default SingleCategoryPage;
+export default ViewCategoryPage;

@@ -8,7 +8,7 @@ import {
   IonButton,
 } from "@ionic/react";
 import { useHistory } from "react-router";
-import { EntriesData } from "../GetPutData";
+import { EntriesData } from "../../GetPutData";
 
 interface Entry {
   content: any;
@@ -46,7 +46,7 @@ const CalendarPage = () => {
   };
 
   const handleViewClick = () => {
-    history.push("/view", { selectedDate });
+    history.push("/viewDate", { selectedDate });
   };
 
   const handleDateChange = (event: CustomEvent<any>) => {
