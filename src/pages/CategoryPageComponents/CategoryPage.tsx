@@ -1,9 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import {
   IonContent,
-  IonHeader,
-  IonTitle,
-  IonToolbar,
   IonIcon,
   IonPopover,
   useIonToast,
