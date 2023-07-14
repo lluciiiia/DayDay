@@ -33,8 +33,7 @@ const CategoryModal: React.FC<CategoryModalProps> = ({
     <IonModal
       isOpen={showModal}
       onDidDismiss={() => setShowModal(false)}
-      presentingElement={presentingElement}
-    >
+      presentingElement={presentingElement}>
       <IonHeader>
         <IonToolbar>
           <IonButtons slot="start">
@@ -54,24 +53,21 @@ const CategoryModal: React.FC<CategoryModalProps> = ({
             justifyContent: "center",
             alignItems: "center",
             marginTop: "20px",
-          }}
-        >
+          }}>
           <div
             style={{
               background: "rgba(70, 70, 70, 0.5)",
               width: "350px",
               height: "200px",
               borderRadius: "10px",
-            }}
-          >
+            }}>
             <div
               style={{
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
                 marginTop: "15px",
-              }}
-            >
+              }}>
               <IonIcon
                 icon={list}
                 style={{
@@ -88,8 +84,7 @@ const CategoryModal: React.FC<CategoryModalProps> = ({
                 justifyContent: "center",
                 alignItems: "center",
                 marginTop: "20px",
-              }}
-            >
+              }}>
               <IonInput
                 ref={categoryRef}
                 placeholder="Category Name"

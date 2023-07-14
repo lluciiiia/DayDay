@@ -4,26 +4,20 @@ import {
   IonHeader,
   IonTitle,
   IonToolbar,
-  IonItem,
-  IonList,
-  IonSearchbar,
-  IonLabel,
-  IonReorder,
   IonIcon,
-  IonButton,
   IonPopover,
   useIonToast,
-  IonButtons
+  IonButtons,
+  IonButton,
+  IonSearchbar,
+  IonList,
+  IonItem,
 } from "@ionic/react";
-import {
-  settingsOutline,
-  list,
-  closeCircleOutline,
-  informationCircleOutline,
-} from "ionicons/icons";
+import { settingsOutline } from "ionicons/icons";
 import "../../main.css";
 import { CategoriesData } from "../../GetPutData";
 import CategoryModal from "./CategoryModal";
+import CategoryList from "./CategoryList";
 
 const CategoryPage = () => {
   const popover = useRef<HTMLIonPopoverElement | null>(null);
@@ -125,12 +119,11 @@ const CategoryPage = () => {
 
         {editMode && (
           <IonButtons>
-          <IonButton
-            style={{ marginTop: "27px", marginLeft: "190px" }}
-            onClick={() => setEditMode(false)}
-          >
-            Done
-          </IonButton>
+            <IonButton
+              style={{ marginTop: "27px", marginLeft: "190px" }}
+              onClick={() => setEditMode(false)}>
+              Done
+            </IonButton>
           </IonButtons>
         )}
         <IonIcon
@@ -150,24 +143,21 @@ const CategoryPage = () => {
             popover.current = ref;
           }}
           trigger="popover-button"
-          dismissOnSelect={true}
-        >
+          dismissOnSelect={true}>
           <IonContent scrollY={false}>
             <IonList>
               <IonItem
                 button={true}
                 detail={false}
                 onClick={openPopover}
-                id="addCategory"
-              >
+                id="addCategory">
                 Add Category
               </IonItem>
               <IonItem
                 button={true}
                 detail={false}
                 onClick={openPopover}
-                id="editCategory"
-              >
+                id="editCategory">
                 Edit Category
               </IonItem>
             </IonList>
@@ -175,35 +165,19 @@ const CategoryPage = () => {
         </IonPopover>
       </div>
 
-      <IonSearchbar showClearButton="focus" />
+      <div style={{ display: "flex", flexDirection: "row" }}>
+        <IonSearchbar showClearButton="focus" />
+      </div>
 
-      <IonList>
-        {categories.map((category, index) => (
-          <IonItem key={index} style={{ padding: "7px", fontSize: "18px" }}>
-            {editMode && category !== "Default" && category !== "Achievement" && (
-              <IonIcon
-                icon={closeCircleOutline}
-                style={{
-                  fontSize: "22px",
-                  marginRight: "10px",
-                }}
-                onClick={() => handleDeleteCategory(index)}
-              />
-            )}
-            <IonLabel>{category}</IonLabel>
-            {editMode && category !== "Default" && category !== "Achievement" && (
-              <IonIcon
-                icon={informationCircleOutline}
-                style={{ fontSize: "22px" }}
-                onClick={() => {
-                  setSelectedCategory(category); // Set the selected category
-                  setShowModal(true);
-                }}
-              />
-            )}
-          </IonItem>
-        ))}
-      </IonList>
+      <IonContent scrollY={true}>
+        <CategoryList
+          categories={categories}
+          editMode={editMode}
+          handleDeleteCategory={handleDeleteCategory}
+          setSelectedCategory={setSelectedCategory}
+          setShowModal={setShowModal}
+        />
+      </IonContent>
 
       {showModal && (
         <CategoryModal
