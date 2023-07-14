@@ -66,15 +66,15 @@ const CategoryPage = () => {
     const newCategory = categoryRef.current?.value as string;
     if (newCategory) {
       let updatedData;
+      // Rename the existing category
       if (selectedCategory) {
-        // Modify the existing category
         const categoryIndex = categories.findIndex(
           (category) => category === selectedCategory
         );
         updatedData = [...categories];
         updatedData[categoryIndex] = newCategory;
-      } else {
-        // Add a new category
+      } // Add a new category
+      else {
         updatedData = [...categories, newCategory];
       }
       const categoriesData = new CategoriesData();
