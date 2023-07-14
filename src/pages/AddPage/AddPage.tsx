@@ -1,21 +1,24 @@
-import React, { useRef, useState, useEffect } from "react";
+// AddPage.tsx
+import React, { useEffect, useRef, useState } from "react";
 import {
+  IonButton,
   IonContent,
   IonHeader,
-  IonTitle,
-  IonToolbar,
-  IonButton,
-  useIonToast,
   IonInput,
   IonItem,
-  IonSelectOption,
-  IonSelect,
   IonList,
+  IonSelect,
+  IonSelectOption,
+  IonTitle,
+  IonToolbar,
+  useIonToast,
+  SelectCustomEvent,
   SelectChangeEventDetail,
 } from "@ionic/react";
 import { useHistory, useLocation } from "react-router";
-import { AddAll } from "./UpdateAll";
-import { CategoriesData } from "../GetPutData";
+import { AddAll } from "../UpdateAll";
+import { CategoriesData } from "../../GetPutData";
+import ContentEditor from "./AddSub/ContentEditor";
 
 interface LocationState {
   selectedDate: string;
@@ -29,7 +32,6 @@ const AddPage = () => {
   const selectedDate = location.state?.selectedDate;
   const titleRef = useRef<HTMLIonInputElement>(null);
   const [selectedCategory, setSelectedCategory] = useState("");
-
   const [categories, setCategories] = useState<string[]>([]);
 
   useEffect(() => {
@@ -55,7 +57,10 @@ const AddPage = () => {
     }
 
     const entry: Entry = {
-      content: [],
+      content:   [{
+        type: "text",
+        text: content,
+      },],
       date: selectedDate,
       title: title,
       category: selectedCategory,
@@ -80,12 +85,6 @@ const AddPage = () => {
       duration: 300,
       position: "middle",
     });
-  };
-
-  const handleContentChange = (
-    event: React.ChangeEvent<HTMLTextAreaElement>
-  ) => {
-    setContent(event.target.value);
   };
 
   const handleCategoryChange = (
@@ -113,8 +112,7 @@ const AddPage = () => {
               aria-label="category"
               placeholder="Select Category"
               value={selectedCategory}
-              onIonChange={handleCategoryChange as any}
-            >
+              onIonChange={handleCategoryChange as any}>
               {categories.map((category: string) => (
                 <IonSelectOption value={category} key={category}>
                   {category}
@@ -123,29 +121,7 @@ const AddPage = () => {
             </IonSelect>
           </IonList>
         </div>
-        <div
-          style={{
-            height: 570,
-            overflowY: "scroll",
-            maxWidth: 370,
-            margin: "auto",
-            padding: "0px 3px 20px 3px",
-          }}
-        >
-          <textarea
-            value={content}
-            onChange={handleContentChange}
-            style={{
-              width: "100%",
-              height: "100%",
-              border: 0,
-              borderRadius: 10,
-              borderColor: "transparent",
-              fontSize: "16px",
-            }}
-            placeholder="Enter your diary here"
-          ></textarea>
-        </div>
+        <ContentEditor content={content} onContentChange={setContent} />
         <div
           style={{
             display: "flex",
@@ -156,14 +132,12 @@ const AddPage = () => {
             left: 0,
             right: 0,
             padding: "0.5rem",
-          }}
-        >
+          }}>
           <IonButton
             fill="outline"
             id="save"
             style={{ width: "160px" }}
-            onClick={handleSave}
-          >
+            onClick={handleSave}>
             Save
           </IonButton>
         </div>

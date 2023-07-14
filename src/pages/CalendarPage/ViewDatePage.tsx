@@ -87,7 +87,7 @@ const ViewDatePage = () => {
                     marginTop: "5px",
                     marginBottom: "15px",
                   }}>
-                  content max 20 words .....................
+                  {entry.content[0].text}
                 </div>
               </div>
             </IonItem>
