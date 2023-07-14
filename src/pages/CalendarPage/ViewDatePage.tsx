@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { useRef, useState, useEffect } from "react";
 import {
   IonContent,
@@ -14,6 +14,7 @@ import { EntriesData } from "../../GetPutData";
 const ViewDatePage = () => {
   const location = useLocation<{ selectedDate?: string }>();
   const selectedDate = location?.state?.selectedDate || "";
+  const history = useHistory();
 
   const [entriesData, setEntriesData] = useState<Entry[]>([]);
 
@@ -53,8 +54,13 @@ const ViewDatePage = () => {
         <IonList>
           {filteredEntries.map((entry) => (
             <IonItem
-              key={entry.date}
-              style={{ padding: "7px", fontSize: "18px" }}>
+            key={entry.date}
+            style={{ padding: "7px", fontSize: "18px" }}
+            onClick={() => {
+              history.push("/view", { entryData: entry });
+            }}
+          >
+          
               <div
                 style={{
                   display: "flex",
