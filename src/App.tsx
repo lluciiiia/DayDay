@@ -35,6 +35,7 @@ import CalendarPage from "./pages/CalendarPage";
 import BrowserPage from "./pages/BrowserPage";
 import CategoryPage from "./pages/CategoryPage/CategoryMain";
 import AddPage from "./pages/AddPage";
+import SingleCategoryPage from "./pages/CategoryPage/SingleCategoryPage";
 
 setupIonicReact();
 
@@ -49,6 +50,8 @@ const App: React.FC = () => (
           <Route path="/browser" exact={true} render={() => <BrowserPage />} />
           <Route path="/category" exact={true} render={() => <CategoryPage />} />
           <Route path="/add" exact={true} render={() => <AddPage />} />
+          {/* <Route path="/category/:id" exact={true} render={() => <SingleCategoryPage />} /> */}
+          <Route path="/single" exact={true} render={() => <SingleCategoryPage/>} />
         
         </IonRouterOutlet>
 

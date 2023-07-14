@@ -5,6 +5,7 @@ import { CategoriesData } from "../../GetPutData";
 import CategoryModal from "./CategorySub.tsx/CategoryModal";
 import CategoryList from "./CategorySub.tsx/CategoryList";
 import CategoryHeader from "./CategorySub.tsx/CategoryHeader";
+import { SearchCategories } from "./CategorySub.tsx/SearchCategories";
 
 const CategoryMain = () => {
   const [showModal, setShowModal] = useState(false);
@@ -30,6 +31,19 @@ const CategoryMain = () => {
         console.error("Error fetching categories:", error);
       });
   }, []);
+  
+  // ** Search
+  // const [inputValue, setInputValue] = useState(""); // New state variable
+  // const [results, setResults] = useState<{ date: string; content: string }[]>(
+  //   []
+  // );
+
+  const handleInput = (event: CustomEvent) => {
+    // const input = event.detail.value || "";
+    // setInputValue(input); // Store the input value
+    // const searchResults = SearchCategories(input);
+    // setResults(searchResults);
+  };
 
   return (
     <IonContent scrollY={true}>
@@ -44,7 +58,7 @@ const CategoryMain = () => {
         categories={categories}
       />
       <div style={{ display: "flex", flexDirection: "row" }}>
-        <IonSearchbar showClearButton="focus" />
+        <IonSearchbar showClearButton="focus" onIonInput={handleInput} />
       </div>
 
       <CategoryList

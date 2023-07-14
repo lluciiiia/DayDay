@@ -2,6 +2,7 @@ import React from "react";
 import { IonItem, IonList, IonIcon, IonLabel } from "@ionic/react";
 import { closeCircleOutline, informationCircleOutline } from "ionicons/icons";
 import { CategoriesData } from "../../../GetPutData";
+import { useHistory } from "react-router-dom";
 
 interface CategoryListProps {
   categories: string[];
@@ -18,12 +19,20 @@ const CategoryList: React.FC<CategoryListProps> = ({
   setShowModal,
   setCategories,
 }) => {
+  const history = useHistory(); // Use the useHistory hook
+
   const handleDeleteCategory = (index: number) => {
     const updatedData = categories.filter((_, i) => i !== index);
     const categoriesData = new CategoriesData();
     categoriesData.putCategoriesData(updatedData);
     setCategories(updatedData);
   };
+
+  const handleCategoryClick = (category: string) => {
+    setSelectedCategory(category);
+    history.push("/single"); // Navigate to "/single" route
+  };
+
   return (
     <IonList>
       {categories.map((category, index) => (
@@ -38,13 +47,15 @@ const CategoryList: React.FC<CategoryListProps> = ({
               onClick={() => handleDeleteCategory(index)}
             />
           )}
-          <IonLabel>{category}</IonLabel>
+          <IonLabel onClick={() => handleCategoryClick(category)}>
+            {category}
+          </IonLabel>
           {editMode && category !== "Default" && category !== "Achievement" && (
             <IonIcon
               icon={informationCircleOutline}
               style={{ fontSize: "22px" }}
               onClick={() => {
-                setSelectedCategory(category); // Set the selected category
+                setSelectedCategory(category);
                 setShowModal(true);
               }}
             />
