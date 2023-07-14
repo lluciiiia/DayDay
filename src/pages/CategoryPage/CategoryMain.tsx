@@ -106,7 +106,7 @@ const CategoryPage = () => {
       <CategoryHeader
         editMode={editMode}
         openPopover={openPopover}
-        setEditMode={setEditMode} // Pass setEditMode as a prop
+        setEditMode={setEditMode} 
         popover={popover}
       />
       <div style={{ display: "flex", flexDirection: "row" }}>
