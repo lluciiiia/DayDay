@@ -32,7 +32,7 @@ import "@ionic/react/css/display.css";
 import "./theme/variables.css";
 import { search, calendarClear, list } from "ionicons/icons";
 import CalendarPage from "./pages/CalendarPage/CalendarPage";
-import BrowserPage from "./pages/BrowserPage";
+import BrowserPage from "./pages/BrowserPage/BrowserPage";
 import CategoryPage from "./pages/CategoryPage/CategoryPage";
 import AddPage from "./pages/AddEditPage/AddPage";
 import ViewCategoryPage from "./pages/ViewList/ViewCategoryPage";
