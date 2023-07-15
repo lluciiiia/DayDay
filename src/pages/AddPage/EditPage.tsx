@@ -16,17 +16,20 @@ import CategorySelection from "./AddSub/CategorySelection";
 
 interface LocationState {
   selectedDate: string;
+  entryData?: Entry;
 }
 
 const EditPage = () => {
   const history = useHistory();
   const location = useLocation<LocationState>();
-  const [content, setContent] = useState("");
   const selectedDate = location.state?.selectedDate;
   const titleRef = useRef<HTMLIonInputElement>(null);
-  const [selectedCategory, setSelectedCategory] = useState("");
   const [categories, setCategories] = useState<string[]>([]);
   const { handleSave } = SaveEntry();
+  const entryData = location.state?.entryData;
+  const [content, setContent] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("");
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -42,21 +45,24 @@ const EditPage = () => {
     <>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Write your day</IonTitle>
+          <IonTitle>Edit your diary</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent scrollY={false}>
         <div style={{ margin: "5px" }}>
+          {/* TODO: before the user edits the title, it must be {entry.title} as a default */}
           <IonItem style={{ fontSize: "18px" }}>
-            <IonInput placeholder="Enter the title" ref={titleRef}></IonInput>
+            <IonInput placeholder="Enter the title" ref={titleRef} value={entryData?.title}></IonInput>
           </IonItem>
         </div>
+        {/* TODO: before the user edits the category, it must be {entry.category} as a default */}
         <CategorySelection
-          selectedCategory={selectedCategory}
+          selectedCategory={entryData?.category ?? ""}
           categories={categories}
           onCategoryChange={setSelectedCategory}
         />
-        <ContentEditor content={content} onContentChange={setContent} />
+        {/* TODO: before the user edits the content, it must be {entry.content[0]} as a default */}
+        <ContentEditor content={entryData?.content[0]?.text ?? ""} onContentChange={newContent => setContent(newContent)} />
         <div
           style={{
             display: "flex",
@@ -73,6 +79,7 @@ const EditPage = () => {
             id="save"
             style={{ width: "160px" }}
             onClick={() =>
+              // T: delete entryData from backend
               handleSave(
                 titleRef,
                 content,
