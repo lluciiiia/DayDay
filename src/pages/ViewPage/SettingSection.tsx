@@ -29,7 +29,7 @@ const deleteEntry = async () => {
   
   const editEntry = () => {
     // TODO: edit the corresponding entry from the backend
-    history.push("/edit", {});
+    history.push("/edit", {entryData});
   };
 
   return (
