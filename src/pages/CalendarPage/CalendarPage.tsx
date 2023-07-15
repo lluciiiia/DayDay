@@ -5,11 +5,11 @@ import {
   IonTitle,
   IonToolbar,
   IonDatetime,
-  IonButton,
 } from "@ionic/react";
 import { useHistory } from "react-router";
 import { EntriesData } from "../../GetPutData";
 import Showbuttons from "./CalendarSub/ShowButtons";
+import { checkDiaryExists } from "./CalendarSub/checkDiaryExists";
 
 interface Entry {
   content: any;
@@ -57,12 +57,10 @@ const CalendarPage = () => {
     setShowButtons(true);
   };
 
-  const checkDiaryExists = (date: string | null) => {
-    if (date) {
-      return diaryDates.includes(date);
-    }
-    return false;
+  const checkDiaryEntryExists = () => {
+    return checkDiaryExists(selectedDate, diaryDates);
   };
+
 
   return (
     <>
@@ -105,7 +103,7 @@ const CalendarPage = () => {
               }}>
               <Showbuttons
                 selectedDate={selectedDate}
-                checkDiaryExists={checkDiaryExists}
+                checkDiaryExists={checkDiaryEntryExists}
                 handleAddClick={handleAddClick}
                 handleViewClick={handleViewClick}
               />
