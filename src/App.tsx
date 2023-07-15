@@ -34,11 +34,11 @@ import { search, heart, calendarClear, list } from "ionicons/icons";
 import CalendarPage from "./pages/CalendarPage/CalendarPage";
 import BrowserPage from "./pages/BrowserPage";
 import CategoryPage from "./pages/CategoryPage/CategoryPage";
-import AddPage from "./pages/AddPage/AddPage";
+import AddPage from "./pages/AddEditPage/AddPage";
 import ViewCategoryPage from "./pages/CategoryPage/ViewCategoryPage";
 import ViewDatePage from "./pages/CalendarPage/ViewDatePage";
 import ViewPage from "./pages/ViewPage/ViewPage";
-import EditPage from "./pages/AddPage/EditPage";
+import EditPage from "./pages/AddEditPage/EditPage";
 
 setupIonicReact();
 
