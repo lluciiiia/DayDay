@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import {
   IonContent,
@@ -10,6 +10,7 @@ import {
 import ViewList from "./ViewListSub/ViewList";
 import useFetchEntriesData from "./ViewListSub/fetchEntriesData";
 import { closeCircleOutline } from "ionicons/icons";
+import { EntriesData } from "../../GetPutData";
 
 const ViewDatePage = () => {
   const location = useLocation<{ selectedDate?: string }>();
@@ -21,9 +22,26 @@ const ViewDatePage = () => {
   );
 
   const [editMode, setEditMode] = useState(false);
+  const [entries, setEntries] = useState<Entry[]>([]);
+  const [selectedEntry, setSelectedEntry] = useState<Entry | null>(null);
+
+
+  useEffect(() => {
+    //setPresentingElement(page.current);
+    // get data from backend
+    const entriesData = new EntriesData();
+    entriesData
+      .getEntriesData()
+      .then((data) => {
+        setEntries(data);
+      })
+      .catch((error) => {
+        console.error("Error fetching entries:", error);
+      });
+  }, []);
 
   const handleEditClick = () => {
-    setEditMode(true); // Set editMode to false
+    setEditMode(true); 
   };
 
   return (
@@ -64,7 +82,12 @@ const ViewDatePage = () => {
         </div>
 
         <IonSearchbar showClearButton="focus"></IonSearchbar>
-        <ViewList entries={filteredEntries} />
+        <ViewList
+          editMode={editMode}
+          setEditMode={setEditMode}
+          entries={filteredEntries}
+          selectedDate={selectedDate}
+        />
       </IonContent>
     </>
   );

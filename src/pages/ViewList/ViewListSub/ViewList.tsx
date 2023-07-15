@@ -1,22 +1,51 @@
 import { useHistory } from "react-router-dom";
-import { IonItem, IonList } from "@ionic/react";
+import { IonItem, IonList, IonIcon, IonLabel } from "@ionic/react";
+import { EntriesData } from "../../../GetPutData";
+import { closeCircleOutline, informationCircleOutline } from "ionicons/icons";
+
 
 interface ViewListProps {
+  editMode: boolean;
+  setEditMode: React.Dispatch<React.SetStateAction<boolean>>;
   entries: Entry[];
+  selectedDate: string;
 }
 
-const ViewList: React.FC<ViewListProps> = ({ entries }) => {
+const ViewList: React.FC<ViewListProps> = ({
+  editMode,
+  setEditMode,
+  entries,
+  selectedDate,
+}) => {
   const history = useHistory();
+
+  const handleDeleteEntry = (index: number) => {
+    const updatedData = entries.filter((_, i) => i !== index);
+    const entriesData = new EntriesData();
+    // entriesData.putEntriesData(updatedData);
+    // setEntries(updatedData);
+  };
+
+  const handleEntryClick = (selectedEntry: Entry) => {
+      history.push("/view", { entryData: selectedEntry });
+  };
 
   return (
     <IonList>
-      {entries.map((entry) => (
-        <IonItem
-          key={entry.id}
-          style={{ padding: "7px", fontSize: "18px" }}
-          onClick={() => {
-            history.push("/view", { entryData: entry });
-          }}>
+
+      {entries.map((entry, index) => (
+        <IonItem key={entry.id} style={{ padding: "7px", fontSize: "18px" }}>
+          {editMode && (
+            <IonIcon
+              icon={closeCircleOutline}
+              style={{
+                fontSize: "22px",
+                marginRight: "10px",
+              }}
+              onClick={() => handleDeleteEntry(index)}
+            />
+          )}
+          <IonLabel onClick={() => handleEntryClick(entry)}>
           <div
             style={{
               display: "flex",
@@ -56,6 +85,8 @@ const ViewList: React.FC<ViewListProps> = ({ entries }) => {
                 : ""}
             </div>
           </div>
+          </IonLabel>
+
         </IonItem>
       ))}
     </IonList>
