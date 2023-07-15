@@ -1,7 +1,7 @@
 import { useHistory } from "react-router";
-import { AddAll } from "../../UpdateAll";
+import { AddAll } from "../../../else/UpdateAll";
 import { useIonToast } from "@ionic/react";
-import { presentToast } from "../../presentToast";
+import { presentToast } from "../../../else/presentToast";
 
 export const SaveEntry = () => {
   const [present] = useIonToast();

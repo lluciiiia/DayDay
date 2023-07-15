@@ -1,4 +1,4 @@
-import WordCountAnalyzer from "../data/Analyzer/WordCountAnalyzer";
+import WordCountAnalyzer from "./Analyzer/WordCountAnalyzer";
 import { EntriesData } from "../GetPutData";
 
 export async function AddAll(entry: Entry) {
