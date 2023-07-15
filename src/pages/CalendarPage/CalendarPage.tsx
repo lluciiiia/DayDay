@@ -10,6 +10,7 @@ import { useHistory } from "react-router";
 import { EntriesData } from "../../GetPutData";
 import Showbuttons from "./CalendarSub/ShowButtons";
 import { checkDiaryExists } from "./CalendarSub/checkDiaryExists";
+import CalendarView from "./CalendarSub/CalendarView";
 
 interface Entry {
   content: any;
@@ -50,17 +51,13 @@ const CalendarPage = () => {
     history.push("/viewDate", { selectedDate });
   };
 
-  const handleDateChange = (event: CustomEvent<any>) => {
-    const date = event.detail.value.split("T")[0];
-    console.log("Selected Date:", date);
-    setSelectedDate(date);
-    setShowButtons(true);
+  const handleDateChange = (date: string | null) => {
+    setShowButtons(date !== null);
   };
 
   const checkDiaryEntryExists = () => {
     return checkDiaryExists(selectedDate, diaryDates);
   };
-
 
   return (
     <>
@@ -79,20 +76,11 @@ const CalendarPage = () => {
             paddingBottom: 60,
             alignItems: "center",
           }}>
-          <div
-            style={{
-              alignSelf: "center",
-              paddingTop: 30,
-            }}>
-            <IonDatetime
-              onIonChange={handleDateChange}
-              presentation="date"
-              highlightedDates={diaryDates.map((date) => ({
-                date,
-                textColor: "rgb(68, 10, 184)",
-                backgroundColor: "rgb(211, 200, 229)",
-              }))}></IonDatetime>
-          </div>
+         
+          <CalendarView
+            onDateChange={handleDateChange}
+            diaryDates={diaryDates}
+          />
 
           {showButtons && (
             <div
