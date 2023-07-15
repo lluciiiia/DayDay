@@ -1,27 +1,16 @@
-import { useHistory, useLocation } from "react-router-dom";
-import { useRef, useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
 import {
   IonContent,
   IonHeader,
-  IonTitle,
-  IonToolbar,
-  IonItem,
-  IonList,
   IonSearchbar,
-  IonLabel,
-  IonReorder,
-  IonReorderGroup,
-  ItemReorderEventDetail,
 } from "@ionic/react";
 import { EntriesData } from "../../GetPutData";
-
+import ViewList from "./ViewListSub/ViewList";
 
 const ViewCategoryPage = () => {
   const location = useLocation<{ selectedCategory?: string }>();
   const selectedCategory = location?.state?.selectedCategory || "";
-
-  const history = useHistory();
-
   const [entriesData, setEntriesData] = useState<Entry[]>([]);
 
   useEffect(() => {
@@ -40,25 +29,22 @@ const ViewCategoryPage = () => {
 
   return (
     <>
-      <IonHeader></IonHeader>
-      <p
-        style={{
-          fontSize: "28px",
-          marginLeft: "15px",
-          fontWeight: "bold",
-          marginTop: "35px",
-          marginBottom: "10px",
-        }}>
-        {selectedCategory}
-      </p>
-      <IonSearchbar
-        showClearButton="focus"
-        //onIonInput={handleInput}
-      ></IonSearchbar>
-      <IonList>
-{/* TODO: same list component */}
-
-      </IonList>
+      <IonHeader>
+      </IonHeader>
+      <IonContent>
+        <p
+          style={{
+            fontSize: "28px",
+            marginLeft: "15px",
+            fontWeight: "bold",
+            marginTop: "35px",
+            marginBottom: "10px",
+          }}>
+          {selectedCategory}
+        </p>
+        <IonSearchbar showClearButton="focus"></IonSearchbar>
+        <ViewList entries={filteredEntries} />
+      </IonContent>
     </>
   );
 };

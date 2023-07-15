@@ -1,5 +1,5 @@
-import { useHistory, useLocation } from "react-router-dom";
-import { useRef, useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
 import {
   IonContent,
   IonHeader,
@@ -13,7 +13,6 @@ import ViewList from "./ViewListSub/ViewList";
 const ViewDatePage = () => {
   const location = useLocation<{ selectedDate?: string }>();
   const selectedDate = location?.state?.selectedDate || "";
-  const history = useHistory();
 
   const [entriesData, setEntriesData] = useState<Entry[]>([]);
 
@@ -34,9 +33,9 @@ const ViewDatePage = () => {
   return (
     <>
       <IonHeader>
-        <IonToolbar>
+        {/* <IonToolbar>
           <IonTitle>View Date Page</IonTitle>
-        </IonToolbar>
+        </IonToolbar> */}
       </IonHeader>
       <IonContent>
         <p
