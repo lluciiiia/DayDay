@@ -9,13 +9,7 @@ import { useHistory } from "react-router";
 import { EntriesData } from "../../GetPutData";
 import CalendarView from "./CalendarSub/CalendarView";
 import ShowButtons from "./CalendarSub/ShowButtons";
-
-interface Entry {
-  content: any;
-  date: string;
-  title: string;
-  category: string;
-}
+import { Entry } from "./CalendarSub/IEntry";
 
 const CalendarPage = () => {
   const history = useHistory();
