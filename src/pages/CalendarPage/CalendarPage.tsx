@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import {
   IonContent,
   IonHeader,
@@ -9,6 +9,7 @@ import {
 } from "@ionic/react";
 import { useHistory } from "react-router";
 import { EntriesData } from "../../GetPutData";
+import Showbuttons from "./CalendarSub/ShowButtons";
 
 interface Entry {
   content: any;
@@ -102,22 +103,12 @@ const CalendarPage = () => {
                 width: "100%",
                 maxWidth: "370px",
               }}>
-              {checkDiaryExists(selectedDate) ? (
-                <div style={{ marginTop: "10px" }}>
-                  <IonButton expand="block" onClick={handleAddClick}>
-                    Add
-                  </IonButton>
-                  <IonButton expand="block" onClick={handleViewClick}>
-                    View
-                  </IonButton>
-                </div>
-              ) : (
-                <div style={{ marginTop: "10px" }}>
-                  <IonButton expand="block" onClick={handleAddClick}>
-                    Add
-                  </IonButton>
-                </div>
-              )}
+              <Showbuttons
+                selectedDate={selectedDate}
+                checkDiaryExists={checkDiaryExists}
+                handleAddClick={handleAddClick}
+                handleViewClick={handleViewClick}
+              />
             </div>
           )}
         </div>
