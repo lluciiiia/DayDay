@@ -7,8 +7,8 @@ import {
 } from "@ionic/react";
 import { useHistory } from "react-router";
 import { EntriesData } from "../../GetPutData";
-import Showbuttons from "./CalendarSub/ShowButtons";
 import CalendarView from "./CalendarSub/CalendarView";
+import ShowButtons from "./CalendarSub/ShowButtons";
 
 interface Entry {
   content: any;
@@ -78,7 +78,8 @@ const CalendarPage = () => {
             height: "100%",
             paddingBottom: 60,
             alignItems: "center",
-          }}>
+          }}
+        >
           <CalendarView
             diaryDates={diaryDates}
             onDateChange={handleDateChange}
@@ -90,8 +91,9 @@ const CalendarPage = () => {
                 marginBottom: "5px",
                 width: "100%",
                 maxWidth: "370px",
-              }}>
-              <Showbuttons
+              }}
+            >
+              <ShowButtons
                 selectedDate={selectedDate}
                 checkDiaryExists={checkDiaryExists}
                 handleAddClick={handleAddClick}
