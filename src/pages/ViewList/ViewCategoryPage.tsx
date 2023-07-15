@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
+import { useRef, useState, useEffect } from "react";
 import {
   IonContent,
   IonHeader,
@@ -13,10 +13,30 @@ import {
   IonReorderGroup,
   ItemReorderEventDetail,
 } from "@ionic/react";
+import { EntriesData } from "../../GetPutData";
+
 
 const ViewCategoryPage = () => {
-  const location = useLocation<{ category?: string }>();
-  const category = location?.state?.category || "";
+  const location = useLocation<{ selectedCategory?: string }>();
+  const selectedCategory = location?.state?.selectedCategory || "";
+
+  const history = useHistory();
+
+  const [entriesData, setEntriesData] = useState<Entry[]>([]);
+
+  useEffect(() => {
+    const fetchEntriesData = async () => {
+      const entriesData = new EntriesData();
+      const entries = await entriesData.getEntriesData();
+      setEntriesData(entries);
+    };
+
+    fetchEntriesData();
+  }, []);
+
+  const filteredEntries = entriesData.filter(
+    (entry) => entry.category === selectedCategory
+  );
 
   return (
     <>
@@ -29,13 +49,16 @@ const ViewCategoryPage = () => {
           marginTop: "35px",
           marginBottom: "10px",
         }}>
-        {category}
+        {selectedCategory}
       </p>
       <IonSearchbar
         showClearButton="focus"
         //onIonInput={handleInput}
       ></IonSearchbar>
-      <IonList></IonList>
+      <IonList>
+{/* TODO: same list component */}
+
+      </IonList>
     </>
   );
 };
