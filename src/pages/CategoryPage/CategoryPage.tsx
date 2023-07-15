@@ -50,11 +50,8 @@ const CategoryMain = () => {
       <CategoryHeader
         editMode={editMode}
         setEditMode={setEditMode}
-        showModal={showModal}
         setShowModal={setShowModal}
-        selectedCategory={selectedCategory}
         setSelectedCategory={setSelectedCategory}
-        //categoryRef={categoryRef}
         categories={categories}
       />
       <div style={{ display: "flex", flexDirection: "row" }}>

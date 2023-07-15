@@ -12,22 +12,16 @@ import { settingsOutline } from "ionicons/icons";
 interface CategoryHeaderProps {
   editMode: boolean;
   setEditMode: React.Dispatch<React.SetStateAction<boolean>>;
-  showModal: boolean;
   setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
-  selectedCategory: string;
   setSelectedCategory: React.Dispatch<React.SetStateAction<string>>;
-  //categoryRef: React.RefObject<HTMLIonInputElement>;
   categories: string[]; // Add categories prop
 }
 
 const CategoryHeader: React.FC<CategoryHeaderProps> = ({
   editMode,
   setEditMode,
-  showModal,
   setShowModal,
-  selectedCategory,
   setSelectedCategory,
-  //categoryRef,
   categories,
 }) => {
   const popover = useRef<HTMLIonPopoverElement | null>(null);
