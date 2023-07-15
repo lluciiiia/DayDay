@@ -18,6 +18,10 @@ export const SaveEntry = () => {
       presentToast(present, "Please enter your diary title");
       return;
     }
+    if (selectedCategory.trim() === "") {
+      presentToast(present, "Please select your diary category");
+      return;
+    }
     if (content.trim() === "") {
       presentToast(present, "Please enter your diary content");
       return;
