@@ -1,10 +1,5 @@
 import { useState, useEffect } from "react";
-import {
-  IonContent,
-  IonHeader,
-  IonTitle,
-  IonToolbar,
-} from "@ionic/react";
+import { IonContent, IonHeader, IonTitle, IonToolbar } from "@ionic/react";
 import { useHistory } from "react-router";
 import CalendarView from "./CalendarSub/CalendarView";
 import ShowButtons from "./CalendarSub/ShowButtons";
@@ -19,13 +14,13 @@ const DiaryPage = () => {
 
   useEffect(() => {
     fetchDatesData()
-    .then((entries: any) => {
+      .then((entries: any) => {
         setDiaryEntries(entries);
-    })
-    .catch((error: any) => {
+      })
+      .catch((error: any) => {
         console.error("Failed to fetch entries data: ", error);
-    });
-}, []);
+      });
+  }, []);
 
   const handleAddClick = () => {
     history.push("/add", { selectedDate });
@@ -33,12 +28,6 @@ const DiaryPage = () => {
 
   const handleViewClick = () => {
     history.push("/viewDate", { selectedDate });
-  };
-
-  const handleDateChange = (date: string) => {
-    console.log("Selected Date:", date);
-    setSelectedDate(date);
-    setShowButtons(true);
   };
 
   const checkDiaryExists = (date: string | null) => {
@@ -68,7 +57,8 @@ const DiaryPage = () => {
         >
           <CalendarView
             diaryDates={diaryEntries.map((entry) => entry.date)}
-            onDateChange={handleDateChange}
+            onDateChange={setSelectedDate}
+            setShowButtons={setShowButtons}
           />
 
           {showButtons && (

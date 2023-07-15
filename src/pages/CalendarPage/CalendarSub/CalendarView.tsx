@@ -3,15 +3,18 @@ import { IonDatetime } from "@ionic/react";
 interface CalendarViewProps {
   diaryDates: string[];
   onDateChange: (date: string) => void;
+  setShowButtons: (show: boolean) => void;
 }
 
 const CalendarView: React.FC<CalendarViewProps> = ({
   diaryDates,
   onDateChange,
+  setShowButtons,
 }) => {
   const handleDateChange = (event: CustomEvent<any>) => {
     const date = event.detail.value.split("T")[0];
     onDateChange(date);
+    setShowButtons(true);
   };
 
   return (
