@@ -1,5 +1,5 @@
-import WordCountAnalyzer from "./Analyzer/WordCountAnalyzer";
-import { EntriesData } from "../GetPutData";
+import WordCountAnalyzer from "../../../else/Analyzer/WordCountAnalyzer";
+import { EntriesData } from "../../../GetPutData";
 
 export async function AddAll(entry: Entry) {
   // add entry

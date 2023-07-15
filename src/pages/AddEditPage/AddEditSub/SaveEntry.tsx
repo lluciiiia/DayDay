@@ -1,5 +1,5 @@
 import { useHistory } from "react-router";
-import { AddAll } from "../../../else/UpdateAll";
+import { AddAll } from "../../ViewList/ViewListSub/UpdateAll";
 import { useIonToast } from "@ionic/react";
 import { presentToast } from "../../../else/presentToast";
 

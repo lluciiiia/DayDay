@@ -3,7 +3,7 @@ import { useLocation,  } from "react-router-dom";
 import { IonContent, IonSearchbar,  } from "@ionic/react";
 import ViewList from "./ViewListSub/ViewList";
 import useFetchEntriesData from "./ViewListSub/fetchEntriesData";
-import CategoryHeader from "../../else/HeaderButtons";
+import CategoryHeader from "../CategoryPage/CategorySub.tsx/CategoryHeader";
 
 const ViewDatePage = () => {
   const location = useLocation<{ selectedDate?: string }>();
