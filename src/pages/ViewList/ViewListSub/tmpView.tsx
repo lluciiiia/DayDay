@@ -1,9 +1,31 @@
 import { useState, useRef, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { IonContent, useIonToast, IonSearchbar } from "@ionic/react";
 import "../../main.css";
 import { EntriesData } from "../../../GetPutData";
+import ViewHeader from "./tmpHeader";
+import useFetchEntriesData from "./fetchEntriesData";
 
-const CategoryMain = () => {
+const ViewPage = () => {
+  // From CalendarPage or CategoryPage
+  const location = useLocation<{
+    selectedDate?: string;
+    selectedCategory?: string;
+  }>();
+  const selectedDate = location?.state?.selectedDate || "";
+  const selectedCategory = location?.state?.selectedCategory || "";
+
+  const entriesData = useFetchEntriesData();
+
+  // TODO: dynamic? fetch (by date, category)
+  const filteredEntriesByDate = entriesData.filter(
+    (entry) => entry.date === selectedDate
+  );
+  const filteredEntriesByCategory = entriesData.filter(
+    (entry) => entry.category === selectedCategory
+  );
+
+  // from here, for new header / list
   const [entries, setEntries] = useState<string[]>([]);
   const entryRef = useRef<HTMLIonInputElement>(null);
   const page = useRef(undefined);
@@ -13,23 +35,9 @@ const CategoryMain = () => {
     HTMLElement | undefined
   >(undefined);
 
-  useEffect(() => {
-    setPresentingElement(page.current);
-    // get data from backend
-    const entriesData = new EntriesData();
-    entriesData
-      .getEntriesData()
-      .then((data) => {
-        setEntries(data);
-      })
-      .catch((error) => {
-        console.error("Error fetching entries:", error);
-      });
-  }, []);
-
   return (
     <IonContent scrollY={true}>
-        {/* TODO: entriesData type -> Header props edit */}
+      {/* TODO: entriesData type -> Header props edit */}
       <ViewHeader
         editMode={editMode}
         setEditMode={setEditMode}
@@ -37,6 +45,7 @@ const CategoryMain = () => {
         setSelectedEntry={setSelectedEntry}
         entryRef={entryRef}
         entries={entries}
+        // only different part: selectedDate or selectedCategory 
       />
       <div style={{ display: "flex", flexDirection: "row" }}>
         <IonSearchbar showClearButton="focus" />
@@ -47,4 +56,4 @@ const CategoryMain = () => {
   );
 };
 
-export default CategoryMain;
+export default ViewPage;

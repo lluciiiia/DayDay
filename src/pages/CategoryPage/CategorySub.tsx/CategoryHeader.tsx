@@ -16,7 +16,7 @@ interface CategoryHeaderProps {
   setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
   selectedCategory: string;
   setSelectedCategory: React.Dispatch<React.SetStateAction<string>>;
-  categoryRef: React.RefObject<HTMLIonInputElement>;
+  //categoryRef: React.RefObject<HTMLIonInputElement>;
   categories: string[]; // Add categories prop
 }
 
@@ -27,8 +27,7 @@ const CategoryHeader: React.FC<CategoryHeaderProps> = ({
   setShowModal,
   selectedCategory,
   setSelectedCategory,
-  categoryRef,
-
+  //categoryRef,
   categories,
 }) => {
   const popover = useRef<HTMLIonPopoverElement | null>(null);

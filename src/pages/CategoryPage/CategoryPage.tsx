@@ -54,7 +54,7 @@ const CategoryMain = () => {
         setShowModal={setShowModal}
         selectedCategory={selectedCategory}
         setSelectedCategory={setSelectedCategory}
-        categoryRef={categoryRef}
+        //categoryRef={categoryRef}
         categories={categories}
       />
       <div style={{ display: "flex", flexDirection: "row" }}>
