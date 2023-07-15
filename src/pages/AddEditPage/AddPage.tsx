@@ -10,25 +10,23 @@ import {
 } from "@ionic/react";
 import { useHistory, useLocation } from "react-router";
 import { CategoriesData } from "../../GetPutData";
-import ContentEditor from "./AddSub/ContentEditor";
-import EditEntry from "./AddSub/EditEntry";
-import CategorySelection from "./AddSub/CategorySelection";
+import ContentEditor from "./AddEditSub/ContentEditor";
+import { SaveEntry } from "./AddEditSub/SaveEntry";
+import CategorySelection from "./AddEditSub/CategorySelection";
 
 interface LocationState {
   selectedDate: string;
-  entryData?: Entry;
 }
 
-const EditPage = () => {
+const AddPage = () => {
   const history = useHistory();
   const location = useLocation<LocationState>();
+  const [content, setContent] = useState("");
   const selectedDate = location.state?.selectedDate;
   const titleRef = useRef<HTMLIonInputElement>(null);
-  const [categories, setCategories] = useState<string[]>([]);
-  const { handleEdit } = EditEntry();
-  const entryData = location.state?.entryData;
-  const [content, setContent] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
+  const [categories, setCategories] = useState<string[]>([]);
+  const { handleSave } = SaveEntry();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -44,30 +42,21 @@ const EditPage = () => {
     <>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Edit your diary</IonTitle>
+          <IonTitle>Write your day</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent scrollY={false}>
         <div style={{ margin: "5px" }}>
-          {/* TODO: before the user edits the title, it must be {entry.title} as a default */}
           <IonItem style={{ fontSize: "18px" }}>
-            <IonInput
-              placeholder="Enter the title"
-              ref={titleRef}
-              value={entryData?.title}></IonInput>
+            <IonInput placeholder="Enter the title" ref={titleRef}></IonInput>
           </IonItem>
         </div>
-        {/* TODO: before the user edits the category, it must be {entry.category} as a default */}
         <CategorySelection
-          selectedCategory={entryData?.category ?? ""}
+          selectedCategory={selectedCategory}
           categories={categories}
           onCategoryChange={setSelectedCategory}
         />
-        {/* TODO: before the user edits the content, it must be {entry.content[0]} as a default */}
-        <ContentEditor
-          content={entryData?.content[0]?.text ?? ""}
-          onContentChange={(newContent) => setContent(newContent)}
-        />
+        <ContentEditor content={content} onContentChange={setContent} />
         <div
           style={{
             display: "flex",
@@ -83,15 +72,15 @@ const EditPage = () => {
             fill="outline"
             id="save"
             style={{ width: "160px" }}
-            onClick={() => {
-              handleEdit(
+            onClick={() =>
+              handleSave(
                 titleRef,
                 content,
                 selectedDate,
                 selectedCategory,
                 history
-              );
-            }}>
+              )
+            }>
             Save
           </IonButton>
         </div>
@@ -100,4 +89,4 @@ const EditPage = () => {
   );
 };
 
-export default EditPage;
+export default AddPage;
