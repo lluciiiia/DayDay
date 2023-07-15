@@ -1,26 +1,13 @@
 import { useLocation } from "react-router-dom";
-import { useState, useEffect } from "react";
-import {
-  IonContent,
-  IonSearchbar,
-} from "@ionic/react";
-import { EntriesData } from "../../GetPutData";
+import { IonContent, IonSearchbar } from "@ionic/react";
 import ViewList from "./ViewListSub/ViewList";
+import useFetchEntriesData from "./ViewListSub/fetchEntriesData";
 
 const ViewCategoryPage = () => {
   const location = useLocation<{ selectedCategory?: string }>();
   const selectedCategory = location?.state?.selectedCategory || "";
-  const [entriesData, setEntriesData] = useState<Entry[]>([]);
 
-  useEffect(() => {
-    const fetchEntriesData = async () => {
-      const entriesData = new EntriesData();
-      const entries = await entriesData.getEntriesData();
-      setEntriesData(entries);
-    };
-
-    fetchEntriesData();
-  }, []);
+  const entriesData = useFetchEntriesData();
 
   const filteredEntries = entriesData.filter(
     (entry) => entry.category === selectedCategory
