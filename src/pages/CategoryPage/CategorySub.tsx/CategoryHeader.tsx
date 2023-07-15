@@ -9,7 +9,7 @@ import {
 } from "@ionic/react";
 import { settingsOutline } from "ionicons/icons";
 
-interface HeaderButtonsProps {
+interface CategoryHeaderProps {
   editMode: boolean;
   setEditMode: React.Dispatch<React.SetStateAction<boolean>>;
   showModal: boolean;
@@ -20,7 +20,7 @@ interface HeaderButtonsProps {
   categories: string[]; // Add categories prop
 }
 
-const HeaderButtons: React.FC<HeaderButtonsProps> = ({
+const CategoryHeader: React.FC<CategoryHeaderProps> = ({
   editMode,
   setEditMode,
   showModal,
@@ -121,4 +121,4 @@ const HeaderButtons: React.FC<HeaderButtonsProps> = ({
   );
 };
 
-export default HeaderButtons;
+export default CategoryHeader;

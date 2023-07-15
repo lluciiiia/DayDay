@@ -4,7 +4,7 @@ import "../../main.css";
 import { CategoriesData } from "../../GetPutData";
 import CategoryModal from "./CategorySub.tsx/CategoryModal";
 import CategoryList from "./CategorySub.tsx/CategoryList";
-import HeaderButtons from "./CategorySub.tsx/CategoryHeader";
+import CategoryHeader from "./CategorySub.tsx/CategoryHeader";
 import { SearchCategories } from "./CategorySub.tsx/SearchCategories";
 
 const CategoryMain = () => {
@@ -47,7 +47,7 @@ const CategoryMain = () => {
 
   return (
     <IonContent scrollY={true}>
-      <HeaderButtons
+      <CategoryHeader
         editMode={editMode}
         setEditMode={setEditMode}
         showModal={showModal}
