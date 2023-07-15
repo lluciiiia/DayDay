@@ -1,10 +1,10 @@
 import { useHistory } from "react-router";
 import { AddAll } from "../../UpdateAll";
 import { useIonToast } from "@ionic/react";
+import { presentToast } from "../../presentToast";
 
 export const SaveEntry = () => {
   const [present] = useIonToast();
-
   const handleSave = async (
     titleRef: React.RefObject<HTMLIonInputElement>,
     content: string,
@@ -15,11 +15,11 @@ export const SaveEntry = () => {
     const title = titleRef.current?.value as string;
 
     if (title.trim() === "") {
-      presentToast("Please enter your diary title");
+      presentToast(present, "Please enter your diary title");
       return;
     }
     if (content.trim() === "") {
-      presentToast("Please enter your diary content");
+      presentToast(present, "Please enter your diary content");
       return;
     }
 
@@ -33,27 +33,20 @@ export const SaveEntry = () => {
       date: selectedDate!,
       title: title,
       category: selectedCategory,
+      id: undefined,
     };
 
     try {
       await AddAll(entry);
 
-      presentToast("Your diary is saved!");
+      presentToast(present, "Your diary is saved!");
       setTimeout(() => {
         history.push("/calendar");
       }, 300);
     } catch (error) {
       console.error(error);
-      presentToast("Failed to save your diary.");
+      presentToast(present, "Failed to save your diary.");
     }
-  };
-
-  const presentToast = (message: string) => {
-    present({
-      message: message,
-      duration: 300,
-      position: "middle",
-    });
   };
 
   return {
