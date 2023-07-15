@@ -6,34 +6,26 @@ import {
   IonToolbar,
 } from "@ionic/react";
 import { useHistory } from "react-router";
-import { EntriesData } from "../../GetPutData";
 import CalendarView from "./CalendarSub/CalendarView";
 import ShowButtons from "./CalendarSub/ShowButtons";
+import { fetchDatesData } from "./CalendarSub/fetchDatesData";
 import { Entry } from "./CalendarSub/IEntry";
 
-const CalendarPage = () => {
+const DiaryPage = () => {
   const history = useHistory();
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
   const [showButtons, setShowButtons] = useState(false);
-  const [diaryDates, setDiaryDates] = useState<string[]>([]);
+  const [diaryEntries, setDiaryEntries] = useState<Entry[]>([]);
 
   useEffect(() => {
-    const entriesData = new EntriesData();
-    const entriesResultPromise = entriesData.getEntriesData();
-
-    entriesResultPromise
-      .then((entriesResult) => {
-        if (Array.isArray(entriesResult)) {
-          const dates = entriesResult.map((entry: Entry) => entry.date);
-          setDiaryDates(dates);
-        } else {
-          console.error("The returned value is not an array.");
-        }
-      })
-      .catch((error) => {
+    fetchDatesData()
+    .then((entries: any) => {
+        setDiaryEntries(entries);
+    })
+    .catch((error: any) => {
         console.error("Failed to fetch entries data: ", error);
-      });
-  }, []);
+    });
+}, []);
 
   const handleAddClick = () => {
     history.push("/add", { selectedDate });
@@ -51,7 +43,7 @@ const CalendarPage = () => {
 
   const checkDiaryExists = (date: string | null) => {
     if (date) {
-      return diaryDates.includes(date);
+      return diaryEntries.some((entry) => entry.date === date);
     }
     return false;
   };
@@ -75,7 +67,7 @@ const CalendarPage = () => {
           }}
         >
           <CalendarView
-            diaryDates={diaryDates}
+            diaryDates={diaryEntries.map((entry) => entry.date)}
             onDateChange={handleDateChange}
           />
 
@@ -101,4 +93,4 @@ const CalendarPage = () => {
   );
 };
 
-export default CalendarPage;
+export default DiaryPage;
