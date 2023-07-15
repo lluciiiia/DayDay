@@ -1,4 +1,3 @@
-// DiaryEditor.tsx
 import React from "react";
 
 interface ContentEditorProps {
