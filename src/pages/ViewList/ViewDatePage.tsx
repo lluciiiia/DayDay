@@ -2,9 +2,6 @@ import { useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import {
   IonContent,
-  IonHeader,
-  IonTitle,
-  IonToolbar,
   IonSearchbar,
 } from "@ionic/react";
 import { EntriesData } from "../../GetPutData";
@@ -32,11 +29,6 @@ const ViewDatePage = () => {
 
   return (
     <>
-      <IonHeader>
-        {/* <IonToolbar>
-          <IonTitle>View Date Page</IonTitle>
-        </IonToolbar> */}
-      </IonHeader>
       <IonContent>
         <p
           style={{

@@ -2,7 +2,6 @@ import { useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import {
   IonContent,
-  IonHeader,
   IonSearchbar,
 } from "@ionic/react";
 import { EntriesData } from "../../GetPutData";
@@ -29,8 +28,6 @@ const ViewCategoryPage = () => {
 
   return (
     <>
-      <IonHeader>
-      </IonHeader>
       <IonContent>
         <p
           style={{
