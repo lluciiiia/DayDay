@@ -1,15 +1,11 @@
 import { useHistory } from "react-router-dom";
-import {
-  IonItem,
-  IonList,
-} from "@ionic/react";
+import { IonItem, IonList } from "@ionic/react";
 
 interface ViewListProps {
   entries: Entry[];
-  selectedDate: string;
 }
 
-const ViewList: React.FC<ViewListProps> = ({ entries, selectedDate }) => {
+const ViewList: React.FC<ViewListProps> = ({ entries }) => {
   const history = useHistory();
 
   return (
@@ -20,23 +16,20 @@ const ViewList: React.FC<ViewListProps> = ({ entries, selectedDate }) => {
           style={{ padding: "7px", fontSize: "18px" }}
           onClick={() => {
             history.push("/view", { entryData: entry });
-          }}
-        >
+          }}>
           <div
             style={{
               display: "flex",
               flexDirection: "column",
               width: "100%",
-            }}
-          >
+            }}>
             <div style={{ display: "flex", flexDirection: "row" }}>
               <div
                 style={{
                   fontSize: "21px",
                   fontWeight: "bold",
                   marginRight: "auto",
-                }}
-              >
+                }}>
                 {entry.title}
               </div>
               <div
@@ -45,8 +38,7 @@ const ViewList: React.FC<ViewListProps> = ({ entries, selectedDate }) => {
                   color: "rgb(165, 165, 165)",
                   marginLeft: "auto",
                   marginTop: "10px",
-                }}
-              >
+                }}>
                 {entry.category}
               </div>
             </div>
@@ -56,8 +48,7 @@ const ViewList: React.FC<ViewListProps> = ({ entries, selectedDate }) => {
                 fontSize: "16px",
                 marginTop: "5px",
                 marginBottom: "15px",
-              }}
-            >
+              }}>
               {entry.content && entry.content[0] && entry.content[0].text
                 ? entry.content[0].text.length > 30
                   ? `${entry.content[0].text.substring(0, 88)}...`

@@ -46,12 +46,11 @@ const ViewDatePage = () => {
             fontWeight: "bold",
             marginTop: "35px",
             marginBottom: "10px",
-          }}
-        >
+          }}>
           {selectedDate}
         </p>
         <IonSearchbar showClearButton="focus"></IonSearchbar>
-        <ViewList entries={filteredEntries} selectedDate={selectedDate} />
+        <ViewList entries={filteredEntries} />
       </IonContent>
     </>
   );
