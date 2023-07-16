@@ -1,19 +1,9 @@
 import { useState, useRef, useEffect } from "react";
 import { useLocation, useHistory } from "react-router-dom";
-import {
-  IonContent,
-  IonSearchbar,
-  IonIcon,
-  IonButton,
-  IonButtons,
-  IonLabel,
-  IonList,
-  IonItem,
-} from "@ionic/react";
-//import ViewList from "./ViewListSub/ViewList";
+import { IonContent, IonSearchbar, IonButton, IonButtons } from "@ionic/react";
+import ViewList from "./ViewListSub/ViewList";
 import useFetchEntriesData from "./ViewListSub/fetchEntriesData";
 import { EntriesData } from "../../GetPutData";
-import { closeCircleOutline } from "ionicons/icons";
 
 const ViewDatePage = () => {
   const location = useLocation<{ selectedDate?: string }>();
@@ -29,9 +19,9 @@ const ViewDatePage = () => {
   >(undefined);
   const history = useHistory();
 
+  // always update filtered entries
   useEffect(() => {
     setPresentingElement(page.current);
-    // get data from backend
     const fetchData = async () => {
       try {
         const data = await entriesData;
@@ -41,14 +31,10 @@ const ViewDatePage = () => {
       }
     };
     fetchData();
-  }, [entriesData, selectedDate]); // Update filteredEntries when entriesData or selectedDate changes
-
+  }, [entriesData, selectedDate]); 
 
   const handleDeleteEntry = (index: number, entry: Entry) => {
-    console.log("delete clicked");
-    console.log("entry before updating", entry);
     const updatedData = entries.filter((_, i) => i !== index);
-    console.log("entry after updating", updatedData);
     setEntries(updatedData);
 
     const entriesData = new EntriesData();
@@ -56,7 +42,6 @@ const ViewDatePage = () => {
   };
 
   const handleEntryClick = (selectedEntry: Entry) => {
-    console.log("entry clicked");
     setSelectedEntry(selectedEntry);
     history.push("/view", { entryData: selectedEntry });
   };
@@ -105,68 +90,13 @@ const ViewDatePage = () => {
         </div>
 
         <IonSearchbar showClearButton="focus"></IonSearchbar>
-        <IonList>
-          {entries.map((entry, index) => (
-            <IonItem
-              key={entry.id}
-              style={{ padding: "7px", fontSize: "18px" }}>
-              {editMode && (
-                <IonIcon
-                  icon={closeCircleOutline}
-                  style={{
-                    fontSize: "22px",
-                    marginRight: "10px",
-                  }}
-                  onClick={() => {
-                    setSelectedEntry(entry);
-                    handleDeleteEntry(index, entry);
-                  }}
-                />
-              )}
-              <IonLabel onClick={() => handleEntryClick(entry)}>
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    width: "100%",
-                  }}>
-                  <div style={{ display: "flex", flexDirection: "row" }}>
-                    <div
-                      style={{
-                        fontSize: "21px",
-                        fontWeight: "bold",
-                        marginRight: "auto",
-                      }}>
-                      {entry.title}
-                    </div>
-                    <div
-                      style={{
-                        fontSize: "14px",
-                        color: "rgb(165, 165, 165)",
-                        marginLeft: "auto",
-                        marginTop: "10px",
-                      }}>
-                      {entry.category}
-                    </div>
-                  </div>
-
-                  <div
-                    style={{
-                      fontSize: "16px",
-                      marginTop: "5px",
-                      marginBottom: "15px",
-                    }}>
-                    {entry.content && entry.content[0] && entry.content[0].text
-                      ? entry.content[0].text.length > 30
-                        ? `${entry.content[0].text.substring(0, 88)}...`
-                        : entry.content[0].text
-                      : ""}
-                  </div>
-                </div>
-              </IonLabel>
-            </IonItem>
-          ))}
-        </IonList>
+       
+        <ViewList
+          entries={entries}
+          editMode={editMode}
+          handleDeleteEntry={handleDeleteEntry}
+          handleEntryClick={handleEntryClick}
+        />
       </IonContent>
     </>
   );
