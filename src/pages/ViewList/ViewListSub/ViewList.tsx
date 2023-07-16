@@ -64,16 +64,7 @@ const ViewList: React.FC<ViewListProps> = ({
       {entries.map((entry, index) => (
         <IonItem key={entry.id} style={{ padding: "7px", fontSize: "18px" }}>
           {editMode && (
-            // <IonIcon
-            //   icon={closeCircleOutline}
-            //   style={{ fontSize: "22px", marginRight: "10px" }}
-            //   onClick={() => {
-            //     handleDeleteEntry(index, entry);
-            //     // TODO: the diary will be permanently removed
-            //   }}
-            // />
             <>
-              {/* <IonButton id="present-alert">Click Me</IonButton> */}
               <IonIcon
                 id="present-alert"
                 icon={closeCircleOutline}
@@ -85,12 +76,9 @@ const ViewList: React.FC<ViewListProps> = ({
                 buttons={[
                   {
                     text: "Cancel",
-                    role: "cancel",
-                    handler: () => {},
                   },
                   {
                     text: "Confirm",
-                    role: "confirm",
                     handler: () => {
                       handleDeleteEntry(index, entry);
                     },
