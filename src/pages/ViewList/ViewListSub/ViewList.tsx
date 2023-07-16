@@ -84,8 +84,6 @@ const ViewList: React.FC<ViewListProps> = ({
                     },
                   },
                 ]}></IonAlert>
-              <p>{handlerMessage}</p>
-              <p>{roleMessage}</p>
             </>
           )}
           <IonLabel onClick={() => handleEntryClick(entry)}>
