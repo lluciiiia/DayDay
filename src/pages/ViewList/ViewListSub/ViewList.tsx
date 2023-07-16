@@ -83,7 +83,8 @@ const ViewList: React.FC<ViewListProps> = ({
                       handleDeleteEntry(index, entry);
                     },
                   },
-                ]}></IonAlert>
+                ]}
+                ></IonAlert>
             </>
           )}
           <IonLabel onClick={() => handleEntryClick(entry)}>
