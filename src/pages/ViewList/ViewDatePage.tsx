@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import { IonContent, IonSearchbar, IonButton, IonButtons } from "@ionic/react";
 import ViewList from "./ViewListSub/ViewList";
 import useFetchEntriesData from "./ViewListSub/fetchEntriesData";
+import ViewHeader from "./ViewListSub/ViewHeader";
 
 const ViewDatePage = () => {
   const location = useLocation<{ selectedDate?: string }>();
@@ -34,39 +35,11 @@ const ViewDatePage = () => {
   return (
     <>
       <IonContent>
-        <div style={{ display: "flex", flexDirection: "row" }}>
-          <p
-            style={{
-              fontSize: "28px",
-              marginLeft: "15px",
-              fontWeight: "bold",
-              marginTop: "35px",
-              marginBottom: "10px",
-            }}>
-            {selectedDate}
-          </p>
-
-          {editMode && (
-            <IonButtons>
-              <IonButton
-                style={{ marginTop: "27px", marginLeft: "168px" }}
-                onClick={() => setEditMode(false)}>
-                Done
-              </IonButton>
-            </IonButtons>
-          )}
-          <IonButtons>
-            <IonButton
-              style={{
-                display: editMode ? "none" : "block",
-                marginTop: "27px",
-                marginLeft: "174px",
-              }}
-              onClick={() => setEditMode(true)}>
-              Edit
-            </IonButton>
-          </IonButtons>
-        </div>
+        <ViewHeader
+          selectedDate={selectedDate}
+          editMode={editMode}
+          setEditMode={setEditMode}
+        />
 
         <IonSearchbar showClearButton="focus"></IonSearchbar>
 
