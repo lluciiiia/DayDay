@@ -1,9 +1,8 @@
 import { useState, useRef, useEffect } from "react";
-import { useLocation, useHistory } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { IonContent, IonSearchbar, IonButton, IonButtons } from "@ionic/react";
 import ViewList from "./ViewListSub/ViewList";
 import useFetchEntriesData from "./ViewListSub/fetchEntriesData";
-import { EntriesData } from "../../GetPutData";
 
 const ViewDatePage = () => {
   const location = useLocation<{ selectedDate?: string }>();
@@ -17,7 +16,6 @@ const ViewDatePage = () => {
   const [presentingElement, setPresentingElement] = useState<
     HTMLElement | undefined
   >(undefined);
-  const history = useHistory();
 
   // always update filtered entries
   useEffect(() => {
@@ -31,20 +29,7 @@ const ViewDatePage = () => {
       }
     };
     fetchData();
-  }, [entriesData, selectedDate]); 
-
-  const handleDeleteEntry = (index: number, entry: Entry) => {
-    const updatedData = entries.filter((_, i) => i !== index);
-    setEntries(updatedData);
-
-    const entriesData = new EntriesData();
-    entriesData.deleteEntriesData(entry);
-  };
-
-  const handleEntryClick = (selectedEntry: Entry) => {
-    setSelectedEntry(selectedEntry);
-    history.push("/view", { entryData: selectedEntry });
-  };
+  }, [entriesData, selectedDate]);
 
   const handleEditClick = () => {
     // Set the selected entry to the first entry in the list
@@ -90,12 +75,12 @@ const ViewDatePage = () => {
         </div>
 
         <IonSearchbar showClearButton="focus"></IonSearchbar>
-       
+
         <ViewList
           entries={entries}
           editMode={editMode}
-          handleDeleteEntry={handleDeleteEntry}
-          handleEntryClick={handleEntryClick}
+          setEntries={setEntries}
+          setSelectedEntry={setSelectedEntry}
         />
       </IonContent>
     </>
