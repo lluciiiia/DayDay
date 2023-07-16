@@ -31,12 +31,6 @@ const ViewDatePage = () => {
     fetchData();
   }, [entriesData, selectedDate]);
 
-  const handleEditClick = () => {
-    // Set the selected entry to the first entry in the list
-    setSelectedEntry(entries[0]);
-    setEditMode(true);
-  };
-
   return (
     <>
       <IonContent>
@@ -68,7 +62,7 @@ const ViewDatePage = () => {
                 marginTop: "27px",
                 marginLeft: "174px",
               }}
-              onClick={handleEditClick}>
+              onClick={() => setEditMode(true)}>
               Edit
             </IonButton>
           </IonButtons>
