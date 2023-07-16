@@ -1,5 +1,12 @@
-import { useEffect } from "react";
-import { IonItem, IonList, IonIcon, IonLabel } from "@ionic/react";
+import { useEffect, useState } from "react";
+import {
+  IonItem,
+  IonList,
+  IonIcon,
+  IonLabel,
+  IonButton,
+  IonAlert,
+} from "@ionic/react";
 import { closeCircleOutline } from "ionicons/icons";
 import { EntriesData } from "../../../GetPutData";
 import { useHistory } from "react-router-dom";
@@ -7,7 +14,7 @@ import { useHistory } from "react-router-dom";
 interface ViewListProps {
   editMode: boolean;
   selectedDate: string;
-  entriesData: Entry[]; 
+  entriesData: Entry[];
   entries: Entry[];
   setEntries: React.Dispatch<React.SetStateAction<Entry[]>>;
   setSelectedEntry: (entry: Entry) => void;
@@ -22,6 +29,9 @@ const ViewList: React.FC<ViewListProps> = ({
   setSelectedEntry,
 }) => {
   const history = useHistory();
+
+  const [handlerMessage, setHandlerMessage] = useState("");
+  const [roleMessage, setRoleMessage] = useState("");
 
   // useEffect to filter entries based on the selectedDate
   useEffect(() => {
@@ -54,13 +64,41 @@ const ViewList: React.FC<ViewListProps> = ({
       {entries.map((entry, index) => (
         <IonItem key={entry.id} style={{ padding: "7px", fontSize: "18px" }}>
           {editMode && (
-            <IonIcon
-              icon={closeCircleOutline}
-              style={{ fontSize: "22px", marginRight: "10px" }}
-              onClick={() => {
-                handleDeleteEntry(index, entry);
-              }}
-            />
+            // <IonIcon
+            //   icon={closeCircleOutline}
+            //   style={{ fontSize: "22px", marginRight: "10px" }}
+            //   onClick={() => {
+            //     handleDeleteEntry(index, entry);
+            //     // TODO: the diary will be permanently removed
+            //   }}
+            // />
+            <>
+              {/* <IonButton id="present-alert">Click Me</IonButton> */}
+              <IonIcon
+                id="present-alert"
+                icon={closeCircleOutline}
+                style={{ fontSize: "22px", marginRight: "10px" }}
+              />
+              <IonAlert
+                header="the diary will be permanently removed"
+                trigger="present-alert"
+                buttons={[
+                  {
+                    text: "Cancel",
+                    role: "cancel",
+                    handler: () => {},
+                  },
+                  {
+                    text: "Confirm",
+                    role: "confirm",
+                    handler: () => {
+                      handleDeleteEntry(index, entry);
+                    },
+                  },
+                ]}></IonAlert>
+              <p>{handlerMessage}</p>
+              <p>{roleMessage}</p>
+            </>
           )}
           <IonLabel onClick={() => handleEntryClick(entry)}>
             <div
