@@ -1,22 +1,40 @@
+import { useEffect } from "react";
 import { IonItem, IonList, IonIcon, IonLabel } from "@ionic/react";
 import { closeCircleOutline } from "ionicons/icons";
 import { EntriesData } from "../../../GetPutData";
 import { useHistory } from "react-router-dom";
 
 interface ViewListProps {
-  entries: Entry[];
   editMode: boolean;
+  selectedDate: string;
+  entriesData: Entry[]; 
+  entries: Entry[];
   setEntries: React.Dispatch<React.SetStateAction<Entry[]>>;
   setSelectedEntry: (entry: Entry) => void;
 }
 
 const ViewList: React.FC<ViewListProps> = ({
-  entries,
   editMode,
+  selectedDate,
+  entriesData,
+  entries,
   setEntries,
   setSelectedEntry,
 }) => {
   const history = useHistory();
+
+  // useEffect to filter entries based on the selectedDate
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await entriesData;
+        setEntries(data.filter((entry) => entry.date === selectedDate));
+      } catch (error) {
+        console.error("Error fetching entries:", error);
+      }
+    };
+    fetchData();
+  }, [entriesData, selectedDate]);
 
   const handleDeleteEntry = (index: number, entry: Entry) => {
     const updatedData = entries.filter((_, i) => i !== index);
@@ -30,6 +48,7 @@ const ViewList: React.FC<ViewListProps> = ({
     setSelectedEntry(selectedEntry);
     history.push("/view", { entryData: selectedEntry });
   };
+
   return (
     <IonList>
       {entries.map((entry, index) => (
