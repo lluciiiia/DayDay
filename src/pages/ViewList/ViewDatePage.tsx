@@ -1,9 +1,9 @@
 import { useState, useRef, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { IonContent, IonSearchbar, IonButton, IonButtons } from "@ionic/react";
+import { IonContent, IonSearchbar } from "@ionic/react";
 import ViewList from "./ViewListSub/ViewList";
-import useFetchEntriesData from "./ViewListSub/fetchEntriesData";
 import ViewHeader from "./ViewListSub/ViewHeader";
+import useFetchEntriesData from "./ViewListSub/fetchEntriesData";
 
 const ViewDatePage = () => {
   const location = useLocation<{ selectedDate?: string }>();

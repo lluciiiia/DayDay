@@ -21,8 +21,7 @@ const ViewHeader: React.FC<ViewHeaderProps> = ({
           fontWeight: "bold",
           marginTop: "35px",
           marginBottom: "10px",
-        }}
-      >
+        }}>
         {selectedDate}
       </p>
 
@@ -30,8 +29,7 @@ const ViewHeader: React.FC<ViewHeaderProps> = ({
         <IonButtons>
           <IonButton
             style={{ marginTop: "27px", marginLeft: "168px" }}
-            onClick={() => setEditMode(false)}
-          >
+            onClick={() => setEditMode(false)}>
             Done
           </IonButton>
         </IonButtons>
@@ -43,8 +41,7 @@ const ViewHeader: React.FC<ViewHeaderProps> = ({
             marginTop: "27px",
             marginLeft: "174px",
           }}
-          onClick={() => setEditMode(true)}
-        >
+          onClick={() => setEditMode(true)}>
           Edit
         </IonButton>
       </IonButtons>
