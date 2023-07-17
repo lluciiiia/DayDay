@@ -121,7 +121,7 @@ const ViewList: React.FC<ViewListProps> = ({
                     right: 0,
                     fontSize: "14px",
                     color: "rgb(165, 165, 165)",
-                    marginTop: "20px",
+                    marginTop: "28px",
                     marginRight: "10px",
                   }}>
                   {selectionType === "category" ? entry.date : entry.category}
