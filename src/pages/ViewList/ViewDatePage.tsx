@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { IonContent, IonSearchbar } from "@ionic/react";
-import ViewList from "./ViewListSub/ViewDateList";
+import ViewList from "./ViewListSub/ViewList";
 import ViewHeader from "./ViewListSub/ViewHeader";
 import useFetchEntriesData from "./ViewListSub/fetchEntriesData";
 
@@ -28,6 +28,7 @@ const ViewDatePage = () => {
 
         <ViewList
           editMode={editMode}
+          selectionType="date"
           selectedDate={selectedDate}
           entriesData={entriesData}
           entries={entries}

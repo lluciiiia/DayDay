@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import {
   IonItem,
   IonList,
@@ -12,8 +12,10 @@ import { EntriesData } from "../../../GetPutData";
 import { useHistory } from "react-router-dom";
 
 interface ViewListProps {
+  selectionType: "category" | "date";
+  selectedCategory?: string;
+  selectedDate?: string;
   editMode: boolean;
-  selectedDate: string;
   entriesData: Entry[];
   entries: Entry[];
   setEntries: React.Dispatch<React.SetStateAction<Entry[]>>;
@@ -21,8 +23,10 @@ interface ViewListProps {
 }
 
 const ViewList: React.FC<ViewListProps> = ({
-  editMode,
+  selectionType,
+  selectedCategory,
   selectedDate,
+  editMode,
   entriesData,
   entries,
   setEntries,
@@ -30,21 +34,28 @@ const ViewList: React.FC<ViewListProps> = ({
 }) => {
   const history = useHistory();
 
-  const [handlerMessage, setHandlerMessage] = useState("");
-  const [roleMessage, setRoleMessage] = useState("");
-
-  // useEffect to filter entries based on the selectedDate
   useEffect(() => {
     const fetchData = async () => {
       try {
         const data = await entriesData;
-        setEntries(data.filter((entry) => entry.date === selectedDate));
+        let filteredEntries: Entry[] = [];
+
+        if (selectionType === "date") {
+          filteredEntries = data.filter((entry) => entry.date === selectedDate);
+        } else if (selectionType === "category") {
+          filteredEntries = data.filter(
+            (entry) => entry.category === selectedCategory
+          );
+        }
+
+        setEntries(filteredEntries);
       } catch (error) {
         console.error("Error fetching entries:", error);
       }
     };
+
     fetchData();
-  }, [entriesData, selectedDate]);
+  }, [entriesData, selectedDate, selectedCategory, selectionType]);
 
   const handleDeleteEntry = (index: number, entry: Entry) => {
     const updatedData = entries.filter((_, i) => i !== index);
@@ -111,9 +122,9 @@ const ViewList: React.FC<ViewListProps> = ({
                     fontSize: "14px",
                     color: "rgb(165, 165, 165)",
                     marginTop: "20px",
-                    marginRight: "10px"
+                    marginRight: "10px",
                   }}>
-                  {entry.category}
+                  {selectionType === "category" ? entry.date : entry.category}
                 </div>
               </div>
 

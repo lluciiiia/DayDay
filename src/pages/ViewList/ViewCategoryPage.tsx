@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { IonContent, IonSearchbar } from "@ionic/react";
-import ViewCategoryList from "./ViewListSub/ViewCategoryList";
+import ViewList from "./ViewListSub/ViewList";
 import ViewHeader from "./ViewListSub/ViewHeader";
 import useFetchEntriesData from "./ViewListSub/fetchEntriesData";
 
@@ -26,8 +26,9 @@ const ViewCategoryPage = () => {
 
         <IonSearchbar showClearButton="focus"></IonSearchbar>
 
-        <ViewCategoryList
+        <ViewList
           editMode={editMode}
+          selectionType="category"
           selectedCategory={selectedCategory}
           entriesData={entriesData}
           entries={entries}
