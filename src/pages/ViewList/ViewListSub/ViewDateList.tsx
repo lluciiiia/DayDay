@@ -83,8 +83,7 @@ const ViewList: React.FC<ViewListProps> = ({
                       handleDeleteEntry(index, entry);
                     },
                   },
-                ]}
-                ></IonAlert>
+                ]}></IonAlert>
             </>
           )}
           <IonLabel onClick={() => handleEntryClick(entry)}>
@@ -97,18 +96,22 @@ const ViewList: React.FC<ViewListProps> = ({
               <div style={{ display: "flex", flexDirection: "row" }}>
                 <div
                   style={{
+                    position: "relative",
                     fontSize: "21px",
                     fontWeight: "bold",
-                    marginRight: "auto",
+                    flexGrow: 1,
                   }}>
                   {entry.title}
                 </div>
                 <div
                   style={{
+                    position: "absolute",
+                    top: 0,
+                    right: 0,
                     fontSize: "14px",
                     color: "rgb(165, 165, 165)",
-                    marginLeft: "auto",
-                    marginTop: "10px",
+                    marginTop: "20px",
+                    marginRight: "10px"
                   }}>
                   {entry.category}
                 </div>
