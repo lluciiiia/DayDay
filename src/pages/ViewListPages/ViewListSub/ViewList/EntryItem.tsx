@@ -6,7 +6,6 @@ interface EntryItemProps {
   entry: Entry;
   selectionType: "category" | "date";
   editMode: boolean;
-  onDelete: (entry: Entry) => void;
   onSelect: (entry: Entry) => void;
   showAlert: boolean;
   setShowAlert: React.Dispatch<React.SetStateAction<boolean>>;
@@ -17,7 +16,6 @@ export const EntryItem: React.FC<EntryItemProps> = ({
   entry,
   selectionType,
   editMode,
-  onDelete,
   onSelect,
   showAlert,
   setShowAlert,

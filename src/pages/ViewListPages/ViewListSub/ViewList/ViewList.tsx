@@ -80,7 +80,6 @@ const ViewList: React.FC<ViewListProps> = ({
             entry={entry}
             selectionType={selectionType}
             editMode={editMode}
-            onDelete={handleDeleteEntry}
             onSelect={handleEntryClick}
             showAlert={showAlert}
             setShowAlert={setShowAlert}
