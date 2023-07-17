@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { IonItem, IonList, IonIcon, IonLabel } from "@ionic/react";
-import { closeCircleOutline } from "ionicons/icons";
+import { IonList } from "@ionic/react";
 import { EntriesData } from "../../../../GetPutData";
 import { useHistory } from "react-router-dom";
 import ViewAlert from "./ViewAlert";
+import EntryItem from "./EntryItem";
 
 interface ViewListProps {
   selectionType: "category" | "date";
@@ -75,68 +75,17 @@ const ViewList: React.FC<ViewListProps> = ({
     <>
       <IonList>
         {entries.map((entry) => (
-          <IonItem key={entry.id} style={{ padding: "7px", fontSize: "18px" }}>
-            {editMode && (
-              <>
-                <IonIcon
-                  icon={closeCircleOutline}
-                  style={{ fontSize: "22px", marginRight: "10px" }}
-                  onClick={() => {
-                    // Show the alert only for the first item
-                    if (!showAlert) {
-                      setShowAlert(true);
-                      setDeletingEntry(entry);
-                    }
-                  }}
-                />
-              </>
-            )}
-            <IonLabel onClick={() => handleEntryClick(entry)}>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  width: "100%",
-                }}>
-                <div style={{ display: "flex", flexDirection: "row" }}>
-                  <div
-                    style={{
-                      position: "relative",
-                      fontSize: "21px",
-                      fontWeight: "bold",
-                      flexGrow: 1,
-                    }}>
-                    {entry.title}
-                  </div>
-                  <div
-                    style={{
-                      position: "absolute",
-                      top: 0,
-                      right: 0,
-                      fontSize: "14px",
-                      color: "rgb(165, 165, 165)",
-                      marginTop: "28px",
-                      marginRight: "10px",
-                    }}>
-                    {selectionType === "category" ? entry.date : entry.category}
-                  </div>
-                </div>
-
-                <div
-                  style={{
-                    fontSize: "16px",
-                    marginTop: "5px",
-                    marginBottom: "15px",
-                  }}>
-                  {entry.content && entry.content[0] && entry.content[0].text
-                    ? entry.content[0].text.length > 30
-                      ? `${entry.content[0].text.substring(0, 88)}...`
-                      : entry.content[0].text
-                    : ""}
-                </div>
-              </div>
-            </IonLabel>
-          </IonItem>
+          <EntryItem
+            key={entry.id}
+            entry={entry}
+            selectionType={selectionType}
+            editMode={editMode}
+            onDelete={handleDeleteEntry}
+            onSelect={handleEntryClick}
+            showAlert={showAlert}
+            setShowAlert={setShowAlert}
+            setDeletingEntry={setDeletingEntry}
+          />
         ))}
       </IonList>
       <ViewAlert
