@@ -25,26 +25,28 @@ const ViewCategoryHeader: React.FC<ViewCategoryHeaderProps> = ({
         {selectedCategory}
       </p>
 
-      {editMode && (
+      <div style={{ position: "fixed", marginTop: "35px" }}>
+        {editMode && (
+          <IonButtons>
+            <IonButton
+              style={{ marginLeft: "330px" }}
+              onClick={() => setEditMode(false)}>
+              Done
+            </IonButton>
+          </IonButtons>
+        )}
         <IonButtons>
           <IonButton
-            style={{ marginTop: "27px", marginLeft: "168px" }}
-            onClick={() => setEditMode(false)}>
-            Done
+            style={{
+              display: editMode ? "none" : "block",
+
+              marginLeft: "335px",
+            }}
+            onClick={() => setEditMode(true)}>
+            Edit
           </IonButton>
         </IonButtons>
-      )}
-      <IonButtons>
-        <IonButton
-          style={{
-            display: editMode ? "none" : "block",
-            marginTop: "27px",
-            marginLeft: "174px",
-          }}
-          onClick={() => setEditMode(true)}>
-          Edit
-        </IonButton>
-      </IonButtons>
+      </div>
     </div>
   );
 };
