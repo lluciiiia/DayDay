@@ -132,6 +132,7 @@ const CategoryModal: React.FC<CategoryModalProps> = ({
               <IonInput
                 ref={categoryRef}
                 placeholder="Category Name"
+                maxlength={10}
                 style={{
                   background: "rgba(120, 120, 120, 0.4)",
                   width: "300px",
