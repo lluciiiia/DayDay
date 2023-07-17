@@ -52,7 +52,7 @@ const EditPage = () => {
         <div style={{ margin: "5px" }}>
           {/* TODO: before the user edits the title, it must be {entry.title} as a default */}
           <IonItem style={{ fontSize: "18px" }}>
-            <IonInput placeholder="Enter the title" ref={titleRef} value={entryData?.title}></IonInput>
+            <IonInput placeholder="Enter the title" ref={titleRef} maxlength={20} value={entryData?.title}></IonInput>
           </IonItem>
         </div>
         {/* TODO: before the user edits the category, it must be {entry.category} as a default */}
