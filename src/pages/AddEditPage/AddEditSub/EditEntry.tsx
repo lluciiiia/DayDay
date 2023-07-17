@@ -1,4 +1,4 @@
-import { AddAll } from "../../ViewList/ViewListSub/UpdateAll";
+import { AddAll } from "../../ViewListPages/ViewListSub/UpdateAll";
 import { useIonToast } from "@ionic/react";
 import SaveEntry from "./SaveEntry";
 import { EntriesData } from "../../../GetPutData";

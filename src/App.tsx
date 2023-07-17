@@ -35,8 +35,8 @@ import CalendarPage from "./pages/CalendarPage/CalendarPage";
 import BrowserPage from "./pages/BrowserPage/BrowserPage";
 import CategoryPage from "./pages/CategoryPage/CategoryPage";
 import AddPage from "./pages/AddEditPage/AddPage";
-import ViewCategoryPage from "./pages/ViewList/ViewCategoryPage";
-import ViewDatePage from "./pages/ViewList/ViewDatePage";
+import ViewCategoryPage from "./pages/ViewListPages/ViewCategoryPage";
+import ViewDatePage from "./pages/ViewListPages/ViewDatePage";
 import ViewPage from "./pages/ViewPage/ViewPage";
 import EditPage from "./pages/AddEditPage/EditPage";
 
