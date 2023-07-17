@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { IonList } from "@ionic/react";
-import { EntriesData } from "../../../../GetPutData";
 import { useHistory } from "react-router-dom";
 import ViewAlert from "./ViewAlert";
 import EntryItem from "./EntryItem";
@@ -54,18 +53,6 @@ const ViewList: React.FC<ViewListProps> = ({
     fetchData();
   }, [entriesData, selectedDate, selectedCategory, selectionType]);
 
-  const handleDeleteEntry = (entryToDelete: Entry) => {
-    const entryIndex = entries.indexOf(entryToDelete);
-    if (entryIndex !== -1) {
-      const updatedData = [...entries];
-      updatedData.splice(entryIndex, 1);
-      setEntries(updatedData);
-
-      const entriesDataInstance = new EntriesData();
-      entriesDataInstance.deleteEntriesData(entryToDelete);
-    }
-  };
-
   const handleEntryClick = (selectedEntry: Entry) => {
     setSelectedEntry(selectedEntry);
     history.push("/view", { entryData: selectedEntry });
@@ -92,7 +79,8 @@ const ViewList: React.FC<ViewListProps> = ({
         setShowAlert={setShowAlert}
         deletingEntry={deletingEntry}
         setDeletingEntry={setDeletingEntry}
-        handleDeleteEntry={handleDeleteEntry}
+        entries={entries}
+        setEntries={setEntries}
       />
     </>
   );
