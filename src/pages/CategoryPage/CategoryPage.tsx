@@ -5,7 +5,7 @@ import { CategoriesData } from "../../GetPutData";
 import CategoryModal from "./CategorySub.tsx/CategoryModal";
 import CategoryList from "./CategorySub.tsx/CategoryList";
 import CategoryHeader from "./CategorySub.tsx/CategoryHeader";
-import { SearchCategories } from "./CategorySub.tsx/SearchCategories";
+//import { SearchCategories } from "./CategorySub.tsx/SearchCategories";
 
 const CategoryMain = () => {
   const [showModal, setShowModal] = useState(false);

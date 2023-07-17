@@ -58,6 +58,7 @@ const CategoryModal: React.FC<CategoryModalProps> = ({
               updatedData[categoryIndex] = newCategory;
 
               // TODO: change the all category names in the corresponding diaries
+              
             } // Add a new category
             else {
               updatedData = [...categories, newCategory];
