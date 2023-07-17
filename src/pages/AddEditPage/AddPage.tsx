@@ -48,7 +48,7 @@ const AddPage = () => {
       <IonContent scrollY={false}>
         <div style={{ margin: "5px" }}>
           <IonItem style={{ fontSize: "18px" }}>
-            <IonInput placeholder="Enter the title" ref={titleRef} maxlength={20}></IonInput>
+            <IonInput placeholder="Enter the title" ref={titleRef} maxlength={18}></IonInput>
           </IonItem>
         </div>
         <CategorySelection
