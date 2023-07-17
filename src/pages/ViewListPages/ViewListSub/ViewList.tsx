@@ -156,16 +156,16 @@ const ViewList: React.FC<ViewListProps> = ({
           {
             text: "Cancel",
             handler: () => {
-              setShowAlert(false); // Close the alert on cancel
-              setDeletingEntry(null); // Reset deletingEntry
+              setShowAlert(false); 
+              setDeletingEntry(null);
             },
           },
           {
             text: "Confirm",
             handler: () => {
-              handleDeleteEntry(deletingEntry!); // Call the delete function
-              setShowAlert(false); // Close the alert after deletion
-              setDeletingEntry(null); // Reset deletingEntry
+              handleDeleteEntry(deletingEntry!); 
+              setShowAlert(false); 
+              setDeletingEntry(null);
             },
           },
         ]}
