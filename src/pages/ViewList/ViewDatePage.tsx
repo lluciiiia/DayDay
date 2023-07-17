@@ -18,6 +18,7 @@ const ViewDatePage = () => {
     <>
       <IonContent>
         <ViewHeader
+          selectionType="date"
           selectedDate={selectedDate}
           editMode={editMode}
           setEditMode={setEditMode}

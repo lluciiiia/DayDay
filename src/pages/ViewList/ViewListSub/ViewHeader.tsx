@@ -2,12 +2,16 @@ import React from "react";
 import { IonButton, IonButtons } from "@ionic/react";
 
 interface ViewHeaderProps {
-  selectedDate: string;
+  selectionType: "category" | "date"; // New prop to indicate selection type
+  selectedCategory?: string;
+  selectedDate?: string;
   editMode: boolean;
   setEditMode: (value: boolean) => void;
 }
 
 const ViewHeader: React.FC<ViewHeaderProps> = ({
+  selectionType,
+  selectedCategory,
   selectedDate,
   editMode,
   setEditMode,
@@ -21,16 +25,16 @@ const ViewHeader: React.FC<ViewHeaderProps> = ({
           fontWeight: "bold",
           marginTop: "35px",
           marginBottom: "10px",
-        }}>
-        {selectedDate}
+        }}
+      >
+        {/* difference */}
+        {selectionType === "category" ? selectedCategory : selectedDate}
       </p>
 
       <div style={{ position: "fixed", marginTop: "35px" }}>
         {editMode && (
           <IonButtons>
-            <IonButton
-              style={{ marginLeft: "330px" }}
-              onClick={() => setEditMode(false)}>
+            <IonButton style={{ marginLeft: "330px" }} onClick={() => setEditMode(false)}>
               Done
             </IonButton>
           </IonButtons>
@@ -41,7 +45,8 @@ const ViewHeader: React.FC<ViewHeaderProps> = ({
               display: editMode ? "none" : "block",
               marginLeft: "335px",
             }}
-            onClick={() => setEditMode(true)}>
+            onClick={() => setEditMode(true)}
+          >
             Edit
           </IonButton>
         </IonButtons>

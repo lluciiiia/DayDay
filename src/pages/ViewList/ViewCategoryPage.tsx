@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { IonContent, IonSearchbar } from "@ionic/react";
 import ViewCategoryList from "./ViewListSub/ViewCategoryList";
-import ViewCategoryHeader from "./ViewListSub/ViewCategoryHeader";
+import ViewHeader from "./ViewListSub/ViewHeader";
 import useFetchEntriesData from "./ViewListSub/fetchEntriesData";
 
 const ViewCategoryPage = () => {
@@ -17,7 +17,8 @@ const ViewCategoryPage = () => {
   return (
     <>
       <IonContent>
-        <ViewCategoryHeader
+        <ViewHeader
+          selectionType="category"
           selectedCategory={selectedCategory}
           editMode={editMode}
           setEditMode={setEditMode}
