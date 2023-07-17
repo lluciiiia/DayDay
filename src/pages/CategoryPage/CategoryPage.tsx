@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { IonContent, useIonToast, IonSearchbar } from "@ionic/react";
+import { IonContent, IonSearchbar } from "@ionic/react";
 import "../../main.css";
 import { CategoriesData } from "../../GetPutData";
 import CategoryModal from "./CategorySub.tsx/CategoryModal";
@@ -31,7 +31,7 @@ const CategoryMain = () => {
         console.error("Error fetching categories:", error);
       });
   }, []);
-  
+
   // ** Search
   // const [inputValue, setInputValue] = useState(""); // New state variable
   // const [results, setResults] = useState<{ date: string; content: string }[]>(

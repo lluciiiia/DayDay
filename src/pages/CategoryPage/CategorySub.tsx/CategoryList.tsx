@@ -3,6 +3,7 @@ import { IonItem, IonList, IonIcon, IonLabel, IonAlert } from "@ionic/react";
 import { closeCircleOutline, informationCircleOutline } from "ionicons/icons";
 import { CategoriesData } from "../../../GetPutData";
 import { useHistory } from "react-router-dom";
+import { EntriesData } from "../../../GetPutData";
 
 interface CategoryListProps {
   categories: string[];
@@ -24,7 +25,27 @@ const CategoryList: React.FC<CategoryListProps> = ({
   const [showAlert, setShowAlert] = useState(false);
   const [deletingCategory, setDeletingCategory] = useState<string | null>(null);
 
-  const handleDeleteCategory = (index: number) => {
+  const handleDeleteCategory = async (index: number) => {
+    const categoryToDelete = categories[index];
+
+    try {
+      const entriesData = new EntriesData();
+      const currentEntriesData = await entriesData.getEntriesData();
+
+      const filteredEntries: Entry[] = currentEntriesData.filter(
+        (entry: Entry) => entry.category === categoryToDelete
+      );
+
+      // delete every entry in the category
+      filteredEntries.forEach((entry: Entry) => {
+        entriesData.deleteEntriesData(entry);
+      });
+    } catch (error) {
+      console.error("Error fetching entries data:", error);
+    }
+
+    // Delete the category & update the UI
+    // TODO: improve the algorithm instead of filtering
     const updatedData = categories.filter((_, i) => i !== index);
     const categoriesData = new CategoriesData();
     categoriesData.putCategoriesData(updatedData);
