@@ -38,32 +38,51 @@ const CategoryModal: React.FC<CategoryModalProps> = ({
   const handleDoneClick = () => {
     const newCategory = categoryRef.current?.value as string;
     if (newCategory) {
-      let updatedData: any;
-      // Rename the existing category
-      if (selectedCategory) {
-        const categoryIndex = categories.findIndex(
-          (category) => category === selectedCategory
-        );
-        updatedData = [...categories];
-        updatedData[categoryIndex] = newCategory;
-      } // Add a new category
-      else {
-        updatedData = [...categories, newCategory];
-      }
       const categoriesData = new CategoriesData();
+      // rename a category
       categoriesData
-        .putCategoriesData(updatedData)
-        .then(() => {
-          setCategories(updatedData);
-          setShowModal(false);
+        .getCategoriesData()
+        .then((existingCategories: any) => {
+          if (existingCategories.includes(newCategory) && newCategory !== selectedCategory) {
+            // Present a toast indicating that the category already exists
+            presentToast("Category already exists!");
+          } else {
+            let updatedData: any;
+            // Rename the existing category
+            if (selectedCategory) {
+              const categoryIndex = categories.findIndex(
+                (category) => category === selectedCategory
+              );
+              updatedData = [...categories];
+              updatedData[categoryIndex] = newCategory;
+  
+              // TODO: change the all category names in the corresponding diaries
+  
+            } // Add a new category
+            else {
+              updatedData = [...categories, newCategory];
+            }
+            const categoriesData = new CategoriesData();
+            categoriesData
+              .putCategoriesData(updatedData)
+              .then(() => {
+                setCategories(updatedData);
+                setShowModal(false);
+              })
+              .catch((error: any) => {
+                console.error("Error updating categories:", error);
+              });
+          }
         })
         .catch((error: any) => {
-          console.error("Error updating categories:", error);
+          console.error("Error fetching existing categories:", error);
         });
     } else {
       presentToast("Enter new category");
     }
   };
+  
+  
 
   const presentToast = (message: string) => {
     present({
