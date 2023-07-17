@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   IonItem,
   IonList,
@@ -34,6 +34,9 @@ const ViewList: React.FC<ViewListProps> = ({
 }) => {
   const history = useHistory();
 
+  const [showAlert, setShowAlert] = useState(false);
+  const [deletingEntry, setDeletingEntry] = useState<Entry | null>(null);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -57,13 +60,18 @@ const ViewList: React.FC<ViewListProps> = ({
     fetchData();
   }, [entriesData, selectedDate, selectedCategory, selectionType]);
 
-  const handleDeleteEntry = (index: number, entry: Entry) => {
-    const updatedData = entries.filter((_, i) => i !== index);
-    setEntries(updatedData);
+  const handleDeleteEntry = (entryToDelete: Entry) => {
+    const entryIndex = entries.indexOf(entryToDelete);
+    if (entryIndex !== -1) {
+      const updatedData = [...entries];
+      updatedData.splice(entryIndex, 1);
+      setEntries(updatedData);
 
-    const entriesData = new EntriesData();
-    entriesData.deleteEntriesData(entry);
+      const entriesDataInstance = new EntriesData();
+      entriesDataInstance.deleteEntriesData(entryToDelete);
+    }
   };
+  
 
   const handleEntryClick = (selectedEntry: Entry) => {
     setSelectedEntry(selectedEntry);
@@ -71,33 +79,27 @@ const ViewList: React.FC<ViewListProps> = ({
   };
 
   return (
-    <IonList>
-      {entries.map((entry, index) => (
-        <IonItem key={entry.id} style={{ padding: "7px", fontSize: "18px" }}>
-          {editMode && (
-            <>
-              <IonIcon
-                id="present-alert"
-                icon={closeCircleOutline}
-                style={{ fontSize: "22px", marginRight: "10px" }}
-              />
-              <IonAlert
-                header="the diary will be permanently removed"
-                trigger="present-alert"
-                buttons={[
-                  {
-                    text: "Cancel",
-                  },
-                  {
-                    text: "Confirm",
-                    handler: () => {
-                      handleDeleteEntry(index, entry);
-                    },
-                  },
-                ]}></IonAlert>
-            </>
-          )}
-          <IonLabel onClick={() => handleEntryClick(entry)}>
+    <>
+      <IonList>
+        {entries.map((entry) => (
+          <IonItem key={entry.id} style={{ padding: "7px", fontSize: "18px" }}>
+            {editMode && (
+              <>
+                <IonIcon
+                  id="present-alert"
+                  icon={closeCircleOutline}
+                  style={{ fontSize: "22px", marginRight: "10px" }}
+                  onClick={() => {
+                    // Show the alert only for the first item
+                    if (!showAlert) {
+                      setShowAlert(true);
+                      setDeletingEntry(entry);
+                    }
+                  }}
+                />
+              </>
+            )}
+            <IonLabel onClick={() => handleEntryClick(entry)}>
             <div
               style={{
                 display: "flex",
@@ -141,10 +143,35 @@ const ViewList: React.FC<ViewListProps> = ({
                   : ""}
               </div>
             </div>
-          </IonLabel>
-        </IonItem>
-      ))}
-    </IonList>
+            </IonLabel>
+          </IonItem>
+        ))}
+      </IonList>
+
+      {/* Alert */}
+      <IonAlert
+        isOpen={showAlert}
+        header="The diary will be permanently removed"
+        buttons={[
+          {
+            text: "Cancel",
+            handler: () => {
+              setShowAlert(false); // Close the alert on cancel
+              setDeletingEntry(null); // Reset deletingEntry
+            },
+          },
+          {
+            text: "Confirm",
+            handler: () => {
+              handleDeleteEntry(deletingEntry!); // Call the delete function
+              setShowAlert(false); // Close the alert after deletion
+              setDeletingEntry(null); // Reset deletingEntry
+            },
+          },
+        ]}
+      ></IonAlert>
+    </>
+
   );
 };
 
