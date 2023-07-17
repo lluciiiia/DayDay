@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import { IonItem, IonList, IonIcon, IonLabel, IonAlert } from "@ionic/react";
+import { IonItem, IonList, IonIcon, IonLabel } from "@ionic/react";
 import { closeCircleOutline } from "ionicons/icons";
 import { EntriesData } from "../../../../GetPutData";
 import { useHistory } from "react-router-dom";
+import ViewAlert from "./ViewAlert";
 
 interface ViewListProps {
   selectionType: "category" | "date";
@@ -138,28 +139,13 @@ const ViewList: React.FC<ViewListProps> = ({
           </IonItem>
         ))}
       </IonList>
-
-      {/* Alert */}
-      <IonAlert
-        isOpen={showAlert}
-        header="The diary will be permanently removed"
-        buttons={[
-          {
-            text: "Cancel",
-            handler: () => {
-              setShowAlert(false);
-              setDeletingEntry(null);
-            },
-          },
-          {
-            text: "Confirm",
-            handler: () => {
-              handleDeleteEntry(deletingEntry!);
-              setShowAlert(false);
-              setDeletingEntry(null);
-            },
-          },
-        ]}></IonAlert>
+      <ViewAlert
+        showAlert={showAlert}
+        setShowAlert={setShowAlert}
+        deletingEntry={deletingEntry}
+        setDeletingEntry={setDeletingEntry}
+        handleDeleteEntry={handleDeleteEntry}
+      />
     </>
   );
 };
