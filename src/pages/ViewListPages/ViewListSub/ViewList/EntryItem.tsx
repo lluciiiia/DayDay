@@ -1,29 +1,32 @@
 import React from "react";
 import { IonIcon, IonItem, IonLabel } from "@ionic/react";
 import { closeCircleOutline } from "ionicons/icons";
+import { useHistory } from "react-router-dom";
 
 interface EntryItemProps {
   entry: Entry;
   selectionType: "category" | "date";
   editMode: boolean;
-  onSelect: (entry: Entry) => void;
   showAlert: boolean;
   setShowAlert: React.Dispatch<React.SetStateAction<boolean>>;
   setDeletingEntry: React.Dispatch<React.SetStateAction<Entry | null>>;
+  setSelectedEntry: (entry: Entry) => void;
 }
 
 export const EntryItem: React.FC<EntryItemProps> = ({
   entry,
   selectionType,
   editMode,
-  onSelect,
   showAlert,
   setShowAlert,
-  setDeletingEntry
+  setDeletingEntry,
+  setSelectedEntry,
 }) => {
+  const history = useHistory();
 
-  const handleEntryClick = () => {
-    onSelect(entry);
+  const handleEntryClick = (selectedEntry: Entry) => {
+    setSelectedEntry(selectedEntry);
+    history.push("/view", { entryData: selectedEntry });
   };
 
   return (
@@ -42,7 +45,7 @@ export const EntryItem: React.FC<EntryItemProps> = ({
           />
         </>
       )}
-      <IonLabel onClick={() => handleEntryClick()}>
+      <IonLabel onClick={() => handleEntryClick(entry)}>
         <div
           style={{
             display: "flex",
