@@ -43,21 +43,21 @@ const CategoryModal: React.FC<CategoryModalProps> = ({
       categoriesData
         .getCategoriesData()
         .then((existingCategories: any) => {
-          if (existingCategories.includes(newCategory) && newCategory !== selectedCategory) {
-            // Present a toast indicating that the category already exists
-            presentToast("Category already exists!");
+          if (
+            existingCategories.includes(newCategory) &&
+            newCategory !== selectedCategory
+          ) {
+            presentToast("Category already exists!"); // except keeping the same name
           } else {
             let updatedData: any;
-            // Rename the existing category
             if (selectedCategory) {
               const categoryIndex = categories.findIndex(
                 (category) => category === selectedCategory
               );
               updatedData = [...categories];
               updatedData[categoryIndex] = newCategory;
-  
+
               // TODO: change the all category names in the corresponding diaries
-  
             } // Add a new category
             else {
               updatedData = [...categories, newCategory];
@@ -81,8 +81,6 @@ const CategoryModal: React.FC<CategoryModalProps> = ({
       presentToast("Enter new category");
     }
   };
-  
-  
 
   const presentToast = (message: string) => {
     present({
