@@ -34,7 +34,7 @@ const ViewList: React.FC<ViewListProps> = ({
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await entriesData;
+        const data = entriesData;
         let filteredEntries: Entry[] = [];
 
         if (selectionType === "date") {
