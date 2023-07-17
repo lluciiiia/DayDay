@@ -86,7 +86,6 @@ const ViewList: React.FC<ViewListProps> = ({
             {editMode && (
               <>
                 <IonIcon
-                  id="present-alert"
                   icon={closeCircleOutline}
                   style={{ fontSize: "22px", marginRight: "10px" }}
                   onClick={() => {
