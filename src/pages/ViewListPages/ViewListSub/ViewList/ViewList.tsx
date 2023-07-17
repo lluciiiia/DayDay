@@ -1,14 +1,7 @@
 import { useEffect, useState } from "react";
-import {
-  IonItem,
-  IonList,
-  IonIcon,
-  IonLabel,
-  IonButton,
-  IonAlert,
-} from "@ionic/react";
+import { IonItem, IonList, IonIcon, IonLabel, IonAlert } from "@ionic/react";
 import { closeCircleOutline } from "ionicons/icons";
-import { EntriesData } from "../../../GetPutData";
+import { EntriesData } from "../../../../GetPutData";
 import { useHistory } from "react-router-dom";
 
 interface ViewListProps {
@@ -71,7 +64,6 @@ const ViewList: React.FC<ViewListProps> = ({
       entriesDataInstance.deleteEntriesData(entryToDelete);
     }
   };
-  
 
   const handleEntryClick = (selectedEntry: Entry) => {
     setSelectedEntry(selectedEntry);
@@ -99,49 +91,49 @@ const ViewList: React.FC<ViewListProps> = ({
               </>
             )}
             <IonLabel onClick={() => handleEntryClick(entry)}>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                width: "100%",
-              }}>
-              <div style={{ display: "flex", flexDirection: "row" }}>
-                <div
-                  style={{
-                    position: "relative",
-                    fontSize: "21px",
-                    fontWeight: "bold",
-                    flexGrow: 1,
-                  }}>
-                  {entry.title}
-                </div>
-                <div
-                  style={{
-                    position: "absolute",
-                    top: 0,
-                    right: 0,
-                    fontSize: "14px",
-                    color: "rgb(165, 165, 165)",
-                    marginTop: "28px",
-                    marginRight: "10px",
-                  }}>
-                  {selectionType === "category" ? entry.date : entry.category}
-                </div>
-              </div>
-
               <div
                 style={{
-                  fontSize: "16px",
-                  marginTop: "5px",
-                  marginBottom: "15px",
+                  display: "flex",
+                  flexDirection: "column",
+                  width: "100%",
                 }}>
-                {entry.content && entry.content[0] && entry.content[0].text
-                  ? entry.content[0].text.length > 30
-                    ? `${entry.content[0].text.substring(0, 88)}...`
-                    : entry.content[0].text
-                  : ""}
+                <div style={{ display: "flex", flexDirection: "row" }}>
+                  <div
+                    style={{
+                      position: "relative",
+                      fontSize: "21px",
+                      fontWeight: "bold",
+                      flexGrow: 1,
+                    }}>
+                    {entry.title}
+                  </div>
+                  <div
+                    style={{
+                      position: "absolute",
+                      top: 0,
+                      right: 0,
+                      fontSize: "14px",
+                      color: "rgb(165, 165, 165)",
+                      marginTop: "28px",
+                      marginRight: "10px",
+                    }}>
+                    {selectionType === "category" ? entry.date : entry.category}
+                  </div>
+                </div>
+
+                <div
+                  style={{
+                    fontSize: "16px",
+                    marginTop: "5px",
+                    marginBottom: "15px",
+                  }}>
+                  {entry.content && entry.content[0] && entry.content[0].text
+                    ? entry.content[0].text.length > 30
+                      ? `${entry.content[0].text.substring(0, 88)}...`
+                      : entry.content[0].text
+                    : ""}
+                </div>
               </div>
-            </div>
             </IonLabel>
           </IonItem>
         ))}
@@ -155,22 +147,20 @@ const ViewList: React.FC<ViewListProps> = ({
           {
             text: "Cancel",
             handler: () => {
-              setShowAlert(false); 
+              setShowAlert(false);
               setDeletingEntry(null);
             },
           },
           {
             text: "Confirm",
             handler: () => {
-              handleDeleteEntry(deletingEntry!); 
-              setShowAlert(false); 
+              handleDeleteEntry(deletingEntry!);
+              setShowAlert(false);
               setDeletingEntry(null);
             },
           },
-        ]}
-      ></IonAlert>
+        ]}></IonAlert>
     </>
-
   );
 };
 

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { IonContent, IonSearchbar } from "@ionic/react";
-import ViewList from "./ViewListSub/ViewList";
+import ViewList from "./ViewListSub/ViewList/ViewList";
 import ViewHeader from "./ViewListSub/ViewHeader";
 import useFetchEntriesData from "./ViewListSub/fetchEntriesData";
 
