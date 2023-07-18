@@ -19,7 +19,6 @@ const CategoryList: React.FC<CategoryListProps> = ({
   setShowModal,
   setCategories,
 }) => {
-  const history = useHistory();
 
   const [showAlert, setShowAlert] = useState(false);
   const [deletingCategory, setDeletingCategory] = useState<string | null>(null);

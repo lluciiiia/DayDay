@@ -10,5 +10,3 @@ type Entry = {
   category: string;
   key: number | undefined;
 };
-
-
