@@ -30,7 +30,7 @@ export const EntryItem: React.FC<EntryItemProps> = ({
   };
 
   return (
-    <IonItem key={entry.id} style={{ padding: "7px", fontSize: "18px" }}>
+    <IonItem key={entry.key} style={{ padding: "7px", fontSize: "18px" }}>
       {editMode && (
         <>
           <IonIcon

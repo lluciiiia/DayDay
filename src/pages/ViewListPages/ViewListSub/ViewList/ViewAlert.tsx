@@ -19,16 +19,11 @@ export const ViewAlert: React.FC<ViewAlertProps> = ({
   entries,
   setEntries,
 }) => {
-  const handleDeleteEntry = (entryToDelete: Entry) => {
-    const entryIndex = entries.indexOf(entryToDelete);
-    if (entryIndex !== -1) {
-      const updatedData = [...entries];
-      updatedData.splice(entryIndex, 1);
-      setEntries(updatedData);
-
-      const entriesDataInstance = new EntriesData();
-      entriesDataInstance.deleteEntriesData(entryToDelete);
-    }
+  const handleDeleteEntry = async (entryToDelete: Entry) => {
+    const entriesData = new EntriesData();
+    await entriesData.deleteEntriesData(entryToDelete);
+    const updatedData = await entriesData.getEntriesData();
+    setEntries(updatedData);
   };
   return (
     <IonAlert

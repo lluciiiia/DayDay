@@ -8,7 +8,7 @@ type Entry = {
   date: string;
   title: string;
   category: string;
-  id: number | undefined;
+  key: number;
 };
 
 

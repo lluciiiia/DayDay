@@ -55,44 +55,6 @@ const CategoryList: React.FC<CategoryListProps> = ({
     }
   };
 
-  // const handleDeleteCategory = async (index: number) => {
-  //   const categoryToDelete = categories[index];
-
-  //   try {
-  //     const entriesData = new EntriesData();
-  //     const currentEntriesData = await entriesData.getEntriesData();
-
-  //     const filteredEntries: Entry[] = currentEntriesData.filter(
-  //       (entry: Entry) => entry.category === categoryToDelete
-  //     );
-
-  //     // delete every entry in the category
-  //     filteredEntries.forEach((entry: Entry) => {
-  //       entriesData.deleteEntriesData(entry);
-  //     });
-  //   } catch (error) {
-  //     console.error("Error fetching entries data:", error);
-  //   }
-
-  //   // Delete the category & update the UI
-
-  //   // AFTER
-  //   const categoriesData = new CategoriesData();
-  //   categoriesData.deleteCategoriesData(categoryToDelete);
-  //   const updatedData = categoriesData.getCategoriesData();
-  //   setCategories(updatedData);
-
-  //   // BEFORE
-  //   // delete the category from backend data
-
-  //   // const updatedData = categories.filter((_, i) => i !== index);
-  //   // const categoriesData = new CategoriesData();
-  //   // categoriesData.putCategoriesData(updatedData);
-
-  //   // update the UI
-  //   //setCategories(updatedData);
-  // };
-
   const handleCategoryClick = (selectedCategory: string) => {
     setSelectedCategory(selectedCategory);
     history.push("/viewCategory", { selectedCategory });

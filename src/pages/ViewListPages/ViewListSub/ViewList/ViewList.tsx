@@ -53,9 +53,9 @@ const ViewList: React.FC<ViewListProps> = ({
   return (
     <>
       <IonList>
-        {entries.map((entry) => (
+        {entries.map((entry, key) => (
           <EntryItem
-            key={entry.id}
+            key={key}
             entry={entry}
             selectionType={selectionType}
             editMode={editMode}

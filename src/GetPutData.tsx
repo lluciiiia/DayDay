@@ -10,7 +10,7 @@ export class CategoriesData {
     console.log("typeof data in deleteCategoriesData", typeof id);
     console.log("categoriesURL", categoriesURL);
     try {
-      await axios.delete(categoriesURL, { data: {id} });
+      await axios.delete(categoriesURL, { data: { id } });
     } catch (error) {
       console.error(error);
       throw new Error("Failed to delete category.");
@@ -30,7 +30,7 @@ export class CategoriesData {
 
   async putCategoriesData(id: string) {
     try {
-      await axios.put(categoriesURL, { data: {id} });
+      await axios.put(categoriesURL, { data: { id } });
     } catch (error) {
       //console.error(error);
       throw new Error("Failed to update categories data.");
@@ -42,6 +42,7 @@ export class EntriesData {
   async deleteEntriesData(data: Entry) {
     console.log("data in deleteEntriesData", data);
     console.log("typeof data in deleteEntriesData", typeof data);
+    console.log("entriesURL", entriesURL);
     try {
       await axios.delete(entriesURL, { data });
     } catch (error) {
@@ -56,7 +57,6 @@ export class EntriesData {
       const entries = response.data;
       return entries;
     } catch (error) {
-      //console.error(error);
       throw new Error("Failed to update entries data.");
     }
   }
