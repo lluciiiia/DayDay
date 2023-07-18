@@ -75,8 +75,8 @@ const CategoryModal: React.FC<CategoryModalProps> = ({
 
             filteredEntries.forEach((entry) => {
               entriesData.modifyEntriesData({
-                entry: entry,
-                selectedCategory: selectedCategory,
+                entryToChange: entry,
+                newChange: newCategory,
                 changeType: "category",
               });
             });

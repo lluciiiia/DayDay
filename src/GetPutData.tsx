@@ -79,15 +79,18 @@ export class EntriesData {
   }
 
   async modifyEntriesData(data: {
-    entry: Entry;
-    selectedCategory: string;
+    entryToChange: Entry;
+    newChange: string;
     changeType: string;
   }) {
     console.log("data in modifyEntriesData", data);
     try {
-      await axios.put(entriesURL + "/modify", data);
+      const response = await axios.put(entriesURL + "/modify", data);
+      console.log("Response from server:", response);
     } catch (error) {
+      console.error("Error while updating entries data:", error);
       throw new Error("Failed to update entries data.");
     }
   }
+  
 }
