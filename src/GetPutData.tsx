@@ -5,18 +5,6 @@ const categoriesURL = ApiURL + "/categories";
 const entriesURL = ApiURL + "/entries";
 
 export class CategoriesData {
-  async deleteCategoriesData(id: string) {
-    console.log("data in deleteCategoriesData", id);
-    console.log("typeof data in deleteCategoriesData", typeof id);
-    console.log("categoriesURL", categoriesURL);
-    try {
-      await axios.delete(categoriesURL, { data: { id } });
-    } catch (error) {
-      console.error(error);
-      throw new Error("Failed to delete category.");
-    }
-  }
-
   async getCategoriesData() {
     try {
       const response = await axios.get(categoriesURL);
@@ -31,6 +19,28 @@ export class CategoriesData {
   async putCategoriesData(id: string) {
     try {
       await axios.put(categoriesURL, { data: { id } });
+    } catch (error) {
+      //console.error(error);
+      throw new Error("Failed to update categories data.");
+    }
+  }
+
+  async deleteCategoriesData(id: string) {
+    console.log("data in deleteCategoriesData", id);
+    console.log("typeof data in deleteCategoriesData", typeof id);
+    console.log("categoriesURL", categoriesURL);
+    try {
+      await axios.delete(categoriesURL, { data: { id } });
+    } catch (error) {
+      console.error(error);
+      throw new Error("Failed to delete category.");
+    }
+  }
+
+  async modifyCategoriesData(id: string[]) {
+    console.log("data in modifyCategoriesData", id);
+    try {
+      await axios.put(categoriesURL + "/modify", id);
     } catch (error) {
       //console.error(error);
       throw new Error("Failed to update categories data.");

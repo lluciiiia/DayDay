@@ -39,7 +39,7 @@ const CategoryModal: React.FC<CategoryModalProps> = ({
     const newCategory = categoryRef.current?.value as string;
     if (newCategory) {
       const categoriesData = new CategoriesData();
-  
+
       try {
         const existingCategories = await categoriesData.getCategoriesData();
         if (
@@ -58,17 +58,21 @@ const CategoryModal: React.FC<CategoryModalProps> = ({
             setCategories(updatedData);
 
             // TODO: rename it in categoriesData in backend
-  
+            await categoriesData.modifyCategoriesData([
+              selectedCategory,
+              newCategory,
+            ]);
+
             // TODO: Request the backend to update the category names in corresponding diaries (entriesData)
 
-          // add a new category
+            // add a new category
           } else {
             const updatedData = [...categories, newCategory];
             setCategories(updatedData);
             console.log(updatedData);
             console.log(newCategory);
             await categoriesData.putCategoriesData(newCategory); // Request the backend to add a new category
-          }   
+          }
           setShowModal(false);
         }
       } catch (error) {
@@ -78,7 +82,6 @@ const CategoryModal: React.FC<CategoryModalProps> = ({
       presentToast("Enter a new category");
     }
   };
-  
 
   const presentToast = (message: string) => {
     present({
