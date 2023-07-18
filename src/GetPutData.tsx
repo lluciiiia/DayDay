@@ -42,7 +42,6 @@ export class CategoriesData {
     try {
       await axios.put(categoriesURL + "/modify", id);
     } catch (error) {
-      //console.error(error);
       throw new Error("Failed to update categories data.");
     }
   }
@@ -75,7 +74,19 @@ export class EntriesData {
     try {
       await axios.put(entriesURL, data);
     } catch (error) {
-      //console.error(error);
+      throw new Error("Failed to update entries data.");
+    }
+  }
+
+  async modifyEntriesData(data: {
+    entry: Entry;
+    selectedCategory: string;
+    changeType: string;
+  }) {
+    console.log("data in modifyEntriesData", data);
+    try {
+      await axios.put(entriesURL + "/modify", data);
+    } catch (error) {
       throw new Error("Failed to update entries data.");
     }
   }

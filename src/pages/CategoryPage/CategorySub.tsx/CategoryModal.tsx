@@ -13,6 +13,7 @@ import {
 } from "@ionic/react";
 import { list } from "ionicons/icons";
 import { CategoriesData } from "../../../GetPutData";
+import { EntriesData } from "../../../GetPutData";
 
 interface CategoryModalProps {
   showModal: boolean;
@@ -57,13 +58,28 @@ const CategoryModal: React.FC<CategoryModalProps> = ({
             updatedData[categoryIndex] = newCategory;
             setCategories(updatedData);
 
-            // TODO: rename it in categoriesData in backend
+            // rename it in categoriesData in backend
             await categoriesData.modifyCategoriesData([
               selectedCategory,
               newCategory,
             ]);
 
-            // TODO: Request the backend to update the category names in corresponding diaries (entriesData)
+            // rename the category in every diary
+            const entriesData = new EntriesData();
+            const entries = await entriesData.getEntriesData();
+            let filteredEntries: Entry[] = [];
+
+            filteredEntries = entries.filter(
+              (entry: Entry) => entry.category === selectedCategory
+            );
+
+            filteredEntries.forEach((entry) => {
+              entriesData.modifyEntriesData({
+                entry: entry,
+                selectedCategory: selectedCategory,
+                changeType: "category",
+              });
+            });
 
             // add a new category
           } else {
