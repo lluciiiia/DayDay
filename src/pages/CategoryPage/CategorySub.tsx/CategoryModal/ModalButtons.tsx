@@ -5,7 +5,7 @@ import {
   IonButtons,
   IonButton,
   IonTitle,
-  useIonToast
+  useIonToast,
 } from "@ionic/react";
 import { CategoriesData, EntriesData } from "../../../../GetPutData";
 
@@ -24,7 +24,58 @@ const ModalButtons: React.FC<ModalButtonsProps> = ({
   setCategories,
   categories,
 }) => {
-    const [present] = useIonToast();
+  const [present] = useIonToast();
+
+  const presentToast = (message: string) => {
+    present({
+      message: message,
+      duration: 100,
+      position: "middle",
+    });
+  };
+
+  const handleRenameCategory = async (
+    newCategory: string,
+    categoriesData: CategoriesData
+  ) => {
+    const updatedData: string[] = [...categories];
+    const categoryIndex = categories.findIndex(
+      (category) => category === selectedCategory
+    );
+    updatedData[categoryIndex] = newCategory;
+    setCategories(updatedData);
+
+    // rename it in categoriesData in the backend
+    await categoriesData.modifyCategoriesData([selectedCategory, newCategory]);
+
+    // rename the category in every diary
+    const entriesData = new EntriesData();
+    const entries = await entriesData.getEntriesData();
+    let filteredEntries: Entry[] = [];
+
+    filteredEntries = entries.filter(
+      (entry: Entry) => entry.category === selectedCategory
+    );
+
+    filteredEntries.forEach((entry) => {
+      entriesData.modifyEntriesData({
+        entryToChange: entry,
+        newChange: newCategory,
+        changeType: "category",
+      });
+    });
+  };
+
+  const handleAddCategory = async (
+    newCategory: string,
+    categoriesData: CategoriesData
+  ) => {
+    const updatedData = [...categories, newCategory];
+    setCategories(updatedData);
+    console.log(updatedData);
+    console.log(newCategory);
+    await categoriesData.putCategoriesData(newCategory);
+  };
 
   const handleDoneClick = async () => {
     const newCategory = categoryRef.current?.value as string;
@@ -39,45 +90,10 @@ const ModalButtons: React.FC<ModalButtonsProps> = ({
         ) {
           presentToast("Category already exists!"); // except keeping the same name
         } else {
-          // rename a category
           if (selectedCategory) {
-            const updatedData: string[] = [...categories];
-            const categoryIndex = categories.findIndex(
-              (category) => category === selectedCategory
-            );
-            updatedData[categoryIndex] = newCategory;
-            setCategories(updatedData);
-
-            // rename it in categoriesData in backend
-            await categoriesData.modifyCategoriesData([
-              selectedCategory,
-              newCategory,
-            ]);
-
-            // rename the category in every diary
-            const entriesData = new EntriesData();
-            const entries = await entriesData.getEntriesData();
-            let filteredEntries: Entry[] = [];
-
-            filteredEntries = entries.filter(
-              (entry: Entry) => entry.category === selectedCategory
-            );
-
-            filteredEntries.forEach((entry) => {
-              entriesData.modifyEntriesData({
-                entryToChange: entry,
-                newChange: newCategory,
-                changeType: "category",
-              });
-            });
-
-            // add a new category
+            await handleRenameCategory(newCategory, categoriesData);
           } else {
-            const updatedData = [...categories, newCategory];
-            setCategories(updatedData);
-            console.log(updatedData);
-            console.log(newCategory);
-            await categoriesData.putCategoriesData(newCategory); // Request the backend to add a new category
+            await handleAddCategory(newCategory, categoriesData);
           }
           setShowModal(false);
         }
@@ -89,13 +105,6 @@ const ModalButtons: React.FC<ModalButtonsProps> = ({
     }
   };
 
-  const presentToast = (message: string) => {
-    present({
-      message: message,
-      duration: 100,
-      position: "middle",
-    });
-  };
   return (
     <>
       <IonHeader>
