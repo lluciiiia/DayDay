@@ -65,8 +65,7 @@ const ModalButtons: React.FC<ModalButtonsProps> = ({
   ) => {
     const updatedData = [...categories, newCategory];
     setCategories(updatedData);
-    console.log(updatedData);
-    console.log(newCategory);
+  
     await categoriesData.putCategoriesData(newCategory);
   };
 
