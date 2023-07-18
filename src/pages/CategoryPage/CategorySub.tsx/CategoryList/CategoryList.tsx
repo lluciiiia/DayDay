@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { IonItem, IonList } from "@ionic/react";
-import { useHistory } from "react-router-dom";
 import CategoryAlert from "./CategoryAlert";
 import EachCategory from "./EachCategory";
 
