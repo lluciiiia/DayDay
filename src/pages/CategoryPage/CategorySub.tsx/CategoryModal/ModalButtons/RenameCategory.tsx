@@ -1,11 +1,6 @@
 import React from "react";
 import { CategoriesData, EntriesData } from "../../../../../GetPutData";
 
-interface RenameCategoryProps {
-  setCategories: React.Dispatch<React.SetStateAction<string[]>>;
-  categories: string[];
-}
-
 export const handleRenameCategory = async (
   newCategory: string,
   categoriesData: CategoriesData,
