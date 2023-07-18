@@ -33,21 +33,22 @@ const CategoryList: React.FC<CategoryListProps> = ({
     const categoryToDelete = categories[index];
 
     try {
+      // delete every entry in the category
       const entriesData = new EntriesData();
       const currentEntriesData = await entriesData.getEntriesData();
 
       const filteredEntries: Entry[] = currentEntriesData.filter(
         (entry: Entry) => entry.category === categoryToDelete
       );
-
-      // delete every entry in the category
       filteredEntries.forEach((entry: Entry) => {
         entriesData.deleteEntriesData(entry);
       });
 
-      // Delete the category & update the UI
+      // Delete the category
       const categoriesData = new CategoriesData();
       await categoriesData.deleteCategoriesData(categoryToDelete);
+
+      // update the UI
       const updatedData = await categoriesData.getCategoriesData();
       setCategories(updatedData);
     } catch (error) {
