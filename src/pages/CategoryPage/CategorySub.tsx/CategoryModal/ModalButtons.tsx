@@ -8,6 +8,7 @@ import {
   useIonToast,
 } from "@ionic/react";
 import { CategoriesData, EntriesData } from "../../../../GetPutData";
+import { presentToast } from "../../../../else/presentToast";
 
 interface ModalButtonsProps {
   setShowModal: (show: boolean) => void;
@@ -25,14 +26,6 @@ const ModalButtons: React.FC<ModalButtonsProps> = ({
   categories,
 }) => {
   const [present] = useIonToast();
-
-  const presentToast = (message: string) => {
-    present({
-      message: message,
-      duration: 100,
-      position: "middle",
-    });
-  };
 
   const handleRenameCategory = async (
     newCategory: string,
@@ -88,7 +81,7 @@ const ModalButtons: React.FC<ModalButtonsProps> = ({
           existingCategories.includes(newCategory) &&
           newCategory !== selectedCategory
         ) {
-          presentToast("Category already exists!"); // except keeping the same name
+          presentToast(present, "Category already exists!"); // except keeping the same name
         } else {
           if (selectedCategory) {
             await handleRenameCategory(newCategory, categoriesData);
@@ -101,7 +94,7 @@ const ModalButtons: React.FC<ModalButtonsProps> = ({
         console.error("Error handling category update:", error);
       }
     } else {
-      presentToast("Enter a new category");
+      presentToast(present, "Enter a new category");
     }
   };
 

@@ -4,7 +4,7 @@ export const presentToast = (
   ) => {
     present({
       message: message,
-      duration: 300,
+      duration: 150,
       position: "middle",
     });
   };
