@@ -4,7 +4,7 @@ import {
   IonContent,
 } from "@ionic/react";
 import ModalInput from "./ModalInput";
-import ModalButtons from "./ModalButtons";
+import ModalButtons from "./ModalButtons/ModalButtons";
 
 interface CategoryModalProps {
   showModal: boolean;

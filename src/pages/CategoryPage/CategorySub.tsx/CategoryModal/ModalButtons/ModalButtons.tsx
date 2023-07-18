@@ -7,8 +7,10 @@ import {
   IonTitle,
   useIonToast,
 } from "@ionic/react";
-import { CategoriesData, EntriesData } from "../../../../GetPutData";
-import { presentToast } from "../../../../else/presentToast";
+import { CategoriesData } from "../../../../../GetPutData";
+import { presentToast } from "../../../../../else/presentToast";
+import { handleAddCategory } from "./AddCategory";
+import { handleRenameCategory } from "./RenameCategory";
 
 interface ModalButtonsProps {
   setShowModal: (show: boolean) => void;
@@ -27,48 +29,6 @@ const ModalButtons: React.FC<ModalButtonsProps> = ({
 }) => {
   const [present] = useIonToast();
 
-  const handleRenameCategory = async (
-    newCategory: string,
-    categoriesData: CategoriesData
-  ) => {
-    const updatedData: string[] = [...categories];
-    const categoryIndex = categories.findIndex(
-      (category) => category === selectedCategory
-    );
-    updatedData[categoryIndex] = newCategory;
-    setCategories(updatedData);
-
-    // rename it in categoriesData in the backend
-    await categoriesData.modifyCategoriesData([selectedCategory, newCategory]);
-
-    // rename the category in every diary
-    const entriesData = new EntriesData();
-    const entries = await entriesData.getEntriesData();
-    let filteredEntries: Entry[] = [];
-
-    filteredEntries = entries.filter(
-      (entry: Entry) => entry.category === selectedCategory
-    );
-
-    filteredEntries.forEach((entry) => {
-      entriesData.modifyEntriesData({
-        entryToChange: entry,
-        newChange: newCategory,
-        changeType: "category",
-      });
-    });
-  };
-
-  const handleAddCategory = async (
-    newCategory: string,
-    categoriesData: CategoriesData
-  ) => {
-    const updatedData = [...categories, newCategory];
-    setCategories(updatedData);
-  
-    await categoriesData.putCategoriesData(newCategory);
-  };
-
   const handleDoneClick = async () => {
     const newCategory = categoryRef.current?.value as string;
     if (newCategory) {
@@ -83,9 +43,20 @@ const ModalButtons: React.FC<ModalButtonsProps> = ({
           presentToast(present, "Category already exists!"); // except keeping the same name
         } else {
           if (selectedCategory) {
-            await handleRenameCategory(newCategory, categoriesData);
+            await handleRenameCategory(
+              newCategory,
+              categoriesData,
+              selectedCategory,
+              setCategories,
+              categories
+            );
           } else {
-            await handleAddCategory(newCategory, categoriesData);
+            await handleAddCategory(
+              newCategory,
+              categoriesData,
+              setCategories,
+              categories
+            );
           }
           setShowModal(false);
         }
