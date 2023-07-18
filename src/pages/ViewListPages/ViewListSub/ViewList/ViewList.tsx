@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { IonList } from "@ionic/react";
 import ViewAlert from "./ViewAlert";
-import EntryItem from "./EntryItem";
+import EachEntry from "./EachEntry";
 
 interface ViewListProps {
   selectionType: "category" | "date";
@@ -54,7 +54,7 @@ const ViewList: React.FC<ViewListProps> = ({
     <>
       <IonList>
         {entries.map((entry, key) => (
-          <EntryItem
+          <EachEntry
             key={key}
             entry={entry}
             selectionType={selectionType}

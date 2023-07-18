@@ -3,7 +3,7 @@ import { IonIcon, IonItem, IonLabel } from "@ionic/react";
 import { closeCircleOutline } from "ionicons/icons";
 import { useHistory } from "react-router-dom";
 
-interface EntryItemProps {
+interface EachEntryProps {
   entry: Entry;
   selectionType: "category" | "date";
   editMode: boolean;
@@ -13,7 +13,7 @@ interface EntryItemProps {
   setSelectedEntry: (entry: Entry) => void;
 }
 
-export const EntryItem: React.FC<EntryItemProps> = ({
+export const EachEntry: React.FC<EachEntryProps> = ({
   entry,
   selectionType,
   editMode,
@@ -94,4 +94,4 @@ export const EntryItem: React.FC<EntryItemProps> = ({
   );
 };
 
-export default EntryItem;
+export default EachEntry;
