@@ -37,7 +37,7 @@ export const SaveEntry = () => {
       date: selectedDate!,
       title: title,
       category: selectedCategory,
-      id: undefined,
+      key: undefined,
     };
 
     try {
