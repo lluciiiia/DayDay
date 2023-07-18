@@ -35,53 +35,95 @@ const CategoryModal: React.FC<CategoryModalProps> = ({
 }) => {
   const [present] = useIonToast();
 
-  const handleDoneClick = () => {
+  // const handleDoneClick = () => {
+  //   const newCategory = categoryRef.current?.value as string;
+  //   if (newCategory) {
+  //     const categoriesData = new CategoriesData();
+
+  //     // rename a category
+  //     categoriesData
+  //       .getCategoriesData()
+  //       .then((existingCategories: any) => {
+  //         if (
+  //           existingCategories.includes(newCategory) &&
+  //           newCategory !== selectedCategory
+  //         ) {
+  //           presentToast("Category already exists!"); // except keeping the same name
+  //         } else {
+  //           let updatedData: any;
+  //           if (selectedCategory) {
+  //             const categoryIndex = categories.findIndex(
+  //               (category) => category === selectedCategory
+  //             );
+  //             updatedData = [...categories];
+  //             updatedData[categoryIndex] = newCategory;
+
+  //             // TODO: change the all category names in the corresponding diaries
+              
+  //           } // Add a new category
+  //           else {
+  //             updatedData = [...categories, newCategory];
+  //           }
+  //           const categoriesData = new CategoriesData();
+  //           categoriesData
+  //             .putCategoriesData(newCategory)
+  //             .then(() => {
+  //               setCategories(updatedData);
+  //               setShowModal(false);
+  //             })
+  //             .catch((error: any) => {
+  //               console.error("Error updating categories:", error);
+  //             });
+  //         }
+  //       })
+  //       .catch((error: any) => {
+  //         console.error("Error fetching existing categories:", error);
+  //       });
+  //   } else {
+  //     presentToast("Enter new category");
+  //   }
+  // };
+
+  const handleDoneClick = async () => {
     const newCategory = categoryRef.current?.value as string;
     if (newCategory) {
       const categoriesData = new CategoriesData();
-      // rename a category
-      categoriesData
-        .getCategoriesData()
-        .then((existingCategories: any) => {
-          if (
-            existingCategories.includes(newCategory) &&
-            newCategory !== selectedCategory
-          ) {
-            presentToast("Category already exists!"); // except keeping the same name
+  
+      try {
+        const existingCategories = await categoriesData.getCategoriesData();
+        if (
+          existingCategories.includes(newCategory) &&
+          newCategory !== selectedCategory
+        ) {
+          presentToast("Category already exists!"); // except keeping the same name
+        } else {
+          // rename a category
+          if (selectedCategory) {
+            const updatedData: string[] = [...categories];
+            const categoryIndex = categories.findIndex(
+              (category) => category === selectedCategory
+            );
+            updatedData[categoryIndex] = newCategory;
+  
+            // TODO: Request the backend to update the category names in corresponding diaries
+          // add a new category
           } else {
-            let updatedData: any;
-            if (selectedCategory) {
-              const categoryIndex = categories.findIndex(
-                (category) => category === selectedCategory
-              );
-              updatedData = [...categories];
-              updatedData[categoryIndex] = newCategory;
-
-              // TODO: change the all category names in the corresponding diaries
-              
-            } // Add a new category
-            else {
-              updatedData = [...categories, newCategory];
-            }
-            const categoriesData = new CategoriesData();
-            categoriesData
-              .putCategoriesData(updatedData)
-              .then(() => {
-                setCategories(updatedData);
-                setShowModal(false);
-              })
-              .catch((error: any) => {
-                console.error("Error updating categories:", error);
-              });
+            const updatedData = [...categories, newCategory];
+            setCategories(updatedData);
+            console.log(updatedData);
+            console.log(newCategory);
+            await categoriesData.putCategoriesData(newCategory); // Request the backend to add a new category
           }
-        })
-        .catch((error: any) => {
-          console.error("Error fetching existing categories:", error);
-        });
+          setShowModal(false);
+        }
+      } catch (error) {
+        console.error("Error handling category update:", error);
+      }
     } else {
-      presentToast("Enter new category");
+      presentToast("Enter a new category");
     }
   };
+  
 
   const presentToast = (message: string) => {
     present({
