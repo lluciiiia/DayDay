@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import { IonItem, IonList, IonIcon, IonLabel, IonAlert } from "@ionic/react";
+import { IonItem, IonList, IonIcon, IonLabel } from "@ionic/react";
 import { closeCircleOutline, informationCircleOutline } from "ionicons/icons";
-import { CategoriesData } from "../../../../GetPutData";
 import { useHistory } from "react-router-dom";
-import { EntriesData } from "../../../../GetPutData";
+import CategoryAlert from "./CategoryAlert";
 
 interface CategoryListProps {
   categories: string[];
@@ -28,33 +27,6 @@ const CategoryList: React.FC<CategoryListProps> = ({
 
   const [showAlert, setShowAlert] = useState(false);
   const [deletingCategory, setDeletingCategory] = useState<string | null>(null);
-
-  const handleDeleteCategory = async (index: number) => {
-    const categoryToDelete = categories[index];
-
-    try {
-      // delete every entry in the category
-      const entriesData = new EntriesData();
-      const currentEntriesData = await entriesData.getEntriesData();
-
-      const filteredEntries: Entry[] = currentEntriesData.filter(
-        (entry: Entry) => entry.category === categoryToDelete
-      );
-      filteredEntries.forEach((entry: Entry) => {
-        entriesData.deleteEntriesData(entry);
-      });
-
-      // Delete the category
-      const categoriesData = new CategoriesData();
-      await categoriesData.deleteCategoriesData(categoryToDelete);
-
-      // update the UI
-      const updatedData = await categoriesData.getCategoriesData();
-      setCategories(updatedData);
-    } catch (error) {
-      console.error("Error fetching entries data:", error);
-    }
-  };
 
   const handleCategoryClick = (selectedCategory: string) => {
     setSelectedCategory(selectedCategory);
@@ -101,29 +73,13 @@ const CategoryList: React.FC<CategoryListProps> = ({
           </IonItem>
         ))}
       </IonList>
-      <IonAlert
-        isOpen={showAlert}
-        header="Every diary will be permanently removed"
-        buttons={[
-          {
-            text: "Cancel",
-            handler: () => {
-              setShowAlert(false);
-              setDeletingCategory(null);
-            },
-          },
-          {
-            text: "Confirm",
-            handler: () => {
-              if (deletingCategory) {
-                const indexToDelete = categories.indexOf(deletingCategory);
-                handleDeleteCategory(indexToDelete);
-              }
-              setShowAlert(false);
-              setDeletingCategory(null);
-            },
-          },
-        ]}
+      <CategoryAlert
+        showAlert={showAlert}
+        setShowAlert={setShowAlert}
+        deletingCategory={deletingCategory}
+        setDeletingCategory={setDeletingCategory}
+        categories={categories}
+        setCategories={setCategories}
       />
     </>
   );
