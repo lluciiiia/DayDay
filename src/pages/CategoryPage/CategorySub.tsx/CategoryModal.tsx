@@ -55,8 +55,12 @@ const CategoryModal: React.FC<CategoryModalProps> = ({
               (category) => category === selectedCategory
             );
             updatedData[categoryIndex] = newCategory;
+            setCategories(updatedData);
+
+            // TODO: rename it in categoriesData in backend
   
-            // TODO: Request the backend to update the category names in corresponding diaries
+            // TODO: Request the backend to update the category names in corresponding diaries (entriesData)
+
           // add a new category
           } else {
             const updatedData = [...categories, newCategory];
@@ -64,7 +68,7 @@ const CategoryModal: React.FC<CategoryModalProps> = ({
             console.log(updatedData);
             console.log(newCategory);
             await categoriesData.putCategoriesData(newCategory); // Request the backend to add a new category
-          }
+          }   
           setShowModal(false);
         }
       } catch (error) {
