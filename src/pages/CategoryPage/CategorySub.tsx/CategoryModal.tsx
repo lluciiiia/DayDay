@@ -35,55 +35,6 @@ const CategoryModal: React.FC<CategoryModalProps> = ({
 }) => {
   const [present] = useIonToast();
 
-  // const handleDoneClick = () => {
-  //   const newCategory = categoryRef.current?.value as string;
-  //   if (newCategory) {
-  //     const categoriesData = new CategoriesData();
-
-  //     // rename a category
-  //     categoriesData
-  //       .getCategoriesData()
-  //       .then((existingCategories: any) => {
-  //         if (
-  //           existingCategories.includes(newCategory) &&
-  //           newCategory !== selectedCategory
-  //         ) {
-  //           presentToast("Category already exists!"); // except keeping the same name
-  //         } else {
-  //           let updatedData: any;
-  //           if (selectedCategory) {
-  //             const categoryIndex = categories.findIndex(
-  //               (category) => category === selectedCategory
-  //             );
-  //             updatedData = [...categories];
-  //             updatedData[categoryIndex] = newCategory;
-
-  //             // TODO: change the all category names in the corresponding diaries
-              
-  //           } // Add a new category
-  //           else {
-  //             updatedData = [...categories, newCategory];
-  //           }
-  //           const categoriesData = new CategoriesData();
-  //           categoriesData
-  //             .putCategoriesData(newCategory)
-  //             .then(() => {
-  //               setCategories(updatedData);
-  //               setShowModal(false);
-  //             })
-  //             .catch((error: any) => {
-  //               console.error("Error updating categories:", error);
-  //             });
-  //         }
-  //       })
-  //       .catch((error: any) => {
-  //         console.error("Error fetching existing categories:", error);
-  //       });
-  //   } else {
-  //     presentToast("Enter new category");
-  //   }
-  // };
-
   const handleDoneClick = async () => {
     const newCategory = categoryRef.current?.value as string;
     if (newCategory) {
