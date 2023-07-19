@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { EntriesData } from "../../../GetPutData";
+import { EntriesData } from "../../../else/GetPutData";
 
 export const useFetchEntriesData = () => {
   const [entriesData, setEntriesData] = useState<Entry[]>([]);

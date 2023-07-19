@@ -1,7 +1,7 @@
 import { IonAlert } from "@ionic/react";
 import React from "react";
-import { EntriesData } from "../../../../GetPutData";
-import { CategoriesData } from "../../../../GetPutData";
+import { EntriesData } from "../../../../else/GetPutData";
+import { CategoriesData } from "../../../../else/GetPutData";
 
 interface CategoryAlertProps {
   showAlert: boolean;

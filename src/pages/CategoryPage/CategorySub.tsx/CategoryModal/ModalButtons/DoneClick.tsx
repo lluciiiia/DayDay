@@ -1,5 +1,5 @@
 import React from "react";
-import { CategoriesData } from "../../../../../GetPutData";
+import { CategoriesData } from "../../../../../else/GetPutData";
 import { presentToast } from "../../../../../else/presentToast";
 import { handleAddCategory } from "./AddCategory";
 import { handleRenameCategory } from "./RenameCategory";

@@ -13,7 +13,7 @@ export const EditEntry = () => {
   const handleEdit = async (
     titleRef: React.RefObject<HTMLIonInputElement>,
     content: string,
-    selectedDate: string | undefined,
+    selectedDate: string,
     selectedCategory: string,
     history: ReturnType<typeof useHistory>
   ) => {
@@ -46,6 +46,7 @@ export const EditEntry = () => {
     };
 
     try {
+      console.log("entry in EditEntry", entry);
       await EditAll(entry);
 
       presentToast(present, "Your diary is saved!");

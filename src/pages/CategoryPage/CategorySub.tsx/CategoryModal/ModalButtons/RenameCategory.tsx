@@ -1,5 +1,5 @@
 import React from "react";
-import { CategoriesData, EntriesData } from "../../../../../GetPutData";
+import { CategoriesData, EntriesData } from "../../../../../else/GetPutData";
 
 export const handleRenameCategory = async (
   newCategory: string,

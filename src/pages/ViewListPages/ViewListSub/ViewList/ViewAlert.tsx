@@ -1,6 +1,6 @@
 import { IonAlert } from "@ionic/react";
 import React from "react";
-import { EntriesData } from "../../../../GetPutData";
+import { EntriesData } from "../../../../else/GetPutData";
 
 interface ViewAlertProps {
   showAlert: boolean;

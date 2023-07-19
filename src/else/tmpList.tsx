@@ -1,7 +1,7 @@
 import React from "react";
 import { IonItem, IonList, IonIcon, IonLabel } from "@ionic/react";
 import { closeCircleOutline, informationCircleOutline } from "ionicons/icons";
-import { CategoriesData } from "../GetPutData";
+import { CategoriesData } from "./GetPutData";
 import { useHistory } from "react-router-dom";
 
 interface CategoryListProps {

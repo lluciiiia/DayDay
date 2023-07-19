@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { IonContent, IonSearchbar } from "@ionic/react";
 import "../../main.css";
-import { CategoriesData } from "../../GetPutData";
+import { CategoriesData } from "../../else/GetPutData";
 import CategoryModal from "./CategorySub.tsx/CategoryModal/CategoryModal";
 import CategoryList from "./CategorySub.tsx/CategoryList/CategoryList";
 import CategoryHeader from "./CategorySub.tsx/CategoryHeader";

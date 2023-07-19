@@ -9,7 +9,7 @@ import {
   IonToolbar,
 } from "@ionic/react";
 import { useHistory, useLocation } from "react-router";
-import { CategoriesData } from "../../GetPutData";
+import { CategoriesData } from "../../else/GetPutData";
 import ContentEditor from "./AddEditSub/ContentEditor";
 import { SaveEntry } from "./AddEditSub/SaveEntry";
 import CategorySelection from "./AddEditSub/CategorySelection";

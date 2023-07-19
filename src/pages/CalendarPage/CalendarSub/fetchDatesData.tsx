@@ -1,4 +1,4 @@
-import { EntriesData } from "../../../GetPutData";
+import { EntriesData } from "../../../else/GetPutData";
 import { Entry } from "./IEntry";
 
 export const fetchDatesData = async (): Promise<Entry[]> => {

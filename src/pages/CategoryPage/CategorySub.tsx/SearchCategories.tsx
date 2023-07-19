@@ -1,5 +1,5 @@
 import Fuse from "fuse.js";
-import { CategoriesData } from "../../../GetPutData";
+import { CategoriesData } from "../../../else/GetPutData";
 
 const categoriesData = new CategoriesData();
 

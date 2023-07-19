@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ApiURL } from "../../BackendURL";
+import { ApiURL } from "../BackendURL";
 const apiURL = ApiURL + "/wordcount";
 
 const ignoredWords = [

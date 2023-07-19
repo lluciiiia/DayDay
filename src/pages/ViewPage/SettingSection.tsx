@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { useLocation, useHistory } from "react-router-dom";
 import { IonActionSheet } from "@ionic/react";
-import { EntriesData } from "../../GetPutData";
+import { EntriesData } from "../../else/GetPutData";
 
 interface SettingSectionProps {
   entryData: Entry;

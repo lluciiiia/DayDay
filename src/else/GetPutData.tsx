@@ -49,9 +49,6 @@ export class CategoriesData {
 
 export class EntriesData {
   async deleteEntriesData(data: Entry) {
-    console.log("data in deleteEntriesData", data);
-    console.log("typeof data in deleteEntriesData", typeof data);
-    console.log("entriesURL", entriesURL);
     try {
       await axios.delete(entriesURL, { data });
     } catch (error) {
@@ -80,7 +77,7 @@ export class EntriesData {
 
   async modifyEntriesData(data: {
     entryToChange: Entry;
-    newChange: string;
+    newChange: string | Content[];
     changeType: string;
   }) {
     console.log("data in modifyEntriesData", data);
@@ -92,5 +89,4 @@ export class EntriesData {
       throw new Error("Failed to update entries data.");
     }
   }
-  
 }
