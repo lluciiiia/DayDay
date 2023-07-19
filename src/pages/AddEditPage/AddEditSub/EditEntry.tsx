@@ -3,11 +3,6 @@ import { EditAll } from "../../../else/UpdateAll";
 import { useIonToast } from "@ionic/react";
 import { presentToast } from "../../../else/presentToast";
 
-interface LocationState {
-  selectedDate: string;
-  entryData?: Entry;
-}
-
 export const EditEntry = () => {
   const [present] = useIonToast();
   const handleEdit = async (
@@ -39,24 +34,31 @@ export const EditEntry = () => {
           text: content,
         },
       ],
-      date: selectedDate!,
+      date: selectedDate,
       title: title,
       category: selectedCategory,
       key: undefined,
     };
 
-    try {
-      console.log("entry in EditEntry", entry);
-      await EditAll(entry);
+    // try {
+    //   console.log("entry in EditEntry", entry);
+    //   await EditAll(entry);
 
-      presentToast(present, "Your diary is saved!");
-      setTimeout(() => {
-        history.push("/calendar");
-      }, 300);
-    } catch (error) {
-      console.error(error);
-      presentToast(present, "Failed to save your diary.");
-    }
+    //   presentToast(present, "Your diary is saved!");
+    //   setTimeout(() => {
+    //     history.push("/calendar");
+    //   }, 300);
+    // } catch (error) {
+    //   console.error(error);
+    //   presentToast(present, "Failed to save your diary.");
+    // }
+    console.log("entry in EditEntry", entry);
+    EditAll(entry);
+
+    presentToast(present, "Your diary is saved!");
+    setTimeout(() => {
+      history.push("/calendar");
+    }, 300);
   };
 
   return {
