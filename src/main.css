@@ -1,0 +1,16 @@
+ion-popover {
+  --background: rgba(105, 105, 105, 0.6);
+  --backdrop-opacity: 0.6;
+  --box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.6);
+  --color: white;
+  --width: 130px;
+}
+
+ion-popover ion-item {
+  --background: rgba(105, 105, 105, 0.6);
+}
+
+/* 
+ion-modal {
+  --height: auto;
+} */
