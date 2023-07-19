@@ -27,9 +27,12 @@ const EditPage = () => {
   const [categories, setCategories] = useState<string[]>([]);
   const { handleEdit } = EditEntry();
   const entryData = location.state?.entryData;
-  const [content, setContent] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("");
-
+  // Initialize it with the entry's category
+  const [selectedCategory, setSelectedCategory] = useState(
+    entryData?.category ?? ""
+  );
+  // Initialize it with the first content's text from the entry
+  const [content, setContent] = useState(entryData?.content[0]?.text ?? "");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -50,19 +53,23 @@ const EditPage = () => {
       </IonHeader>
       <IonContent scrollY={false}>
         <div style={{ margin: "5px" }}>
-          {/* TODO: before the user edits the title, it must be {entry.title} as a default */}
           <IonItem style={{ fontSize: "18px" }}>
-            <IonInput placeholder="Enter the title" ref={titleRef} maxlength={20} value={entryData?.title}></IonInput>
+            <IonInput
+              placeholder="Enter the title"
+              ref={titleRef}
+              maxlength={20}
+              value={entryData?.title}></IonInput>
           </IonItem>
         </div>
-        {/* TODO: before the user edits the category, it must be {entry.category} as a default */}
         <CategorySelection
-          selectedCategory={entryData?.category ?? ""}
+          selectedCategory={selectedCategory}
           categories={categories}
-          onCategoryChange={setSelectedCategory}
+          onCategoryChange={(newCategory) => setSelectedCategory(newCategory)}
         />
-        {/* TODO: before the user edits the content, it must be {entry.content[0]} as a default */}
-        <ContentEditor content={entryData?.content[0]?.text ?? ""} onContentChange={newContent => setContent(newContent)} />
+        <ContentEditor
+          content={content}
+          onContentChange={(newContent) => setContent(newContent)}
+        />
         <div
           style={{
             display: "flex",
