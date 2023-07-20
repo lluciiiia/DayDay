@@ -1,5 +1,6 @@
 import { ApiURL } from "../else/BackendURL";
 import axios from "axios";
+import { Entry, EntryService } from "./interfaces";
 
 const categoriesURL = ApiURL + "/categories";
 const entriesURL = ApiURL + "/entries";

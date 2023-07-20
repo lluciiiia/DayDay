@@ -1,4 +1,4 @@
-interface LocationData {
+export interface LocationData {
   latitude: number;
   longitude: number;
   name?: string;
@@ -9,7 +9,7 @@ interface LocationData {
   postalCode?: string;
 }
 
-interface Content {
+export interface Content {
   type: "text" | "image" | "video" | "audio" | "location" | "sticker";
   text?: string;
   image?: string;
@@ -19,7 +19,7 @@ interface Content {
   sticker?: string;
 }
 
-interface Entry {
+export interface Entry {
   id?: number;
   content: Content[];
   date: string;
@@ -27,7 +27,7 @@ interface Entry {
   category: string;
 }
 
-interface EntryService {
+export interface EntryService {
   addEntry(entry: Entry): Promise<void>;
   deleteEntry(entryId: number): Promise<void>;
   editEntry(entryId: number, updatedEntry: Entry): Promise<void>;
@@ -35,4 +35,7 @@ interface EntryService {
   getAllEntries(): Promise<Entry[]>;
 }
 
-interface EntryAnalysis {}
+export interface EntryAnalysis {
+  analyzeSentiment(entry: Entry): Promise<string>;
+  analyzeLocation(entry: Entry): Promise<LocationData>;
+}
