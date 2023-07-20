@@ -27,6 +27,11 @@ export interface Entry {
   category: string;
 }
 
+export interface Category {
+  id?: number;
+  name: string;
+}
+
 export interface EntryService {
   addEntry(entry: Entry): Promise<void>;
   deleteEntry(entryId: number): Promise<void>;
