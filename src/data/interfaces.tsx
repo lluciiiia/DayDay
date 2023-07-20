@@ -40,7 +40,10 @@ export interface EntryService {
   getAllEntries(): Promise<Entry[]>;
 }
 
-export interface EntryAnalysis {
-  analyzeSentiment(entry: Entry): Promise<string>;
-  analyzeLocation(entry: Entry): Promise<LocationData>;
+export interface CategoryService {
+  addCategory(category: Category): Promise<void>;
+  deleteCategory(categoryId: number): Promise<void>;
+  editCategory(categoryId: number, updatedCategory: Category): Promise<void>;
+  getCategory(categoryId: number): Promise<Category>;
+  getAllCategories(): Promise<Category[]>;
 }
