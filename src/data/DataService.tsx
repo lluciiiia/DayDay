@@ -1,46 +1,52 @@
-import { ApiURL } from "./BackendURL";
+import { ApiURL } from "../else/BackendURL";
 import axios from "axios";
 
 const categoriesURL = ApiURL + "/categories";
 const entriesURL = ApiURL + "/entries";
 
-export class EntriesData {
-  getEntries = async () => {
+export class EntryServiceImpl implements EntryService {
+  async addEntry(entry: Omit<Entry, "id">): Promise<void> {
+    try {
+      await axios.post(entriesURL, entry);
+    } catch (error) {
+      throw new Error("Failed to add the entry.");
+    }
+  }
+
+  async deleteEntry(entryId: number): Promise<void> {
+    try {
+      await axios.delete(`${entriesURL}/${entryId}`);
+    } catch (error) {
+      throw new Error("Failed to delete the entry.");
+    }
+  }
+
+  async editEntry(entryId: number, updatedEntry: Entry): Promise<void> {
+    try {
+      await axios.put(`${entriesURL}/modify/${entryId}`, updatedEntry);
+    } catch (error) {
+      throw new Error("Failed to edit the entry.");
+    }
+  }
+
+  async getEntry(entryId: number): Promise<Entry> {
+    try {
+      const response = await axios.get(`${entriesURL}/${entryId}`);
+      return response.data;
+    } catch (error) {
+      throw new Error("Failed to get the entry.");
+    }
+  }
+
+  async getAllEntries(): Promise<Entry[]> {
     try {
       const response = await axios.get(entriesURL);
       const entries = response.data;
       return entries;
     } catch (error) {
-      throw new Error("Failed to update entries data.");
+      throw new Error("Failed to get all entries.");
     }
-  };
-
-  putEntry = async (newEntry: Omit<Entry, "id">) => {
-    try {
-      // Omit the 'id' field before sending the request
-      const response = await axios.post(entriesURL, newEntry);
-
-      console.log("Backend response:", response.data);
-    } catch (error) {
-      console.error("Error creating entry:", error);
-    }
-  };
-
-  deleteEntry = async (id: number) => {
-    try {
-      await axios.delete(entriesURL, { data: { id } });
-    } catch (error) {
-      console.error("Error deleting entry:", error);
-    }
-  };
-
-  modifyEntry = async (id: number) => {
-    try {
-      await axios.put(entriesURL + "/modify", { data: { id } });
-    } catch (error) {
-      console.error("Error updating entry:", error);
-    }
-  };
+  }
 }
 
 export class CategoriesData {
