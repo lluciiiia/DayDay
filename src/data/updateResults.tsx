@@ -4,7 +4,7 @@ import { ActivityGoalResultData } from "./ResultService/ActivityGoalResult";
 import { LocationResultData } from "./ResultService/locationResult";
 import { EmotionalMappingResultData } from "./ResultService/MappingResult";
 
-export class modifyResults {
+export class updateResults {
   private timeBasedResult = new TimeBasedResultData();
   private sentimentResult = new SentimentResultData();
   private activityGoalResult = new ActivityGoalResultData();
