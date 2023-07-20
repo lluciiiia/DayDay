@@ -43,45 +43,40 @@ export class EntriesData {
   };
 }
 
-
-
 export class CategoriesData {
-    getCategories = async () => {
-        try {
-          const response = await axios.get(categoriesURL);
-          const categories = response.data;
-          return categories;
-        } catch (error) {
-          throw new Error("Failed to update entries data.");
-        }
-      };
+  getCategories = async () => {
+    try {
+      const response = await axios.get(categoriesURL);
+      const categories = response.data;
+      return categories;
+    } catch (error) {
+      throw new Error("Failed to update entries data.");
+    }
+  };
 
-   putCategory = async (id: string) => {
+  putCategory = async (id: string) => {
     try {
       const response = await axios.post(categoriesURL, { id });
       console.log("Backend response:", response.data);
       return response.data;
-      } catch (error) {
-        console.error("Error creating entry:", error);
-      
-        }
-    };
+    } catch (error) {
+      console.error("Error creating entry:", error);
+    }
+  };
 
-    deleteCategory = async (id: string) => {
-        try {
-          await axios.delete(categoriesURL, { data: { id } });
-        } catch (error) {
-          console.error("Error deleting Category:", error);
-        }
-      };
-    
-      modifyCategory = async (id: string) => {
-        try {
-          await axios.put(categoriesURL + "/modify", { data: { id } });
-        } catch (error) {
-          console.error("Error updating Category:", error);
-        }
-      };
+  deleteCategory = async (id: string) => {
+    try {
+      await axios.delete(categoriesURL, { data: { id } });
+    } catch (error) {
+      console.error("Error deleting Category:", error);
+    }
+  };
+
+  modifyCategory = async (id: string) => {
+    try {
+      await axios.put(categoriesURL + "/modify", { data: { id } });
+    } catch (error) {
+      console.error("Error updating Category:", error);
+    }
+  };
 }
-
-
