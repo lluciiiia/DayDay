@@ -1,6 +1,6 @@
 import { ApiURL } from "../else/BackendURL";
 import axios from "axios";
-import { Entry, EntryService } from "./interfaces";
+import { Entry, EntryService, Category, CategoryService } from "./interfaces";
 
 const categoriesURL = ApiURL + "/categories";
 const entriesURL = ApiURL + "/entries";
@@ -50,40 +50,46 @@ export class EntryServiceImpl implements EntryService {
   }
 }
 
-export class CategoriesData {
-  getCategories = async () => {
+export class CategoryServiceImpl implements CategoryService {
+  async addCategory(category: Omit<Category, "id">): Promise<void> {
     try {
-      const response = await axios.get(categoriesURL);
-      const categories = response.data;
-      return categories;
+      await axios.post(categoriesURL, category);
     } catch (error) {
-      throw new Error("Failed to update entries data.");
+      throw new Error("Failed to add the category.");
     }
-  };
+  }
 
-  putCategory = async (id: string) => {
+  async deleteCategory(categoryId: number): Promise<void> {
     try {
-      const response = await axios.post(categoriesURL, { id });
-      console.log("Backend response:", response.data);
+      await axios.delete(`${categoriesURL}/${categoryId}`);
+    } catch (error) {
+      throw new Error("Failed to delete the category.");
+    }
+  }
+
+  async editCategory(categoryId: number, updatedCategory: Category): Promise<void> {
+    try {
+      await axios.put(`${categoriesURL}/modify/${categoryId}`, updatedCategory);
+    } catch (error) {
+      throw new Error("Failed to edit the category.");
+    }
+  }
+
+  async getCategory(categoryId: number): Promise<Category> {
+    try {
+      const response = await axios.get(`${categoriesURL}/${categoryId}`);
       return response.data;
     } catch (error) {
-      console.error("Error creating entry:", error);
+      throw new Error("Failed to get the category.");
     }
-  };
+  }
 
-  deleteCategory = async (id: string) => {
+  async getAllCategories(): Promise<Category[]> {
     try {
-      await axios.delete(categoriesURL, { data: { id } });
+      const response = await axios.get(categoriesURL);
+      return response.data;
     } catch (error) {
-      console.error("Error deleting Category:", error);
+      throw new Error("Failed to fetch categories.");
     }
-  };
-
-  modifyCategory = async (id: string) => {
-    try {
-      await axios.put(categoriesURL + "/modify", { data: { id } });
-    } catch (error) {
-      console.error("Error updating Category:", error);
-    }
-  };
+  }
 }
