@@ -47,3 +47,5 @@ export interface CategoryService {
   getCategory(categoryId: number): Promise<Category>;
   getAllCategories(): Promise<Category[]>;
 }
+
+export interface EntryAnalysis {}
