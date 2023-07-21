@@ -1,6 +1,6 @@
 import { IonAlert } from "@ionic/react";
 import React from "react";
-import { Entry } from "../../../../data/interfaces";
+import { Entry, Category } from "../../../../data/interfaces";
 import { EntryServiceImpl } from "../../../../data/DataService";
 
 interface ViewAlertProps {
@@ -8,8 +8,10 @@ interface ViewAlertProps {
   setShowAlert: React.Dispatch<React.SetStateAction<boolean>>;
   deletingEntry: Entry | null;
   setDeletingEntry: React.Dispatch<React.SetStateAction<Entry | null>>;
-  entries: Entry[];
   setEntries: React.Dispatch<React.SetStateAction<Entry[]>>;
+  selectedCategory: Category | undefined;
+  selectedDate: string | undefined;
+  selectionType: string;
 }
 
 export const ViewAlert: React.FC<ViewAlertProps> = ({
@@ -17,14 +19,30 @@ export const ViewAlert: React.FC<ViewAlertProps> = ({
   setShowAlert,
   deletingEntry,
   setDeletingEntry,
-  entries,
   setEntries,
+  selectedCategory,
+  selectedDate,
+  selectionType,
 }) => {
   const handleDeleteEntry = async (entryToDelete: Entry) => {
     const entriesData = new EntryServiceImpl();
     await entriesData.deleteEntry(entryToDelete.id);
     const updatedData = await entriesData.getAllEntries();
-    setEntries(updatedData);
+    let filteredEntries: Entry[] = [];
+
+    if (selectionType === "date") {
+      filteredEntries = updatedData.filter(
+        (entry) => entry.date === selectedDate
+      );
+    } else if (selectionType === "category" && selectedCategory) {
+      filteredEntries = updatedData.filter(
+        (entry) =>
+          JSON.stringify(entry.category.name) ===
+          JSON.stringify(selectedCategory.name)
+      );
+    }
+
+    setEntries(filteredEntries);
   };
   return (
     <IonAlert

@@ -37,15 +37,15 @@ const ViewList: React.FC<ViewListProps> = ({
         if (selectionType === "date") {
           filteredEntries = data.filter((entry) => entry.date === selectedDate);
         } else if (selectionType === "category" && selectedCategory) {
-          console.log("before: ", data);
           filteredEntries = data.filter(
             (entry) =>
-              JSON.stringify(entry.category) ===
+              JSON.stringify(entry.category.name) ===
               JSON.stringify(selectedCategory.name)
           );
         }
-        console.log("filteredEntries: ", filteredEntries);
+
         setEntries(filteredEntries);
+        console.log("entries setted in ViewList", entries);
       } catch (error) {
         console.error("Error fetching entries:", error);
       }
@@ -75,8 +75,10 @@ const ViewList: React.FC<ViewListProps> = ({
         setShowAlert={setShowAlert}
         deletingEntry={deletingEntry}
         setDeletingEntry={setDeletingEntry}
-        entries={entries}
         setEntries={setEntries}
+        selectedCategory={selectedCategory}
+        selectedDate={selectedDate}
+        selectionType={selectionType}
       />
     </>
   );
