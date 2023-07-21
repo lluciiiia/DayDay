@@ -33,26 +33,31 @@ export const EditEntry = () => {
     }
 
     const categoryService = new CategoryServiceImpl();
-    const categories = categoryService.getAllCategories();
+    const categories = await categoryService.getAllCategories();
+
     const objectCategory = Object.values(categories).find(
-      (value) => value.name === selectedCategory
+      (category) =>
+        JSON.stringify(category.name) === JSON.stringify(selectedCategory)
     );
 
-    const entry: Entry = {
-      content: [
-        {
-          type: "text",
-          text: content,
-        },
-      ],
-      date: selectedDate,
-      title: title,
-      category: objectCategory,
-      id: entryid,
-    };
+    if (objectCategory) {
+      const entry: Entry = {
+        content: [
+          {
+            type: "text",
+            text: content,
+          },
+        ],
+        date: selectedDate,
+        title: title,
+        category: objectCategory,
+        id: entryid,
+      };
+      console.log("entry in editEntry", entry);
 
-    const EntryService = new EntryServiceImpl();
-    await EntryService.editEntry(entryid, entry);
+      const EntryService = new EntryServiceImpl();
+      await EntryService.editEntry(entryid, entry);
+    }
 
     presentToast(present, "Your diary is saved!");
     setTimeout(() => {

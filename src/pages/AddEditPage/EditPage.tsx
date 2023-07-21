@@ -16,26 +16,25 @@ import EditEntry from "./AddEditSub/EditEntry";
 import CategorySelection from "./AddEditSub/CategorySelection";
 
 interface LocationState {
-  selectedDate: string;
-  entryData?: Entry;
+  entryData: Entry;
 }
 
 const EditPage = () => {
   const history = useHistory();
   const location = useLocation<LocationState>();
-  const selectedDate = location.state?.selectedDate;
-  const titleRef = useRef<HTMLIonInputElement>(null);
-  const [categories, setCategories] = useState<Category[]>([]);
   const entryData = location.state?.entryData;
-  // Initialize it with the entry's category
-  const [selectedCategory, setSelectedCategory] = useState(
-    entryData?.category.name ?? ""
-  );
-  // Initialize it with the first content's text from the entry
-  const [content, setContent] = useState(entryData?.content[0]?.text ?? "");
-  const { handleEdit } = EditEntry();
 
   const entryid = entryData?.id;
+  const selectedDate = entryData?.date;
+
+  const [title, setTitle] = useState(entryData?.title);
+  const titleRef = useRef<HTMLIonInputElement>(null);
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState(
+    entryData?.category.name
+  );
+  const [content, setContent] = useState(entryData?.content[0]?.text ?? "");
+  const { handleEdit } = EditEntry();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -61,7 +60,8 @@ const EditPage = () => {
               placeholder="Enter the title"
               ref={titleRef}
               maxlength={20}
-              value={entryData?.title}></IonInput>
+              value={title}
+              onIonChange={(e) => setTitle(e.detail.value!)}></IonInput>
           </IonItem>
         </div>
         <CategorySelection
