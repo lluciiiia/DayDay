@@ -19,17 +19,18 @@ const CategoryList: React.FC<CategoryListProps> = ({
   setShowModal,
   setCategories,
 }) => {
-
   const [showAlert, setShowAlert] = useState(false);
-  const [deletingCategory, setDeletingCategory] = useState<Category | null>(null);
+  const [deletingCategory, setDeletingCategory] = useState<Category | null>(
+    null
+  );
 
   return (
     <>
       <IonList>
-        {categories.map((category, index) => (
+        {Object.values(categories).map((value, index) => (
           <IonItem key={index} style={{ padding: "7px", fontSize: "18px" }}>
             <EachCategory
-              category={category}
+              category={value}
               editMode={editMode}
               showAlert={showAlert}
               setShowAlert={setShowAlert}

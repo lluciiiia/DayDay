@@ -12,8 +12,8 @@ export const handleRenameCategory = async (
   setCategories: React.Dispatch<React.SetStateAction<Category[]>>,
   categories: Category[]
 ) => {
-  const updatedData: Category[] = [...categories];
-  const categoryIndex = categories.findIndex(
+  const updatedData: Category[] = [...Object.values(categories)];
+  const categoryIndex = Object.values(categories).findIndex(
     (category) => category === selectedCategory
   );
   updatedData[categoryIndex].name = newCategory;

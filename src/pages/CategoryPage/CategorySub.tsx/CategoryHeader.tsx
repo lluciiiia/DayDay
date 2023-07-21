@@ -69,7 +69,7 @@ const CategoryHeader: React.FC<CategoryHeaderProps> = ({
       {editMode && (
         <IonButtons>
           <IonButton
-            style={{ marginTop: "27px", marginLeft: "190px" }}
+            style={{ marginTop: "27px", marginLeft: "210px" }}
             onClick={handleDoneClick} // Call handleDoneClick
           >
             Done
@@ -84,7 +84,7 @@ const CategoryHeader: React.FC<CategoryHeaderProps> = ({
           display: editMode ? "none" : "block",
           marginTop: "38px",
           fontSize: "28px",
-          marginLeft: "210px",
+          marginLeft: "225px",
         }}
       />
 

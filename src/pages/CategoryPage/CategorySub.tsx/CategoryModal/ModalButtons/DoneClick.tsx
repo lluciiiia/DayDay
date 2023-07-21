@@ -31,7 +31,7 @@ const DoneClick: React.FC<DoneClickProps> = ({
       try {
         const existingCategories = await categoriesData.getAllCategories();
         if (
-          existingCategories.some(
+          Object.values(existingCategories).some(
             (category) => category.name === newCategory
           ) &&
           selectedCategory && newCategory !== selectedCategory.name
