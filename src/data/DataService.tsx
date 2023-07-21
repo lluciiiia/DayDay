@@ -23,6 +23,7 @@ export class EntryServiceImpl implements EntryService {
   }
 
   async editEntry(entryId: number | any, updatedEntry: Entry): Promise<void> {
+    console.log("editEntry!!");
     try {
       await axios.put(`${entriesURL}/modify/${entryId}`, updatedEntry);
     } catch (error) {

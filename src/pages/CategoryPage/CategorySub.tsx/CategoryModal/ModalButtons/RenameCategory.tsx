@@ -27,12 +27,16 @@ export const handleRenameCategory = async (
   const entries = await entriesData.getAllEntries();
   let filteredEntries: Entry[] = [];
 
+  console.log(selectedCategory.name);
   filteredEntries = entries.filter(
-    (entry: Entry) => entry.category === selectedCategory
+    (entry: Entry) => entry.category.id === selectedCategory.id
   );
+
+  console.log(filteredEntries);
 
   filteredEntries.forEach((entry) => {
     entry.category.name = newCategory;
+    console.log(entry.category.name);
     entriesData.editEntry(entry.id, entry);
   });
 };
