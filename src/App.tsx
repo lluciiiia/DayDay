@@ -32,7 +32,7 @@ import "@ionic/react/css/display.css";
 import "./theme/variables.css";
 import { search, calendarClear, list } from "ionicons/icons";
 import CalendarPage from "./pages/CalendarPage/CalendarPage";
-// import BrowserPage from "./pages/BrowserPage/BrowserPage";
+import BrowserPage from "./pages/BrowserPage/BrowserPage";
 import CategoryPage from "./pages/CategoryPage/CategoryPage";
 import AddPage from "./pages/AddEditPage/AddPage";
 import ViewCategoryPage from "./pages/ViewListPages/ViewCategoryPage";
@@ -50,7 +50,7 @@ const App: React.FC = () => (
         <IonRouterOutlet>
           <Redirect exact path="/" to="/calendar" />
           <Route path="/calendar" exact={true} render={() => <CalendarPage />} />
-          {/* <Route path="/browser" exact={true} render={() => <BrowserPage />} /> */}
+          <Route path="/browser" exact={true} render={() => <BrowserPage />} />
           <Route path="/category" exact={true} render={() => <CategoryPage />} />
           <Route path="/add" exact={true} render={() => <AddPage />} />
           <Route path="/viewCategory" exact={true} render={() => <ViewCategoryPage/>} />
