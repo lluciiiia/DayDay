@@ -64,7 +64,7 @@ export const CategoryAlert: React.FC<CategoryAlertProps> = ({
           text: "Confirm",
           handler: () => {
             if (deletingCategory) {
-              const indexToDelete = categories.indexOf(deletingCategory);
+              const indexToDelete = Object.values(categories).indexOf(deletingCategory);
               handleDeleteCategory(indexToDelete);
             }
             setShowAlert(false);
