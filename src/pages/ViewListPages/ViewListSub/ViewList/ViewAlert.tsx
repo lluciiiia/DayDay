@@ -22,7 +22,7 @@ export const ViewAlert: React.FC<ViewAlertProps> = ({
 }) => {
   const handleDeleteEntry = async (entryToDelete: Entry) => {
     const entriesData = new EntryServiceImpl();
-    await entriesData.deleteEntry(entryToDelete);
+    await entriesData.deleteEntry(entryToDelete.id);
     const updatedData = await entriesData.getAllEntries();
     setEntries(updatedData);
   };

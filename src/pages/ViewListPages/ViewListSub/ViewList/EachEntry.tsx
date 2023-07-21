@@ -30,8 +30,6 @@ export const EachEntry: React.FC<EachEntryProps> = ({
     history.push("/view", { entryData: selectedEntry });
   };
 
-
-
   return (
     <IonItem key={entry.id} style={{ padding: "7px", fontSize: "18px" }}>
       {editMode && (
@@ -75,7 +73,6 @@ export const EachEntry: React.FC<EachEntryProps> = ({
                 marginTop: "28px",
                 marginRight: "10px",
               }}>
-              
               {selectionType === "category" ? entry.date : entry.category.name}
             </div>
           </div>
