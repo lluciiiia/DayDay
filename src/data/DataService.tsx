@@ -7,6 +7,7 @@ const entriesURL = ApiURL + "/entries";
 
 export class EntryServiceImpl implements EntryService {
   async addEntry(entry: Omit<Entry, "id">): Promise<void> {
+    console.log(entriesURL, entry);
     try {
       await axios.post(entriesURL, entry);
     } catch (error) {
@@ -14,7 +15,7 @@ export class EntryServiceImpl implements EntryService {
     }
   }
 
-  async deleteEntry(entryId: number): Promise<void> {
+  async deleteEntry(entryId: number | any): Promise<void> {
     try {
       await axios.delete(`${entriesURL}/${entryId}`);
     } catch (error) {
@@ -22,7 +23,7 @@ export class EntryServiceImpl implements EntryService {
     }
   }
 
-  async editEntry(entryId: number, updatedEntry: Entry): Promise<void> {
+  async editEntry(entryId: number | any, updatedEntry: Entry): Promise<void> {
     try {
       await axios.put(`${entriesURL}/modify/${entryId}`, updatedEntry);
     } catch (error) {
@@ -51,15 +52,17 @@ export class EntryServiceImpl implements EntryService {
 }
 
 export class CategoryServiceImpl implements CategoryService {
-  async addCategory(category: Omit<Category, "id">): Promise<void> {
+  async addCategory(id: string): Promise<void> {
+    console.log("categoryName in service: ", id);
+    console.log(categoriesURL, id);
     try {
-      await axios.post(categoriesURL, category);
+      await axios.post(categoriesURL, { data: { id } });
     } catch (error) {
       throw new Error("Failed to add the category.");
     }
   }
 
-  async deleteCategory(categoryId: number): Promise<void> {
+  async deleteCategory(categoryId: number | any): Promise<void> {
     try {
       await axios.delete(`${categoriesURL}/${categoryId}`);
     } catch (error) {
@@ -67,9 +70,12 @@ export class CategoryServiceImpl implements CategoryService {
     }
   }
 
-  async editCategory(categoryId: number, updatedCategory: Category): Promise<void> {
+  async editCategory(
+    categoryId: number | any,
+    id: string
+  ): Promise<void> {
     try {
-      await axios.put(`${categoriesURL}/modify/${categoryId}`, updatedCategory);
+      await axios.put(`${categoriesURL}/modify/${categoryId}`, { data: { id } });
     } catch (error) {
       throw new Error("Failed to edit the category.");
     }

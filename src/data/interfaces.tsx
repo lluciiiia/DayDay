@@ -24,7 +24,7 @@ export interface Entry {
   content: Content[];
   date: string;
   title: string;
-  category: string;
+  category: Category;
 }
 
 export interface Category {
