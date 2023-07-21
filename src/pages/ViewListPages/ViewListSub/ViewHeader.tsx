@@ -27,7 +27,6 @@ const ViewHeader: React.FC<ViewHeaderProps> = ({
           marginTop: "35px",
           marginBottom: "10px",
         }}>
-        {/* difference */}
         {selectionType === "category" ? selectedCategory?.name : selectedDate}
       </p>
 
@@ -35,7 +34,7 @@ const ViewHeader: React.FC<ViewHeaderProps> = ({
         {editMode && (
           <IonButtons>
             <IonButton
-              style={{ marginLeft: "330px" }}
+              style={{ marginLeft: "350px" }}
               onClick={() => setEditMode(false)}>
               Done
             </IonButton>
@@ -45,7 +44,7 @@ const ViewHeader: React.FC<ViewHeaderProps> = ({
           <IonButton
             style={{
               display: editMode ? "none" : "block",
-              marginLeft: "335px",
+              marginLeft: "355px",
             }}
             onClick={() => setEditMode(true)}>
             Edit

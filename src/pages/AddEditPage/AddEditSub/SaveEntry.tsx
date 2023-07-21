@@ -44,7 +44,6 @@ export const SaveEntry = () => {
 
     const entries = new EntryServiceImpl();
     try {
-      
       await entries.addEntry(entry);
 
       presentToast(present, "Your diary is saved!");

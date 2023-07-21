@@ -22,8 +22,6 @@ const CategorySelection: React.FC<CategorySelectionProps> = ({
     event: CustomEvent<SelectChangeEventDetail<any>>
   ) => {
     const selectedName = event.detail.value;
-    console.log(selectedName);
-    // Find the corresponding Category object based on the selected name
     const selectedCategory = Object.values(categories).find(
       (category) => category.name === selectedName
     );
