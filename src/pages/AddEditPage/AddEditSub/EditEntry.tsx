@@ -1,7 +1,11 @@
 import { useHistory } from "react-router";
-import { EditAll } from "../../../else/UpdateAll";
 import { useIonToast } from "@ionic/react";
 import { presentToast } from "../../../else/presentToast";
+import { Entry } from "../../../data/interfaces";
+import {
+  EntryServiceImpl,
+  CategoryServiceImpl,
+} from "../../../data/DataService";
 
 export const EditEntry = () => {
   const [present] = useIonToast();
@@ -10,7 +14,8 @@ export const EditEntry = () => {
     content: string,
     selectedDate: string,
     selectedCategory: string,
-    history: ReturnType<typeof useHistory>
+    history: ReturnType<typeof useHistory>,
+    entryid: number | undefined
   ) => {
     const title = titleRef.current?.value as string;
 
@@ -27,6 +32,12 @@ export const EditEntry = () => {
       return;
     }
 
+    const categoryService = new CategoryServiceImpl();
+    const categories = categoryService.getAllCategories();
+    const objectCategory = Object.values(categories).find(
+      (value) => value.name === selectedCategory
+    );
+
     const entry: Entry = {
       content: [
         {
@@ -36,24 +47,12 @@ export const EditEntry = () => {
       ],
       date: selectedDate,
       title: title,
-      category: selectedCategory,
-      key: undefined,
+      category: objectCategory,
+      id: entryid,
     };
 
-    // try {
-    //   console.log("entry in EditEntry", entry);
-    //   await EditAll(entry);
-
-    //   presentToast(present, "Your diary is saved!");
-    //   setTimeout(() => {
-    //     history.push("/calendar");
-    //   }, 300);
-    // } catch (error) {
-    //   console.error(error);
-    //   presentToast(present, "Failed to save your diary.");
-    // }
-    console.log("entry in EditEntry", entry);
-    EditAll(entry);
+    const EntryService = new EntryServiceImpl();
+    await EntryService.editEntry(entryid, entry);
 
     presentToast(present, "Your diary is saved!");
     setTimeout(() => {
