@@ -37,7 +37,7 @@ import CategoryPage from "./pages/CategoryPage/CategoryPage";
 import AddPage from "./pages/AddEditPage/AddPage";
 import ViewCategoryPage from "./pages/ViewListPages/ViewCategoryPage";
 import ViewDatePage from "./pages/ViewListPages/ViewDatePage";
-// import ViewPage from "./pages/ViewPage/ViewPage";
+import ViewPage from "./pages/ViewPage/ViewPage";
 // import EditPage from "./pages/AddEditPage/EditPage";
 
 setupIonicReact();
@@ -55,8 +55,8 @@ const App: React.FC = () => (
           <Route path="/add" exact={true} render={() => <AddPage />} />
           <Route path="/viewCategory" exact={true} render={() => <ViewCategoryPage/>} />
           <Route path="/viewDate" exact={true} render={() => <ViewDatePage/>} />
-          {/* <Route path="/view" exact={true} render={() => <ViewPage/>} />
-          <Route path="/edit" exact={true} render={() => <EditPage/>} /> */}
+          <Route path="/view" exact={true} render={() => <ViewPage/>} />
+          {/* <Route path="/edit" exact={true} render={() => <EditPage/>} /> */}
 
         
         </IonRouterOutlet>
