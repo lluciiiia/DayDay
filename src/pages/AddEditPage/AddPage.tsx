@@ -25,7 +25,7 @@ const AddPage = () => {
   const [content, setContent] = useState("");
   const selectedDate = location.state?.selectedDate;
   const titleRef = useRef<HTMLIonInputElement>(null);
-  const [selectedCategory, setSelectedCategory] = useState<Category>();
+  const [selectedCategoryName, setSelectedCategoryName] = useState("");
   const [categories, setCategories] = useState<Category[]>([]);
   const { handleSave } = SaveEntry();
 
@@ -53,9 +53,9 @@ const AddPage = () => {
           </IonItem>
         </div>
         <CategorySelection
-          selectedCategory={selectedCategory}
+          selectedCategoryName={selectedCategoryName}
           categories={categories}
-          onCategoryChange={setSelectedCategory}
+          onCategoryChange={setSelectedCategoryName}
         />
         <ContentEditor content={content} onContentChange={setContent} />
         <div
@@ -78,8 +78,9 @@ const AddPage = () => {
                 titleRef,
                 content,
                 selectedDate,
-                selectedCategory,
-                history
+                selectedCategoryName,
+                history,
+                categories
               )
             }>
             Save

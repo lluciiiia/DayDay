@@ -8,27 +8,19 @@ import {
 import { Category } from "../../../data/interfaces";
 
 interface CategorySelectionProps {
-  selectedCategory: Category | undefined;
+  selectedCategoryName: string;
   categories: Category[];
-  onCategoryChange: (value: Category) => void;
-}
+  onCategoryChange: (value: string) => void;}
 
 const CategorySelection: React.FC<CategorySelectionProps> = ({
-  selectedCategory,
+  selectedCategoryName,
   categories,
   onCategoryChange,
 }) => {
   const handleCategoryChange = (
     event: CustomEvent<SelectChangeEventDetail<any>>
   ) => {
-    const selectedName = event.detail.value;
-    const selectedCategory = Object.values(categories).find(
-      (category) => category.name === selectedName
-    );
-
-    if (selectedCategory) {
-      onCategoryChange(selectedCategory);
-    }
+    onCategoryChange(event.detail.value);
   };
 
   const categoryNames = Object.values(categories).map((value) => value.name);
@@ -39,9 +31,9 @@ const CategorySelection: React.FC<CategorySelectionProps> = ({
         <IonSelect
           aria-label="category"
           placeholder="Select Category"
-          value={selectedCategory}
+          value={selectedCategoryName}
           onIonChange={handleCategoryChange}>
-          {categoryNames.map((name) => (
+          {categoryNames.map((name: string) => (
             <IonSelectOption value={name} key={name}>
               {name}
             </IonSelectOption>

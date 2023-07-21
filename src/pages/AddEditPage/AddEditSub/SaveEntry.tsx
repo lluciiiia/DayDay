@@ -10,8 +10,9 @@ export const SaveEntry = () => {
     titleRef: React.RefObject<HTMLIonInputElement>,
     content: string,
     selectedDate: string | undefined,
-    selectedCategory: Category | undefined,
-    history: ReturnType<typeof useHistory>
+    selectedCategoryName: string | undefined,
+    history: ReturnType<typeof useHistory>,
+    categories: Category[]
   ) => {
     const title = titleRef.current?.value as string;
 
@@ -19,8 +20,8 @@ export const SaveEntry = () => {
       presentToast(present, "Please enter your diary title");
       return;
     }
-    console.log(selectedCategory);
-    if (selectedCategory === undefined) {
+    console.log(selectedCategoryName);
+    if (selectedCategoryName === "") {
       presentToast(present, "Please select your diary category");
       return;
     }
@@ -28,6 +29,10 @@ export const SaveEntry = () => {
       presentToast(present, "Please enter your diary content");
       return;
     }
+
+    const selectedCategory = Object.values(categories).find(
+      (value) => value.name === selectedCategoryName
+    );
 
     const entry: Entry = {
       content: [
