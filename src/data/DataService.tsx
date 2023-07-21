@@ -7,6 +7,8 @@ const entriesURL = ApiURL + "/entries";
 
 export class EntryServiceImpl implements EntryService {
   async addEntry(entry: Omit<Entry, "id">): Promise<void> {
+    console.log("entry.category: ", entry.category);
+    console.log("type of entry.category: ", typeof entry.category);
     console.log(entriesURL, entry);
     try {
       await axios.post(entriesURL, entry);
@@ -70,12 +72,11 @@ export class CategoryServiceImpl implements CategoryService {
     }
   }
 
-  async editCategory(
-    categoryId: number | any,
-    id: string
-  ): Promise<void> {
+  async editCategory(categoryId: number | any, id: string): Promise<void> {
     try {
-      await axios.put(`${categoriesURL}/modify/${categoryId}`, { data: { id } });
+      await axios.put(`${categoriesURL}/modify/${categoryId}`, {
+        data: { id },
+      });
     } catch (error) {
       throw new Error("Failed to edit the category.");
     }

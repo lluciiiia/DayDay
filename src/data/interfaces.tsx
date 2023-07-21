@@ -41,9 +41,9 @@ export interface EntryService {
 }
 
 export interface CategoryService {
-  addCategory(category: Category): Promise<void>;
+  addCategory(categoryName: string): Promise<void>;
   deleteCategory(categoryId: number): Promise<void>;
-  editCategory(categoryId: number, updatedCategory: Category): Promise<void>;
+  editCategory(categoryId: number, updatedCategory: string): Promise<void>;
   getCategory(categoryId: number): Promise<Category>;
   getAllCategories(): Promise<Category[]>;
 }

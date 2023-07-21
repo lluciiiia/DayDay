@@ -35,8 +35,8 @@ import CalendarPage from "./pages/CalendarPage/CalendarPage";
 // import BrowserPage from "./pages/BrowserPage/BrowserPage";
 import CategoryPage from "./pages/CategoryPage/CategoryPage";
 import AddPage from "./pages/AddEditPage/AddPage";
-// import ViewCategoryPage from "./pages/ViewListPages/ViewCategoryPage";
-// import ViewDatePage from "./pages/ViewListPages/ViewDatePage";
+import ViewCategoryPage from "./pages/ViewListPages/ViewCategoryPage";
+import ViewDatePage from "./pages/ViewListPages/ViewDatePage";
 // import ViewPage from "./pages/ViewPage/ViewPage";
 // import EditPage from "./pages/AddEditPage/EditPage";
 
@@ -53,9 +53,9 @@ const App: React.FC = () => (
           {/* <Route path="/browser" exact={true} render={() => <BrowserPage />} /> */}
           <Route path="/category" exact={true} render={() => <CategoryPage />} />
           <Route path="/add" exact={true} render={() => <AddPage />} />
-          {/* <Route path="/viewCategory" exact={true} render={() => <ViewCategoryPage/>} />
+          <Route path="/viewCategory" exact={true} render={() => <ViewCategoryPage/>} />
           <Route path="/viewDate" exact={true} render={() => <ViewDatePage/>} />
-          <Route path="/view" exact={true} render={() => <ViewPage/>} />
+          {/* <Route path="/view" exact={true} render={() => <ViewPage/>} />
           <Route path="/edit" exact={true} render={() => <EditPage/>} /> */}
 
         
