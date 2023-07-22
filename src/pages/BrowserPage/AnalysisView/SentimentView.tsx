@@ -24,18 +24,6 @@ ChartJS.register(
 );
 
 const SentimentView = () => {
-  //   const [data, setData] = useState({
-  //     labels: [],
-  //     datasets: [
-  //       {
-  //         label: "mood change within a month",
-  //         data: [] as number[],
-  //         fill: false,
-  //         borderColor: "rgb(75, 192, 192)",
-  //         tension: 0.1,
-  //       },
-  //     ],
-  //   });
   const [hasResult, setHasResult] = useState(false);
   const [data, setData] = useState<{
     labels: string[];
@@ -52,15 +40,12 @@ const SentimentView = () => {
     const fetchData = async () => {
       const sentimentResult = new SentimentResultData();
       const result = await sentimentResult.getAllResults();
-      console.log("result: ", result);
 
       if (result) {
         setHasResult(true);
 
         const dates: string[] = Object.keys(result);
         const scores: number[] = Object.values(result);
-
-        console.log("dates, scores: ", dates, scores);
 
         const newData = {
           labels: dates,
@@ -75,14 +60,12 @@ const SentimentView = () => {
           ],
         };
 
-        setData(newData); // Update data state variable
+        setData(newData);
       }
     };
 
     fetchData();
   }, []);
-
-  console.log("data after passing if statement", data);
 
   return (
     <>
@@ -112,7 +95,7 @@ const SentimentView = () => {
                 <Line data={data} />
               </div>
               {/* instruction */}
-              <div style={{ marginTop: "60px", padding: "10px" }}>
+              <div style={{ marginTop: "60px", padding: "10px 20px" }}>
                 <div style={{ fontSize: "20px", fontWeight: "bold" }}>
                   Get To Know Your Sentiment Patterns
                 </div>
@@ -121,7 +104,7 @@ const SentimentView = () => {
                   Positive score: positive sentiment. <br></br>
                   Negative score: negative sentiment. <br></br>
                   <br></br>
-                  Each date displays the average of the sentiment of the day.
+                  Each date displays the average of the day.
                 </div>
               </div>
             </div>

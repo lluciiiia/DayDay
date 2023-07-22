@@ -1,14 +1,7 @@
 import { ApiURL } from "../../else/BackendURL";
 import axios from "axios";
 
-
 const sentimentURL = ApiURL + "/sentiment";
-
-// export interface SentimentResult {
-//   entryId: number;
-//   entryDate: string;
-//   entryScore: number;
-// }
 
 export class SentimentResultData {
   async getAllResults(): Promise<any> {
@@ -16,9 +9,13 @@ export class SentimentResultData {
     return response.data;
   }
 
-  async addResult(entryId: number, totalScore: number, entryDate: string | undefined): Promise<void> {
+  async addResult(
+    entryId: number,
+    totalScore: number,
+    entryDate: string | undefined
+  ): Promise<void> {
     await axios.post(sentimentURL, {
-      data: { entryId: entryId, totalScore: totalScore, entryDate: entryDate},
+      data: { entryId: entryId, totalScore: totalScore, entryDate: entryDate },
     });
   }
 
