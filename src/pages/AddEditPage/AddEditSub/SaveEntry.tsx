@@ -57,8 +57,7 @@ export const SaveEntry = () => {
       const sentimentAnalyzer = new SentimentTrendsAnalyzer();
       const updateResults = new UpdateResults();
       const sentimentResult = await sentimentAnalyzer.analyzeSentiment(entry);
-      console.log("Sentiment result: " + sentimentResult);
-      await updateResults.addResultData(entryId, sentimentResult);
+      await updateResults.addResultData(entryId, sentimentResult, selectedDate);
 
       presentToast(present, "Your diary is saved!");
       setTimeout(() => {

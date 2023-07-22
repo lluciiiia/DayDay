@@ -1,26 +1,24 @@
 import { ApiURL } from "../../else/BackendURL";
 import axios from "axios";
 
+
 const sentimentURL = ApiURL + "/sentiment";
+
+// export interface SentimentResult {
+//   entryId: number;
+//   entryDate: string;
+//   entryScore: number;
+// }
 
 export class SentimentResultData {
   async getAllResults(): Promise<any> {
-    // Get the analysis result data for the given entryId from the backend
-    const response = await axios.get(sentimentURL);
+    const response = await axios.get(`${sentimentURL}/All`);
     return response.data;
   }
 
-  async getResult(entryId: number): Promise<any> {
-    // Get the analysis result data for the given entryId from the backend
-    const response = await axios.get(`${sentimentURL}/${entryId}`, {
-      data: { entryId: entryId },
-    });
-    return response.data;
-  }
-
-  async addResult(entryId: number, totalScore: number): Promise<void> {
+  async addResult(entryId: number, totalScore: number, entryDate: string | undefined): Promise<void> {
     await axios.post(sentimentURL, {
-      data: { entryId: entryId, totalScore: totalScore },
+      data: { entryId: entryId, totalScore: totalScore, entryDate: entryDate},
     });
   }
 

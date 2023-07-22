@@ -11,9 +11,9 @@ export class UpdateResults {
   private locationResult = new LocationResultData();
   private emotionalMappingResult = new EmotionalMappingResultData();
 
-  async addResultData(entryId: number, analysisResult: any) {
+  async addResultData(entryId: number, analysisResult: any, entryDate: any) {
     // this.timeBasedResult.addResult(entryId, analysisResult);
-    this.sentimentResult.addResult(entryId, analysisResult);
+    this.sentimentResult.addResult(entryId, analysisResult, entryDate);
     // this.activityGoalResult.addResult(entryId, analysisResult);
     // this.locationResult.addResult(entryId, analysisResult);
     // this.emotionalMappingResult.addResult(entryId, analysisResult);
