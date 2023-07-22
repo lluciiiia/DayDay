@@ -24,18 +24,29 @@ ChartJS.register(
 );
 
 const SentimentView = () => {
-  const [data, setData] = useState({
-    labels: [],
-    datasets: [
-      {
-        label: "mood change within a month",
-        data: [] as number[],
-        fill: false,
-        borderColor: "rgb(75, 192, 192)",
-        tension: 0.1,
-      },
-    ],
-  });
+  //   const [data, setData] = useState({
+  //     labels: [],
+  //     datasets: [
+  //       {
+  //         label: "mood change within a month",
+  //         data: [] as number[],
+  //         fill: false,
+  //         borderColor: "rgb(75, 192, 192)",
+  //         tension: 0.1,
+  //       },
+  //     ],
+  //   });
+  const [hasResult, setHasResult] = useState(false);
+  const [data, setData] = useState<{
+    labels: string[];
+    datasets: {
+      label: string;
+      data: number[];
+      fill: boolean;
+      borderColor: string;
+      tension: number;
+    }[];
+  } | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -44,30 +55,34 @@ const SentimentView = () => {
       console.log("result: ", result);
 
       if (result) {
+        setHasResult(true);
+
         const dates: string[] = Object.keys(result);
         const scores: number[] = Object.values(result);
 
         console.log("dates, scores: ", dates, scores);
 
-        if (typeof dates === "string") {
-          setData({
-            labels: dates,
-            datasets: [
-              {
-                label: "mood change within a month",
-                data: scores,
-                fill: false,
-                borderColor: "rgb(75, 192, 192)",
-                tension: 0.1,
-              },
-            ],
-          });
-        }
+        const newData = {
+          labels: dates,
+          datasets: [
+            {
+              label: "mood change within a month",
+              data: scores,
+              fill: false,
+              borderColor: "rgb(75, 192, 192)",
+              tension: 0.1,
+            },
+          ],
+        };
+
+        setData(newData); // Update data state variable
       }
     };
 
     fetchData();
   }, []);
+
+  console.log("data after passing if statement", data);
 
   return (
     <>
@@ -83,7 +98,7 @@ const SentimentView = () => {
       </p>
       <IonContent scrollY={false}>
         <div style={{ display: "flex", flexDirection: "column" }}>
-          {data ? (
+          {hasResult && data ? (
             <div style={{ display: "flex", flexDirection: "column" }}>
               <div
                 style={{
@@ -104,7 +119,8 @@ const SentimentView = () => {
                 <div style={{ fontSize: "18px", marginTop: "18px" }}>
                   Each sentiment score ranges from -5 to +5. <br></br>
                   Positive score: positive sentiment. <br></br>
-                  Negative score: negative sentiment. <br></br><br></br>
+                  Negative score: negative sentiment. <br></br>
+                  <br></br>
                   Each date displays the average of the sentiment of the day.
                 </div>
               </div>
