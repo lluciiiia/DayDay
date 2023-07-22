@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import { IonContent } from "@ionic/react";
 import {
   Chart as ChartJS,
@@ -12,7 +11,7 @@ import {
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 import Instruction from "./Instruction";
-import { SentimentResultData } from "../../../data/ResultService/sentimentResult";
+import fetchSentimentResult from "./fetchSentimentResult";
 
 ChartJS.register(
   CategoryScale,
@@ -25,48 +24,7 @@ ChartJS.register(
 );
 
 const SentimentView = () => {
-  const [hasResult, setHasResult] = useState(false);
-  const [data, setData] = useState<{
-    labels: string[];
-    datasets: {
-      label: string;
-      data: number[];
-      fill: boolean;
-      borderColor: string;
-      tension: number;
-    }[];
-  } | null>(null);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const sentimentResult = new SentimentResultData();
-      const result = await sentimentResult.getAllResults();
-
-      if (result) {
-        setHasResult(true);
-
-        const dates: string[] = Object.keys(result);
-        const scores: number[] = Object.values(result);
-
-        const newData = {
-          labels: dates,
-          datasets: [
-            {
-              label: "mood change within a month",
-              data: scores,
-              fill: false,
-              borderColor: "rgb(75, 192, 192)",
-              tension: 0.1,
-            },
-          ],
-        };
-
-        setData(newData);
-      }
-    };
-
-    fetchData();
-  }, []);
+  const { hasResult, data } = fetchSentimentResult();
 
   return (
     <>
