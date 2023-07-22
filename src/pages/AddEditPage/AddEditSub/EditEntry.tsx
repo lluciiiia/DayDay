@@ -58,35 +58,36 @@ export const EditEntry = () => {
       };
       console.log("entry in editEntry", entry);
 
+      try {
       const EntryService = new EntryServiceImpl();
       await EntryService.editEntry(entryid, entry);
-      // // update analysis
-      // const sentimentAnalyzer = new SentimentTrendsAnalyzer();
-      // const updateResults = new UpdateResults();
-      // const sentimentResult = await sentimentAnalyzer.analyzeSentiment(entry);
-      // console.log("Sentiment result: " + sentimentResult);
-
-      // await updateResults.editResultData(entryid, sentimentResult);
-
+     
       const updateManager = new UpdateManager();
       // update sentiment analysis
       const sentimentAnalyzer = new SentimentTrendsAnalyzer();
       const sentimentResult = await sentimentAnalyzer.analyzeSentiment(entry);
+      console.log("Sentiment result: " + sentimentResult);
       await updateManager.editResultData(entryid, {
         sentiment: sentimentResult,
       });
       // update wordCloud analysis
       const wordCloudsAnalyzer = new WordCloudsAnalyzer();
       const wordCloudsResult = await wordCloudsAnalyzer.analyzeWords(entry);
+      console.log("passed");
+      console.log("WordClouds result: " + wordCloudsResult);
       await updateManager.editResultData(entryid, {
         wordClouds: wordCloudsResult,
       });
-    }
 
-    presentToast(present, "Your diary is saved!");
-    setTimeout(() => {
-      history.push("/calendar");
-    }, 300);
+      presentToast(present, "Your diary is saved!");
+      setTimeout(() => {
+        history.push("/calendar");
+      }, 300);
+    } catch (error) {
+      console.error(error);
+      presentToast(present, "Failed to edit your diary.");
+    }
+    }
   };
 
   return {

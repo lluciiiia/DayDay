@@ -51,19 +51,6 @@ export const SaveEntry = () => {
     };
 
     try {
-      // // save an entry + update analysis with the entry id
-      // const entries = new EntryServiceImpl();
-      // const entryId = await entries.addEntry(entry);
-      // // update sentiment analysis
-      // const sentimentAnalyzer = new SentimentTrendsAnalyzer();
-      // const updateResults = new UpdateResults();
-      // const sentimentResult = await sentimentAnalyzer.analyzeSentiment(entry);
-      // await updateResults.addResultData(entryId, sentimentResult, selectedDate);
-      // // update sentiment analysis
-      // const wordCloudsAnalyzer = new WordCloudsAnalyzer();
-      // const wordCloudsResult = await wordCloudsAnalyzer.analyzeWords(entry);
-      // await updateResults.addResultData(entryId, wordCloudsResult); // not fitting the parameters
-
       // save an entry
       const entries = new EntryServiceImpl();
       const entryId = await entries.addEntry(entry);

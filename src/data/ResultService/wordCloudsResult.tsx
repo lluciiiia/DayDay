@@ -1,7 +1,7 @@
 import { ApiURL } from "../../else/BackendURL";
 import axios from "axios";
 
-const resultURL = ApiURL + "/wordCloudsResults";
+const resultURL = ApiURL + "/wordClouds";
 
 export class WordCloudsResultData {
   async getAllResults(): Promise<any> {
@@ -10,6 +10,7 @@ export class WordCloudsResultData {
   }
 
   async addResult(entryId: number, frequencyMap: object): Promise<void> {
+    console.log("frequncyMap", frequencyMap);
     await axios.post(resultURL, {
       data: { entryId: entryId, frequencyMap: frequencyMap },
     });
@@ -19,6 +20,7 @@ export class WordCloudsResultData {
     entryId: number | undefined,
     frequencyMap: object
   ): Promise<void> {
+    console.log("entryId, frequencyMap", entryId, frequencyMap);
     await axios.put(`${resultURL}/modify/${entryId}`, {
       data: { entryId: entryId, frequencyMap: frequencyMap },
     });

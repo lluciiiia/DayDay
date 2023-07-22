@@ -1,26 +1,6 @@
 import { SentimentResultData } from "./ResultService/sentimentResult";
 import { WordCloudsResultData } from "./ResultService/wordCloudsResult";
 
-// export class UpdateResults {
-//   private sentimentResult = new SentimentResultData();
-//   private wordCloudsResult = new WordCloudsResultData();
-
-//   async addResultData(entryId: number, analysisResult: any, entryDate: any) {
-//     this.sentimentResult.addResult(entryId, analysisResult, entryDate);
-//     this.wordCloudsResult.addResult(entryId, frequencyMap); // not fitting the parameters
-//   }
-
-//   async editResultData(entryId: number | undefined, updatedResult: any) {
-//     this.sentimentResult.editResult(entryId, updatedResult);
-//     this.wordCloudsResult.editResult(entryId, frequencyMap); // not fitting the parameters
-//   }
-
-//   async deleteResultData(entryId: number | undefined) {
-//     this.sentimentResult.deleteResult(entryId);
-//     this.wordCloudsResult.deleteResult(entryId);
-//   }
-// }
-
 export abstract class UpdateResults {
   abstract addResult(entryId: number, analysisResult: any, entryDate?: any): Promise<void>;
   abstract editResult(entryId: number, updatedResult: any): Promise<void>;
@@ -46,9 +26,11 @@ export class UpdateManager {
 
   async editResultData(entryId: number | undefined, updatedResult: any) {
     if (updatedResult.sentiment) {
+      console.log("sent in update",updatedResult.sentiment);
       await this.sentimentResult.editResult(entryId, updatedResult.sentiment);
     }
     else if (updatedResult.wordClouds) {
+      console.log("wc in update",updatedResult.wordClouds);
       await this.wordCloudsResult.editResult(entryId, updatedResult.wordClouds);
     }
   }
