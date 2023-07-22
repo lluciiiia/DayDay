@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { SentimentResultData } from "../../../data/ResultService/sentimentResult";
+import { SentimentResultData } from "../../../../data/ResultService/sentimentResult";
 
 const fetchSentimentResult = () => {
   const [hasResult, setHasResult] = useState(false);
