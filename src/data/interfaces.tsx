@@ -49,6 +49,6 @@ export interface CategoryService {
 }
 
 export interface EntryAnalysis {
-analyzeSentiment(entry: Entry): Promise<number>;
+// analyzeSentiment(entry: Entry): Promise<number>;
 
 }

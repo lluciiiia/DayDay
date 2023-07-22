@@ -1,30 +1,26 @@
 import { ApiURL } from "../../else/BackendURL";
 import axios from "axios";
 
-const resultURL = ApiURL + "/sentiment";
+const resultURL = ApiURL + "/wordCloudsResults";
 
-export class SentimentResultData {
+export class WordCloudsResultData {
   async getAllResults(): Promise<any> {
     const response = await axios.get(`${resultURL}/All`);
     return response.data;
   }
 
-  async addResult(
-    entryId: number,
-    totalScore: number,
-    entryDate: string | undefined
-  ): Promise<void> {
+  async addResult(entryId: number, frequencyMap: object): Promise<void> {
     await axios.post(resultURL, {
-      data: { entryId: entryId, totalScore: totalScore, entryDate: entryDate },
+      data: { entryId: entryId, frequencyMap: frequencyMap },
     });
   }
 
   async editResult(
     entryId: number | undefined,
-    newScore: number
+    frequencyMap: object
   ): Promise<void> {
     await axios.put(`${resultURL}/modify/${entryId}`, {
-      data: { entryId: entryId, newScore: newScore },
+      data: { entryId: entryId, frequencyMap: frequencyMap },
     });
   }
 
