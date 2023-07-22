@@ -1,7 +1,7 @@
 import { IonAlert } from "@ionic/react";
 import React from "react";
 import { Entry, Category } from "../../../../data/interfaces";
-import { UpdateResults } from "../../../../data/updateResults";
+import { UpdateManager } from "../../../../data/updateResults";
 import {
   EntryServiceImpl,
   CategoryServiceImpl,
@@ -30,7 +30,7 @@ export const CategoryAlert: React.FC<CategoryAlertProps> = ({
     try {
       // delete every entry in the category
       const entriesData = new EntryServiceImpl();
-      const updateResults = new UpdateResults();
+      const updateResults = new UpdateManager();
 
       const currentEntriesData = await entriesData.getAllEntries();
 

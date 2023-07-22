@@ -3,8 +3,9 @@ import { useIonToast } from "@ionic/react";
 import { presentToast } from "../../../else/presentToast";
 import { Entry, Category } from "../../../data/interfaces";
 import { EntryServiceImpl } from "../../../data/DataService";
+import { WordCloudsAnalyzer } from "../../../data/Analyzer/WordCloudsAnalyzer";
 import { SentimentTrendsAnalyzer } from "../../../data/Analyzer/SentimentAnalysis";
-import { UpdateResults } from "../../../data/updateResults";
+import { UpdateManager } from "../../../data/updateResults";
 
 export const SaveEntry = () => {
   const [present] = useIonToast();
@@ -50,14 +51,38 @@ export const SaveEntry = () => {
     };
 
     try {
-      // save an entry + update analysis with the entry id
+      // // save an entry + update analysis with the entry id
+      // const entries = new EntryServiceImpl();
+      // const entryId = await entries.addEntry(entry);
+      // // update sentiment analysis
+      // const sentimentAnalyzer = new SentimentTrendsAnalyzer();
+      // const updateResults = new UpdateResults();
+      // const sentimentResult = await sentimentAnalyzer.analyzeSentiment(entry);
+      // await updateResults.addResultData(entryId, sentimentResult, selectedDate);
+      // // update sentiment analysis
+      // const wordCloudsAnalyzer = new WordCloudsAnalyzer();
+      // const wordCloudsResult = await wordCloudsAnalyzer.analyzeWords(entry);
+      // await updateResults.addResultData(entryId, wordCloudsResult); // not fitting the parameters
+
+      // save an entry
       const entries = new EntryServiceImpl();
       const entryId = await entries.addEntry(entry);
-      // update analysis
+
+      const updateManager = new UpdateManager();
+      // update sentiment analysis
       const sentimentAnalyzer = new SentimentTrendsAnalyzer();
-      const updateResults = new UpdateResults();
       const sentimentResult = await sentimentAnalyzer.analyzeSentiment(entry);
-      await updateResults.addResultData(entryId, sentimentResult, selectedDate);
+      await updateManager.addResultData(
+        entryId,
+        { sentiment: sentimentResult },
+        selectedDate
+      );
+      // update wordCloud analysis
+      const wordCloudsAnalyzer = new WordCloudsAnalyzer();
+      const wordCloudsResult = await wordCloudsAnalyzer.analyzeWords(entry);
+      await updateManager.addResultData(entryId, {
+        wordClouds: wordCloudsResult,
+      });
 
       presentToast(present, "Your diary is saved!");
       setTimeout(() => {
