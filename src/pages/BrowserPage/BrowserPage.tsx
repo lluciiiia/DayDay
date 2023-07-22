@@ -28,15 +28,15 @@ const BrowserPage = () => {
       ></IonSearchbar>
       <IonList>
         <IonItem
-          style={{ padding: "7px", fontSize: "18px" }}
+          style={{ fontSize: "18px" }}
           onClick={() => history.push("/sentimentView")}>
-          <IonLabel>Sentiment Analysis</IonLabel>
+          <IonLabel style={{ padding: "7px" }}>Sentiment Analysis</IonLabel>
         </IonItem>
-        <IonItem style={{ padding: "7px", fontSize: "18px" }}>
-          <IonLabel>Item 2</IonLabel>
+        <IonItem style={{ fontSize: "18px" }}>
+          <IonLabel style={{ padding: "7px" }}>Item 2</IonLabel>
         </IonItem>
-        <IonItem style={{ padding: "7px", fontSize: "18px" }}>
-          <IonLabel>Item 3</IonLabel>
+        <IonItem style={{ fontSize: "18px" }}>
+          <IonLabel style={{ padding: "7px" }}>Item 3</IonLabel>
         </IonItem>
       </IonList>
     </>
