@@ -39,7 +39,7 @@ import ViewCategoryPage from "./pages/ViewListPages/ViewCategoryPage";
 import ViewDatePage from "./pages/ViewListPages/ViewDatePage";
 import ViewPage from "./pages/ViewPage/ViewPage";
 import EditPage from "./pages/AddEditPage/EditPage";
-import SentimentView from "./pages/BrowserPage/SentimentView/SentimentView";
+import SentimentView from "./pages/BrowserPage/AnalysisViews.tsx/SentimentView/SentimentView";
 
 setupIonicReact();
 

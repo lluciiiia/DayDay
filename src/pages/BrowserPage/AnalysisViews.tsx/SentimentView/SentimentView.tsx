@@ -1,7 +1,7 @@
 import { IonContent } from "@ionic/react";
-import NoData from "./SentimentSub/NoData";
-import YesData from "./SentimentSub/YesData";
-import fetchSentimentResult from "./SentimentSub/fetchSentimentResult";
+import NoData from "./SubSentiment/NoData";
+import YesData from "./SubSentiment/YesData";
+import fetchSentimentResult from "./SubSentiment/fetchSentimentResult";
 
 const SentimentView = () => {
   const { hasResult, data } = fetchSentimentResult();
