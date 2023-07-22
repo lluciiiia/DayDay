@@ -70,7 +70,7 @@ export const EachEntry: React.FC<EachEntryProps> = ({
                 right: 0,
                 fontSize: "14px",
                 color: "rgb(165, 165, 165)",
-                marginTop: "28px",
+                marginTop: "16px",
                 marginRight: "10px",
               }}>
               {selectionType === "category" ? entry.date : entry.category.name}
@@ -80,7 +80,7 @@ export const EachEntry: React.FC<EachEntryProps> = ({
           <div
             style={{
               fontSize: "16px",
-              marginTop: "5px",
+              marginTop: "8px",
               marginBottom: "15px",
             }}>
             {entry.content && entry.content[0] && entry.content[0].text

@@ -2,6 +2,8 @@ import { useHistory } from "react-router";
 import { useIonToast } from "@ionic/react";
 import { presentToast } from "../../../else/presentToast";
 import { Entry } from "../../../data/interfaces";
+import { UpdateResults } from "../../../data/updateResults";
+import { SentimentTrendsAnalyzer } from "../../../data/Analyzer/SentimentAnalysis";
 import {
   EntryServiceImpl,
   CategoryServiceImpl,
@@ -57,6 +59,13 @@ export const EditEntry = () => {
 
       const EntryService = new EntryServiceImpl();
       await EntryService.editEntry(entryid, entry);
+      // update analysis
+      const sentimentAnalyzer = new SentimentTrendsAnalyzer();
+      const updateResults = new UpdateResults();
+      const sentimentResult = await sentimentAnalyzer.analyzeSentiment(entry);
+      console.log("Sentiment result: " + sentimentResult);
+
+      await updateResults.editResultData(entryid, sentimentResult);
     }
 
     presentToast(present, "Your diary is saved!");

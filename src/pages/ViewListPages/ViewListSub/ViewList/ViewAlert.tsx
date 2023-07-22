@@ -2,6 +2,7 @@ import { IonAlert } from "@ionic/react";
 import React from "react";
 import { Entry, Category } from "../../../../data/interfaces";
 import { EntryServiceImpl } from "../../../../data/DataService";
+import { UpdateResults } from "../../../../data/updateResults";
 
 interface ViewAlertProps {
   showAlert: boolean;
@@ -25,8 +26,13 @@ export const ViewAlert: React.FC<ViewAlertProps> = ({
   selectionType,
 }) => {
   const handleDeleteEntry = async (entryToDelete: Entry) => {
+    // update entries
     const entriesData = new EntryServiceImpl();
     await entriesData.deleteEntry(entryToDelete.id);
+    // update analysis
+    const updateResults = new UpdateResults();
+    await updateResults.deleteResultData(entryToDelete.id);
+
     const updatedData = await entriesData.getAllEntries();
     let filteredEntries: Entry[] = [];
 

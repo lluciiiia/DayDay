@@ -4,6 +4,7 @@ import { useLocation, useHistory } from "react-router-dom";
 import { IonActionSheet } from "@ionic/react";
 import { Entry, Category } from "../../data/interfaces";
 import { EntryServiceImpl } from "../../data/DataService";
+import { UpdateResults } from "../../data/updateResults";
 
 interface SettingSectionProps {
   entryData: Entry;
@@ -15,10 +16,14 @@ export const SettingSection: React.FC<SettingSectionProps> = ({
   const history = useHistory();
 
   const deleteEntry = async () => {
-    const entriesData = new EntryServiceImpl();
     try {
       // Update the backend with the modified entries data
+      const entriesData = new EntryServiceImpl();
       await entriesData.deleteEntry(entryData.id);
+      // update analysis
+      const updateResults = new UpdateResults();
+      await updateResults.deleteResultData(entryData.id);
+
       history.push("/calendar");
     } catch (error) {
       console.error(error);

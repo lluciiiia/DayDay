@@ -1,28 +1,42 @@
 import { ApiURL } from "../../else/BackendURL";
 import axios from "axios";
 
-const resultURL = ApiURL + "/sentimentResults";
+const sentimentURL = ApiURL + "/sentiment";
 
 export class SentimentResultData {
-
-  async getResult(entryId: number): Promise<any> {
+  async getAllResults(): Promise<any> {
     // Get the analysis result data for the given entryId from the backend
-    const response = await axios.get(`${resultURL}/${entryId}`);
+    const response = await axios.get(sentimentURL);
     return response.data;
   }
 
-  async addResult(entryId: number, analysisResult: any): Promise<void> {
-    // Add the analysis result data for the given entryId to the backend
-    await axios.post(resultURL, { entryId, result: analysisResult });
+  async getResult(entryId: number): Promise<any> {
+    // Get the analysis result data for the given entryId from the backend
+    const response = await axios.get(`${sentimentURL}/${entryId}`, {
+      data: { entryId: entryId },
+    });
+    return response.data;
   }
 
-  async editResult(entryId: number, updatedResult: any): Promise<void> {
-    // Update the analysis result data for the given entryId in the backend
-    await axios.put(`${resultURL}/${entryId}`, { result: updatedResult });
+  async addResult(entryId: number, totalScore: number): Promise<void> {
+    await axios.post(sentimentURL, {
+      data: { entryId: entryId, totalScore: totalScore },
+    });
   }
 
-  async deleteResult(entryId: number): Promise<void> {
-    // Delete the analysis result data for the given entryId from the backend
-    await axios.delete(`${resultURL}/${entryId}`);
+  async editResult(
+    entryId: number | undefined,
+    newScore: number
+  ): Promise<void> {
+    await axios.put(`${sentimentURL}/modify/${entryId}`, {
+      data: { entryId: entryId, newScore: newScore },
+    });
+  }
+
+  async deleteResult(entryId: number | undefined): Promise<void> {
+    console.log("entryId: " + entryId);
+    await axios.delete(`${sentimentURL}/${entryId}`, {
+      data: { entryId: entryId },
+    });
   }
 }

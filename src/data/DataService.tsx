@@ -6,9 +6,11 @@ const categoriesURL = ApiURL + "/categories";
 const entriesURL = ApiURL + "/entries";
 
 export class EntryServiceImpl implements EntryService {
-  async addEntry(entry: Omit<Entry, "id">): Promise<void> {
+  async addEntry(entry: Omit<Entry, "id">): Promise<number> {
     try {
-      await axios.post(entriesURL, entry);
+      const response = await axios.post<number>(entriesURL, entry); // Specify the response type as number
+      const entryId = response.data; // Get the entry ID from the response data
+      return entryId;
     } catch (error) {
       throw new Error("Failed to add the entry.");
     }

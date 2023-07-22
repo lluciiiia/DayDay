@@ -1,44 +1,36 @@
 import { Entry } from "../interfaces";
 import { EntryAnalysis } from "../interfaces";
+import Sentiment from "sentiment";
 
 export interface EmotionData {}
 
 // entry.content.text, entry.date
 export interface SentimentAnalysis extends EntryAnalysis {
-  analyzeSentiment(entry: Entry): Promise<string>;
+  analyzeSentiment(entry: Entry): Promise<number>;
 }
 
-// Emotional Analysis
-export interface EmotionalAnalysis extends SentimentAnalysis {
-  analyzeEmotions(entry: Entry): Promise<EmotionData>;
-}
-
-export class EmotionalAnalyzer implements EmotionalAnalysis {
-  async analyzeSentiment(entry: Entry): Promise<string> {
-    // Implementation for sentiment analysis
-    const sentimentResult = /* Perform sentiment analysis */ "";
-    return sentimentResult;
-  }
-
-  async analyzeEmotions(entry: Entry): Promise<EmotionData> {
-    // Implementation to detect emotional state in the text entries
-    const emotionData: EmotionData = {
-      happiness: 0,
-      stress: 0,
-      sadness: 0,
-      // Calculate emotion scores based on the text in the entry
-    };
-    return emotionData;
-  }
-}
-
-// Sentiment Trends
+//Sentiment Trends
 export interface SentimentTrends extends SentimentAnalysis {}
 
 export class SentimentTrendsAnalyzer implements SentimentTrends {
-  async analyzeSentiment(entry: Entry): Promise<string> {
-    // Implementation for sentiment analysis
-    const sentimentResult = /* Perform sentiment analysis */ "";
-    return sentimentResult;
+  async analyzeSentiment(entry: Entry): Promise<number> {
+    // date: string; score: number
+    const content = entry.content[0]; // TODO: check after adding other types of contents
+    console.log("content in analyzer", content);
+    if (content.type === "text" && content.text) {
+      const lowercontent = content.text.toLowerCase();
+      const tokens = lowercontent.split(" ");
+
+      const sentimentAnalyzer = new Sentiment();
+
+      let totalScore = 0;
+      for (const token of tokens) {
+        const result = sentimentAnalyzer.analyze(token);
+        totalScore += result.score;
+      }
+      console.log("totalscore in analyzer: ", totalScore);
+      return totalScore;
+    }
+    return 0;
   }
 }

@@ -3,6 +3,8 @@ import { useIonToast } from "@ionic/react";
 import { presentToast } from "../../../else/presentToast";
 import { Entry, Category } from "../../../data/interfaces";
 import { EntryServiceImpl } from "../../../data/DataService";
+import { SentimentTrendsAnalyzer } from "../../../data/Analyzer/SentimentAnalysis";
+import { UpdateResults } from "../../../data/updateResults";
 
 export const SaveEntry = () => {
   const [present] = useIonToast();
@@ -47,9 +49,16 @@ export const SaveEntry = () => {
       id: undefined,
     };
 
-    const entries = new EntryServiceImpl();
     try {
-      await entries.addEntry(entry);
+      // save an entry + update analysis with the entry id
+      const entries = new EntryServiceImpl();
+      const entryId = await entries.addEntry(entry);
+      // update analysis
+      const sentimentAnalyzer = new SentimentTrendsAnalyzer();
+      const updateResults = new UpdateResults();
+      const sentimentResult = await sentimentAnalyzer.analyzeSentiment(entry);
+      console.log("Sentiment result: " + sentimentResult);
+      await updateResults.addResultData(entryId, sentimentResult);
 
       presentToast(present, "Your diary is saved!");
       setTimeout(() => {

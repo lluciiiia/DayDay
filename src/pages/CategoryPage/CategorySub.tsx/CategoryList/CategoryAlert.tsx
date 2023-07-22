@@ -1,8 +1,11 @@
 import { IonAlert } from "@ionic/react";
 import React from "react";
 import { Entry, Category } from "../../../../data/interfaces";
-import { EntryServiceImpl, CategoryServiceImpl } from "../../../../data/DataService";
-
+import { UpdateResults } from "../../../../data/updateResults";
+import {
+  EntryServiceImpl,
+  CategoryServiceImpl,
+} from "../../../../data/DataService";
 
 interface CategoryAlertProps {
   showAlert: boolean;
@@ -27,13 +30,17 @@ export const CategoryAlert: React.FC<CategoryAlertProps> = ({
     try {
       // delete every entry in the category
       const entriesData = new EntryServiceImpl();
+      const updateResults = new UpdateResults();
+
       const currentEntriesData = await entriesData.getAllEntries();
 
       const filteredEntries: Entry[] = currentEntriesData.filter(
         (entry: Entry) => entry.category.name === categoryToDelete.name
       );
+
       filteredEntries.forEach((entry: Entry) => {
-        entriesData.deleteEntry(entry.id);
+        entriesData.deleteEntry(entry.id); // update entry
+        updateResults.deleteResultData(entry.id); // update analysis
       });
 
       // Delete the category
@@ -64,7 +71,8 @@ export const CategoryAlert: React.FC<CategoryAlertProps> = ({
           text: "Confirm",
           handler: () => {
             if (deletingCategory) {
-              const indexToDelete = Object.values(categories).indexOf(deletingCategory);
+              const indexToDelete =
+                Object.values(categories).indexOf(deletingCategory);
               handleDeleteCategory(indexToDelete);
             }
             setShowAlert(false);

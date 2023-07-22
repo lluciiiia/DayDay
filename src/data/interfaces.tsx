@@ -33,7 +33,7 @@ export interface Category {
 }
 
 export interface EntryService {
-  addEntry(entry: Entry): Promise<void>;
+  addEntry(entry: Entry): Promise<number>;
   deleteEntry(entryId: number): Promise<void>;
   editEntry(entryId: number, updatedEntry: Entry): Promise<void>;
   getEntry(entryId: number): Promise<Entry>;
@@ -41,11 +41,14 @@ export interface EntryService {
 }
 
 export interface CategoryService {
-  addCategory(categoryName: string): Promise<void>;
+  addCategory(category: string): Promise<void>;
   deleteCategory(categoryId: number): Promise<void>;
   editCategory(categoryId: number, updatedCategory: string): Promise<void>;
   getCategory(categoryId: number): Promise<Category>;
   getAllCategories(): Promise<Category[]>;
 }
 
-export interface EntryAnalysis {}
+export interface EntryAnalysis {
+analyzeSentiment(entry: Entry): Promise<number>;
+
+}
