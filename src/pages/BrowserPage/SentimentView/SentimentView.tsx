@@ -11,6 +11,7 @@ import {
   Legend,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
+import Instruction from "./Instruction";
 import { SentimentResultData } from "../../../data/ResultService/sentimentResult";
 
 ChartJS.register(
@@ -94,19 +95,7 @@ const SentimentView = () => {
                 }}>
                 <Line data={data} />
               </div>
-              {/* instruction */}
-              <div style={{ marginTop: "60px", padding: "10px 20px" }}>
-                <div style={{ fontSize: "20px", fontWeight: "bold" }}>
-                  Get To Know Your Sentiment Patterns
-                </div>
-                <div style={{ fontSize: "18px", marginTop: "18px" }}>
-                  Each sentiment score ranges from -5 to +5. <br></br>
-                  Positive score: positive sentiment. <br></br>
-                  Negative score: negative sentiment. <br></br>
-                  <br></br>
-                  Each date displays the average of the day.
-                </div>
-              </div>
+              <Instruction />
             </div>
           ) : (
             <div
