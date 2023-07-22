@@ -39,6 +39,7 @@ import ViewCategoryPage from "./pages/ViewListPages/ViewCategoryPage";
 import ViewDatePage from "./pages/ViewListPages/ViewDatePage";
 import ViewPage from "./pages/ViewPage/ViewPage";
 import EditPage from "./pages/AddEditPage/EditPage";
+import SentimentView from "./pages/BrowserPage/AnalysisView/SentimentView";
 
 setupIonicReact();
 
@@ -57,6 +58,7 @@ const App: React.FC = () => (
           <Route path="/viewDate" exact={true} render={() => <ViewDatePage/>} />
           <Route path="/view" exact={true} render={() => <ViewPage/>} />
           <Route path="/edit" exact={true} render={() => <EditPage/>} />
+          <Route path="/sentimentView" exact={true} render={() => <SentimentView/>} />
 
         
         </IonRouterOutlet>
