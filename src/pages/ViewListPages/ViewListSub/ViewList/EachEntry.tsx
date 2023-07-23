@@ -31,7 +31,7 @@ export const EachEntry: React.FC<EachEntryProps> = ({
   };
 
   return (
-    <IonItem key={entry.id} style={{ padding: "7px", fontSize: "18px" }}>
+    <IonItem key={entry.id} style={{ fontSize: "18px" }}>
       {editMode && (
         <>
           <IonIcon
@@ -46,7 +46,9 @@ export const EachEntry: React.FC<EachEntryProps> = ({
           />
         </>
       )}
-      <IonLabel onClick={() => handleEntryClick(entry)}>
+      <IonLabel
+        onClick={() => handleEntryClick(entry)}
+        style={{ padding: "3px 13px " }}>
         <div
           style={{
             display: "flex",
@@ -71,7 +73,7 @@ export const EachEntry: React.FC<EachEntryProps> = ({
                 fontSize: "14px",
                 color: "rgb(165, 165, 165)",
                 marginTop: "16px",
-                marginRight: "10px",
+                marginRight: "18px",
               }}>
               {selectionType === "category" ? entry.date : entry.category.name}
             </div>
@@ -80,12 +82,11 @@ export const EachEntry: React.FC<EachEntryProps> = ({
           <div
             style={{
               fontSize: "16px",
-              marginTop: "8px",
-              marginBottom: "15px",
+              marginTop: "7px",
             }}>
             {entry.content && entry.content[0] && entry.content[0].text
-              ? entry.content[0].text.length > 30
-                ? `${entry.content[0].text.substring(0, 88)}...`
+              ? entry.content[0].text.length > 15
+                ? `${entry.content[0].text.substring(0, 37)} ...`
                 : entry.content[0].text
               : ""}
           </div>
