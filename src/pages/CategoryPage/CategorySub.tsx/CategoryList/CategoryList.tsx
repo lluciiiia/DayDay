@@ -28,7 +28,7 @@ const CategoryList: React.FC<CategoryListProps> = ({
     <>
       <IonList>
         {Object.values(categories).map((value, index) => (
-          <IonItem key={index} style={{ padding: "7px", fontSize: "18px" }}>
+          <IonItem key={index} style={{ fontSize: "18px" }}>
             <EachCategory
               category={value}
               editMode={editMode}

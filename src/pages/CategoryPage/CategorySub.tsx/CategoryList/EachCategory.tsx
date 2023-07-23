@@ -47,7 +47,7 @@ export const EachCategory: React.FC<EachCategoryProps> = ({
           }}
         />
       )}
-      <IonLabel onClick={() => handleCategoryClick(category)}>
+      <IonLabel onClick={() => handleCategoryClick(category)} style={{padding: "13px"}}>
         {category.name}
       </IonLabel>
       {editMode && category.name !== "Default" && category.name !== "Achievement" && (
