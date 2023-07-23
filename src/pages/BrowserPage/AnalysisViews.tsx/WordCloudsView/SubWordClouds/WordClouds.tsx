@@ -23,7 +23,7 @@ export const WordClouds: React.FC<WordCloudsProps> = ({ topWords }) => {
           backgroundColor: "rgba(0,0,0)",
         });
 
-        // Optionally, you can add event listeners or further customization to the word cloud canvas here.
+        // Optional) add event listeners or further customization to the word cloud canvas here.
       }
     }
 
@@ -40,7 +40,7 @@ export const WordClouds: React.FC<WordCloudsProps> = ({ topWords }) => {
   }, [topWords]);
 
   return (
-    <IonContent scrollY={false} style={{ height: "calc(100% - 75px)" }}>
+    <IonContent scrollY={false}>
       <canvas ref={cloudRef} width="380" height="650" />
     </IonContent>
   );

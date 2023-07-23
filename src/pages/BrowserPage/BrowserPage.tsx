@@ -35,9 +35,9 @@ const BrowserPage = () => {
         <IonItem style={{ fontSize: "19px" }} onClick={() => history.push("/wordCloudsView")}>
           <IonLabel style={{ padding: "13px" }}>Word Clouds</IonLabel>
         </IonItem>
-        <IonItem style={{ fontSize: "19px" }}>
+        {/* <IonItem style={{ fontSize: "19px" }}>
           <IonLabel style={{ padding: "13px" }}>Item 3</IonLabel>
-        </IonItem>
+        </IonItem> */}
       </IonList>
     </>
   );
