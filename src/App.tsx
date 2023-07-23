@@ -40,6 +40,7 @@ import ViewDatePage from "./pages/ViewListPages/ViewDatePage";
 import ViewPage from "./pages/ViewPage/ViewPage";
 import EditPage from "./pages/AddEditPage/EditPage";
 import SentimentView from "./pages/BrowserPage/AnalysisViews.tsx/SentimentView/SentimentView";
+import WordCloudsView from "./pages/BrowserPage/AnalysisViews.tsx/WordCloudsView/WordCloudsView";
 
 setupIonicReact();
 
@@ -59,8 +60,8 @@ const App: React.FC = () => (
           <Route path="/view" exact={true} render={() => <ViewPage/>} />
           <Route path="/edit" exact={true} render={() => <EditPage/>} />
           <Route path="/sentimentView" exact={true} render={() => <SentimentView/>} />
+          <Route path="/wordCloudsView" exact={true} render={() => <WordCloudsView/>} />
 
-        
         </IonRouterOutlet>
 
         <IonTabBar slot="bottom">
