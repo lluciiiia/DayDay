@@ -14,8 +14,10 @@ interface CategoryHeaderProps {
   editMode: boolean;
   setEditMode: React.Dispatch<React.SetStateAction<boolean>>;
   setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
-  setSelectedCategory: React.Dispatch<React.SetStateAction<Category|undefined>>;
-  categories: Category[]; // Add categories prop
+  setSelectedCategory: React.Dispatch<
+    React.SetStateAction<Category | undefined>
+  >;
+  categories: Category[];
 }
 
 const CategoryHeader: React.FC<CategoryHeaderProps> = ({
@@ -50,7 +52,7 @@ const CategoryHeader: React.FC<CategoryHeaderProps> = ({
   };
 
   const handleDoneClick = () => {
-    setEditMode(false); // Set editMode to false
+    setEditMode(false);
   };
 
   return (
@@ -69,9 +71,8 @@ const CategoryHeader: React.FC<CategoryHeaderProps> = ({
       {editMode && (
         <IonButtons>
           <IonButton
-            style={{ marginTop: "27px", marginLeft: "210px" }}
-            onClick={handleDoneClick} // Call handleDoneClick
-          >
+            style={{ marginTop: "27px", marginLeft: "190px" }}
+            onClick={handleDoneClick}>
             Done
           </IonButton>
         </IonButtons>
@@ -84,7 +85,7 @@ const CategoryHeader: React.FC<CategoryHeaderProps> = ({
           display: editMode ? "none" : "block",
           marginTop: "38px",
           fontSize: "28px",
-          marginLeft: "225px",
+          marginLeft: "200px",
         }}
       />
 

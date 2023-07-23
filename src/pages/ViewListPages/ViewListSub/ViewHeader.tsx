@@ -34,7 +34,7 @@ const ViewHeader: React.FC<ViewHeaderProps> = ({
         {editMode && (
           <IonButtons>
             <IonButton
-              style={{ marginLeft: "350px" }}
+              style={{ marginLeft: "330px" }}
               onClick={() => setEditMode(false)}>
               Done
             </IonButton>
@@ -44,7 +44,7 @@ const ViewHeader: React.FC<ViewHeaderProps> = ({
           <IonButton
             style={{
               display: editMode ? "none" : "block",
-              marginLeft: "355px",
+              marginLeft: "335px",
             }}
             onClick={() => setEditMode(true)}>
             Edit
