@@ -21,10 +21,11 @@ export class SentimentResultData {
 
   async editResult(
     entryId: number | undefined,
-    newScore: number
+    newScore: number,
+    entryDate: string | undefined
   ): Promise<void> {
     await axios.put(`${resultURL}/modify/${entryId}`, {
-      data: { entryId: entryId, newScore: newScore },
+      data: { entryId: entryId, newScore: newScore, entryDate: entryDate },
     });
   }
 

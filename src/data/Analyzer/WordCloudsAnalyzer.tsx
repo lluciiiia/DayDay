@@ -26,7 +26,6 @@ const ignoredWords = [
   "s",
 ];
 
-// entry.content.text, entry.date
 export interface WordCloudsAnalysis extends EntryAnalysis {
   analyzeWords(entry: Entry): Promise<object>;
 }
@@ -37,7 +36,6 @@ export interface WordClouds extends WordCloudsAnalysis {}
 
 export class WordCloudsAnalyzer implements WordClouds {
   async analyzeWords(entry: Entry): Promise<object> {
-    console.log("Analyzing");
     const content = entry.content[0]; // TODO: check after adding other types of contents
     if (content.type === "text" && content.text) {
       let words = content.text.split(/\s+|(?=[^\w\s])|(?<=[^\w\s])/); // Split by whitespace or symbols
@@ -53,7 +51,6 @@ export class WordCloudsAnalyzer implements WordClouds {
         wordFrequency[word] = (wordFrequency[word] || 0) + 1;
       });
 
-      console.log('wordFrequency: ' + wordFrequency);
       return wordFrequency;
     }
     return {};

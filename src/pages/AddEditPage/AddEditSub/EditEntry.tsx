@@ -56,7 +56,6 @@ export const EditEntry = () => {
         category: objectCategory,
         id: entryid,
       };
-      console.log("entry in editEntry", entry);
 
       try {
         const EntryService = new EntryServiceImpl();
@@ -66,16 +65,14 @@ export const EditEntry = () => {
         // update sentiment analysis
         const sentimentAnalyzer = new SentimentTrendsAnalyzer();
         const sentimentResult = await sentimentAnalyzer.analyzeSentiment(entry);
-        console.log("Sentiment result: " + sentimentResult);
-        await updateManager.editResultData(entryid, {
-          sentiment: sentimentResult,
-        });
-        console.log("Updated sentiment");
+        await updateManager.editResultData(
+          entryid,
+          { sentiment: sentimentResult },
+          selectedDate
+        );
         // update wordCloud analysis
         const wordCloudsAnalyzer = new WordCloudsAnalyzer();
         const wordCloudsResult = await wordCloudsAnalyzer.analyzeWords(entry);
-        console.log("passed");
-        console.log("WordClouds result: " + wordCloudsResult);
         await updateManager.editResultData(entryid, {
           wordClouds: wordCloudsResult,
         });

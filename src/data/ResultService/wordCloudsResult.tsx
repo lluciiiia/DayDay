@@ -10,7 +10,6 @@ export class WordCloudsResultData {
   }
 
   async addResult(entryId: number, frequencyMap: object): Promise<void> {
-    console.log("frequncyMap", frequencyMap);
     await axios.post(resultURL, {
       data: { entryId: entryId, frequencyMap: frequencyMap },
     });
@@ -20,14 +19,12 @@ export class WordCloudsResultData {
     entryId: number | undefined,
     frequencyMap: object
   ): Promise<void> {
-    console.log("entryId, frequencyMap", entryId, frequencyMap);
     await axios.put(`${resultURL}/modify/${entryId}`, {
       data: { entryId: entryId, frequencyMap: frequencyMap },
     });
   }
 
   async deleteResult(entryId: number | undefined): Promise<void> {
-    console.log("entryId: " + entryId);
     await axios.delete(`${resultURL}/${entryId}`, {
       data: { entryId: entryId },
     });
