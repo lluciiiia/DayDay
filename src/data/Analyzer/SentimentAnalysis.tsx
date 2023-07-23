@@ -1,11 +1,11 @@
 import { Entry } from "../interfaces";
 import { EntryAnalysis } from "../interfaces";
 import Sentiment from "sentiment";
-// import * as natural from "natural";
 
 // entry.content.text, entry.date
 export interface SentimentAnalysis extends EntryAnalysis {
   analyzeSentiment(entry: Entry): Promise<number>;
+  analyzeStress(totalScore: number): Promise<string>;
 }
 
 function tokenizer(entry: Entry): string[] {
@@ -32,13 +32,17 @@ export class SentimentTrendsAnalyzer implements SentimentAnalysis {
     console.log("totalscore in analyzer: ", totalScore);
     return totalScore;
   }
-}
 
-export class StressAnalyzer implements SentimentAnalysis {
-  async analyzeSentiment(entry: Entry): Promise<number> {
-    const tokens = tokenizer(entry);
-
-    // if total score
-    return 0;
+  async analyzeStress(totalScore: number): Promise<string> {
+    if (totalScore <= -10) {
+      return "High stress level";
+    } else if (totalScore <= -5) {
+      return "Moderate stress level";
+    } else if (totalScore <= 0) {
+      return "Moderate stress level";
+    }else {
+      return "Low stress level";
+    }
   }
 }
+

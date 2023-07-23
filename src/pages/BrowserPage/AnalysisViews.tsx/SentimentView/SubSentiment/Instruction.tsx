@@ -11,6 +11,7 @@ export const Instruction = () => {
         <br />
         Each date displays the average of the day.
       </div>
+      {/* StressMangement: guide according to the stress level */}
     </div>
   );
 };

@@ -35,9 +35,9 @@ const BrowserPage = () => {
         <IonItem style={{ fontSize: "19px" }} onClick={() => history.push("/wordCloudsView")}>
           <IonLabel style={{ padding: "13px" }}>Word Clouds</IonLabel>
         </IonItem>
-        <IonItem style={{ fontSize: "19px" }} onClick={() => history.push("/stressView")}>
+        {/* <IonItem style={{ fontSize: "19px" }} onClick={() => history.push("/stressView")}>
           <IonLabel style={{ padding: "13px" }}>Stress management</IonLabel>
-        </IonItem>
+        </IonItem> */}
       </IonList>
     </>
   );
