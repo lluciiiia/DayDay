@@ -77,7 +77,7 @@ const App: React.FC = () => (
 
           <IonTabButton tab="browser" href="/browser">
             <IonIcon icon={search} />
-            <IonLabel>Browser</IonLabel>
+            <IonLabel>Browse</IonLabel>
           </IonTabButton>
 
         </IonTabBar>

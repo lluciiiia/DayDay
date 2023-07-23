@@ -1,11 +1,11 @@
 import { useHistory } from "react-router";
 import { useIonToast } from "@ionic/react";
-import { presentToast } from "../../../else/presentToast";
-import { Entry, Category } from "../../../data/interfaces";
-import { EntryServiceImpl } from "../../../data/DataService";
-import { WordCloudsAnalyzer } from "../../../data/Analyzer/WordCloudsAnalyzer";
-import { SentimentTrendsAnalyzer } from "../../../data/Analyzer/SentimentAnalysis";
-import { UpdateManager } from "../../../data/updateResults";
+import { presentToast } from "../../../../else/presentToast";
+import { Entry, Category } from "../../../../data/interfaces";
+import { EntryServiceImpl } from "../../../../data/DataService";
+import { WordCloudsAnalyzer } from "../../../../data/Analyzer/WordCloudsAnalyzer";
+import { SentimentTrendsAnalyzer } from "../../../../data/Analyzer/SentimentAnalysis";
+import { UpdateManager } from "../../../../data/updateResults";
 
 export const SaveEntry = () => {
   const [present] = useIonToast();

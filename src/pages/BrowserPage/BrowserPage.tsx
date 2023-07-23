@@ -20,7 +20,7 @@ const BrowserPage = () => {
           marginTop: "35px",
           marginBottom: "10px",
         }}>
-        Browser
+        Browse
       </p>
       <IonSearchbar
         showClearButton="focus"

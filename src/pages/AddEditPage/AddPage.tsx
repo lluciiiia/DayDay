@@ -11,7 +11,7 @@ import {
 import { useHistory, useLocation } from "react-router";
 import { CategoryServiceImpl } from "../../data/DataService";
 import ContentEditor from "./AddEditSub/ContentEditor";
-import { SaveEntry } from "./AddEditSub/SaveEntry";
+import { SaveEntry } from "./AddEditSub/SaveEntry/SaveEntry";
 import CategorySelection from "./AddEditSub/CategorySelection";
 import { Category } from "../../data/interfaces";
 
