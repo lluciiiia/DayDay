@@ -1,14 +1,14 @@
 import { Entry } from "../interfaces";
 import { EntryAnalysis } from "../interfaces";
 import Sentiment from "sentiment";
-import * as natural from "natural";
+// import * as natural from "natural";
 
 // entry.content.text, entry.date
 export interface SentimentAnalysis extends EntryAnalysis {
   analyzeSentiment(entry: Entry): Promise<number>;
 }
 
-function tokenizeContent(entry: Entry): string[] {
+function tokenizer(entry: Entry): string[] {
   const content = entry.content[0]; // TODO: check after adding other types of contents
   if (content.type === "text" && content.text) {
     const lowercontent = content.text.toLowerCase();
@@ -20,7 +20,7 @@ function tokenizeContent(entry: Entry): string[] {
 
 export class SentimentTrendsAnalyzer implements SentimentAnalysis {
   async analyzeSentiment(entry: Entry): Promise<number> {
-    const tokens = tokenizeContent(entry);
+    const tokens = tokenizer(entry);
 
     const sentimentAnalyzer = new Sentiment();
 
@@ -36,8 +36,9 @@ export class SentimentTrendsAnalyzer implements SentimentAnalysis {
 
 export class StressAnalyzer implements SentimentAnalysis {
   async analyzeSentiment(entry: Entry): Promise<number> {
-    const tokens = tokenizeContent(entry);
+    const tokens = tokenizer(entry);
 
+    // if total score
     return 0;
   }
 }
