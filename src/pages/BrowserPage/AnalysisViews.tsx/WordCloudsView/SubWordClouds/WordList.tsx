@@ -7,7 +7,7 @@ interface WordListProps {
 export const WordList: React.FC<WordListProps> = ({ topWords }) => {
   return (
     <>
-      <IonContent scrollY={true} style={{ height: "calc(100% - 80px)" }}>
+      <IonContent scrollY={true} style={{ height: "calc(100% - 75px)" }}>
         <div
           style={{
             padding: "7px 13px",

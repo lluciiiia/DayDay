@@ -35,11 +35,11 @@ export const WordCloudsView = () => {
           marginLeft: "15px",
           fontWeight: "bold",
           marginTop: "35px",
-          marginBottom: "10px",
+          marginBottom: "5px",
         }}>
         Word Clouds
       </p>
-      <IonToggle style={{ padding: "13px" }} onClick={() => setToggle(!toggle)}>
+      <IonToggle labelPlacement="end" style={{ padding: "13px", marginLeft: "210px" }} onClick={() => setToggle(!toggle)}>
         {toggle ? "View Clouds" : "View List"}
       </IonToggle>
       {toggle ? (

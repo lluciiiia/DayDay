@@ -7,7 +7,9 @@ interface WordCloudsProps {
 export const WordClouds: React.FC<WordCloudsProps> = ({ topWords }) => {
   return (
     <>
-      <IonContent scrollY={true}></IonContent>
+      <IonContent
+        scrollY={true}
+        style={{ height: "calc(100% - 75px)" }}></IonContent>
     </>
   );
 };
