@@ -19,17 +19,16 @@ export class UpdateManager {
     if (analysisResult.sentiment) {
       await this.sentimentResult.addResult(entryId, analysisResult.sentiment, entryDate);
     }
-    else if (analysisResult.wordClouds) {
+    if (analysisResult.wordClouds) {
       await this.wordCloudsResult.addResult(entryId, analysisResult.wordClouds);
     }
   }
 
   async editResultData(entryId: number | undefined, updatedResult: any) {
     if (updatedResult.sentiment) {
-      console.log("sent in update",updatedResult.sentiment);
       await this.sentimentResult.editResult(entryId, updatedResult.sentiment);
     }
-    else if (updatedResult.wordClouds) {
+    if (updatedResult.wordClouds) {
       console.log("wc in update",updatedResult.wordClouds);
       await this.wordCloudsResult.editResult(entryId, updatedResult.wordClouds);
     }
