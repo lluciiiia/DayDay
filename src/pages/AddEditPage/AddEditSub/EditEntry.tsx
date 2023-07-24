@@ -2,7 +2,7 @@ import { useHistory } from "react-router";
 import { useIonToast } from "@ionic/react";
 import { presentToast } from "../../../else/presentToast";
 import { Entry } from "../../../data/interfaces";
-import { WordCloudsAnalyzer } from "../../../data/Analyzer/WordCloudsAnalyzer";
+import { WordCloudsAnalyzer } from "../../../data/Analyzer/WordCloudsAnalysis";
 import { SentimentTrendsAnalyzer } from "../../../data/Analyzer/SentimentAnalysis";
 import {
   SentimentResultData,

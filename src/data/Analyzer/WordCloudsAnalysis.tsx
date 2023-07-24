@@ -30,7 +30,6 @@ export interface WordCloudsAnalysis extends EntryAnalysis {
   analyzeWords(entry: Entry): Promise<object>;
 }
 
-//TODO: Word Clouds: Create word clouds from diary entries to highlight the most frequently used words, offering a quick overview of the user's main concerns or interests.
 // entry.content.text, entry.id
 export interface WordClouds extends WordCloudsAnalysis {}
 
