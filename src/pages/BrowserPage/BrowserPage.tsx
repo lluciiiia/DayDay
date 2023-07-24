@@ -7,7 +7,7 @@ import {
   IonLabel,
   IonIcon,
 } from "@ionic/react";
-import { heartHalf, chatboxEllipses } from "ionicons/icons";
+import { heartHalf, cloud } from "ionicons/icons";
 
 const BrowserPage = () => {
   const history = useHistory();
@@ -39,7 +39,7 @@ const BrowserPage = () => {
           style={{ fontSize: "19px" }}
           onClick={() => history.push("/wordCloudsView")}>
           <IonIcon
-            icon={chatboxEllipses}
+            icon={cloud}
             style={{ color: "rgb(225, 244, 255)" }}
           />
           <IonLabel style={{ padding: "13px" }}>Word Clouds</IonLabel>
