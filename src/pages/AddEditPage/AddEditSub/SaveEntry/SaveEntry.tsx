@@ -5,7 +5,8 @@ import { Entry, Category } from "../../../../data/interfaces";
 import { EntryServiceImpl } from "../../../../data/DataService";
 import { WordCloudsAnalyzer } from "../../../../data/Analyzer/WordCloudsAnalyzer";
 import { SentimentTrendsAnalyzer } from "../../../../data/Analyzer/SentimentAnalysis";
-import { UpdateManager } from "../../../../data/updateResults";
+import { SentimentResultData } from "../../../../data/ResultConstructor";
+import { WordCloudsResultData } from "../../../../data/ResultConstructor";
 
 export const SaveEntry = () => {
   const [present] = useIonToast();
@@ -54,22 +55,23 @@ export const SaveEntry = () => {
       // save an entry
       const entries = new EntryServiceImpl();
       const entryId = await entries.addEntry(entry);
-
-      const updateManager = new UpdateManager();
+      console.log("type of  entryId", typeof entryId);
       // update sentiment analysis
       const sentimentAnalyzer = new SentimentTrendsAnalyzer();
       const sentimentResult = await sentimentAnalyzer.analyzeSentiment(entry);
-      await updateManager.addResultData(
-        entryId,
-        { sentiment: sentimentResult },
-        selectedDate
-      );
       // update wordCloud analysis
       const wordCloudsAnalyzer = new WordCloudsAnalyzer();
       const wordCloudsResult = await wordCloudsAnalyzer.analyzeWords(entry);
-      await updateManager.addResultData(entryId, {
-        wordClouds: wordCloudsResult,
-      });
+
+      const sentimentData = new SentimentResultData();
+      await sentimentData.addSentimentResult(
+        entryId,
+        sentimentResult,
+        selectedDate
+      );
+
+      const wordCloudsData = new WordCloudsResultData();
+      await wordCloudsData.addWordCloudResult(entryId, wordCloudsResult);
 
       presentToast(present, "Your diary is saved!");
       setTimeout(() => {

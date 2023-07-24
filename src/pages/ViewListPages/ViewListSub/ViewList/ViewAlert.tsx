@@ -2,7 +2,8 @@ import { IonAlert } from "@ionic/react";
 import React from "react";
 import { Entry, Category } from "../../../../data/interfaces";
 import { EntryServiceImpl } from "../../../../data/DataService";
-import { UpdateManager } from "../../../../data/updateResults";
+// import { UpdateManager } from "../../../../data/updateResults";
+import { SentimentResultData, WordCloudsResultData } from "../../../../data/ResultConstructor";
 
 interface ViewAlertProps {
   showAlert: boolean;
@@ -30,8 +31,13 @@ export const ViewAlert: React.FC<ViewAlertProps> = ({
     const entriesData = new EntryServiceImpl();
     await entriesData.deleteEntry(entryToDelete.id);
     // update analysis
-    const updateManager = new UpdateManager();
-    await updateManager.deleteResultData(entryToDelete.id);
+    // const updateManager = new UpdateManager();
+    // await updateManager.deleteResultData(entryToDelete.id);
+    const sentimentResult = new SentimentResultData();
+    const wordCloudResult = new WordCloudsResultData();
+
+    await sentimentResult.deleteResult(entryToDelete.id);
+    await wordCloudResult.deleteResult(entryToDelete.id);
 
     const updatedData = await entriesData.getAllEntries();
     let filteredEntries: Entry[] = [];

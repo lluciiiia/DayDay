@@ -3,7 +3,8 @@ import { useLocation, useHistory } from "react-router-dom";
 import { IonActionSheet } from "@ionic/react";
 import { Entry, Category } from "../../data/interfaces";
 import { EntryServiceImpl } from "../../data/DataService";
-import { UpdateManager, UpdateResults } from "../../data/updateResults";
+// import { UpdateManager, UpdateResults } from "../../data/updateResults";
+import { SentimentResultData, WordCloudsResultData } from "../../data/ResultConstructor";
 
 interface SettingSectionProps {
   entryData: Entry;
@@ -20,8 +21,13 @@ export const SettingSection: React.FC<SettingSectionProps> = ({
       const entriesData = new EntryServiceImpl();
       await entriesData.deleteEntry(entryData.id);
       // update analysis
-      const updateManager = new UpdateManager();
-      await updateManager.deleteResultData(entryData.id);
+      // const updateManager = new UpdateManager();
+      // await updateManager.deleteResultData(entryData.id);
+      const sentimentResult = new SentimentResultData();
+    const wordCloudResult = new WordCloudsResultData();
+
+    await sentimentResult.deleteResult(entryData.id);
+    await wordCloudResult.deleteResult(entryData.id);
 
       history.push("/calendar");
     } catch (error) {

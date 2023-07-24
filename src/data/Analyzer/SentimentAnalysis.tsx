@@ -40,9 +40,8 @@ export class SentimentTrendsAnalyzer implements SentimentAnalysis {
       return "Moderate stress level";
     } else if (totalScore <= 0) {
       return "Moderate stress level";
-    }else {
+    } else {
       return "Low stress level";
     }
   }
 }
-

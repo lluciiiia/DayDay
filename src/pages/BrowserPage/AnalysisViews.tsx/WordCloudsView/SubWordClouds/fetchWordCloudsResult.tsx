@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { WordCloudsResultData } from "../../../../../data/ResultService/wordCloudsResult";
+import { WordCloudsResultData } from "../../../../../data/ResultConstructor";
 
 const fetchWordCloudsResult = () => {
   const [topWords, setTopWords] = useState<[string, number][]>([]);

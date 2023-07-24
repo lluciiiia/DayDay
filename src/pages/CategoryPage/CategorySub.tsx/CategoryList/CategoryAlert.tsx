@@ -1,7 +1,8 @@
 import { IonAlert } from "@ionic/react";
 import React from "react";
 import { Entry, Category } from "../../../../data/interfaces";
-import { UpdateManager } from "../../../../data/updateResults";
+// import { UpdateManager } from "../../../../data/updateResults";
+import { SentimentResultData, WordCloudsResultData } from "../../../../data/ResultConstructor";
 import {
   EntryServiceImpl,
   CategoryServiceImpl,
@@ -30,7 +31,9 @@ export const CategoryAlert: React.FC<CategoryAlertProps> = ({
     try {
       // delete every entry in the category
       const entriesData = new EntryServiceImpl();
-      const updateResults = new UpdateManager();
+      // const updateResults = new UpdateManager();
+      const sentimentResult = new SentimentResultData();
+      const wordCloudResult = new WordCloudsResultData();
 
       const currentEntriesData = await entriesData.getAllEntries();
 
@@ -40,7 +43,9 @@ export const CategoryAlert: React.FC<CategoryAlertProps> = ({
 
       filteredEntries.forEach((entry: Entry) => {
         entriesData.deleteEntry(entry.id); // update entry
-        updateResults.deleteResultData(entry.id); // update analysis
+        // updateResults.deleteResultData(entry.id); // update analysis
+        sentimentResult.deleteResult(entry.id); // update
+        wordCloudResult.deleteResult(entry.id);
       });
 
       // Delete the category
