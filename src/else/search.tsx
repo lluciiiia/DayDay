@@ -21,20 +21,17 @@
 import Fuse from "fuse.js";
 import { Entry, Category } from "../data/interfaces";
 
-
-// Define a generic interface for the search data
+// generic search function
 export interface SearchData<T> {
   data: T[];
   keys: string[];
 }
 
-// Define a generic interface for the search result
 export interface SearchResult<T> {
   item: T;
   matches?: readonly Fuse.FuseResultMatch[] | undefined;
 }
 
-// Generic search function that can handle different data types
 export function search<T>(
   searchData: SearchData<T>,
   input: string
@@ -51,22 +48,7 @@ export function search<T>(
   return result;
 }
 
-// Example usage for searching categories by name and returning the category names
-// interface CategorySearchData {
-//   data: Category[];
-//   keys: string[];
-// }
-
-// export const searchCategories = (
-//   data: CategorySearchData,
-//   input: string
-// ): string[] => {
-//   const results = search(data, input);
-
-//   return results.map((result) => result.item.name);
-// };
-
-// Example usage for searching analysis names and returning the analysis names
+// BrowsePage
 interface AnalysisSearchData {
   data: string[];
   keys: string[];
@@ -77,6 +59,23 @@ export const searchAnalysisNames = (
   input: string
 ): string[] => {
   const results = search(data, input);
+
+  return results.map((result) => result.item);
+};
+
+// CategoryPage
+interface CategorySearchData {
+  data: string[];
+  keys: string[];
+}
+
+export const searchCategories = (
+  data: CategorySearchData,
+  input: string
+): String[] => {
+  const results = search(data, input);
+
+  console.log(results);
 
   return results.map((result) => result.item);
 };
