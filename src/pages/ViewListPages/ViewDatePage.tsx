@@ -5,6 +5,7 @@ import ViewList from "./ViewListSub/ViewList/ViewList";
 import ViewHeader from "./ViewListSub/ViewHeader";
 import useFetchEntriesData from "./ViewListSub/fetchEntriesData";
 import { Entry } from "../../data/interfaces";
+import { searchEntries } from "../../else/search";
 
 const ViewDatePage = () => {
   const location = useLocation<{ selectedDate?: string }>();
@@ -14,6 +15,36 @@ const ViewDatePage = () => {
   const [editMode, setEditMode] = useState(false);
   const [entries, setEntries] = useState<Entry[]>([]);
   const [selectedEntry, setSelectedEntry] = useState<Entry | null>(null);
+
+  const [results, setResults] = useState<Entry[]>([]);
+  const [inputValue, setInputValue] = useState(""); // New state variable
+
+  const handleInput = (event: CustomEvent) => {
+    const input = event.detail.value || "";
+    setInputValue(input); // Store the input value
+
+    if (input) {
+      const searchResults = searchEntries(
+        {
+          data: Object.values(entries).map(
+            (entry) => entry.title || entry.content[0]?.text || ""
+          ),
+          keys: Object.values(entries).map(
+            (entry) => entry.title || entry.content[0]?.text || ""
+          ),
+        },
+        input
+      );
+
+      const searchedResults: Entry[] = Object.values(entries).filter((entry) =>
+        searchResults.includes(entry.title || entry.content[0]?.text || "")
+      );
+
+      setResults(searchedResults);
+    } else {
+      setResults([]); // Clear the search results when input is empty
+    }
+  };
 
   return (
     <>
@@ -25,14 +56,16 @@ const ViewDatePage = () => {
           setEditMode={setEditMode}
         />
 
-        <IonSearchbar showClearButton="focus"></IonSearchbar>
+        <IonSearchbar
+          showClearButton="focus"
+          onIonInput={handleInput}></IonSearchbar>
 
         <ViewList
           editMode={editMode}
           selectionType="date"
           selectedDate={selectedDate}
           entriesData={entriesData}
-          entries={entries}
+          entries={inputValue === "" ? entries : results}
           setEntries={setEntries}
           setSelectedEntry={setSelectedEntry}
         />
