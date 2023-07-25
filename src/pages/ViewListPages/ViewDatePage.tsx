@@ -27,17 +27,19 @@ const ViewDatePage = () => {
       const searchResults = searchEntries(
         {
           data: Object.values(entries).map(
-            (entry) => entry.title || entry.content[0]?.text || ""
+            (entry) => entry.title || entry.content[0].text || ""
           ),
           keys: Object.values(entries).map(
-            (entry) => entry.title || entry.content[0]?.text || ""
+            (entry) => entry.title || entry.content[0].text || ""
           ),
         },
         input
       );
 
-      const searchedResults: Entry[] = Object.values(entries).filter((entry) =>
-        searchResults.includes(entry.title || entry.content[0]?.text || "")
+      const searchedResults: Entry[] = Object.values(entries).filter(
+        (entry) =>
+          entry.title?.includes(input) ||
+          (entry.content[0]?.text && entry.content[0].text.includes(input))
       );
 
       setResults(searchedResults);
