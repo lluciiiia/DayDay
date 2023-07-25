@@ -5,6 +5,7 @@ import ViewList from "./ViewListSub/ViewList/ViewList";
 import ViewHeader from "./ViewListSub/ViewHeader";
 import useFetchEntriesData from "./ViewListSub/fetchEntriesData";
 import { Entry, Category } from "../../data/interfaces";
+import { searchEntries } from "../../else/search";
 
 const ViewCategoryPage = () => {
   const location = useLocation<{ selectedCategory?: Category }>();
@@ -14,6 +15,38 @@ const ViewCategoryPage = () => {
   const [editMode, setEditMode] = useState(false);
   const [entries, setEntries] = useState<Entry[]>([]);
   const [selectedEntry, setSelectedEntry] = useState<Entry | null>(null);
+
+  const [results, setResults] = useState<Entry[]>([]);
+  const [inputValue, setInputValue] = useState(""); // New state variable
+
+  const handleInput = (event: CustomEvent) => {
+    const input = event.detail.value || "";
+    setInputValue(input); // Store the input value
+
+    if (input) {
+      const searchResults = searchEntries(
+        {
+          data: Object.values(entries).map(
+            (entry) => entry.title || entry.content[0].text || ""
+          ),
+          keys: Object.values(entries).map(
+            (entry) => entry.title || entry.content[0].text || ""
+          ),
+        },
+        input
+      );
+
+      const searchedResults: Entry[] = Object.values(entries).filter(
+        (entry) =>
+          entry.title?.includes(input) ||
+          (entry.content[0]?.text && entry.content[0].text.includes(input))
+      );
+
+      setResults(searchedResults);
+    } else {
+      setResults([]); // Clear the search results when input is empty
+    }
+  };
 
   return (
     <>
@@ -25,14 +58,16 @@ const ViewCategoryPage = () => {
           setEditMode={setEditMode}
         />
 
-        <IonSearchbar showClearButton="focus"></IonSearchbar>
+        <IonSearchbar
+          showClearButton="focus"
+          onIonInput={handleInput}></IonSearchbar>
 
         <ViewList
           editMode={editMode}
           selectionType="category"
           selectedCategory={selectedCategory}
           entriesData={entriesData}
-          entries={entries}
+          entries={inputValue === "" ? entries : results}
           setEntries={setEntries}
           setSelectedEntry={setSelectedEntry}
         />
