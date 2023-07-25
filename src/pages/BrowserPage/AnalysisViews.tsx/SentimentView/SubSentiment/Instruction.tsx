@@ -1,3 +1,5 @@
+import { SentimentTrendsAnalyzer } from "../../../../../data/Analyzer/SentimentAnalysis";
+
 export const Instruction = () => {
   return (
     <div style={{ marginTop: "60px", padding: "10px 20px" }}>
@@ -12,6 +14,7 @@ export const Instruction = () => {
         Each date displays the average of the day.
       </div>
       {/* StressMangement: guide according to the stress level */}
+
     </div>
   );
 };

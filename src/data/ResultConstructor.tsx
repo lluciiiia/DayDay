@@ -1,5 +1,6 @@
 import { ResultData, ResultDataProps } from "./ResultData";
 
+// sentiment
 const sentimentResultProps: ResultDataProps = {
   url: "/sentiment",
 };
@@ -28,6 +29,7 @@ export class SentimentResultData extends ResultData {
   }
 }
 
+// word cloud
 const wordCloudsResultProps: ResultDataProps = {
   url: "/wordClouds",
 };
