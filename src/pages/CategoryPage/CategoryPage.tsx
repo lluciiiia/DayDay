@@ -6,7 +6,6 @@ import CategoryList from "./CategorySub.tsx/CategoryList/CategoryList";
 import CategoryHeader from "./CategorySub.tsx/CategoryHeader";
 import { Category } from "../../data/interfaces";
 import { CategoryServiceImpl } from "../../data/DataService";
-import { searchCategories } from "../../else/search";
 import { useSearch } from "../../else/searchGeneric";
 import { CategorySearchData } from "../../else/search";
 
