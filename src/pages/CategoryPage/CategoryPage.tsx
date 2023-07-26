@@ -23,9 +23,7 @@ const CategoryMain = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       setPresentingElement(page.current);
-      // get data from backend
       const categories: Category[] = await categoryService.getAllCategories();
-
       setCategories(categories);
     };
 

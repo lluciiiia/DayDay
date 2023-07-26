@@ -1,5 +1,4 @@
 import Fuse from "fuse.js";
-import { Entry, Category } from "../data/interfaces";
 
 // generic search function
 export interface SearchData<T> {
