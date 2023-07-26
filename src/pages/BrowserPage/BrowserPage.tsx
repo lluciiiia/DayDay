@@ -1,5 +1,4 @@
 import { useHistory } from "react-router";
-import { useState } from "react";
 import {
   IonHeader,
   IonItem,

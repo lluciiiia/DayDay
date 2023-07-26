@@ -7,6 +7,8 @@ import CategoryHeader from "./CategorySub.tsx/CategoryHeader";
 import { Category } from "../../data/interfaces";
 import { CategoryServiceImpl } from "../../data/DataService";
 import { searchCategories } from "../../else/search";
+import { useSearch } from "../../else/searchGeneric";
+import { CategorySearchData } from "../../else/search";
 
 const CategoryMain = () => {
   const [showModal, setShowModal] = useState(false);
@@ -31,30 +33,16 @@ const CategoryMain = () => {
   }, []);
 
   // search functionality
-  const [results, setResults] = useState<Category[]>([]);
-  const [inputValue, setInputValue] = useState(""); // New state variable
-
-  const handleInput = (event: CustomEvent) => {
-    const input = event.detail.value || "";
-    setInputValue(input); // Store the input value
-
-    if (input) {
-      const searchResults = searchCategories(
-        {
-          data: Object.values(categories).map((category) => category.name),
-          keys: Object.values(categories).map((category) => category.name),
-        },
-        input
-      );
-      const searchedResults: Category[] = Object.values(categories).filter(
-        (category) => searchResults.includes(category.name)
-      );
-
-      setResults(searchedResults);
-    } else {
-      setResults([]); // Clear the search results when input is empty
-    }
+  const searchData: CategorySearchData = {
+    data: Object.values(categories).map((category) => category.name),
+    keys: Object.values(categories).map((category) => category.name),
   };
+
+  const { results, inputValue, handleInput } = useSearch(searchData);
+
+  const searchResults: Category[] = Object.values(categories).filter(
+    (category) => results.includes(category.name)
+  );
 
   return (
     <IonContent scrollY={true}>
@@ -72,7 +60,7 @@ const CategoryMain = () => {
       </div>
 
       <CategoryList
-        categories={inputValue === "" ? categories : results}
+        categories={inputValue === "" ? categories : searchResults}
         editMode={editMode}
         setCategories={setCategories}
         setSelectedCategory={setSelectedCategory}

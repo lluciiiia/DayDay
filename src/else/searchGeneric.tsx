@@ -1,15 +1,16 @@
 import { useState } from "react";
 import { search, SearchData, SearchResult } from "./search"; // Assuming you have the search logic in a separate file
 import { InputChangeEventDetail } from "@ionic/react";
+import { Category } from "../data/interfaces";
 
 export interface SearchHookResult<T> {
-  results: T[];
+  results: (T | Category)[];
   inputValue: string;
   handleInput: (event: CustomEvent<InputChangeEventDetail>) => void;
 }
 
 export function useSearch<T>(searchData: SearchData<T>): SearchHookResult<T> {
-  const [results, setResults] = useState<T[]>([]);
+  const [results, setResults] = useState<(T | Category)[]>([]);
   const [inputValue, setInputValue] = useState("");
 
   const handleInput = (event: CustomEvent<InputChangeEventDetail>) => {
@@ -23,6 +24,26 @@ export function useSearch<T>(searchData: SearchData<T>): SearchHookResult<T> {
       setResults([]); // Clear the search results when input is empty
     }
   };
+
+  //     if (input) {
+  //       const searchResults: SearchResult<T>[] = search(searchData, input);
+  //         console.log("passed");
+  //       // Additional functionality for Category search
+  //       if (typeof searchData.data === "object" && "name" in searchData.data.values) {
+  //         const categories: Category[] = searchData.data as Category[]; // Assume it's Category[]
+  //         console.log(categories);
+  //         const searchedResults: Category[] = categories.filter((category) =>
+  //           searchResults.some((result) => result.item === category.name)
+  //         );
+  //         console.log(searchedResults);
+  //         setResults(searchedResults);
+  //       } else {
+  //         setResults(searchResults.map((result) => result.item));
+  //       }
+  //     } else {
+  //       setResults([]); // Clear the search results when input is empty
+  //     }
+  //   };
 
   return { results, inputValue, handleInput };
 }
