@@ -5,7 +5,8 @@ import ViewList from "./ViewListSub/ViewList/ViewList";
 import ViewHeader from "./ViewListSub/ViewHeader";
 import useFetchEntriesData from "./ViewListSub/fetchEntriesData";
 import { Entry, Category } from "../../data/interfaces";
-import { searchEntries } from "../../else/search";
+import { useSearch } from "../../else/searchGeneric";
+import { EntrySearchData } from "../../else/search";
 
 const ViewCategoryPage = () => {
   const location = useLocation<{ selectedCategory?: Category }>();
@@ -16,37 +17,23 @@ const ViewCategoryPage = () => {
   const [entries, setEntries] = useState<Entry[]>([]);
   const [selectedEntry, setSelectedEntry] = useState<Entry | null>(null);
 
-  const [results, setResults] = useState<Entry[]>([]);
-  const [inputValue, setInputValue] = useState(""); // New state variable
-
-  const handleInput = (event: CustomEvent) => {
-    const input = event.detail.value || "";
-    setInputValue(input); // Store the input value
-
-    if (input) {
-      const searchResults = searchEntries(
-        {
-          data: Object.values(entries).map(
-            (entry) => entry.title || entry.content[0].text || ""
-          ),
-          keys: Object.values(entries).map(
-            (entry) => entry.title || entry.content[0].text || ""
-          ),
-        },
-        input
-      );
-
-      const searchedResults: Entry[] = Object.values(entries).filter(
-        (entry) =>
-          entry.title?.includes(input) ||
-          (entry.content[0]?.text && entry.content[0].text.includes(input))
-      );
-
-      setResults(searchedResults);
-    } else {
-      setResults([]); // Clear the search results when input is empty
-    }
+  // search functionality
+  const searchData: EntrySearchData = {
+    data: Object.values(entries).map(
+      (entry) => entry.title || entry.content[0].text || ""
+    ),
+    keys: Object.values(entries).map(
+      (entry) => entry.title || entry.content[0].text || ""
+    ),
   };
+
+  const { results, inputValue, handleInput } = useSearch(searchData);
+
+  const searchedResults: Entry[] = Object.values(entries).filter(
+    (entry) =>
+      entry.title?.includes(inputValue) ||
+      (entry.content[0]?.text && entry.content[0].text.includes(inputValue))
+  );
 
   return (
     <>
@@ -67,7 +54,7 @@ const ViewCategoryPage = () => {
           selectionType="category"
           selectedCategory={selectedCategory}
           entriesData={entriesData}
-          entries={inputValue === "" ? entries : results}
+          entries={inputValue === "" ? entries : searchedResults}
           setEntries={setEntries}
           setSelectedEntry={setSelectedEntry}
         />
