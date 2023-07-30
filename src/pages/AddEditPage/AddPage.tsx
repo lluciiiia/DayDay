@@ -62,7 +62,6 @@ const AddPage = () => {
           onCategoryChange={setSelectedCategoryName}
         />
 
-        {/* Add a location -> Modal */}
         <AddLocation />
 
         <ContentEditor content={content} onContentChange={setContent} />

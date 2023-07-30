@@ -20,7 +20,7 @@ const ModalButtons: React.FC<ModalButtonsProps> = ({ setShowModal }) => {
           <IonButtons slot="start">
             <IonButton onClick={() => setShowModal(false)}>Close</IonButton>
           </IonButtons>
-          <IonTitle>New Category</IonTitle>
+          <IonTitle>Add Location</IonTitle>
 
           <DoneClick setShowModal={setShowModal} />
         </IonToolbar>

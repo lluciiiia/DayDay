@@ -14,7 +14,7 @@ const ContentEditor: React.FC<ContentEditorProps> = ({ content, onContentChange 
   return (
     <div
       style={{
-        height: 575,
+        height: 535,
         overflowY: "scroll",
         maxWidth: 380,
         margin: "auto",
