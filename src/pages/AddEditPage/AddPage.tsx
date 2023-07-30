@@ -14,6 +14,7 @@ import ContentEditor from "./AddEditSub/ContentEditor";
 import { SaveEntry } from "./AddEditSub/SaveEntry/SaveEntry";
 import CategorySelection from "./AddEditSub/CategorySelection";
 import { Category } from "../../data/interfaces";
+import AddLocation from "./AddEditSub/AddLocation/AddLocation";
 
 interface LocationState {
   selectedDate: string;
@@ -49,7 +50,10 @@ const AddPage = () => {
       <IonContent scrollY={false}>
         <div style={{ margin: "5px" }}>
           <IonItem style={{ fontSize: "18px" }}>
-            <IonInput placeholder="Enter the title" ref={titleRef} maxlength={18}></IonInput>
+            <IonInput
+              placeholder="Enter the title"
+              ref={titleRef}
+              maxlength={18}></IonInput>
           </IonItem>
         </div>
         <CategorySelection
@@ -57,6 +61,10 @@ const AddPage = () => {
           categories={categories}
           onCategoryChange={setSelectedCategoryName}
         />
+
+        {/* Add a location -> Modal */}
+        <AddLocation />
+
         <ContentEditor content={content} onContentChange={setContent} />
         <div
           style={{

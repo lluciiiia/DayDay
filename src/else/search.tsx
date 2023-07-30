@@ -28,7 +28,7 @@ export function search<T>(
 }
 
 // BrowsePage
-interface AnalysisSearchData {
+export interface AnalysisSearchData {
   data: string[];
   keys: string[];
 }
@@ -43,7 +43,7 @@ export const searchAnalysisNames = (
 };
 
 // CategoryPage
-interface CategorySearchData {
+export interface CategorySearchData {
   data: string[];
   keys: string[];
 }
@@ -58,7 +58,7 @@ export const searchCategories = (
 };
 
 // Example usage for searching entries and returning the matched entries
-interface EntrySearchData {
+export interface EntrySearchData {
   data: string[];
   keys: string[];
 }
