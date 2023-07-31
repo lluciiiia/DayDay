@@ -14,9 +14,7 @@ import { getPlaceAPI } from "../../../../data/getPlaceAPI";
 interface LocationModalProps {
   showModal: boolean;
   setShowModal: (show: boolean) => void;
-  selectedLocation: string;
   setSelectedLocation: (value: string) => void;
-  selectedLocationName: string;
   setSelectedLocationName: (value: string) => void;
 }
 
@@ -41,9 +39,7 @@ declare global {
 const LocationModal: React.FC<LocationModalProps> = ({
   showModal,
   setShowModal,
-  selectedLocation,
   setSelectedLocation,
-  selectedLocationName,
   setSelectedLocationName,
 }) => {
   const [searchResults, setSearchResults] = useState<PlaceResult[]>([]);

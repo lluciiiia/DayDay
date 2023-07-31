@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { IonItem, IonLabel, IonChip } from "@ionic/react";
+import { IonItem, IonLabel, IonChip, IonIcon } from "@ionic/react";
 import LocationModal from "./LocationModal";
+import { close } from "ionicons/icons";
 
 interface AddLocationProps {
   selectedLocation: string;
@@ -17,6 +18,12 @@ const AddLocation: React.FC<AddLocationProps> = ({
 }) => {
   const [showModal, setShowModal] = useState(false);
 
+  const handleChipClose = (event: React.MouseEvent) => {
+    event.stopPropagation();
+    setSelectedLocation("");
+    setSelectedLocationName("");
+  };
+
   return (
     <>
       <div style={{ marginLeft: "3px" }}>
@@ -25,7 +32,10 @@ const AddLocation: React.FC<AddLocationProps> = ({
             setShowModal(true);
           }}>
           {selectedLocationName ? (
-            <IonChip outline={true}>{selectedLocationName}</IonChip>
+            <IonChip outline={true}>
+              <IonLabel>{selectedLocationName} </IonLabel>{" "}
+              <IonIcon icon={close} onClick={handleChipClose}></IonIcon>
+            </IonChip>
           ) : (
             <IonLabel style={{ fontSize: "17px", color: "rgb(150, 150, 150)" }}>
               Add Location
