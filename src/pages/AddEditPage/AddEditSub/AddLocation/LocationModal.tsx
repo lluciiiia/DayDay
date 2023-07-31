@@ -35,13 +35,13 @@ const LocationModal: React.FC<LocationModalProps> = ({
   showModal,
   setShowModal,
 }) => {
-  const [searchResults, setSearchResults] = useState<PlaceResult[]>([]); // Specify the type as PlaceResult[]
+  const [searchResults, setSearchResults] = useState<PlaceResult[]>([]); 
   const searchRef = useRef<HTMLIonSearchbarElement>(null);
 
   const [googleMapsLoaded, setGoogleMapsLoaded] = useState(false);
 
+  // Fetch the Google Places API key from the backend when the component mounts
   useEffect(() => {
-    // Fetch the Google Places API key from the backend when the component mounts
     async function fetchGooglePlacesApiKey() {
       try {
         const apiKey = await new getPlaceAPI().getEntry();
@@ -73,7 +73,7 @@ const LocationModal: React.FC<LocationModalProps> = ({
 
   const handleInput = () => {
     const searchValue = searchRef.current?.value;
-    console.log("searchValue: ",searchValue);
+    console.log("searchValue: ", searchValue);
     setSearchResults([]); // Reset the state when handling new input
     if (googleMapsLoaded && searchValue) {
       const service = new window.google.maps.places.PlacesService(
@@ -109,8 +109,8 @@ const LocationModal: React.FC<LocationModalProps> = ({
       </div>
 
       <IonList>
-        {searchResults.map((result, index) => (
-          <IonItem key={index} style={{ fontSize: "18px" }}>
+        {searchResults.map((result) => (
+          <IonItem key={result.formatted_address} style={{ fontSize: "18px" }}>
             <IonLabel
               onClick={() => handleLocationClick(result)}
               style={{ padding: "13px" }}>
@@ -121,22 +121,15 @@ const LocationModal: React.FC<LocationModalProps> = ({
       </IonList>
 
       {googleMapsLoaded && (
-        <GoogleMap
-        // Specify map options like center and zoom here if needed
-        >
-          {/* Add markers for search results on the map */}
-          {searchResults.map((result, index) => (
-            // <Marker
-            //   key={index}
-            //   position={{
-            //     lat: result.geometry.location.lat(),
-            //     lng: result.geometry.location.lng(),
-            //   }}
-            // />
-            <IonList>
-
-                <IonItem><IonLabel>{index}</IonLabel></IonItem>
-            </IonList>
+        <GoogleMap>
+          {searchResults.map((result) => (
+            <Marker
+              key={result.formatted_address}
+              position={{
+                lat: result.geometry.location.lat(),
+                lng: result.geometry.location.lng(),
+              }}
+            />
           ))}
         </GoogleMap>
       )}
