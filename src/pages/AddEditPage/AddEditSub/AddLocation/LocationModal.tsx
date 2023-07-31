@@ -38,7 +38,8 @@ const LocationModal: React.FC<LocationModalProps> = ({
 }) => {
   const [searchResults, setSearchResults] = useState<PlaceResult[]>([]);
   const searchRef = useRef<HTMLIonSearchbarElement>(null);
-
+  // Loading state to display while waiting for Google Maps API to load
+  const [isLoading, setIsLoading] = useState(true);
   const [googleMapsLoaded, setGoogleMapsLoaded] = useState(false);
 
   // Fetch the Google Places API key from the backend when the component mounts
@@ -64,11 +65,15 @@ const LocationModal: React.FC<LocationModalProps> = ({
       googleMapsScript.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places&callback=Function.prototype`;
       googleMapsScript.async = true;
       googleMapsScript.defer = true;
-      googleMapsScript.onload = () => setGoogleMapsLoaded(true);
+      googleMapsScript.onload = () => {
+        setGoogleMapsLoaded(true);
+        setIsLoading(false); // Set isLoading to false when API is loaded
+      };
       document.head.appendChild(googleMapsScript);
       window.googleMapsLoaded = true;
     } else {
       setGoogleMapsLoaded(true);
+      setIsLoading(false); // Set isLoading to false if API was already loaded
     }
   };
 
@@ -93,52 +98,59 @@ const LocationModal: React.FC<LocationModalProps> = ({
     }
   };
 
-  const handleLocationClick = (selectedLocation: any) => {
+  const handleLocationClick = (selectedLocation: PlaceResult) => {
     // Handle the click on a location from the search results
     // Here, you can use the selectedLocation object to get details about the place like name, address, etc.
   };
 
   return (
     <IonModal isOpen={showModal} onDidDismiss={() => setShowModal(false)}>
-      <div>
-        <ModalButtons setShowModal={setShowModal} />
-        <IonSearchbar
-          showClearButton="focus"
-          ref={searchRef}
-          onIonInput={handleInput}
-          style={{ marginTop: "5px" }}></IonSearchbar>
-      </div>
+      <div className="modal-content">
+        <div>
+          <ModalButtons setShowModal={setShowModal} />
+          <IonSearchbar
+            showClearButton="focus"
+            ref={searchRef}
+            onIonInput={handleInput}
+            style={{ marginTop: "5px" }}></IonSearchbar>
+        </div>
 
-      <IonList>
-        {searchResults.map((result, index) => (
-          <IonItem key={index}>
-            <IonLabel
-              onClick={() => handleLocationClick(result)}
-              style={{ padding: "13px" }}>
-              <div style={{ display: "flex", flexDirection: "column" }}>
-                <div style={{ fontSize: "18px" }}>{result.name}</div>
-                <div style={{ marginTop: "3px", fontSize: "13px" }}>
-                  {result.formatted_address}
-                </div>
-              </div>
-            </IonLabel>
-          </IonItem>
-        ))}
-      </IonList>
-
-      {googleMapsLoaded && (
-        <GoogleMap>
+        <IonList>
           {searchResults.map((result, index) => (
-            <Marker
-              key={index}
-              position={{
-                lat: result.geometry.location.lat(),
-                lng: result.geometry.location.lng(),
-              }}
-            />
+            <IonItem key={index}>
+              <IonLabel
+                onClick={() => handleLocationClick(result)}
+                style={{ padding: "13px" }}>
+                <div style={{ display: "flex", flexDirection: "column" }}>
+                  <div style={{ fontSize: "18px" }}>{result.name}</div>
+                  <div style={{ marginTop: "3px", fontSize: "13px" }}>
+                    {result.formatted_address}
+                  </div>
+                </div>
+              </IonLabel>
+            </IonItem>
           ))}
-        </GoogleMap>
-      )}
+        </IonList>
+
+        {isLoading ? ( // Show loading message while waiting for Google Maps API to load
+          <div>Loading...</div>
+        ) : googleMapsLoaded ? (
+          <GoogleMap>
+            {searchResults.map((result, index) => (
+              <Marker
+                key={index}
+                position={{
+                  lat: result.geometry.location.lat(),
+                  lng: result.geometry.location.lng(),
+                }}
+              />
+            ))}
+          </GoogleMap>
+        ) : (
+          // Show a fallback message if API fails to load
+          <div>Failed to load Google Maps API.</div>
+        )}
+      </div>
     </IonModal>
   );
 };
