@@ -11,16 +11,6 @@ ion-popover ion-item {
 }
 
 /* In your CSS file or component's style block */
-/* In your CSS file or component's style block */
-.custom-modal {
-  background: black;
-  color: white; /* Set the text color to white or any other color that suits your design */
-}
-
-.custom-modal-list {
-  background-color: black;
-  color: white; /* Set the text color to white or any other color that suits your design */
-}
 
 .modal-content {
   background-color: black;
