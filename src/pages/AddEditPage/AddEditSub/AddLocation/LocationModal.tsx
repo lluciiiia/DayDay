@@ -7,7 +7,7 @@ import {
   IonLabel,
   IonContent,
 } from "@ionic/react";
-import ModalButtons from "./ModalButtons/ModalButtons";
+import ModalButtons from "./ModalHeader";
 import { GoogleMap, Marker } from "@react-google-maps/api";
 import { getPlaceAPI } from "../../../../data/getPlaceAPI";
 
@@ -101,8 +101,8 @@ const LocationModal: React.FC<LocationModalProps> = ({
   };
 
   const handleLocationClick = (selectedLocation: PlaceResult) => {
-    // Handle the click on a location from the search results
-    // Here, you can use the selectedLocation object to get details about the place like name, address, etc.
+    const placeId = selectedLocation.place_id;
+    console.log("Clicked Location's place_id:", placeId);
   };
 
   return (

@@ -6,27 +6,24 @@ import {
   IonButton,
   IonTitle,
 } from "@ionic/react";
-import DoneClick from "./DoneClick";
 
-interface ModalButtonsProps {
+interface ModalHeaderProps {
   setShowModal: (show: boolean) => void;
 }
 
-const ModalButtons: React.FC<ModalButtonsProps> = ({ setShowModal }) => {
+const ModalHeader: React.FC<ModalHeaderProps> = ({ setShowModal }) => {
   return (
     <>
       <IonHeader>
         <IonToolbar>
-          <IonButtons slot="start">
+          <IonButtons slot="end">
             <IonButton onClick={() => setShowModal(false)}>Close</IonButton>
           </IonButtons>
           <IonTitle>Add Location</IonTitle>
-
-          <DoneClick setShowModal={setShowModal} />
         </IonToolbar>
       </IonHeader>
     </>
   );
 };
 
-export default ModalButtons;
+export default ModalHeader;
