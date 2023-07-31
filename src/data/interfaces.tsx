@@ -1,12 +1,6 @@
-export interface LocationData {
-  latitude: number;
-  longitude: number;
+export interface Location {
+  placeId: string;
   name?: string;
-  address?: string;
-  city?: string;
-  state?: string;
-  country?: string;
-  postalCode?: string;
 }
 
 export interface Content {
@@ -15,7 +9,7 @@ export interface Content {
   image?: string;
   video?: string;
   audio?: string;
-  location?: LocationData;
+  location?: Location;
   sticker?: string;
 }
 

@@ -1,7 +1,7 @@
 import { useHistory } from "react-router";
 import { useIonToast } from "@ionic/react";
 import { presentToast } from "../../../../else/presentToast";
-import { Entry, Category } from "../../../../data/interfaces";
+import { Entry, Category, Location } from "../../../../data/interfaces";
 import { EntryServiceImpl } from "../../../../data/DataService";
 import { WordCloudsAnalyzer } from "../../../../data/Analyzer/WordCloudsAnalysis";
 import { SentimentTrendsAnalyzer } from "../../../../data/Analyzer/SentimentAnalysis";
@@ -16,7 +16,9 @@ export const SaveEntry = () => {
     selectedDate: string | undefined,
     selectedCategoryName: string | undefined,
     history: ReturnType<typeof useHistory>,
-    categories: Category[]
+    categories: Category[],
+    selectedLocation: string | undefined,
+    selectedLocationName: string | undefined
   ) => {
     const title = titleRef.current?.value as string;
 
@@ -49,6 +51,12 @@ export const SaveEntry = () => {
       title: title,
       category: selectedCategory!,
       id: undefined,
+      location: [
+        {
+          placeId: selectedLocation!,
+          name: selectedLocationName!,
+        },
+      ],
     };
 
     try {

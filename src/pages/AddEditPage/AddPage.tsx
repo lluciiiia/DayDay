@@ -94,7 +94,9 @@ const AddPage = () => {
                 selectedDate,
                 selectedCategoryName,
                 history,
-                categories
+                categories,
+                selectedLocation,
+                selectedLocationName
               )
             }>
             Save

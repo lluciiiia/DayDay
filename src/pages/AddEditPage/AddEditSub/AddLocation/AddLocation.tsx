@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { IonModal, IonItem, IonLabel, IonChip } from "@ionic/react";
+import { IonItem, IonLabel, IonChip } from "@ionic/react";
 import LocationModal from "./LocationModal";
 
 interface AddLocationProps {
