@@ -5,6 +5,7 @@ import {
   IonList,
   IonItem,
   IonLabel,
+  IonContent,
 } from "@ionic/react";
 import ModalButtons from "./ModalButtons/ModalButtons";
 import { GoogleMap, Marker } from "@react-google-maps/api";
@@ -115,22 +116,24 @@ const LocationModal: React.FC<LocationModalProps> = ({
             style={{ marginTop: "5px" }}></IonSearchbar>
         </div>
 
-        <IonList>
-          {searchResults.map((result, index) => (
-            <IonItem key={index}>
-              <IonLabel
-                onClick={() => handleLocationClick(result)}
-                style={{ padding: "13px" }}>
-                <div style={{ display: "flex", flexDirection: "column" }}>
-                  <div style={{ fontSize: "18px" }}>{result.name}</div>
-                  <div style={{ marginTop: "3px", fontSize: "13px" }}>
-                    {result.formatted_address}
+        <IonContent style={{ marginTop: "0px", height: "735px" }}>
+          <IonList>
+            {searchResults.map((result, index) => (
+              <IonItem key={index}>
+                <IonLabel
+                  onClick={() => handleLocationClick(result)}
+                  style={{ padding: "13px" }}>
+                  <div style={{ display: "flex", flexDirection: "column" }}>
+                    <div style={{ fontSize: "18px" }}>{result.name}</div>
+                    <div style={{ marginTop: "3px", fontSize: "13px" }}>
+                      {result.formatted_address}
+                    </div>
                   </div>
-                </div>
-              </IonLabel>
-            </IonItem>
-          ))}
-        </IonList>
+                </IonLabel>
+              </IonItem>
+            ))}
+          </IonList>
+        </IonContent>
 
         {isLoading ? ( // Show loading message while waiting for Google Maps API to load
           <div>Loading...</div>
@@ -147,7 +150,6 @@ const LocationModal: React.FC<LocationModalProps> = ({
             ))}
           </GoogleMap>
         ) : (
-          // Show a fallback message if API fails to load
           <div>Failed to load Google Maps API.</div>
         )}
       </div>
