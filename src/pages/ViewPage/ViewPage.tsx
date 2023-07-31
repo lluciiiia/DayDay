@@ -52,12 +52,9 @@ const ViewPage = () => {
           Category: {entryData?.category.name || ""}
         </div>
         <div
-          style={{ marginLeft: "auto", marginRight: "15px", marginTop: "5px" }}>
-          Location:{" "}
-          {entryData?.location ? (
-            <span>{entryData.location.name}</span>
-          ) : (
-            <div></div>
+          style={{ marginLeft: "auto", marginRight: "7px", marginTop: "5px" }}>
+          {entryData?.location && entryData?.location?.name !== "" && (
+            <IonChip outline={true}>{entryData.location.name}</IonChip>
           )}
         </div>
 

@@ -18,7 +18,7 @@ export interface Entry {
   date: string;
   title: string;
   category: Category;
-  location?: Location;
+  location: Location;
 }
 
 export interface Category {

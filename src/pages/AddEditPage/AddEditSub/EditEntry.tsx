@@ -60,6 +60,10 @@ export const EditEntry = () => {
         title: title,
         category: objectCategory,
         id: entryid,
+        location: {
+          placeId: selectedLocation!,
+          name: selectedLocationName!,
+        },
       };
 
       try {
