@@ -28,6 +28,7 @@ const AddPage = () => {
   const titleRef = useRef<HTMLIonInputElement>(null);
   const [selectedCategoryName, setSelectedCategoryName] = useState("");
   const [categories, setCategories] = useState<Category[]>([]);
+  const [selectedLocation, setSelectedLocation] = useState("");
   const { handleSave } = SaveEntry();
 
   useEffect(() => {
@@ -62,7 +63,10 @@ const AddPage = () => {
           onCategoryChange={setSelectedCategoryName}
         />
 
-        <AddLocation />
+        <AddLocation
+          selectedLocation={selectedLocation}
+          setSelectedLocation={setSelectedLocation}
+        />
 
         <ContentEditor content={content} onContentChange={setContent} />
         <div

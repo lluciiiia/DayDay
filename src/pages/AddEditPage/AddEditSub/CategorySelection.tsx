@@ -10,7 +10,8 @@ import { Category } from "../../../data/interfaces";
 interface CategorySelectionProps {
   selectedCategoryName: string;
   categories: Category[];
-  onCategoryChange: (value: string) => void;}
+  onCategoryChange: (value: string) => void;
+}
 
 const CategorySelection: React.FC<CategorySelectionProps> = ({
   selectedCategoryName,

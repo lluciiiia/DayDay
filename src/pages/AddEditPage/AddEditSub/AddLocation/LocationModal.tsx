@@ -14,6 +14,10 @@ import { getPlaceAPI } from "../../../../data/getPlaceAPI";
 interface LocationModalProps {
   showModal: boolean;
   setShowModal: (show: boolean) => void;
+  selectedLocation: string;
+  setSelectedLocation: (value: string) => void;
+  selectedLocationName: string;
+  setSelectedLocationName: (value: string) => void;
 }
 
 interface PlaceResult {
@@ -37,6 +41,10 @@ declare global {
 const LocationModal: React.FC<LocationModalProps> = ({
   showModal,
   setShowModal,
+  selectedLocation,
+  setSelectedLocation,
+  selectedLocationName,
+  setSelectedLocationName,
 }) => {
   const [searchResults, setSearchResults] = useState<PlaceResult[]>([]);
   const searchRef = useRef<HTMLIonSearchbarElement>(null);
@@ -102,7 +110,12 @@ const LocationModal: React.FC<LocationModalProps> = ({
 
   const handleLocationClick = (selectedLocation: PlaceResult) => {
     const placeId = selectedLocation.place_id;
+    const placeName = selectedLocation.name;
+
     console.log("Clicked Location's place_id:", placeId);
+    setSelectedLocation(placeId);
+    setSelectedLocationName(placeName);
+    setShowModal(false);
   };
 
   return (
