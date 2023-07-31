@@ -1,6 +1,6 @@
 export interface Location {
   placeId: string;
-  name?: string;
+  name: string;
 }
 
 export interface Content {
@@ -9,7 +9,6 @@ export interface Content {
   image?: string;
   video?: string;
   audio?: string;
-  location?: Location;
   sticker?: string;
 }
 
@@ -19,6 +18,7 @@ export interface Entry {
   date: string;
   title: string;
   category: Category;
+  location?: Location[];
 }
 
 export interface Category {
@@ -43,6 +43,5 @@ export interface CategoryService {
 }
 
 export interface EntryAnalysis {
-// analyzeSentiment(entry: Entry): Promise<number>;
-
+  // analyzeSentiment(entry: Entry): Promise<number>;
 }

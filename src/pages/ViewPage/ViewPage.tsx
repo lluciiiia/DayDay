@@ -1,12 +1,5 @@
-import { useState } from "react";
-import { useLocation, useHistory } from "react-router-dom";
-import {
-  IonContent,
-  IonIcon,
-  IonActionSheet,
-  IonButton,
-  IonButtons,
-} from "@ionic/react";
+import { useLocation } from "react-router-dom";
+import { IonContent, IonIcon, IonButton, IonChip } from "@ionic/react";
 import { ellipsisHorizontalCircleOutline } from "ionicons/icons";
 import SettingSection from "./SettingSection";
 import { Entry } from "../../data/interfaces";
@@ -57,6 +50,14 @@ const ViewPage = () => {
         <div
           style={{ marginLeft: "auto", marginRight: "15px", marginTop: "5px" }}>
           Category: {entryData?.category.name || ""}
+        </div>
+        <div
+          style={{ marginLeft: "auto", marginRight: "7px", marginTop: "5px" }}>
+          {entryData?.location && entryData.location.length > 0 ? (
+            <IonChip outline={true}>{entryData.location[0].name}</IonChip>
+          ) : (
+            ""
+          )}
         </div>
         <div style={{ padding: "25px 15px" }}>
           {entryData?.content[0].text || ""}
