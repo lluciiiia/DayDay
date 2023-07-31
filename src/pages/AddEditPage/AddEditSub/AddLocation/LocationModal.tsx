@@ -7,7 +7,7 @@ import {
   IonLabel,
 } from "@ionic/react";
 import ModalButtons from "./ModalButtons/ModalButtons";
-import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
+import { GoogleMap, Marker } from "@react-google-maps/api";
 import { getPlaceAPI } from "../../../../data/getPlaceAPI";
 
 interface LocationModalProps {
@@ -26,11 +26,10 @@ interface PlaceResult {
 }
 
 declare global {
-    interface Window {
-      googleMapsLoaded: boolean;
-    }
+  interface Window {
+    googleMapsLoaded: boolean;
   }
-  
+}
 
 const LocationModal: React.FC<LocationModalProps> = ({
   showModal,
@@ -46,7 +45,7 @@ const LocationModal: React.FC<LocationModalProps> = ({
     async function fetchGooglePlacesApiKey() {
       try {
         const apiKey = await new getPlaceAPI().getEntry();
-        console.log("apikey: ",apiKey);
+        console.log("apikey: ", apiKey);
         loadGoogleMapsScript(apiKey);
       } catch (error) {
         console.error(error);
@@ -70,11 +69,11 @@ const LocationModal: React.FC<LocationModalProps> = ({
     } else {
       setGoogleMapsLoaded(true);
     }
-  };  
-  
+  };
 
   const handleInput = () => {
     const searchValue = searchRef.current?.value;
+    console.log("searchValue: ",searchValue);
     setSearchResults([]); // Reset the state when handling new input
     if (googleMapsLoaded && searchValue) {
       const service = new window.google.maps.places.PlacesService(
@@ -86,7 +85,7 @@ const LocationModal: React.FC<LocationModalProps> = ({
       };
       service.textSearch(request, (results, status) => {
         if (status === window.google.maps.places.PlacesServiceStatus.OK) {
-            console.log(results);
+          console.log(results);
           setSearchResults(results as PlaceResult[]); // Cast results as PlaceResult[]
         }
       });
@@ -104,6 +103,7 @@ const LocationModal: React.FC<LocationModalProps> = ({
         <ModalButtons setShowModal={setShowModal} />
         <IonSearchbar
           showClearButton="focus"
+          ref={searchRef}
           onIonInput={handleInput}
           style={{ marginTop: "5px" }}></IonSearchbar>
       </div>
@@ -126,13 +126,17 @@ const LocationModal: React.FC<LocationModalProps> = ({
         >
           {/* Add markers for search results on the map */}
           {searchResults.map((result, index) => (
-            <Marker
-              key={index}
-              position={{
-                lat: result.geometry.location.lat(),
-                lng: result.geometry.location.lng(),
-              }}
-            />
+            // <Marker
+            //   key={index}
+            //   position={{
+            //     lat: result.geometry.location.lat(),
+            //     lng: result.geometry.location.lng(),
+            //   }}
+            // />
+            <IonList>
+
+                <IonItem><IonLabel>{index}</IonLabel></IonItem>
+            </IonList>
           ))}
         </GoogleMap>
       )}
