@@ -116,24 +116,33 @@ const LocationModal: React.FC<LocationModalProps> = ({
             style={{ marginTop: "5px" }}></IonSearchbar>
         </div>
 
-        <IonContent style={{ marginTop: "0px", height: "735px" }}>
-          <IonList>
-            {searchResults.map((result, index) => (
-              <IonItem key={index}>
-                <IonLabel
-                  onClick={() => handleLocationClick(result)}
-                  style={{ padding: "13px" }}>
-                  <div style={{ display: "flex", flexDirection: "column" }}>
-                    <div style={{ fontSize: "18px" }}>{result.name}</div>
-                    <div style={{ marginTop: "3px", fontSize: "13px" }}>
-                      {result.formatted_address}
+        {searchResults.length > 0 ? (
+          <IonContent style={{ marginTop: "0px", height: "735px" }}>
+            <IonList>
+              {searchResults.map((result, index) => (
+                <IonItem key={index}>
+                  <IonLabel
+                    onClick={() => handleLocationClick(result)}
+                    style={{ padding: "13px" }}>
+                    <div style={{ display: "flex", flexDirection: "column" }}>
+                      <div style={{ fontSize: "18px" }}>{result.name}</div>
+                      <div style={{ marginTop: "3px", fontSize: "13px" }}>
+                        {result.formatted_address}
+                      </div>
                     </div>
-                  </div>
-                </IonLabel>
-              </IonItem>
-            ))}
-          </IonList>
-        </IonContent>
+                  </IonLabel>
+                </IonItem>
+              ))}
+            </IonList>
+          </IonContent>
+        ) : (
+          <div
+            style={{
+              background: "rgb(0,0,0)",
+              marginTop: "0px",
+              height: "735px",
+            }}></div>
+        )}
 
         {isLoading ? ( // Show loading message while waiting for Google Maps API to load
           <div>Loading...</div>
