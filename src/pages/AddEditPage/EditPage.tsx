@@ -14,6 +14,7 @@ import { CategoryServiceImpl } from "../../data/DataService";
 import ContentEditor from "./AddEditSub/ContentEditor";
 import EditEntry from "./AddEditSub/EditEntry";
 import CategorySelection from "./AddEditSub/CategorySelection";
+import AddLocation from "./AddEditSub/AddLocation/AddLocation";
 
 interface LocationState {
   entryData: Entry;
@@ -32,6 +33,12 @@ const EditPage = () => {
   const [categories, setCategories] = useState<Category[]>([]);
   const [selectedCategory, setSelectedCategory] = useState(
     entryData?.category.name
+  );
+  const [selectedLocation, setSelectedLocation] = useState(
+    entryData?.location?.placeId ?? ""
+  );
+  const [selectedLocationName, setSelectedLocationName] = useState(
+    entryData?.location?.name ?? ""
   );
   const [content, setContent] = useState(entryData?.content[0]?.text ?? "");
   const { handleEdit } = EditEntry();
@@ -69,6 +76,14 @@ const EditPage = () => {
           categories={categories}
           onCategoryChange={(newCategory) => setSelectedCategory(newCategory)}
         />
+
+        <AddLocation
+          selectedLocation={selectedLocation}
+          setSelectedLocation={setSelectedLocation}
+          selectedLocationName={selectedLocationName}
+          setSelectedLocationName={setSelectedLocationName}
+        />
+
         <ContentEditor
           content={content}
           onContentChange={(newContent) => setContent(newContent)}
@@ -95,7 +110,9 @@ const EditPage = () => {
                 selectedDate,
                 selectedCategory,
                 history,
-                entryid
+                entryid, 
+                selectedLocation,
+                selectedLocationName
               )
             }>
             Save

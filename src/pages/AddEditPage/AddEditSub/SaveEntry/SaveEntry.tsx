@@ -51,12 +51,11 @@ export const SaveEntry = () => {
       title: title,
       category: selectedCategory!,
       id: undefined,
-      location: [
+      location: 
         {
           placeId: selectedLocation!,
           name: selectedLocationName!,
         },
-      ],
     };
 
     try {

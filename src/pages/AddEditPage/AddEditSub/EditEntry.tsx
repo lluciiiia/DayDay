@@ -21,7 +21,9 @@ export const EditEntry = () => {
     selectedDate: string,
     selectedCategory: string,
     history: ReturnType<typeof useHistory>,
-    entryid: number | undefined
+    entryid: number | undefined,
+    selectedLocation: string | undefined,
+    selectedLocationName: string | undefined
   ) => {
     const title = titleRef.current?.value as string;
 

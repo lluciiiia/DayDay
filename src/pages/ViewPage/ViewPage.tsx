@@ -52,13 +52,15 @@ const ViewPage = () => {
           Category: {entryData?.category.name || ""}
         </div>
         <div
-          style={{ marginLeft: "auto", marginRight: "7px", marginTop: "5px" }}>
-          {entryData?.location && entryData.location.length > 0 ? (
-            <IonChip outline={true}>{entryData.location[0].name}</IonChip>
+          style={{ marginLeft: "auto", marginRight: "15px", marginTop: "5px" }}>
+          Location:{" "}
+          {entryData?.location ? (
+            <span>{entryData.location.name}</span>
           ) : (
-            ""
+            <div></div>
           )}
         </div>
+
         <div style={{ padding: "25px 15px" }}>
           {entryData?.content[0].text || ""}
         </div>
