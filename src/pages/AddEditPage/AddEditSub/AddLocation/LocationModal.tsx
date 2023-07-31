@@ -36,7 +36,7 @@ const LocationModal: React.FC<LocationModalProps> = ({
   showModal,
   setShowModal,
 }) => {
-  const [searchResults, setSearchResults] = useState<PlaceResult[]>([]); 
+  const [searchResults, setSearchResults] = useState<PlaceResult[]>([]);
   const searchRef = useRef<HTMLIonSearchbarElement>(null);
 
   const [googleMapsLoaded, setGoogleMapsLoaded] = useState(false);
@@ -111,11 +111,16 @@ const LocationModal: React.FC<LocationModalProps> = ({
 
       <IonList>
         {searchResults.map((result, index) => (
-          <IonItem key={index} style={{ fontSize: "18px" }}>
+          <IonItem key={index}>
             <IonLabel
               onClick={() => handleLocationClick(result)}
               style={{ padding: "13px" }}>
-              {result.name}
+              <div style={{ display: "flex", flexDirection: "column" }}>
+                <div style={{ fontSize: "18px" }}>{result.name}</div>
+                <div style={{ marginTop: "3px", fontSize: "13px" }}>
+                  {result.formatted_address}
+                </div>
+              </div>
             </IonLabel>
           </IonItem>
         ))}
