@@ -59,18 +59,18 @@ const LocationModal: React.FC<LocationModalProps> = ({
   }, [googleMapsLoaded]);
 
   const loadGoogleMapsScript = (apiKey: string) => {
-    if (!window.googleMapsLoaded) { // Check if the API is already loaded
+    if (!window.googleMapsLoaded) {
       const googleMapsScript = document.createElement("script");
-      googleMapsScript.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places`;
+      googleMapsScript.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places&callback=Function.prototype`;
       googleMapsScript.async = true;
       googleMapsScript.defer = true;
       googleMapsScript.onload = () => setGoogleMapsLoaded(true);
       document.head.appendChild(googleMapsScript);
-      window.googleMapsLoaded = true; // Set a flag to indicate the API has been loaded
+      window.googleMapsLoaded = true;
     } else {
-      setGoogleMapsLoaded(true); // If already loaded, set the state directly
+      setGoogleMapsLoaded(true);
     }
-  };
+  };  
   
 
   const handleInput = () => {
@@ -86,6 +86,7 @@ const LocationModal: React.FC<LocationModalProps> = ({
       };
       service.textSearch(request, (results, status) => {
         if (status === window.google.maps.places.PlacesServiceStatus.OK) {
+            console.log(results);
           setSearchResults(results as PlaceResult[]); // Cast results as PlaceResult[]
         }
       });
