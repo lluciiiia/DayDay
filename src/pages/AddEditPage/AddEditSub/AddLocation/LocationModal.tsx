@@ -25,6 +25,7 @@ interface PlaceResult {
     };
   };
   name: string;
+  place_id: string;
 }
 
 declare global {
@@ -118,9 +119,9 @@ const LocationModal: React.FC<LocationModalProps> = ({
 
         {searchResults.length > 0 ? (
           <IonContent style={{ marginTop: "0px", height: "735px" }}>
-            <IonList>
-              {searchResults.map((result, index) => (
-                <IonItem key={index}>
+            <IonList style={{ marginTop: "0px", height: "735px" }}>
+              {searchResults.map((result, place_id) => (
+                <IonItem key={place_id}>
                   <IonLabel
                     onClick={() => handleLocationClick(result)}
                     style={{ padding: "13px" }}>
@@ -148,9 +149,9 @@ const LocationModal: React.FC<LocationModalProps> = ({
           <div>Loading...</div>
         ) : googleMapsLoaded ? (
           <GoogleMap>
-            {searchResults.map((result, index) => (
+            {searchResults.map((result, place_id) => (
               <Marker
-                key={index}
+                key={place_id}
                 position={{
                   lat: result.geometry.location.lat(),
                   lng: result.geometry.location.lng(),
