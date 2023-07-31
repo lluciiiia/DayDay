@@ -5,14 +5,17 @@ import LocationModal from "./LocationModal";
 interface AddLocationProps {
   selectedLocation: string;
   setSelectedLocation: (value: string) => void;
+  selectedLocationName: string;
+  setSelectedLocationName: (value: string) => void;
 }
 
 const AddLocation: React.FC<AddLocationProps> = ({
   selectedLocation,
   setSelectedLocation,
+  selectedLocationName,
+  setSelectedLocationName,
 }) => {
   const [showModal, setShowModal] = useState(false);
-  const [selectedLocationName, setSelectedLocationName] = useState("");
 
   return (
     <>

@@ -29,6 +29,7 @@ const AddPage = () => {
   const [selectedCategoryName, setSelectedCategoryName] = useState("");
   const [categories, setCategories] = useState<Category[]>([]);
   const [selectedLocation, setSelectedLocation] = useState("");
+  const [selectedLocationName, setSelectedLocationName] = useState("");
   const { handleSave } = SaveEntry();
 
   useEffect(() => {
@@ -66,6 +67,8 @@ const AddPage = () => {
         <AddLocation
           selectedLocation={selectedLocation}
           setSelectedLocation={setSelectedLocation}
+          selectedLocationName={selectedLocationName}
+          setSelectedLocationName={setSelectedLocationName}
         />
 
         <ContentEditor content={content} onContentChange={setContent} />
