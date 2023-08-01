@@ -40,6 +40,8 @@ const EditPage = () => {
   const [selectedLocationName, setSelectedLocationName] = useState(
     entryData?.location?.name ?? ""
   );
+  const [selectedLocationLatitude, setSelectedLocationLatitude] = useState<number>(0);
+  const [selectedLocationLongitude, setSelectedLocationLongitude] = useState<number>(0);
   const [content, setContent] = useState(entryData?.content[0]?.text ?? "");
   const { handleEdit } = EditEntry();
 
@@ -78,10 +80,11 @@ const EditPage = () => {
         />
 
         <AddLocation
-          selectedLocation={selectedLocation}
           setSelectedLocation={setSelectedLocation}
           selectedLocationName={selectedLocationName}
           setSelectedLocationName={setSelectedLocationName}
+          setSelectedLocationLatitude={setSelectedLocationLatitude}
+          setSelectedLocationLongitude={setSelectedLocationLongitude}
         />
 
         <ContentEditor
@@ -112,7 +115,9 @@ const EditPage = () => {
                 history,
                 entryid, 
                 selectedLocation,
-                selectedLocationName
+                selectedLocationName,
+                selectedLocationLatitude,
+                selectedLocationLongitude,
               )
             }>
             Save

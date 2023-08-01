@@ -23,7 +23,9 @@ export const EditEntry = () => {
     history: ReturnType<typeof useHistory>,
     entryid: number | undefined,
     selectedLocation: string | undefined,
-    selectedLocationName: string | undefined
+    selectedLocationName: string | undefined,
+    selectedLocationLatitude: number | undefined,
+    selectedLocationLongitude: number | undefined,
   ) => {
     const title = titleRef.current?.value as string;
 
@@ -60,9 +62,12 @@ export const EditEntry = () => {
         title: title,
         category: objectCategory,
         id: entryid,
-        location: {
+        location: 
+        {
           placeId: selectedLocation!,
           name: selectedLocationName!,
+          lat: selectedLocationLatitude!,
+          lng: selectedLocationLongitude!,
         },
       };
 
