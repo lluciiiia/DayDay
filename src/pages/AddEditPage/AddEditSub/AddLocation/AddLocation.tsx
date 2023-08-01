@@ -27,17 +27,18 @@ const AddLocation: React.FC<AddLocationProps> = ({
   return (
     <>
       <div style={{ marginLeft: "3px" }}>
-        <IonItem
-          onClick={() => {
-            setShowModal(true);
-          }}>
+        <IonItem>
           {selectedLocationName ? (
             <IonChip outline={true}>
               <IonLabel>{selectedLocationName} </IonLabel>{" "}
               <IonIcon icon={close} onClick={handleChipClose}></IonIcon>
             </IonChip>
           ) : (
-            <IonLabel style={{ fontSize: "17px", color: "rgb(150, 150, 150)" }}>
+            <IonLabel
+              onClick={() => {
+                setShowModal(true);
+              }}
+              style={{ fontSize: "17px", color: "rgb(150, 150, 150)" }}>
               Add Location
             </IonLabel>
           )}
