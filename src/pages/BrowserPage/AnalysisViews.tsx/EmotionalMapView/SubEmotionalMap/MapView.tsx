@@ -5,8 +5,6 @@ import { happy, sad, paw } from "ionicons/icons";
 import { getPlaceAPI } from "../../../../../data/getPlaceAPI";
 import { useEffect, useState } from "react";
 
-const libraries = ["places"];
-
 export const MapView = () => {
   const mapContainerStyle = {
     width: "100%",
@@ -14,36 +12,33 @@ export const MapView = () => {
   };
 
   const [apiKey, setApiKey] = useState("");
+  const [mapLoaded, setMapLoaded] = useState(false); // New state to track map load
+
   const center = { lat: 40.72, lng: -73.96 }; // Set the initial center of the map
+
   useEffect(() => {
-    let apiLoaded = false;
     async function fetchGooglePlacesApiKey() {
       try {
         const apiKey = await new getPlaceAPI().getEntry();
         console.log("apikey: ", apiKey);
         setApiKey(apiKey);
-        apiLoaded = true;
       } catch (error) {
         console.error(error);
       }
     }
-    if (!apiLoaded) {
+
+    if (!apiKey) {
       fetchGooglePlacesApiKey();
     }
-  }, []);
+  }, [apiKey]); // Add apiKey to the dependencies array to re-fetch if apiKey changes
 
   // Use the filteredEntries obtained from the FilteredEntries component
   const filteredEntries = FilteredEntries();
   if (filteredEntries === null) {
     return [];
   }
-  console.log(
-    "filteredEntries.lat: ",
-    filteredEntries.map((filteredEntry) => filteredEntry.lat)
-  );
-  if (filteredEntries === null) {
-    return [];
-  }
+
+  console.log("filteredEntries.lat: ", filteredEntries.map((filteredEntry) => filteredEntry.lat));
 
   const renderMarkers = () => {
     return filteredEntries.map((filteredEntry) => (
@@ -54,7 +49,8 @@ export const MapView = () => {
           text: filteredEntry.placeName,
           color: "black",
           fontWeight: "bold",
-        }}>
+        }}
+      >
         {filteredEntry.sentimentScore <= 0 ? (
           <IonIcon icon={sad} />
         ) : filteredEntry.sentimentScore <= 5 ? (
@@ -66,15 +62,18 @@ export const MapView = () => {
     ));
   };
 
-  return (
-    <LoadScript googleMapsApiKey={apiKey}>
-      <GoogleMap
-        mapContainerStyle={mapContainerStyle}
-        center={center}
-        zoom={10}>
-        {renderMarkers()}
-      </GoogleMap>
+  console.log("apiKey before Load: ", apiKey);
+
+  return apiKey ? ( // Conditionally render LoadScript based on apiKey
+    <LoadScript googleMapsApiKey={apiKey} onLoad={() => setMapLoaded(true)}>
+      {mapLoaded && ( // Conditionally render the GoogleMap component after the map has loaded
+        <GoogleMap mapContainerStyle={mapContainerStyle} center={center} zoom={10}>
+          {renderMarkers()}
+        </GoogleMap>
+      )}
     </LoadScript>
+  ) : (
+    <div>Loading...</div>
   );
 };
 
