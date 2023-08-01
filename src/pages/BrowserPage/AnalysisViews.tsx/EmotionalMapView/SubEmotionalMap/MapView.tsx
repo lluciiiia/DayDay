@@ -17,8 +17,12 @@ export const MapView = () => {
 
   const [apiKey, setApiKey] = useState("");
   const [mapLoaded, setMapLoaded] = useState(false); // New state to track map load
-
   const center = { lat: 10.7, lng: 106.7 }; // Set the initial center of the map
+
+  const filteredEntries = FilteredEntries();
+  if (filteredEntries === null) {
+    return [];
+  }
 
   useEffect(() => {
     async function fetchGooglePlacesApiKey() {
@@ -35,11 +39,6 @@ export const MapView = () => {
       fetchGooglePlacesApiKey();
     }
   }, [apiKey]);
-
-  const filteredEntries = FilteredEntries();
-  if (filteredEntries === null) {
-    return [];
-  }
 
   const renderMarkers = () => {
     return filteredEntries.map((filteredEntry) => (
