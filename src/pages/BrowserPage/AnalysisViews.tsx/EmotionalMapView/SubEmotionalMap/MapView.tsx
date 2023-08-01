@@ -13,6 +13,9 @@ export const MapView = () => {
 
   // Use the filteredEntries obtained from the FilteredEntries component
   const filteredEntries = FilteredEntries();
+  if (filteredEntries === null) {
+    return [];
+  }
 
   const renderMarkers = () => {
     return filteredEntries.map((filteredEntry) => (
@@ -36,16 +39,13 @@ export const MapView = () => {
   };
 
   return (
-    <div>
-      <h1>My Emotional Map</h1>
-      <GoogleMap
-        mapContainerStyle={mapContainerStyle}
-        center={center}
-        zoom={10} // Set an appropriate initial zoom level
-      >
-        {renderMarkers()}
-      </GoogleMap>
-    </div>
+    <GoogleMap
+      mapContainerStyle={mapContainerStyle}
+      center={center}
+      zoom={10} // Set an appropriate initial zoom level
+    >
+      {renderMarkers()}
+    </GoogleMap>
   );
 };
 

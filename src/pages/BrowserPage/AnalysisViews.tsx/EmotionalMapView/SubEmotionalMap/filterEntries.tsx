@@ -4,7 +4,7 @@ import { EntryServiceImpl } from "../../../../../data/DataService";
 import { Entry } from "../../../../../data/interfaces";
 import { getPlaceAPI } from "../../../../../data/getPlaceAPI";
 
-interface FilteredEntry {
+export interface FilteredEntry {
   placeId: string;
   placeName: string;
   sentimentScore: number;
@@ -12,7 +12,7 @@ interface FilteredEntry {
   lng: number;
 }
 
-const FilteredEntries = () => {
+export const FilteredEntries = () => {
   const [entries, setEntries] = useState<Entry[]>([]);
   const [dates, setDates] = useState<string[]>([]);
   const [scores, setScores] = useState<number[]>([]);
@@ -36,19 +36,51 @@ const FilteredEntries = () => {
       }
     };
 
+    let apiLoaded = false;
     async function fetchGooglePlacesApiKey() {
       try {
         const apiKey = await new getPlaceAPI().getEntry();
         console.log("apikey: ", apiKey);
-        setApiKey(apiKey);
+        loadGoogleMapsScript(apiKey);
+
+        apiLoaded = true;
       } catch (error) {
         console.error(error);
       }
     }
-
+    if (!apiLoaded) {
+      fetchGooglePlacesApiKey();
+    }
     fetchData(), fetchGooglePlacesApiKey();
-  }, []);
+  }, [apiKey]);
 
+  const [googleMapsLoaded, setGoogleMapsLoaded] = useState(false);
+
+  const loadGoogleMapsScript = (apiKey: string) => {
+    if (!window.googleMapsLoaded) {
+      const googleMapsScript = document.createElement("script");
+      googleMapsScript.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places&callback=Function.prototype`;
+      googleMapsScript.async = true;
+      googleMapsScript.defer = true;
+      googleMapsScript.onload = () => {};
+      document.head.appendChild(googleMapsScript);
+      window.googleMapsLoaded = true;
+      setGoogleMapsLoaded(true);
+    }
+    if (!googleMapsLoaded) {
+      // repeat the process til googleMapsLoaded is true
+    }
+  };
+
+  useEffect(() => {
+    const checkMapLoaded = () => {
+      if (window.google && window.google.maps) {
+        setGoogleMapsLoaded(true);
+      } else {
+        setTimeout(checkMapLoaded, 100);
+      }
+    };
+  }, []);
   const fetchLocationDetails = async (placeId: string) => {
     const response = await fetch(
       `https://maps.googleapis.com/maps/api/geocode/json?place_id=${placeId}&key=${apiKey}`
@@ -87,6 +119,10 @@ const FilteredEntries = () => {
 
     getFilteredEntriesWithLocation();
   }, [entries, dates, scores]);
+
+  if (!googleMapsLoaded) {
+    return null;
+  }
 
   return filteredEntries;
 };
