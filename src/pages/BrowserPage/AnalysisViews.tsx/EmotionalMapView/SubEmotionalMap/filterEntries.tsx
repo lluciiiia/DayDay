@@ -38,8 +38,8 @@ export const FilteredEntries = () => {
   }, []);
 
   useEffect(() => {
-    const getFilteredEntriesWithLocation = async () => {
-      const filteredEntriesWithLocation = await Promise.all(
+    const FilteredEntries = async () => {
+      const filteredEntries = await Promise.all(
         entries
           .filter((entry) => entry.location.placeId !== "")
           .map(async (entry) => {
@@ -56,10 +56,10 @@ export const FilteredEntries = () => {
           })
       );
 
-      setFilteredEntries(filteredEntriesWithLocation);
+      setFilteredEntries(filteredEntries);
     };
 
-    getFilteredEntriesWithLocation();
+    FilteredEntries();
   }, [entries, dates, scores]);
 
   return filteredEntries;
