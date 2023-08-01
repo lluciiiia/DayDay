@@ -65,7 +65,6 @@ const AddPage = () => {
         />
 
         <AddLocation
-          selectedLocation={selectedLocation}
           setSelectedLocation={setSelectedLocation}
           selectedLocationName={selectedLocationName}
           setSelectedLocationName={setSelectedLocationName}

@@ -5,12 +5,10 @@ import { GoogleMap, Marker } from "@react-google-maps/api";
 import { getPlaceAPI } from "../../../../data/getPlaceAPI";
 
 interface LoadGoogleMapProps {
-  showModal: boolean;
   setShowModal: (show: boolean) => void;
   setSelectedLocation: (value: string) => void;
   setSelectedLocationName: (value: string) => void;
   searchResults: PlaceResult[];
-  setSearchResults: (value: PlaceResult[]) => void;
   googleMapsLoaded: boolean;
   setGoogleMapsLoaded: (value: boolean) => void;
 }
@@ -34,12 +32,10 @@ declare global {
 }
 
 const LoadGoogleMap: React.FC<LoadGoogleMapProps> = ({
-  showModal,
   setShowModal,
   setSelectedLocation,
   setSelectedLocationName,
   searchResults,
-  setSearchResults,
   googleMapsLoaded,
   setGoogleMapsLoaded,
 }) => {
@@ -49,13 +45,8 @@ const LoadGoogleMap: React.FC<LoadGoogleMapProps> = ({
       try {
         const apiKey = await new getPlaceAPI().getEntry();
         console.log("apikey: ", apiKey);
-        setTimeout(function () {
-          loadGoogleMapsScript(apiKey);
-          if (!googleMapsLoaded) {
-            fetchGooglePlacesApiKey();
-            // repeat the process til googleMapsLoaded is true
-          }
-        }, 5000);
+        loadGoogleMapsScript(apiKey);
+
         apiLoaded = true;
       } catch (error) {
         console.error(error);
@@ -63,26 +54,23 @@ const LoadGoogleMap: React.FC<LoadGoogleMapProps> = ({
     }
     if (!apiLoaded) {
       fetchGooglePlacesApiKey();
-      // repeat the process til googleMapsLoaded is true
     }
   });
 
   const loadGoogleMapsScript = (apiKey: string) => {
-    setTimeout(() => {
-      if (!window.googleMapsLoaded) {
-        const googleMapsScript = document.createElement("script");
-        googleMapsScript.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places&callback=Function.prototype`;
-        googleMapsScript.async = true;
-        googleMapsScript.defer = true;
-        googleMapsScript.onload = () => {};
-        document.head.appendChild(googleMapsScript);
-        window.googleMapsLoaded = true;
-        setGoogleMapsLoaded(true);
-      }
-      if (!googleMapsLoaded) {
-        // repeat the process til googleMapsLoaded is true
-      }
-    }, 5000);
+    if (!window.googleMapsLoaded) {
+      const googleMapsScript = document.createElement("script");
+      googleMapsScript.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places&callback=Function.prototype`;
+      googleMapsScript.async = true;
+      googleMapsScript.defer = true;
+      googleMapsScript.onload = () => {};
+      document.head.appendChild(googleMapsScript);
+      window.googleMapsLoaded = true;
+      setGoogleMapsLoaded(true);
+    }
+    if (!googleMapsLoaded) {
+      // repeat the process til googleMapsLoaded is true
+    }
   };
 
   const handleLocationClick = (selectedLocation: PlaceResult) => {

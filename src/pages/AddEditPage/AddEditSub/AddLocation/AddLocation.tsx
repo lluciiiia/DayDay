@@ -4,14 +4,12 @@ import LocationModal from "./LocationModal";
 import { close } from "ionicons/icons";
 
 interface AddLocationProps {
-  selectedLocation: string;
   setSelectedLocation: (value: string) => void;
   selectedLocationName: string;
   setSelectedLocationName: (value: string) => void;
 }
 
 const AddLocation: React.FC<AddLocationProps> = ({
-  selectedLocation,
   setSelectedLocation,
   selectedLocationName,
   setSelectedLocationName,

@@ -66,12 +66,10 @@ const LocationModal: React.FC<LocationModalProps> = ({
         </div>
 
         <LoadGoogleMap
-          showModal={showModal}
           setShowModal={setShowModal}
           setSelectedLocation={setSelectedLocation}
           setSelectedLocationName={setSelectedLocationName}
           searchResults={searchResults}
-          setSearchResults={setSearchResults}
           googleMapsLoaded={googleMapsLoaded}
           setGoogleMapsLoaded={setGoogleMapsLoaded}
         />
