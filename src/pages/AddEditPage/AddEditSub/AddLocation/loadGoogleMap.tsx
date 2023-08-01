@@ -14,7 +14,7 @@ interface LoadGoogleMapProps {
   setGoogleMapsLoaded: (value: boolean) => void;
 }
 
-interface PlaceResult {
+export interface PlaceResult {
   formatted_address: string;
   geometry: {
     location: {
@@ -58,7 +58,7 @@ const LoadGoogleMap: React.FC<LoadGoogleMapProps> = ({
     if (!apiLoaded) {
       fetchGooglePlacesApiKey();
     }
-  });
+  }, []); 
 
   const loadGoogleMapsScript = (apiKey: string) => {
     if (!window.googleMapsLoaded) {
@@ -66,20 +66,19 @@ const LoadGoogleMap: React.FC<LoadGoogleMapProps> = ({
       googleMapsScript.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places&callback=Function.prototype`;
       googleMapsScript.async = true;
       googleMapsScript.defer = true;
-      googleMapsScript.onload = () => {};
+      googleMapsScript.onload = () => {
+        setGoogleMapsLoaded(true); // Set googleMapsLoaded to true once the script has loaded
+      };
       document.head.appendChild(googleMapsScript);
       window.googleMapsLoaded = true;
       setGoogleMapsLoaded(true);
-    }
-    if (!googleMapsLoaded) {
-      // repeat the process til googleMapsLoaded is true
     }
   };
 
   const handleLocationClick = (selectedLocation: PlaceResult) => {
     const placeId = selectedLocation.place_id;
     const placeName = selectedLocation.name;
-    const placeLat = selectedLocation.geometry.location.lat();
+    const placeLat = selectedLocation.geometry.location.lat(); 
     const placeLng = selectedLocation.geometry.location.lng();
 
     setSelectedLocation(placeId);

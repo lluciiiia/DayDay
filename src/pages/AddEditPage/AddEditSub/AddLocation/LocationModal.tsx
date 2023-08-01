@@ -1,8 +1,8 @@
 import React, { useState, useRef } from "react";
 import { IonModal, IonSearchbar } from "@ionic/react";
 import ModalButtons from "./ModalHeader";
-
 import LoadGoogleMap from "./LoadGoogleMap";
+import { PlaceResult } from "./LoadGoogleMap";
 
 interface LocationModalProps {
   showModal: boolean;
@@ -11,18 +11,6 @@ interface LocationModalProps {
   setSelectedLocationName: (value: string) => void;
   setSelectedLocationLatitude: (latitude: number) => void;
   setSelectedLocationLongitude: (longitude: number) => void;
-}
-
-interface PlaceResult {
-  formatted_address: string;
-  geometry: {
-    location: {
-      lat: () => number;
-      lng: () => number;
-    };
-  };
-  name: string;
-  place_id: string;
 }
 
 const LocationModal: React.FC<LocationModalProps> = ({
@@ -73,6 +61,8 @@ const LocationModal: React.FC<LocationModalProps> = ({
           setShowModal={setShowModal}
           setSelectedLocation={setSelectedLocation}
           setSelectedLocationName={setSelectedLocationName}
+          setSelectedLocationLatitude={setSelectedLocationLatitude}
+          setSelectedLocationLongitude={setSelectedLocationLongitude}
           searchResults={searchResults}
           googleMapsLoaded={googleMapsLoaded}
           setGoogleMapsLoaded={setGoogleMapsLoaded}
