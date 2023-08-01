@@ -9,10 +9,11 @@ export const MapView = () => {
     height: "400px",
   };
 
-  const center = { lat: 0, lng: 0 }; // Set the initial center of the map
+  const center = { lat: 40.72, lng: -73.96 }; // Set the initial center of the map
 
   // Use the filteredEntries obtained from the FilteredEntries component
   const filteredEntries = FilteredEntries();
+  console.log("filteredEntries: ", filteredEntries);
   if (filteredEntries === null) {
     return [];
   }

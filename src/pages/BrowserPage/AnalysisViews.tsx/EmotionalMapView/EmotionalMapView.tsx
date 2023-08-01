@@ -10,7 +10,7 @@ export const EmotionalMapView = () => {
           marginLeft: "15px",
           fontWeight: "bold",
           marginTop: "35px",
-          marginBottom: "10px",
+          marginBottom: "50px",
         }}>
         Emotional Map Analysis
       </p>

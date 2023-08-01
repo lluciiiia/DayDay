@@ -81,6 +81,7 @@ export const FilteredEntries = () => {
       }
     };
   }, []);
+  
   const fetchLocationDetails = async (placeId: string) => {
     const response = await fetch(
       `https://maps.googleapis.com/maps/api/geocode/json?place_id=${placeId}&key=${apiKey}`
