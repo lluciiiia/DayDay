@@ -7,6 +7,8 @@ interface LoadGoogleMapProps {
   setShowModal: (show: boolean) => void;
   setSelectedLocation: (value: string) => void;
   setSelectedLocationName: (value: string) => void;
+  setSelectedLocationLatitude: (latitude: number) => void;
+  setSelectedLocationLongitude: (longitude: number) => void;
   searchResults: PlaceResult[];
   googleMapsLoaded: boolean;
   setGoogleMapsLoaded: (value: boolean) => void;
@@ -37,6 +39,8 @@ const LoadGoogleMap: React.FC<LoadGoogleMapProps> = ({
   searchResults,
   googleMapsLoaded,
   setGoogleMapsLoaded,
+  setSelectedLocationLatitude,
+  setSelectedLocationLongitude,
 }) => {
   useEffect(() => {
     let apiLoaded = false;
@@ -75,10 +79,14 @@ const LoadGoogleMap: React.FC<LoadGoogleMapProps> = ({
   const handleLocationClick = (selectedLocation: PlaceResult) => {
     const placeId = selectedLocation.place_id;
     const placeName = selectedLocation.name;
+    const placeLat = selectedLocation.geometry.location.lat();
+    const placeLng = selectedLocation.geometry.location.lng();
 
     setSelectedLocation(placeId);
     setSelectedLocationName(placeName);
     setShowModal(false);
+    setSelectedLocationLatitude(placeLat);
+    setSelectedLocationLongitude(placeLng);
   };
 
   return (

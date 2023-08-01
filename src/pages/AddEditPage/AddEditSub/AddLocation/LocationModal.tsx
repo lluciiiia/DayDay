@@ -9,6 +9,8 @@ interface LocationModalProps {
   setShowModal: (show: boolean) => void;
   setSelectedLocation: (value: string) => void;
   setSelectedLocationName: (value: string) => void;
+  setSelectedLocationLatitude: (latitude: number) => void;
+  setSelectedLocationLongitude: (longitude: number) => void;
 }
 
 interface PlaceResult {
@@ -28,6 +30,8 @@ const LocationModal: React.FC<LocationModalProps> = ({
   setShowModal,
   setSelectedLocation,
   setSelectedLocationName,
+  setSelectedLocationLatitude,
+  setSelectedLocationLongitude
 }) => {
   const [searchResults, setSearchResults] = useState<PlaceResult[]>([]);
   const searchRef = useRef<HTMLIonSearchbarElement>(null);

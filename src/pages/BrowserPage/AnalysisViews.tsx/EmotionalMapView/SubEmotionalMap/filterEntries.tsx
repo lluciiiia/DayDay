@@ -17,7 +17,7 @@ export const FilteredEntries = () => {
   const [dates, setDates] = useState<string[]>([]);
   const [scores, setScores] = useState<number[]>([]);
   const [filteredEntries, setFilteredEntries] = useState<FilteredEntry[]>([]);
-  const [apiKey, setApiKey] = useState<string>("");
+  const [apiKey, setApiKey] = useState<string>();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -40,9 +40,7 @@ export const FilteredEntries = () => {
     async function fetchGooglePlacesApiKey() {
       try {
         const apiKey = await new getPlaceAPI().getEntry();
-        console.log("apikey: ", apiKey);
-        loadGoogleMapsScript(apiKey);
-        setApiKey(apiKey); 
+        setApiKey(apiKey);
         apiLoaded = true;
       } catch (error) {
         console.error(error);
@@ -56,43 +54,45 @@ export const FilteredEntries = () => {
 
   const [googleMapsLoaded, setGoogleMapsLoaded] = useState(false);
 
-  const loadGoogleMapsScript = (apiKey: string) => {
-    if (!window.googleMapsLoaded) {
-      const googleMapsScript = document.createElement("script");
-      googleMapsScript.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places&callback=Function.prototype`;
-      googleMapsScript.async = true;
-      googleMapsScript.defer = true;
-      googleMapsScript.onload = () => {};
-      document.head.appendChild(googleMapsScript);
-      window.googleMapsLoaded = true;
-      setGoogleMapsLoaded(true);
-    }
-    if (!googleMapsLoaded) {
-      // repeat the process til googleMapsLoaded is true
-    }
-  };
-
-  useEffect(() => {
-    const checkMapLoaded = () => {
-      if (window.google && window.google.maps) {
+  const loadGoogleMapsScript = (
+    placeId: string
+  ): Promise<{ lat: number; lng: number }> => {
+    return new Promise((resolve, reject) => {
+      if (!window.googleMapsLoaded) {
+        const googleMapsScript = document.createElement("script");
+        console.log("apiKey: ", apiKey);
+        googleMapsScript.src = `https://maps.googleapis.com/maps/api/js?id=${placeId}&key=${apiKey}&libraries=places&callback=Function.prototype`;
+        googleMapsScript.async = true;
+        googleMapsScript.defer = true;
+        googleMapsScript.onload = () => {
+          const geocoder = new window.google.maps.Geocoder();
+          geocoder.geocode({ placeId }, (results, status) => {
+            if (status === window.google.maps.GeocoderStatus.OK) {
+              if (results && results.length > 0) {
+                const location = results[0].geometry.location;
+                resolve({ lat: location.lat(), lng: location.lng() });
+              } else {
+                console.error(
+                  "No geocoding results found for the provided placeId."
+                );
+                reject({ lat: 0, lng: 0 });
+              }
+            } else {
+              console.error(
+                "Geocode was not successful for the following reason: " + status
+              );
+              reject({ lat: 0, lng: 0 });
+            }
+          });
+        };
+        document.head.appendChild(googleMapsScript);
+        window.googleMapsLoaded = true;
         setGoogleMapsLoaded(true);
       } else {
-        setTimeout(checkMapLoaded, 100);
+        // Resolve with default location if maps are already loaded
+        resolve({ lat: 0, lng: 0 });
       }
-    };
-  }, []);
-
-  const fetchLocationDetails = async (placeId: string) => {
-    console.log("in fetch: ", apiKey);
-    const response = await fetch(
-      `https://maps.googleapis.com/maps/api/geocode/json?place_id=${placeId}&key=${apiKey}`
-    );
-    const data = await response.json();
-    console.log(data);
-    return {
-      lat: data.results[0]?.geometry?.location?.lat || 0,
-      lng: data.results[0]?.geometry?.location?.lng || 0,
-    };
+    });
   };
 
   useEffect(() => {
@@ -103,7 +103,8 @@ export const FilteredEntries = () => {
           .map(async (entry) => {
             const dateIndex = dates.indexOf(entry.date);
             const sentimentScore = dateIndex !== -1 ? scores[dateIndex] : 0;
-            const locationDetails = await fetchLocationDetails(
+
+            const locationDetails = await loadGoogleMapsScript(
               entry.location.placeId
             );
 
@@ -123,6 +124,7 @@ export const FilteredEntries = () => {
     getFilteredEntriesWithLocation();
   }, [entries, dates, scores]);
 
+  console.log("GML: " + googleMapsLoaded);
   if (!googleMapsLoaded) {
     return null;
   }

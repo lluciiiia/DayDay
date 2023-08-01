@@ -13,7 +13,7 @@ export const MapView = () => {
 
   // Use the filteredEntries obtained from the FilteredEntries component
   const filteredEntries = FilteredEntries();
-  console.log("filteredEntries: ", filteredEntries);
+  console.log("filteredEntries.lat: ", filteredEntries?.map((filteredEntry) => filteredEntry.lat));
   if (filteredEntries === null) {
     return [];
   }

@@ -18,7 +18,9 @@ export const SaveEntry = () => {
     history: ReturnType<typeof useHistory>,
     categories: Category[],
     selectedLocation: string | undefined,
-    selectedLocationName: string | undefined
+    selectedLocationName: string | undefined,
+    selectedLocationLatitude: number | undefined,
+    selectedLocationLongitude: number | undefined,
   ) => {
     const title = titleRef.current?.value as string;
 
@@ -55,6 +57,8 @@ export const SaveEntry = () => {
         {
           placeId: selectedLocation!,
           name: selectedLocationName!,
+          lat: selectedLocationLatitude!,
+          lng: selectedLocationLongitude!,
         },
     };
 

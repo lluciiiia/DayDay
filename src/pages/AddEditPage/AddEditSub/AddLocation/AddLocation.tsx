@@ -7,12 +7,16 @@ interface AddLocationProps {
   setSelectedLocation: (value: string) => void;
   selectedLocationName: string;
   setSelectedLocationName: (value: string) => void;
+  setSelectedLocationLatitude: (latitude: number) => void;
+  setSelectedLocationLongitude: (longitude: number) => void;
 }
 
 const AddLocation: React.FC<AddLocationProps> = ({
   setSelectedLocation,
   selectedLocationName,
   setSelectedLocationName,
+  setSelectedLocationLatitude,
+  setSelectedLocationLongitude
 }) => {
   const [showModal, setShowModal] = useState(false);
 
@@ -49,6 +53,8 @@ const AddLocation: React.FC<AddLocationProps> = ({
           setShowModal={setShowModal}
           setSelectedLocation={setSelectedLocation}
           setSelectedLocationName={setSelectedLocationName}
+          setSelectedLocationLatitude={setSelectedLocationLatitude}
+          setSelectedLocationLongitude={setSelectedLocationLongitude}
         />
       )}
     </>

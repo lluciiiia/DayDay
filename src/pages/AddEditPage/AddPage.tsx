@@ -30,6 +30,10 @@ const AddPage = () => {
   const [categories, setCategories] = useState<Category[]>([]);
   const [selectedLocation, setSelectedLocation] = useState("");
   const [selectedLocationName, setSelectedLocationName] = useState("");
+  const [selectedLocationLatitude, setSelectedLocationLatitude] = useState<number>(0);
+  const [selectedLocationLongitude, setSelectedLocationLongitude] = useState<number>(0);
+
+
   const { handleSave } = SaveEntry();
 
   useEffect(() => {
@@ -68,6 +72,8 @@ const AddPage = () => {
           setSelectedLocation={setSelectedLocation}
           selectedLocationName={selectedLocationName}
           setSelectedLocationName={setSelectedLocationName}
+          setSelectedLocationLatitude={setSelectedLocationLatitude}
+          setSelectedLocationLongitude={setSelectedLocationLongitude}
         />
 
         <ContentEditor content={content} onContentChange={setContent} />
@@ -95,7 +101,9 @@ const AddPage = () => {
                 history,
                 categories,
                 selectedLocation,
-                selectedLocationName
+                selectedLocationName,
+                selectedLocationLatitude,
+                selectedLocationLongitude,
               )
             }>
             Save
