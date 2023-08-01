@@ -1,11 +1,7 @@
 import { IonContent } from "@ionic/react";
-// import NoData from "./SubSentiment/NoData";
-// import YesData from "./SubSentiment/YesData";
-// import fetchSentimentResult from "./SubSentiment/fetchSentimentResult";
+import MapView from "./SubEmotionalMap/MapView";
 
-const EmotionalMapView = () => {
-//   const { hasResult, data } = fetchEmotionalMapResult();
-
+export const EmotionalMapView = () => {
   return (
     <>
       <p
@@ -18,14 +14,9 @@ const EmotionalMapView = () => {
         }}>
         Emotional Map Analysis
       </p>
-      {/* <IonContent scrollY={false}>
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          {hasResult && data ? <YesData data={data} /> : <NoData />}
-          <div
-            id="instruction"
-            style={{ marginTop: "50px", padding: "10px" }}></div>
-        </div>
-      </IonContent> */}
+      <IonContent scrollY={false}>
+        <MapView />
+      </IonContent>
     </>
   );
 };
