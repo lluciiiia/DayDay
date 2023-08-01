@@ -66,10 +66,12 @@ export const MapView = () => {
               textAlign: "center",
               fontWeight: "bold",
               fontSize: "10px",
-              transform: "translate(-100%, 0%)", // Center the div horizontally
-              width: "80px",
-              height: "25px",
-              marginLeft: "40px",
+              transform: "translate(-50%, 0%)", // Center the div horizontally
+              left: "50%", // Add this property to adjust the horizontal position
+              top: "-100%", // Adjust vertical position if needed
+              minWidth: "80px",
+              minHeight: "20px",
+              display: "inline-block", // fit its content horizontally
             }}>
             {filteredEntry.placeName}
           </div>
