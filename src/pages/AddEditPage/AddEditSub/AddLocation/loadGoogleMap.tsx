@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { IonList, IonItem, IonLabel, IonContent } from "@ionic/react";
-import ModalButtons from "./ModalHeader";
 import { GoogleMap, Marker } from "@react-google-maps/api";
 import { getPlaceAPI } from "../../../../data/getPlaceAPI";
 
@@ -116,8 +115,8 @@ const LoadGoogleMap: React.FC<LoadGoogleMapProps> = ({
         <div>Loading...</div>
       ) : (
         <GoogleMap
-          center={{ lat: 0, lng: 0 }} // Set the initial center to some default value
-          zoom={10} // Set the initial zoom level to some default value
+          center={{ lat: 0, lng: 0 }} // the initial center (default)
+          zoom={10} // the initial zoom level (default)
           mapContainerStyle={{ height: "400px", width: "100%" }} // Set the map container style
         >
           {searchResults.map((result, place_id) => (
