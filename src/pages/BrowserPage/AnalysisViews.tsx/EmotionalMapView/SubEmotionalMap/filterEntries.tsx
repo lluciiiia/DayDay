@@ -42,7 +42,7 @@ export const FilteredEntries = () => {
         const apiKey = await new getPlaceAPI().getEntry();
         console.log("apikey: ", apiKey);
         loadGoogleMapsScript(apiKey);
-
+        setApiKey(apiKey); 
         apiLoaded = true;
       } catch (error) {
         console.error(error);
@@ -52,7 +52,7 @@ export const FilteredEntries = () => {
       fetchGooglePlacesApiKey();
     }
     fetchData(), fetchGooglePlacesApiKey();
-  }, [apiKey]);
+  }, []);
 
   const [googleMapsLoaded, setGoogleMapsLoaded] = useState(false);
 
@@ -81,12 +81,14 @@ export const FilteredEntries = () => {
       }
     };
   }, []);
-  
+
   const fetchLocationDetails = async (placeId: string) => {
+    console.log("in fetch: ", apiKey);
     const response = await fetch(
       `https://maps.googleapis.com/maps/api/geocode/json?place_id=${placeId}&key=${apiKey}`
     );
     const data = await response.json();
+    console.log(data);
     return {
       lat: data.results[0]?.geometry?.location?.lat || 0,
       lng: data.results[0]?.geometry?.location?.lng || 0,
