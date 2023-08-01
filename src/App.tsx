@@ -41,6 +41,7 @@ import ViewPage from "./pages/ViewPage/ViewPage";
 import EditPage from "./pages/AddEditPage/EditPage";
 import SentimentView from "./pages/BrowserPage/AnalysisViews.tsx/SentimentView/SentimentView";
 import WordCloudsView from "./pages/BrowserPage/AnalysisViews.tsx/WordCloudsView/WordCloudsView";
+import EmotionalMapView from "./pages/BrowserPage/AnalysisViews.tsx/EmotionalMapView/EmotionalMapView";
 
 setupIonicReact();
 
@@ -61,6 +62,7 @@ const App: React.FC = () => (
           <Route path="/edit" exact={true} render={() => <EditPage/>} />
           <Route path="/sentimentView" exact={true} render={() => <SentimentView/>} />
           <Route path="/wordCloudsView" exact={true} render={() => <WordCloudsView/>} />
+          <Route path="/emotionalMapView" exact={true} render={() => <EmotionalMapView/>} />
 
 
 

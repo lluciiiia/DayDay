@@ -9,15 +9,15 @@ import {
 } from "@ionic/react";
 import { AnalysisSearchData } from "../../else/search";
 import { useSearch } from "../../else/searchGeneric";
-import { heartHalf, cloud } from "ionicons/icons";
+import { heartHalf, cloud, location } from "ionicons/icons";
 
 const BrowserPage = () => {
   const history = useHistory();
 
   // search functionality
   const searchData: AnalysisSearchData = {
-    data: ["Sentiment Analysis", "Word Clouds"],
-    keys: ["Sentiment Analysis", "Word Clouds"],
+    data: ["Sentiment Analysis", "Word Clouds", "Emotional Mapping"],
+    keys: ["Sentiment Analysis", "Word Clouds", "Emotional Mapping"],
   };
 
   const { results, inputValue, handleInput } = useSearch(searchData);
@@ -34,6 +34,12 @@ const BrowserPage = () => {
       icon: cloud,
       color: "rgb(225, 244, 255)",
       path: "/wordCloudsView",
+    },
+    {
+      label: "Emotional Mapping",
+      icon: location,
+      color: "rgb(225, 60, 60)",
+      path: "/emotionalMapView",
     },
   ];
 
