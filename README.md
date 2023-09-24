@@ -4,7 +4,7 @@
 The DayDay is a personal project built using Ionic React. It allows users to create and manage their daily diary entries digitally. 
 This README provides information about the app, its features, and instructions for installation and usage.
 
-<h3>Features</h3>
+<h2>Features</h2>
 Create Diary Entries: Users can write and save diary entries for each day.
 
 Edit and Delete Entries: Edit or delete previously saved diary entries.
