@@ -21,4 +21,4 @@ This README provides information about the app, its features, and instructions f
 
 <h4>Sentiment by Location</h4> Discover how your emotions vary by location.
 
-<h4>ocation Visualization</h4>L Visualize sentiment data on maps to explore your emotional patterns geographically.
+<h4>Location Visualization</h4> Visualize sentiment data on maps to explore your emotional patterns geographically.
