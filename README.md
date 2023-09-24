@@ -1,7 +1,5 @@
 <h1>DayDay</h1>
-
-<h2>Overview</h2>
-The DayDay is a personal project built using Ionic React. It allows users to create and manage their daily diary entries digitally. 
+DayDay is a personal project built using Ionic React. It allows users to create and manage their daily diary entries digitally. 
 This README provides information about the app, its features, and instructions for installation and usage.
 
 <h2>Features</h2>
