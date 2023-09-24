@@ -13,6 +13,8 @@ This README provides information about its features.
 
 <h4>Search</h4> Search for entries based on keywords or dates.
 
+<h4>Word Cloud Visualization</h4> Visualize the most frequently used words in their diary entries.
+
 <h4>Sentiment Analysis</h4> Every diary entry is analyzed for its sentiment, resulting in a score that indicates whether it's positive, negative, or neutral.
 
 <h4>Sentiment Trends</h4> View how your emotions change over time with a visual graph.
