@@ -5,18 +5,20 @@ The DayDay is a personal project built using Ionic React. It allows users to cre
 This README provides information about the app, its features, and instructions for installation and usage.
 
 <h2>Features</h2>
-Create Diary Entries: Users can write and save diary entries for each day.
+<h4>Create Diary Entries</h4> Write and save diary entries for each day.
 
-Edit and Delete Entries: Edit or delete previously saved diary entries.
+<h4>Edit and Delete Entries</h4> Edit or delete previously saved diary entries.
 
-Calendar View: View entries in a calendar format to quickly navigate to specific dates.
+<h4>Filter by Categories</h4> Filter diary entries by selecting one or more categories from a list. 
 
-Search: Search for entries based on keywords or dates.
+<h4>Calendar View</h4> View entries in a calendar format to quickly navigate to specific dates.
 
-Sentiment Analysis: Every diary entry is analyzed for its sentiment, resulting in a score that indicates whether it's positive, negative, or neutral.
+<h4>Search</h4> Search for entries based on keywords or dates.
 
-Sentiment Trends: View how your emotions change over time with a visual graph.
+<h4>Sentiment Analysis</h4> Every diary entry is analyzed for its sentiment, resulting in a score that indicates whether it's positive, negative, or neutral.
 
-Sentiment by Location: Discover how your emotions vary by location.
+<h4>Sentiment Trends</h4> View how your emotions change over time with a visual graph.
 
-Location Visualization: Visualize sentiment data on maps to explore your emotional patterns geographically.
+<h4>Sentiment by Location</h4> Discover how your emotions vary by location.
+
+<h4>ocation Visualization</h4>L Visualize sentiment data on maps to explore your emotional patterns geographically.
