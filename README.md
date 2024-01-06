@@ -2,12 +2,22 @@
 DayDay is a personal project built using Ionic React. It allows users to create and manage their daily diary entries digitally. 
 This README provides information about its features.
 
+<h2>User Interface</h2>
+<h4>Home Page</h4>
+<img src="public/resources/Homepage.png">
+<br>
+<h4>Browse Page</h4>
+<img src="public/resources/Browsepage.png">
+<br>
+<span>Due to recent Ionic library changes, some of the detailed descriptions are unavailable. Actively resolving compatibility issues for enhanced functionality.<br>
+Stay tuned for updates!</span>
+
 <h2>Features</h2>
 <h4>Create Diary Entries</h4> Write and save diary entries for each day.
 
 <h4>Edit and Delete Entries</h4> Edit or delete previously saved diary entries.
 
-<h4>Filter by Categories</h4> Filter diary entries by selecting one or more categories from a list. 
+<h4>Filter by Categories</h4> Filter diary entries by selecting one or more categories from a list.
 
 <h4>Calendar View</h4> View entries in a calendar format to quickly navigate to specific dates.
 
