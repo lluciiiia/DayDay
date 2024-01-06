@@ -3,12 +3,10 @@ DayDay is a personal project built using Ionic React. It allows users to create 
 This README provides information about its features.
 
 <h2>User Interface</h2>
-<h4>Home Page</h4>
+<h3>Home Page</h3>
 <img src="public/resources/Homepage.png">
-<br>
-<h4>Browse Page</h4>
+<h3>Browse Page</h3>
 <img src="public/resources/Browsepage.png">
-<br>
 <span>Due to recent Ionic library changes, some of the detailed descriptions are unavailable. Actively resolving compatibility issues for enhanced functionality.<br>
 Stay tuned for updates!</span>
 
